@@ -27,7 +27,6 @@
         GET /api/tasks/:id
         DELETE /api/tasks/:id
 
-        BONUS:
         Projects
         GET /api/projects
         POST /api/projects

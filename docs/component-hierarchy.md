@@ -22,6 +22,5 @@
 
         Errors
 
-        BONUS:
         LeftNavContainer
           ProjectsNav
