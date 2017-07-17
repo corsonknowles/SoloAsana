@@ -26,6 +26,18 @@
         add_foreign_key "tasks", "users"
         end
 
+# Users API Schema
+
+## users
+column name     | data type | details
+----------------|-----------|-----------------------
+id              | integer   | not null, primary key
+name            | string    | 
+email           | string    | not null, indexed, unique
+password_digest | string    | not null
+session_token   | string    | not null, indexed, unique
+
+
 # Model and Controllers
         rails g model Task title:string body:text due:integer done:boolean user:references section:boolean task:references
         rails g model User username:string password_digest:string session_token:string
