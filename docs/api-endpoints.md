@@ -1,9 +1,8 @@
 # API Endpoints
 
-        api-endpoints.md
-        Rails API endpoints.
-        Only JSON endpoints, except for Root.
-        Params for each endpoint, and what information will be returned.
+
+        Rails API endpoints: All JSON endpoints, except for the Root.
+
 
         HTML ENDPOINT
 
