@@ -57,10 +57,10 @@ Enclosed in the docs folder:
 
 * [BalsamiqWireframes](./BalsamiqWireframes)
 * [ImageWireframes](./ImageWireframes)
-* [React Components](component_hierarchy.md)
-* [API Endpoints](api_endpoints.md)
+* [React Components](component-hierarchy.md)
+* [API Endpoints](api-endpoints.md)
 * [DB Schema](schema.md)
-* [Sample State](sample_state.md)
+* [Sample State](sample-state.md)
 
 
 # Wireframe List
