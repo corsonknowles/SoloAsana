@@ -76,7 +76,7 @@ See Docs Folder for Balsamiq files and PNGs.
 
 # Minimum Viable Product
 
-SoloAsana is a tribute to the amazing task management platform Asana. It provides a complete personal task management system, including tasks with due dates and the amazing interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
+SoloAsana is a rapid development personal project, dedicated to the amazing task management platform Asana. It provides a complete individualized task management system, including items with due dates and the useful interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
 
 # Even More Bonuses:
 Tab to move
