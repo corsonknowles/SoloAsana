@@ -7,6 +7,7 @@ SoloAsana delivers a React.js frontend with a Redux framework.
 The database fueling all this is PostgreSQL.
 
 ### Domain: soloasana.com
+### [Trello Board:] (https://trello.com/b/6awTqKyy/soloasana-board)
 
 # Key Feature Description
 * Tasks (
@@ -86,7 +87,7 @@ Sections & corresponding Section selector in detail view (
   create section by adding Colon ':' at end of task
   )
 
-Import Loading Screen: https://github.com/needim/wdtLoading
+Import Loading Screen: [Existing Library] (https://github.com/needim/wdtLoading)
 
 Calendar
 
