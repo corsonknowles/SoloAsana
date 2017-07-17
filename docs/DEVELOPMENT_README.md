@@ -7,7 +7,7 @@ SoloAsana delivers a React.js frontend with a Redux framework.
 The database fueling all this is PostgreSQL.
 
 ### Domain: soloasana.com
-### [Trello Board:] (https://trello.com/b/6awTqKyy/soloasana-board)
+### Trello Board: https://trello.com/b/6awTqKyy/soloasana-board
 
 # Key Feature Description
 * Tasks (
@@ -55,12 +55,12 @@ Total: 12 Work Days.
 
 Enclosed in the docs folder:
 
-[BalsamiqWireframes](./BalsamiqWireframes)
-[ImageWireframes](./ImageWireframes)
-* [React Components](./component_hierarchy.md)
-* [API Endpoints](./api_endpoints.md)
-* [DB Schema](./schema.md)
-* [Sample State](./sample_state.md)
+* [BalsamiqWireframes](./BalsamiqWireframes)
+* [ImageWireframes](./ImageWireframes)
+* [React Components](component_hierarchy.md)
+* [API Endpoints](api_endpoints.md)
+* [DB Schema](schema.md)
+* [Sample State](sample_state.md)
 
 
 # Wireframe List
