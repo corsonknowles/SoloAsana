@@ -1,21 +1,26 @@
 # SoloAsana
 Stretch yourself to complete all your tasks!
 
-# Domain: soloasana.com
+# Technology Description
+SoloAsana is a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
+SoloAsana delivers a React.js frontend with a Redux framework.
+The database fueling all this is PostgreSQL. 
+
+### Domain: soloasana.com
 
 # Key Feature Description
-Tasks (
-  enter to complete
-  backspace fully to delete
-  click done: task fades
+* Tasks (
+  - enter to complete
+  - backspace fully to delete
+  - click done: task fades
+  - blank tasks persist until removed
   )
-Task Details (
-  Description
-  Change Log
+* Task Details (
+  - Description
+  - Change Log - username, string interpolation, timestamp.
   )
-Due Date (
-  )
-Drag and Drop
+* Due Date
+* Drag and Drop
 
 # Development Timeline
 
@@ -49,19 +54,22 @@ Total: 12 Work Days.
 
 Enclosed in the docs folder:
 
-* api-endpoints.md
-* component-hierarchy.md
-* sample-state.md
-* schema.md
-* BalsamiqWireframes folder
-* ImageWireframes folder (PNG format)
+[BalsamiqWireframes](./BalsamiqWireframes)
+[ImageWireframes](./ImageWireframes)
+* [React Components](./component_hierarchy.md)
+* [API Endpoints](./api_endpoints.md)
+* [DB Schema](./schema.md)
+* [Sample State](./sample_state.md)
 
 
-# Wireframes
+# Wireframe List
 
 Login
+
 Main Task View
+
 Detail Task View
+
 See Docs Folder for Balsamiq files and PNGs.
 
 
@@ -69,14 +77,19 @@ See Docs Folder for Balsamiq files and PNGs.
 
 SoloAsana is a tribute to the amazing task management platform Asana. It provides a complete personal task management system, including tasks with due dates and the amazing interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
 
-
 # Even More Bonuses:
 Tab to move
+
 Attachments
+
 Sections & corresponding Section selector in detail view (
   create section by adding Colon ':' at end of task
   )
+
 Import Loading Screen: https://github.com/needim/wdtLoading
+
 Calendar
+
 Self comments (annotations)
+
 Keyboard shortcut walkthrough
