@@ -89,23 +89,51 @@ Sample State
 sample-state.md
 Create a basic illustration of your state shape. Think about what information you need to store for your app to work, and how best to organize it to minimize duplication and maximize ease of access.
 
+{
+    tasks : {
+        byId : {
+            "task1" : {
+                id : "task1",
+                user : "user1",
+                details : "......",
+                due-date: integer date object,
+                done: boolean
+            },
+            "task2" : {
+                id : "task2",
+                user : "user2",
+                body : "......",
+                due-date: integer date object,
+                done: boolean  
+            }
+        }
+        allIds : ["task1", "task2"]
+    },
+
+    sections : {
+
+    }
+
+    projects : {
+
+    }
+
+
+
 DB Schema
 
 schema.md
 Link to a document outlining the database schema for your app. Build up the schema by walking through your app's wireframes. Think carefully about what data will be needed for each view and the best way to store that data. Make note of any database-level validations and foreign key relationships.
+rails g model Task title:string body:text due:integer done:boolean user:references section:boolean task:references
+rails g model User username:string password_digest:string session_token:string
+rails g controller Users new create
+rails g controller Sessions new create destroy
+
 
 API Endpoints
 
 api-endpoints.md
 Link to a page that lists your Rails API endpoints. Break these up between HTML and JSON endpoints. Discuss what params, if any, will be needed for each endpoint, and what information will be returned.
-
-Implementation Timeline
-
-Create a section in your proposal README for each phase of your project to develop an implementation timeline.
-
-Refer back to your MVP and group the features into logical phases. Rather than building the entire project all at once, you're going to implement one feature at a time. You should have a working app at the end of each phase (even if not all of your features are in yet).
-
-This is crucial both here and in the industry. The truth is, one never knows how long implementing any particular phase will take. Constraints change. Timelines are shortened without warning. An app after any phase must be able to stand on it's on. We call this building in 'slices' instead of 'layers'.
 
 Submission
 
