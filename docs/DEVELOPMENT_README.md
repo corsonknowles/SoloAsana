@@ -4,7 +4,7 @@ Stretch yourself to complete all your tasks!
 # Technology Description
 SoloAsana is a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
 SoloAsana delivers a React.js frontend with a Redux framework.
-The database fueling all this is PostgreSQL. 
+The database fueling all this is PostgreSQL.
 
 ### Domain: soloasana.com
 
@@ -26,28 +26,28 @@ The database fueling all this is PostgreSQL.
 
 Phase 1: React Authentication Built on Top of Rails (2 Days)
 
-Fully stylized login/signup combined form. New account creation with Guest Login.
-BONUS: OAuth for Google Signin
+- Fully stylized login/signup combined form. New account - creation with Guest Login.
+- BONUS: OAuth for Google Signin
 
 Phase 2: Database Model and React Components (2 Days)
-Create the data structures that the site will be made out of.
+- Create the data structures that the site will be made out of.
 
 Phase 3: Tasks Main View (2 Days)
-Tasks can be created, edited, deleted and marked as done or undone.
-Key feature: Enter key creates new tasks .
-BONUS: Adding a ':' makes a task into a Section heading instead
-BONUS: Tasks can be dragged and dropped.
-BONUS ***** Keyboard shortcuts
+- Tasks can be created, edited, deleted and marked as done or undone.
+- Key feature: Enter key creates new tasks .
+- BONUS: Adding a ':' makes a task into a Section heading instead
+- BONUS: Tasks can be dragged and dropped.
+- BONUS ***** Keyboard shortcuts
 
 Phase 4: Tasks Detail View (4 Days)
-  On click, render new component that splits the screen with Task Main View.
-  Detail view allows adding additional information to task.
-  Detail view can specify a due date.
-  BONUS: Change section heading of task
-  BONUS: Add Project label to task. Sort by Project Label.
+  - On click, render new component that splits the screen with Task Main View.
+  - Detail view allows adding additional information to task.
+  - Detail view can specify a due date.
+  - BONUS: Change section heading of task
+  - BONUS: Add Project label to task. Sort by Project Label.
 
 Phase 5: Cleanup and Seeding of Data (2 days)
-Demo view
+- Demo view
 
 Total: 12 Work Days.
 
