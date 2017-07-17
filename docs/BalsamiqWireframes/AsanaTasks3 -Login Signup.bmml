@@ -1,0 +1,62 @@
+<mockup version="1.0" skin="sketch" measuredW="665" measuredH="768" mockupW="630" mockupH="700">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Canvas" x="35" y="68" w="630" h="700" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="254" y="120" w="-1" h="-1" measuredW="152" measuredH="50" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>40</size>
+        <text>Sign%20Up%20</text>
+      </controlProperties>
+    </control>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="244" y="185" w="172" h="42" measuredW="139" measuredH="27" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10470904</color>
+        <text>Use%20Google%20Account</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="109" y="286" w="483" h="-1" measuredW="100" measuredH="5" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="316" y="272" w="28" h="33" measuredW="28" measuredH="33" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>10066329</color>
+        <size>24</size>
+        <text>or</text>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::Canvas" x="310" y="274" w="38" h="29" measuredW="100" measuredH="70" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>none</borderStyle>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::TextInput" x="112" y="343" w="489" h="-1" measuredW="79" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::TextInput" x="109" y="440" w="489" h="-1" measuredW="79" measuredH="27" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Label" x="109" y="320" w="-1" h="-1" measuredW="91" measuredH="18" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>11</size>
+        <text>EMAIL%20ADDRESS</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="109" y="415" w="91" h="18" measuredW="66" measuredH="18" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <color>6710886</color>
+        <size>11</size>
+        <text>PASSWORD</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="229" y="500" w="-1" h="-1" measuredW="202" measuredH="22" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <bold>true</bold>
+        <color>472931</color>
+        <size>14</size>
+        <text>GUEST%20LOGIN%20-%20TRY%20IT%20NOW%21%20</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
