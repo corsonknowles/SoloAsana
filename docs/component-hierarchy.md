@@ -1,30 +1,30 @@
 # React Components
 
-App
-LoginContainer
+        App
+        LoginContainer
 
-LoginForm
+        LoginForm
 
-HeaderContainer
-  LogoutContainer
+        HeaderContainer
+          LogoutContainer
 
-Profile Modal
-  Settings (Modal)
-  User (Modal)
-  (NB: Logout goes in here)
+        Profile Modal
+          Settings (Modal)
+          User (Modal)
+          (NB: Logout goes in here)
 
-DetailContainer
-  DueDate
-  Details
+        DetailContainer
+          DueDate
+          Details
 
-TaskContainer
-  TaskList
+        TaskContainer
+          TaskList
 
-Errors
+        Errors
 
-BONUS:
-LeftNavContainer
-  ProjectsNav
+        BONUS:
+        LeftNavContainer
+          ProjectsNav
 
 
 Indicate what state and dispatch props each component uses.
