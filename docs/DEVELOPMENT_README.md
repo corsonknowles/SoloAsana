@@ -28,19 +28,22 @@ Drag and Drop
 
 # Development Timeline
 
-Phase 1: React Authentication Built on Top of Rails (2 days)
+Phase 1: React Authentication Built on Top of Rails (2 Days)
 
 Fully stylized login/signup combined form. New account creation with Guest Login.
 BONUS: OAuth for Google Signin
 
-Phase 2: Tasks Main View (4 days)
+Phase 2: Database Model and React Components (2 Days)
+Create the data structures that the site will be made out of.
+
+Phase 3: Tasks Main View (2 Days)
 Tasks can be created, edited, deleted and marked as done or undone.
 Key feature: Enter key creates new tasks .
 BONUS: Adding a ':' makes a task into a Section heading instead
 BONUS: Tasks can be dragged and dropped.
 BONUS ***** Keyboard shortcuts
 
-Phase 3: Tasks Detail View (4 days)
+Phase 3: Tasks Detail View (4 Days)
 On click, render new component that splits the screen with Task Main View.
 Detail view allows adding additional information to task.
 Detail view can specify a due date.
@@ -50,11 +53,41 @@ BONUS: Add Project label to task. Sort by Project Label.
 Phase 4: Cleanup and Seeding of Data (2 days)
 Demo view
 
+Total: 12 Work Days.
+
 
 The following files, which should be linked to in the Development README:
 
 * api-endpoints.md
 * component-hierarchy.md
+
+App
+LoginContainer
+
+LoginForm
+
+HeaderContainer
+  LogoutContainer
+
+Profile Modal
+  Settings (Modal)
+  User (Modal)
+  (NB: Logout goes in here)
+
+DetailContainer
+  DueDate
+  Details
+
+TaskContainer
+  TaskList
+
+Errors
+
+BONUS:
+LeftNavContainer
+  ProjectsNav
+
+
 * sample-state.md
 * schema.md
 * Create a docs/wireframes folder to hold wireframe images.
