@@ -1,17 +1,6 @@
 # SoloAsana
 Stretch yourself to complete all your tasks!
 
-Bonuses:
-Sections & corresponding Section selector in detail view (
-  create section by adding Colon ':' at end of task
-  )
-Import Loading Screen: https://github.com/needim/wdtLoading
-Attachments
-Calendar
-Self comments (annotations)
-Keyboard shortcuts
-Tab to move
-
 # Wireframes
 
 # Key Feature Description
@@ -60,7 +49,27 @@ The following files, which should be linked to in the Development README:
 
 * api-endpoints.md
 * component-hierarchy.md
+* sample-state.md
+* schema.md
+* Create a docs folder to hold wireframe images.
 
+Domain: soloasana.com
+
+# Minimum Viable Product
+
+SoloAsana is a tribute to the amazing task management platform Asana. It provides a complete personal task management system, including tasks with due dates and the amazing interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
+
+
+# Wireframes
+
+Login
+Main Task View
+Detail Task View
+See Docs Folder for Balsamiq files and PNGs.
+
+# React Components
+
+component-hierarchy.md
 App
 LoginContainer
 
@@ -88,39 +97,16 @@ LeftNavContainer
   ProjectsNav
 
 
-* sample-state.md
-* schema.md
-* Create a docs/wireframes folder to hold wireframe images.
-
-Domain: soloasana.com
-
-Minimum Viable Product
-
-SoloAsana is a tribute to the amazing task management platform Asana. It provides a complete personal task management system, including tasks with due dates and the amazing interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
+Indicate what state and dispatch props each component uses.
+For presentational components, indicate the props and state they will use.
+Map React Routes with their respective components and paths.
 
 
-# Wireframes
-
-Login
-Main Task View
-Detail Task View
-
-
-# React Components
-
-component-hierarchy.md
-In addition to the wireframes, you should diagram a tree indicating your application's overall component structure.
-
-Discuss how you will nest your components. If components will need containers, indicate what state and dispatch props they will need. For presentational components, discuss what props and state they will need.
-
-Map out your React Routes with their respective components and paths.
-
-See the sample project proposal for an example of this.
-
-Sample State
+# Sample State
 
 sample-state.md
-Create a basic illustration of your state shape. Think about what information you need to store for your app to work, and how best to organize it to minimize duplication and maximize ease of access.
+
+Using normalized state shape, organized to minimize duplication and maximize ease of access:
 
 {
     tasks : {
@@ -157,16 +143,64 @@ DB Schema
 
 schema.md
 Link to a document outlining the database schema for your app. Build up the schema by walking through your app's wireframes. Think carefully about what data will be needed for each view and the best way to store that data. Make note of any database-level validations and foreign key relationships.
+
+# Model and Controllers
 rails g model Task title:string body:text due:integer done:boolean user:references section:boolean task:references
 rails g model User username:string password_digest:string session_token:string
 rails g controller Users new create
 rails g controller Sessions new create destroy
 
 
-API Endpoints
+# API Endpoints
 
 api-endpoints.md
-Link to a page that lists your Rails API endpoints. Break these up between HTML and JSON endpoints. Discuss what params, if any, will be needed for each endpoint, and what information will be returned.
+Rails API endpoints.
+Only JSON endpoints, except for Root.
+Params for each endpoint, and what information will be returned.
+
+HTML ENDPOINT
+
+Root
+GET / - Rendering Screen
+
+JSON ENDPOINTS
+
+Users
+POST /api/users
+GET /api/users/:id
+PATCH /api/users/:id
+
+Session
+POST /api/session
+DELETE /api/session
+
+Tasks
+
+GET /api/tasks
+POST /api/tasks
+GET /api/tasks/:id
+DELETE /api/tasks/:id
+
+BONUS:
+Projects
+GET /api/projects
+POST /api/projects
+GET /api/projects/:id
+PATCH /api/projects/:id
+DELETE /api/projects/:id
+GET /api/projects/:id/tasks
+
+
+# Even More Bonuses:
+Tab to move
+Attachments
+Sections & corresponding Section selector in detail view (
+  create section by adding Colon ':' at end of task
+  )
+Import Loading Screen: https://github.com/needim/wdtLoading
+Calendar
+Self comments (annotations)
+Keyboard shortcut walkthrough
 
 Submission
 
