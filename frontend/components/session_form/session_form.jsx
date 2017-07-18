@@ -1,4 +1,19 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
+
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
 
 class SessionForm extends React.Component {
 	constructor(props){
@@ -6,10 +21,15 @@ class SessionForm extends React.Component {
 		this.state = {
 			email: "",
 			password: "",
-			username: "Awesome User"
+			username: "Awesome User",
+			modalIsOpen: false
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+
+		this.openModal = this.openModal.bind(this);
+		this.afterOpenModal = this.afterOpenModal.bind(this);
+		this.closeModal = this.closeModal.bind(this);
 	}
 
 	handleChange(event) {
@@ -39,6 +59,19 @@ class SessionForm extends React.Component {
 		);
 	}
 
+	openModal() {
+	this.setState({modalIsOpen: true});
+	}
+
+	afterOpenModal() {
+		// references are now sync'd and can be accessed.
+		this.subtitle.style.color = '#f00';
+	}
+
+	closeModal() {
+		this.setState({modalIsOpen: false});
+	}
+
 	render() {
 
 		return (
@@ -56,33 +89,50 @@ class SessionForm extends React.Component {
 
 					<div className="login-form-container">
 
-							<br />
-							<br />
-							<div className="login-form">
-								<br />
-								<label> Email:
-									<input type="text" name="email"
-										value={this.state.email}
-										onChange={this.handleChange}
-										className="login-input" />
-								</label>
+							<button onClick={this.openModal}>Demo Login</button>
+			        <Modal
+			          isOpen={this.state.modalIsOpen}
+			          onAfterOpen={this.afterOpenModal}
+			          onRequestClose={this.closeModal}
+			          style={customStyles}
+			          contentLabel="Example Modal"
+			        >
 
-								<br />
-								<label> Password:
-									<input type="password" name="password"
-										value={this.state.password}
-										onChange={this.handleChange}
-										className="login-input" />
-								</label>
+								<div className="login-form">
+									<br />
+									<label> Email:
+										<input type="text" name="email"
+											value={this.state.email}
+											onChange={this.handleChange}
+											className="login-input" />
+									</label>
 
-								<br />
-								<button onClick={this.handleSubmit('login')}>
-									Log In
-								</button>
-								<button onClick={this.handleSubmit('signup')}>
-									Sign Up
-								</button>
-							</div>
+									<br />
+									<label> Password:
+										<input type="password" name="password"
+											value={this.state.password}
+											onChange={this.handleChange}
+											className="login-input" />
+									</label>
+
+									<br />
+									<button onClick={this.handleSubmit('login')}>
+										Log In
+									</button>
+									<button onClick={this.handleSubmit('signup')}>
+										Sign Up
+									</button>
+								</div>
+
+
+			          <button onClick={this.closeModal}>close</button>
+			          <form>
+			            <input />
+			          </form>
+			        </Modal>
+
+
+
 					</div>
 				</div>
 			</div>

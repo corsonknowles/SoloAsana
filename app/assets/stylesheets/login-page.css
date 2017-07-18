@@ -1,14 +1,16 @@
 .login-page {
 
-  background-color: #fc7279;
+  /*background-color: #fc7279;
   background-image: -webkit-linear-gradient(bottom left, #fc7279 10%, #ff7b9c 65%, #ffc019 125%);
-  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);
+  background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);*/
   height: 540px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
+  background-size: 300vw 300vh;
+  background-position: -100vw -120vh;
 
   font-family: haptic, proxima-nova, 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
   color: white;
@@ -16,7 +18,6 @@
   line-height: 60px;
   border: solid red 2px;
   text-align: center;
-
 
 }
 
@@ -30,7 +31,7 @@
 
 .login-tagline {
   font-size: 22px;
-  line-height: 1.5;
+  line-height: 30px;
   margin-top: 20px;
   margin-bottom: 30px;
 
@@ -39,6 +40,8 @@
 }
 
 .login-form-container {
+  line-height:  14px;
+  margin: 0px;
   text-align: left;
   font-size: 14px;
   border: solid blue 2px;
