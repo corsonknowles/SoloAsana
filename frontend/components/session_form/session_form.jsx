@@ -10,7 +10,9 @@ const customStyles = {
     right                 : 'auto',
     bottom                : 'auto',
     marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
+    transform             : 'translate(-50%, -50%)',
+		height								: '200px',
+		width									: '300px'
   }
 };
 
@@ -124,11 +126,8 @@ class SessionForm extends React.Component {
 									</button>
 								</div>
 
+			          <button className="close-modal" onClick={this.closeModal}>X</button>
 
-			          <button onClick={this.closeModal}>close</button>
-			          <form>
-			            <input />
-			          </form>
 			        </Modal>
 
 
