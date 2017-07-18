@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717154557) do
+ActiveRecord::Schema.define(version: 20170718161915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.bigint "team_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_projects_on_team_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
+  end
 
   create_table "tasks", force: :cascade do |t|
     t.string "title"
@@ -21,22 +31,40 @@ ActiveRecord::Schema.define(version: 20170717154557) do
     t.integer "due"
     t.boolean "done"
     t.bigint "user_id"
+    t.bigint "project_id"
+    t.bigint "team_id"
     t.boolean "section"
     t.bigint "task_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["task_id"], name: "index_tasks_on_task_id"
+    t.index ["team_id"], name: "index_tasks_on_team_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
+    t.string "email"
     t.string "password_digest"
     t.string "session_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "projects", "teams"
+  add_foreign_key "projects", "users"
+  add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "tasks"
+  add_foreign_key "tasks", "teams"
   add_foreign_key "tasks", "users"
+  add_foreign_key "teams", "users"
 end

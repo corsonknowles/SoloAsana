@@ -6,6 +6,8 @@ one:
   due: 1
   done: false
   user: one
+  project: one
+  team: one
   section: false
   task: one
 
@@ -15,5 +17,7 @@ two:
   due: 1
   done: false
   user: two
+  project: two
+  team: two
   section: false
   task: two

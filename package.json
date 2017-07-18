@@ -37,13 +37,13 @@
   "devDependencies": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/corsonknowles/BenchBnB.git"
+    "url": "git+https://github.com/corsonknowles/SoloAsana.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/corsonknowles/BenchBnB/issues"
+    "url": "https://github.com/corsonknowles/SoloAsana/issues"
   },
-  "homepage": "https://github.com/corsonknowles/BenchBnB#readme"
+  "homepage": "https://github.com/corsonknowles/SoloAsana#readme"
 }

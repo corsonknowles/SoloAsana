@@ -7,7 +7,7 @@ const Greeting = ({currentUser, logout}) => {
   if (currentUser) {
     page = (
     <div>
-      { currentUser.username }
+      { currentUser.email }
        <button className="header-button" onClick={logout}>Log Out</button>
     </div>
   )} else {

@@ -55,23 +55,11 @@ Total: 12 Work Days.
 
 Enclosed in the docs folder:
 
-* [BalsamiqWireframes](./BalsamiqWireframes)
-* [ImageWireframes](./ImageWireframes)
+* [Wireframes](./Wireframes)
 * [React Components](component-hierarchy.md)
 * [API Endpoints](api-endpoints.md)
 * [DB Schema](schema.md)
 * [Sample State](sample-state.md)
-
-
-# Wireframe List
-
-Login
-
-Main Task View
-
-Detail Task View
-
-See Docs Folder for Balsamiq files and PNGs.
 
 
 # Minimum Viable Product

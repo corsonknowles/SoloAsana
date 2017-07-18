@@ -42,9 +42,9 @@ name        | string    | not null
         User first:
         rails g model User username:string email:string password_digest:string session_token:string
 
-        rails g model Team name:string references:user
+        rails g model Team name:string user:references
 
-        rails g model Project name:string references:team references:user
+        rails g model Project name:string team:references  user:references
 
         rails g model Task title:string body:text due:integer done:boolean user:references project:references team:references section:boolean task:references
 
