@@ -28,6 +28,4 @@ const SessionReducer = function(state = _nullUser, action){
   }
 };
 
-
-
 export default SessionReducer;
