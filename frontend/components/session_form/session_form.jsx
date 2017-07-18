@@ -4,8 +4,9 @@ class SessionForm extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			username: "",
+			email: "",
 			password: "",
+			username: "Awesome User"
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -43,35 +44,46 @@ class SessionForm extends React.Component {
 		return (
 			<div>
 				{ this.renderErrors() }
-				<div className="login-form-container">
+				<div className="login-page">
+					<div className="login-call-to-action">
+						Move work forward<br />
+					</div>
 
-						<br />
-						<br />
-						<div className="login-form">
-							<br />
-							<label> Email:
-								<input type="text" name="email"
-									value={this.state.email}
-									onChange={this.handleChange}
-									className="login-input" />
-							</label>
+					<div className="login-tagline">
+						Asana is the easiest way for teams to track their work
+						<br />—and get results.
+					</div>
 
-							<br />
-							<label> Password:
-								<input type="password" name="password"
-									value={this.state.password}
-									onChange={this.handleChange}
-									className="login-input" />
-							</label>
+					<div className="login-form-container">
 
 							<br />
-							<button onClick={this.handleSubmit('login')}>
-								Log In
-							</button>
-							<button onClick={this.handleSubmit('signup')}>
-								Sign Up
-							</button>
-						</div>
+							<br />
+							<div className="login-form">
+								<br />
+								<label> Email:
+									<input type="text" name="email"
+										value={this.state.email}
+										onChange={this.handleChange}
+										className="login-input" />
+								</label>
+
+								<br />
+								<label> Password:
+									<input type="password" name="password"
+										value={this.state.password}
+										onChange={this.handleChange}
+										className="login-input" />
+								</label>
+
+								<br />
+								<button onClick={this.handleSubmit('login')}>
+									Log In
+								</button>
+								<button onClick={this.handleSubmit('signup')}>
+									Sign Up
+								</button>
+							</div>
+					</div>
 				</div>
 			</div>
 		);
