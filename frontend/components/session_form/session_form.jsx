@@ -11,8 +11,15 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-		height								: '200px',
-		width									: '300px'
+
+		width									: '50%',
+		maxWidth							: '500px',
+		maxHeight							: '455px',
+		height								: '50%'
+
+
+
+
   }
 };
 
@@ -66,8 +73,9 @@ class SessionForm extends React.Component {
 	}
 
 	afterOpenModal() {
+
 		// references are now sync'd and can be accessed.
-		this.subtitle.style.color = '#f00';
+
 	}
 
 	closeModal() {
@@ -90,6 +98,7 @@ class SessionForm extends React.Component {
 					</div>
 
 					<div className="login-form-container">
+
 
 							<button onClick={this.openModal}>Demo Login</button>
 			        <Modal

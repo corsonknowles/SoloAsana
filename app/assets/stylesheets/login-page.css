@@ -1,11 +1,12 @@
 button {
-  background-color: #a177ff;
-  border-color: #a177ff;
+
+  background-color: #6a67ce;
+  border-color: #6a67ce;
   /*box-shadow: 0 0 0 3px #d0bbff;*/
   color: #fff;
   text-decoration: none;
   -webkit-appearance: none;
-  transition: all .15s ease-in-out;
+
   border: 1px solid #6a67ce;
   border-radius: 3px;
   cursor: pointer;
@@ -14,19 +15,25 @@ button {
   line-height: 2;
   text-align: center;
   padding: 0 15px;
+  transition: all .15s ease-in-out;
+  box-shadow: 0 0 0 0 #d0bbff;
 }
 
 button:hover {
   box-shadow: 0 0 0 3px #d0bbff;
-
+  transition: all .15s ease-in-out;
+  background-color: #a177ff;
+  border-color: #a177ff;
 }
 
+
+
+
 .close-modal {
-  float: right;
-  align: right;
   position: absolute;
-
-
+  top: 0px;
+  right: 0px;
+  margin: 10px;
 }
 
 .login-page {
