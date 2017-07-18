@@ -6,7 +6,8 @@
     "npm": "5.3.x"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "webpack"
   },
   "dependencies": {
     "babel-core": "^6.25.0",
@@ -41,7 +42,7 @@
     "url": "git+https://github.com/corsonknowles/SoloAsana.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "David Corson Knowles",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/corsonknowles/SoloAsana/issues"
