@@ -104,7 +104,7 @@ input, select {
 
 
 
-/*html, body, div, span, applet, object, iframe,
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -125,7 +125,7 @@ time, mark, audio, video, input, button, a, textarea {
   vertical-align: baseline;
   box-sizing: border-box;
   text-decoration: none;
-}*/
+}
 
 
  /*HTML5 display-role reset for older browsers */
