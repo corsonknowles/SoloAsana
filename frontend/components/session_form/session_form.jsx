@@ -45,6 +45,7 @@ class SessionForm extends React.Component {
 		this.closeModal = this.closeModal.bind(this);
 
 		this.handleDemoLogin = this.handleDemoLogin.bind(this);
+    this.disableButtons = this.disableButtons.bind(this);
 	}
 
 	handleChange(event) {
@@ -55,9 +56,11 @@ class SessionForm extends React.Component {
 		});
 	}
 
-	handleSubmit(type){
+	handleSubmit(type, user){
 		return () => {
-			const user = this.state;
+			if (user === undefined) {
+        user = this.state;
+      }
 			this.props.processForm(user, type);
 		};
 	}
@@ -89,44 +92,59 @@ class SessionForm extends React.Component {
 	}
 
 	handleDemoLogin(event) {
-	  // event.preventDefault();
-	// 	let password = "secure";
-	//   let email = "awesome.user@example.com";
-	//   for (let i = 0; i < email.length; i++) {
-	//     setTimeout(() => this.setState({
-	//       email: email.slice(0, i + 1)}), (i * 100));
-	//   }
-	//   for (let j = 0; j < password.length; j++) {
-	//     setTimeout(() => this.setState({
-	//       password: password.slice(0, j + 1)}), ((j + 5) * 100));
-	//   }
-	//   const user = {
-	// 		password: "secure",
-	//     email: "awesome.user@example.com"
-	//   };
-	//
-	//   setTimeout(() => this.props.requestLogin({user}), 2000);
+
+	  event.preventDefault();
+
+    this.disableButtons();
+
+    this.setState({'username': '', 'password': ''});
+
+		let password = "secure";
+	  let email = "awesome.user@example.com";
+	  for (let i = 0; i < email.length; i++) {
+	    setTimeout(() => this.setState({
+	      email: email.slice(0, i + 1)}), (i * 50));
+	  }
+	  for (let j = 0; j < password.length; j++) {
+	    setTimeout(() => this.setState({
+	      password: password.slice(0, j + 1)}), ((j + 24) * 50));
+	  }
+	  const user = {
+			password: "secure",
+	    email: "awesome.user@example.com"
+	  };
+
+	  setTimeout(this.handleSubmit("login", user), 2000);
 	}
 
+  disableButtons() {
+    $("#login-form :button").prop("disabled", true);
+  }
 
 	render() {
 
 		return (
 			<div>
 				<nav>
+          <div className="nav-left">
+
+          <img src='../../../app/assets/images/solo_logo.png' />
+          </div>
+          <div className="nav-right">
 					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
 					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
-					<button className="white" onClick={this.openModal}>Demo</button>
+					<button className='white' onClick={this.openModal}>Demo</button>
+          </div>
 				</nav>
 				<div className="login-page">
-					<div className="login-call-to-action">
+					<h1 className="login-call-to-action">
 						Move work forward<br />
-					</div>
+        </h1>
 
-					<div className="login-tagline">
+					<h3 className="login-tagline">
 						Asana is the easiest way for teams to track their work
 						<br />—and get results.
-					</div>
+					</h3>
 
 					<div className="login-form-container">
 
@@ -141,9 +159,9 @@ class SessionForm extends React.Component {
 
 								<div className="login-form">
 									{ this.renderErrors() }
-									<h1>Log In</h1>
+									<h2>Log In</h2>
 									<br />
-									<button onClick={this.handleDemoLogin('login')}>
+									<button onClick={ (event) => this.handleDemoLogin(event)}>
 										Demo User
 									</button>
 									<button onClick={this.handleSubmit('login')}>
