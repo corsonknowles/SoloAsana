@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-
+// import { Link, NavLink } from 'react-router-dom'
+// import Link from '../Link';
 
 const customStyles = {
   content : {
@@ -61,7 +62,7 @@ class SessionForm extends React.Component {
 
 	renderErrors(){
 		return(
-			<ul>
+			<ul className="errors">
 				{this.props.errors.map( (error, i) => (
 					<li key={`error-${i}`}>
 						{error}
@@ -90,9 +91,9 @@ class SessionForm extends React.Component {
 		return (
 			<div>
 				<nav>
-					<h1>
-
-					</h1>
+					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
+					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
+					<button className="white" onClick={this.openModal}>Demo</button>
 				</nav>
 				<div className="login-page">
 					<div className="login-call-to-action">

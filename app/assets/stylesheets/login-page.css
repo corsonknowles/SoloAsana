@@ -1,14 +1,43 @@
-nav < ul {
+ol, ul, li {
   list-style: none;
-
 }
 
 nav {
   height: 60px;
   background-color: white;
-
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: flex-end;
 }
 
+.hire-me {
+  border-color: transparent;
+  color: #a1a4aa;
+  margin-right: 15px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .15s;
+  background: transparent;
+  margin: 0;
+  line-height: 0px;
+  display: inline-block;
+  /*color: #49505b;*/
+}
+
+.hire-me:hover {
+  color: #80e6ff;
+}
+
+.errors {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin: 10px;
+  line-height: 0px;
+  border: solid teal 2px;
+  font-size: 12px;
+}
 
 button {
 
@@ -32,15 +61,6 @@ button {
   margin: 10px;
 }
 
-input {
-  margin: 10px;
-  height: 40px;
-  width: 440px;
-  /*width: 100%;
-  height: 100%;*/
-  border-radius: 3px;
-}
-
 button:hover {
   box-shadow: 0 0 0 3px #d0bbff;
   transition: all .15s ease-in-out;
@@ -50,8 +70,18 @@ button:hover {
 
 button .white {
   background-color: white;
-  border-color: white;
+  border-color: #6a67ce;
+  color: #6a67ce;
 
+}
+
+input {
+  margin: 10px;
+  height: 40px;
+  width: 440px;
+  /*width: 100%;
+  height: 100%;*/
+  border-radius: 3px;
 }
 
 
@@ -63,11 +93,12 @@ button .white {
 }
 
 .login-page {
-  
+
   /*background-color: #fc7279;
   background-image: -webkit-linear-gradient(bottom left, #fc7279 10%, #ff7b9c 65%, #ffc019 125%);
   background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);*/
   height: 540px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
