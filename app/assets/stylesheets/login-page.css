@@ -26,9 +26,6 @@ button:hover {
   border-color: #a177ff;
 }
 
-
-
-
 .close-modal {
   position: absolute;
   top: 0px;
@@ -60,11 +57,10 @@ button:hover {
 }
 
 .login-call-to-action {
-
   font-size: 65px;
   line-height: 60px;
-  border: solid black 2px;
 
+  /*border: solid black 2px;*/
 }
 
 .login-tagline {
@@ -74,7 +70,6 @@ button:hover {
   margin-bottom: 30px;
 
   /*border: solid green 2px;*/
-
 }
 
 .login-form-container {
@@ -82,7 +77,6 @@ button:hover {
   margin: 0px;
   text-align: left;
   font-size: 14px;
+  
   /*border: solid blue 2px;*/
-
-
 }
