@@ -17,6 +17,7 @@ nav {
   align-content: center;
   justify-content: space-between;
   margin-right: 10%;
+  min-width: 300px;
 }
 
 a {
@@ -89,6 +90,11 @@ button:hover {
   background-color: white;
   border-color: #6a67ce;
   color: #6a67ce;
+  border-width: 2px;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 13px;
+
 
 }
 

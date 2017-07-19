@@ -45,7 +45,6 @@ class SessionForm extends React.Component {
 		this.closeModal = this.closeModal.bind(this);
 
 		this.handleDemoLogin = this.handleDemoLogin.bind(this);
-    this.disableButtons = this.disableButtons.bind(this);
 	}
 
 	handleChange(event) {
@@ -114,7 +113,7 @@ class SessionForm extends React.Component {
 	    email: "awesome.user@example.com"
 	  };
 
-	  setTimeout(this.handleSubmit("login", user), 2000);
+	  setTimeout(this.handleSubmit("login", user), 1550);
 	}
 
   disableButtons() {
@@ -128,12 +127,12 @@ class SessionForm extends React.Component {
 				<nav>
           <div className="nav-left">
 
-          <img src='../../../app/assets/images/solo_logo.png' />
+            <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_132/v1500505306/solo_logo_jukva4.png' />
           </div>
           <div className="nav-right">
-					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
-					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
-					<button className='white' onClick={this.openModal}>Demo</button>
+  					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
+  					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
+  					<button className='white' onClick={this.openModal}>Log In</button>
           </div>
 				</nav>
 				<div className="login-page">
