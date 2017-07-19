@@ -14,7 +14,13 @@ const customStyles = {
 		width									: '50%',
 		maxWidth							: '500px',
 		maxHeight							: '455px',
-		height								: '50%'
+		height								: '50%',
+		display								: 'flex',
+		justifyContent				: 'center',
+		alignItems						: 'center',
+		color									: '#49505b',
+		fontWeight						:	'bold',
+		pointerEvents	        : 'auto'
 
   }
 };
@@ -82,7 +88,11 @@ class SessionForm extends React.Component {
 
 		return (
 			<div>
-				{ this.renderErrors() }
+				<nav>
+					<h1>
+						
+					</h1>
+				</nav>
 				<div className="login-page">
 					<div className="login-call-to-action">
 						Move work forward<br />
@@ -96,7 +106,7 @@ class SessionForm extends React.Component {
 					<div className="login-form-container">
 
 
-							<button onClick={this.openModal}>Demo Login</button>
+							<button onClick={this.openModal}>Demo Login for FREE</button>
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
 			          onAfterOpen={this.afterOpenModal}
@@ -106,26 +116,34 @@ class SessionForm extends React.Component {
 			        >
 
 								<div className="login-form">
+									{ this.renderErrors() }
+									<h1>Log In</h1>
 									<br />
-									<label> Email:
+									<button onClick={this.handleSubmit('login')}>
+										Demo Log In
+									</button>
+									<br />
+									<label className="signup-label"> EMAIL ADDRESS<br />
 										<input type="text" name="email"
 											value={this.state.email}
 											onChange={this.handleChange}
-											className="login-input" />
+											className="login-input"
+											placeholder="email@company.com"
+											 />
 									</label>
 
 									<br />
-									<label> Password:
+									<label className="signup-label"> PASSWORD<br />
 										<input type="password" name="password"
 											value={this.state.password}
 											onChange={this.handleChange}
-											className="login-input" />
+											className="login-input"
+											placeholder="*********"
+										/>
 									</label>
 
 									<br />
-									<button onClick={this.handleSubmit('login')}>
-										Log In
-									</button>
+
 									<button onClick={this.handleSubmit('signup')}>
 										Sign Up
 									</button>
