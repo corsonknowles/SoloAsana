@@ -43,6 +43,8 @@ class SessionForm extends React.Component {
 		this.openModal = this.openModal.bind(this);
 		this.afterOpenModal = this.afterOpenModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
+
+		this.handleDemoLogin = this.handleDemoLogin.bind(this);
 	}
 
 	handleChange(event) {
@@ -86,6 +88,27 @@ class SessionForm extends React.Component {
 		this.setState({modalIsOpen: false});
 	}
 
+	handleDemoLogin(event) {
+	  // event.preventDefault();
+	// 	let password = "secure";
+	//   let email = "awesome.user@example.com";
+	//   for (let i = 0; i < email.length; i++) {
+	//     setTimeout(() => this.setState({
+	//       email: email.slice(0, i + 1)}), (i * 100));
+	//   }
+	//   for (let j = 0; j < password.length; j++) {
+	//     setTimeout(() => this.setState({
+	//       password: password.slice(0, j + 1)}), ((j + 5) * 100));
+	//   }
+	//   const user = {
+	// 		password: "secure",
+	//     email: "awesome.user@example.com"
+	//   };
+	//
+	//   setTimeout(() => this.props.requestLogin({user}), 2000);
+	}
+
+
 	render() {
 
 		return (
@@ -107,7 +130,6 @@ class SessionForm extends React.Component {
 
 					<div className="login-form-container">
 
-
 							<button onClick={this.openModal}>Demo Login for FREE</button>
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
@@ -121,8 +143,11 @@ class SessionForm extends React.Component {
 									{ this.renderErrors() }
 									<h1>Log In</h1>
 									<br />
+									<button onClick={this.handleDemoLogin('login')}>
+										Demo User
+									</button>
 									<button onClick={this.handleSubmit('login')}>
-										Demo Log In
+										Log In
 									</button>
 									<br />
 									<label className="signup-label"> EMAIL ADDRESS<br />
@@ -140,7 +165,7 @@ class SessionForm extends React.Component {
 											value={this.state.password}
 											onChange={this.handleChange}
 											className="login-input"
-											placeholder="*********"
+											placeholder="6 characters or more"
 										/>
 									</label>
 
@@ -155,14 +180,11 @@ class SessionForm extends React.Component {
 
 			        </Modal>
 
-
-
 					</div>
 				</div>
 			</div>
 		);
 	}
-
 }
 
 export default SessionForm;
