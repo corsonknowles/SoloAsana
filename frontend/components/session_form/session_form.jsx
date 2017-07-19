@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-// import { Link, NavLink } from 'react-router-dom'
-// import Link from '../Link';
+import { Link, NavLink } from 'react-router-dom'
+
 
 const customStyles = {
   content : {
@@ -125,13 +125,15 @@ class SessionForm extends React.Component {
 		return (
 			<div>
 				<nav>
-          <div className="nav-left">
-
-            <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_132/v1500505306/solo_logo_jukva4.png' />
-          </div>
+            <div className="nav-left">
+              <Link to="/">
+              <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
+              </Link>
+            </div>
           <div className="nav-right">
   					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
   					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
+            <button onClick={this.openModal}>Get a Demo for FREE</button>
   					<button className='white' onClick={this.openModal}>Log In</button>
           </div>
 				</nav>
@@ -147,7 +149,7 @@ class SessionForm extends React.Component {
 
 					<div className="login-form-container">
 
-							<button onClick={this.openModal}>Demo Login for FREE</button>
+							<button onClick={this.openModal}>Get a Demo for FREE</button>
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
 			          onAfterOpen={this.afterOpenModal}
@@ -162,9 +164,6 @@ class SessionForm extends React.Component {
 									<br />
 									<button onClick={ (event) => this.handleDemoLogin(event)}>
 										Demo User
-									</button>
-									<button onClick={this.handleSubmit('login')}>
-										Log In
 									</button>
 									<br />
 									<label className="signup-label"> EMAIL ADDRESS<br />
@@ -187,10 +186,14 @@ class SessionForm extends React.Component {
 									</label>
 
 									<br />
-
-									<button onClick={this.handleSubmit('signup')}>
+                  <button className="white" onClick={this.handleSubmit('signup')}>
 										Sign Up
 									</button>
+
+                  <button onClick={this.handleSubmit('login')}>
+										Log In
+									</button>
+
 								</div>
 
 			          <button className="close-modal" onClick={this.closeModal}>X</button>
