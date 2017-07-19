@@ -20,7 +20,8 @@ const customStyles = {
 		alignItems						: 'center',
 		color									: '#49505b',
 		fontWeight						:	'bold',
-		pointerEvents	        : 'auto'
+		pointerEvents	        : 'auto',
+		borderRadius					: '10px'
 
   }
 };
@@ -90,7 +91,7 @@ class SessionForm extends React.Component {
 			<div>
 				<nav>
 					<h1>
-						
+
 					</h1>
 				</nav>
 				<div className="login-page">

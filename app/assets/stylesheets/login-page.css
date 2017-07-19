@@ -1,5 +1,12 @@
-nav ul {
-    list-style:none;
+nav < ul {
+  list-style: none;
+
+}
+
+nav {
+  height: 60px;
+  background-color: white;
+
 }
 
 
@@ -56,7 +63,7 @@ button .white {
 }
 
 .login-page {
-
+  
   /*background-color: #fc7279;
   background-image: -webkit-linear-gradient(bottom left, #fc7279 10%, #ff7b9c 65%, #ffc019 125%);
   background-image: linear-gradient(to top right,#fc7279 10%, #ff7b9c 65%, #ffc019 125%);*/
