@@ -28,7 +28,7 @@ nav {
   justify-content: space-between;
   margin-right: 10%;
   min-width: 300px;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .nav-left{
@@ -60,7 +60,7 @@ h2 {
   cursor: pointer;
   transition: all .15s;
   background: transparent;
-  margin: 0;
+
   line-height: 0px;
   display: flex;
   align-self: center;

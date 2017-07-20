@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import { Link, NavLink } from 'react-router-dom'
-
+import { Link, NavLink } from 'react-router-dom';
 
 const customStyles = {
   content : {
