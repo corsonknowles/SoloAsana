@@ -35,7 +35,8 @@ class SessionForm extends React.Component {
 			email: "",
 			password: "",
 			username: "Awesome User",
-			modalIsOpen: false
+			modalIsOpen: false,
+      pending: false
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -117,7 +118,7 @@ class SessionForm extends React.Component {
 	}
 
   disableButtons() {
-    $("#login-form :button").prop("disabled", true);
+    this.state.pending = true;
   }
 
 	render() {
@@ -133,8 +134,8 @@ class SessionForm extends React.Component {
           <div className="nav-right">
   					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
   					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
-            <button onClick={this.openModal}>Get a Demo for FREE</button>
-  					<button className='white' onClick={this.openModal}>Log In</button>
+            <button disabled={ this.state.pending ? "true" : "false" } onClick={this.openModal}>Get a Demo for FREE</button>
+  					<button disabled={ this.state.pending ? "true" : "false" } className='white' onClick={this.openModal}>Log In</button>
           </div>
 				</nav>
 				<div className="login-page">
@@ -186,11 +187,11 @@ class SessionForm extends React.Component {
 									</label>
 
 									<br />
-                  <button className="white" onClick={this.handleSubmit('signup')}>
+                  <button className="white" disabled={ this.state.pending ? "true" : "false" } onClick={this.handleSubmit('signup')}>
 										Sign Up
 									</button>
 
-                  <button onClick={this.handleSubmit('login')}>
+                  <button disabled={ this.state.pending ? true : false } onClick={this.handleSubmit('login')}>
 										Log In
 									</button>
 
