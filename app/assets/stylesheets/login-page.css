@@ -27,6 +27,12 @@ nav {
   justify-content: space-between;
 }
 
+.login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 .nav-right {
   display: flex;
   flex-direction: row;
@@ -216,7 +222,6 @@ input {
   /*border: solid green 2px;*/
   margin-bottom: 50px;
 
-
 }
 
 .login-form-container {
@@ -238,6 +243,6 @@ input {
 
 }
 
-.signup-label {
+.login-label {
 
 }

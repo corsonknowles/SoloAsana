@@ -170,7 +170,7 @@ class SessionForm extends React.Component {
 			          onAfterOpen={this.afterOpenModal}
 			          onRequestClose={this.closeModal}
 			          style={customStyles}
-			          contentLabel="Example Modal"
+			          contentLabel="Login Form"
 			        >
 
 								<div className="login-form">
@@ -181,24 +181,28 @@ class SessionForm extends React.Component {
 										Demo User
 									</button>
 									<br />
-									<label className="signup-label"> EMAIL ADDRESS<br />
-										<input type="text" name="email"
-											value={this.state.email}
-											onChange={this.handleChange}
-											className="login-input"
-											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
-											 />
-									</label>
+                  <div className="login-box">
+  									<label for="email" className="login-label"> EMAIL ADDRESS</label>
+                    <br />
+  										<input type="text" name="email" id="email"
+  											value={this.state.email}
+  											onChange={this.handleChange}
+  											className="login-input"
+  											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
+  											 />
 
-									<br />
-									<label className="signup-label"> PASSWORD<br />
-										<input type="password" name="password"
-											value={this.state.password}
-											onChange={this.handleChange}
-											className="login-input"
-											placeholder="6 characters or more"
-										/>
-									</label>
+
+  									<br />
+  									<label for="password" className="login-label"> PASSWORD </label>
+                    <br />
+  										<input type="password" name="password" id="password"
+  											value={this.state.password}
+  											onChange={this.handleChange}
+  											className="login-input"
+  											placeholder="6 characters or more"
+  										/>
+
+                  </div>
 
 									<br />
                   <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit('signup')}>
