@@ -1,3 +1,13 @@
+::selection {
+    background-color: #80e6ff;
+    color: #49505b;
+}
+
+::-moz-selection {
+  background-color: #80e6ff;
+  color: #49505b;
+}
+
 ol, ul, li {
   list-style: none;
 }
@@ -104,9 +114,8 @@ button:hover {
   color: #6a67ce;
   border-width: 2px;
   padding: 0 13px;
-
-
 }
+
 
 input {
   margin: 10px;
@@ -122,6 +131,17 @@ input {
   top: 0px;
   right: 0px;
   margin: 10px;
+  color: #b9bcc0;
+  background-color: white;
+  border: 0px solid white;
+}
+
+.close-modal:hover{
+  color: #80e6ff;
+  box-shadow: 0 0 0 0px #d0bbff;
+  transition: all .15s ease-in-out;
+  background-color: white;
+  border-color: white;
 }
 
 .login-page {
