@@ -143,7 +143,7 @@ class SessionForm extends React.Component {
         </h1>
 
 					<h3 className="login-tagline">
-						Asana is the easiest way for teams to track their work
+						Solo is the easiest way for teams to track their work
 						<br />—and get results.
 					</h3>
 
