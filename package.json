@@ -16,8 +16,8 @@
     "babel-preset-react": "^6.24.1",
     "install": "^0.10.1",
     "jquery": "^3.2.1",
+    "prune": "0.0.2",
     "react": "^15.6.1",
-    "react-bootstrap": "^0.31.1",
     "react-dom": "^15.6.1",
     "react-dropzone": "^3.13.3",
     "react-modal": "^2.2.2",
@@ -27,7 +27,6 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "remove": "^0.1.5",
-    "status": "0.0.13",
     "superagent": "^3.5.2",
     "thunk": "0.0.1",
     "webpack": "^3.3.0"

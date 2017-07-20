@@ -45,6 +45,7 @@ class SessionForm extends React.Component {
 		this.closeModal = this.closeModal.bind(this);
 
 		this.handleDemoLogin = this.handleDemoLogin.bind(this);
+    this.launchDemo = this.launchDemo.bind(this);
 	}
 
 	handleChange(event) {
@@ -90,6 +91,12 @@ class SessionForm extends React.Component {
 		this.setState({modalIsOpen: false});
 	}
 
+  launchDemo(event) {
+    event.preventDefault();
+    this.openModal();
+    setTimeout(() => this.handleDemoLogin(event), 1000);
+  }
+
 	handleDemoLogin(event) {
 
 	  event.preventDefault();
@@ -126,16 +133,25 @@ class SessionForm extends React.Component {
 		return (
 			<div>
 				<nav>
-            <div className="nav-left">
-              <Link to="/">
-              <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
-              </Link>
-            </div>
+          <div className="nav-left">
+            <Link to="/">
+            <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
+            </Link>
+          </div>
+
           <div className="nav-right">
-  					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
-  					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
-            <button onClick={this.openModal}>Get a Demo for FREE</button>
-  					<button className='white' onClick={this.openModal}>Log In</button>
+
+            <div className='hire-me'>
+    					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub</a><br />
+    					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn</a><br />
+              <a className='hire-me' href='mailto:recruiter.inquiries@soloasana.com'>Contact</a><br />
+            </div>
+
+            <div className="nav-buttons">
+              <button onClick={this.launchDemo}>Get a Demo for FREE</button>
+    					<button className='white' onClick={this.openModal}>Log In</button>
+            </div>
+
           </div>
 				</nav>
 				<div className="login-page">
@@ -144,13 +160,14 @@ class SessionForm extends React.Component {
         </h1>
 
 					<h3 className="login-tagline">
-						Solo is the easiest way for teams to track their work
-						<br />—and get results.
+						Solo is the easiest way for teams to track their work—
+						<br />and get results.
 					</h3>
 
 					<div className="login-form-container">
 
-							<button onClick={this.openModal}>Get a Demo for FREE</button>
+							<button className="white" onClick={this.launchDemo}>Check Out the Demo Account for FREE</button>
+							<button onClick={this.openModal}>Sign Up</button>
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
 			          onAfterOpen={this.afterOpenModal}

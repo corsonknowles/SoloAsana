@@ -1,3 +1,8 @@
+body {
+  font-size: 16px;
+  min-width: 700px;
+}
+
 ::selection {
     background-color: #80e6ff;
     color: #49505b;
@@ -16,6 +21,7 @@ nav {
   height: 60px;
   background-color: white;
   display: flex;
+  flex-wrap: nowrap;
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
@@ -25,24 +31,61 @@ nav {
   display: flex;
   flex-direction: row;
   align-content: center;
+  flex-wrap: nowrap;
   justify-content: space-between;
-  margin-right: 10%;
-  min-width: 300px;
-  font-size: 16px;
+  margin-right: 5%;
 }
 
 .nav-left{
   display: flex;
   align-self: center;
   flex-direction: row;
+  flex-wrap: nowrap;
   align-content: center;
   justify-content: center;
   margin-left: 5%;
-  min-width: 100px;
+
 }
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  min-width: 300px;
+}
+
+.hire-me {
+
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  align-self: center;
+  flex-wrap: nowrap;
+
+  min-width: 90px;
+
+  border-color: transparent;
+  color: #a1a4aa;
+  margin-right: 12px;
+
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .15s;
+  background: transparent;
+
+  line-height: 0px;
+
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 500;
+
+}
+
 
 a {
   line-height: 0px;
+  margin: 20px;
 }
 
 h2 {
@@ -52,19 +95,6 @@ h2 {
   margin: 5px;
 }
 
-.hire-me {
-  border-color: transparent;
-  color: #a1a4aa;
-  margin-right: 15px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all .15s;
-  background: transparent;
-
-  line-height: 0px;
-  display: flex;
-  align-self: center;
-}
 
 .hire-me:hover {
   color: #80e6ff;
@@ -98,7 +128,9 @@ button {
   transition: all .15s ease-in-out;
   box-shadow: 0 0 0 0 #d0bbff;
   margin: 10px;
-  font-weight: 400;
+  padding-left: 20px;
+  padding-right: 20px;
+
 }
 
 button:hover {
@@ -114,6 +146,11 @@ button:hover {
   color: #6a67ce;
   border-width: 2px;
   padding: 0 13px;
+}
+
+button.white:hover {
+    background-color: white;
+    color: #c0bbff;
 }
 
 
@@ -167,16 +204,18 @@ input {
 .login-call-to-action {
   font-size: 65px;
   /*border: solid black 2px;*/
-  line-height: 60px;
+  line-height: 75px;
+  font-weight: 700;
+  margin: 20px;
 
 }
 
 .login-tagline {
   font-size: 22px;
   line-height: 30px;
-  margin-top: 20px;
   /*border: solid green 2px;*/
-  margin-bottom: 30px;
+  margin-bottom: 50px;
+
 
 }
 
