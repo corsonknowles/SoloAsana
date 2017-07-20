@@ -82,9 +82,7 @@ class SessionForm extends React.Component {
 	}
 
 	afterOpenModal() {
-
 		// references are now sync'd and can be accessed.
-
 	}
 
 	closeModal() {
@@ -102,7 +100,6 @@ class SessionForm extends React.Component {
 	  event.preventDefault();
 
     this.setState({pending: true})
-    // this.disableButtons();
 
     this.setState({'username': '', 'password': ''});
 
@@ -148,8 +145,8 @@ class SessionForm extends React.Component {
             </div>
 
             <div className="nav-buttons">
-              <button onClick={this.launchDemo}>Get a Demo for FREE</button>
-    					<button className='white' onClick={this.openModal}>Log In</button>
+              <button onClick={this.launchDemo} >Get a Demo for FREE</button>
+    					<button className='white' onClick={this.openModal} >Log In</button>
             </div>
 
           </div>
@@ -189,7 +186,7 @@ class SessionForm extends React.Component {
 											value={this.state.email}
 											onChange={this.handleChange}
 											className="login-input"
-											placeholder="email@company.com"
+											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
 											 />
 									</label>
 
