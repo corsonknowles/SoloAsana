@@ -95,7 +95,8 @@ class SessionForm extends React.Component {
 
 	  event.preventDefault();
 
-    this.disableButtons();
+    this.setState({pending: true})
+    // this.disableButtons();
 
     this.setState({'username': '', 'password': ''});
 
@@ -134,8 +135,8 @@ class SessionForm extends React.Component {
           <div className="nav-right">
   					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub &nbsp;</a>
   					<a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn &nbsp;</a>
-            <button disabled={ this.state.pending ? "true" : "false" } onClick={this.openModal}>Get a Demo for FREE</button>
-  					<button disabled={ this.state.pending ? "true" : "false" } className='white' onClick={this.openModal}>Log In</button>
+            <button onClick={this.openModal}>Get a Demo for FREE</button>
+  					<button className='white' onClick={this.openModal}>Log In</button>
           </div>
 				</nav>
 				<div className="login-page">
@@ -163,7 +164,7 @@ class SessionForm extends React.Component {
 									{ this.renderErrors() }
 									<h2>Log In</h2>
 									<br />
-									<button onClick={ (event) => this.handleDemoLogin(event)}>
+									<button disabled={!!(this.state.pending)} onClick={ (event) => this.handleDemoLogin(event)}>
 										Demo User
 									</button>
 									<br />
@@ -187,11 +188,11 @@ class SessionForm extends React.Component {
 									</label>
 
 									<br />
-                  <button className="white" disabled={ this.state.pending ? "true" : "false" } onClick={this.handleSubmit('signup')}>
+                  <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit('signup')}>
 										Sign Up
 									</button>
 
-                  <button disabled={ this.state.pending ? true : false } onClick={this.handleSubmit('login')}>
+                  <button disabled={!!(this.state.pending)} onClick={this.handleSubmit('login')}>
 										Log In
 									</button>
 
