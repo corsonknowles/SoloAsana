@@ -13,6 +13,7 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)',
 		width									: '50%',
 		maxWidth							: '575px',
+    minWidth              : '500px',
 		maxHeight							: '585px',
 		height								: '80%',
 		display								: 'flex',
@@ -75,17 +76,17 @@ class Greeting extends React.Component {
     };
   }
 
-  // renderErrors(){
-  //   return(
-  //     <ul className="errors">
-  //       {this.props.errors.map( (error, i) => (
-  //         <li key={`error-${i}`}>
-  //           {error}
-  //         </li>
-  //       ))}
-  //     </ul>
-  //   );
-  // }
+  renderErrors(){
+    return(
+      <ul className="errors">
+        {this.props.errors.map( (error, i) => (
+          <li key={`error-${i}`}>
+            {error}
+          </li>
+        ))}
+      </ul>
+    );
+  }
 
   openModal() {
     this.setState({modalIsOpen: true});
@@ -98,8 +99,6 @@ class Greeting extends React.Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
-
-
 
   render() {
     return (
@@ -120,11 +119,11 @@ class Greeting extends React.Component {
         >
         <div className="profile-form">
 
-          <h2>My Profile Settings</h2>
+          <h2 className="profile-title">My Profile Settings</h2>
           <br />
 
           <br />
-          <label className="profile-label"> USERNAME <br />
+          <label className="profile-label">&nbsp;&nbsp; USERNAME <br />
             <input type="text" name="username"
               value={this.state.username}
               onChange={this.handleChange}
@@ -132,15 +131,7 @@ class Greeting extends React.Component {
               placeholder="Awesome User"
             />
           </label>
-          <label className="profile-label"> USERNAME <br />
-            <input type="text" name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder="Awesome User"
-            />
-          </label>
-          <label className="profile-label"> ROLE <br />
+          <label className="profile-label">&nbsp;&nbsp; ROLE <br />
             <input type="text" name="role"
               value={this.state.role}
               onChange={this.handleChange}
@@ -148,7 +139,7 @@ class Greeting extends React.Component {
               placeholder=""
             />
           </label>
-          <label className="profile-label"> DEPARTMENT <br />
+          <label className="profile-label">&nbsp;&nbsp; DEPARTMENT <br />
             <input type="text" name="department"
               value={this.state.department}
               onChange={this.handleChange}
@@ -156,12 +147,12 @@ class Greeting extends React.Component {
               placeholder=""
             />
           </label>
-          <label className="profile-label"> ABOUT ME <br />
-            <input type="text" name="about"
+          <label className="profile-label">&nbsp;&nbsp; ABOUT ME <br />
+            <input type="text" className="about" name="about"
               value={this.state.about}
               onChange={this.handleChange}
               className="profile-input"
-              placeholder="At work I run dev ops. At home, you'll find me watching murder mysteries and talking my cat off the ledge. Metaphorically."
+              placeholder="At work I run dev ops. At home, I rescue kittens."
             />
           </label>
 

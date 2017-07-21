@@ -3,7 +3,7 @@ section {
   background: #151b26;
   width: 245px;
   height: 100vh;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: normal;
   }
@@ -17,6 +17,8 @@ section {
   color: white;
   fill: white;
   border: 0px solid white;
+  display: flex;
+  align-self: flex-end;
 }
 
 .right {
@@ -31,6 +33,11 @@ section {
   border: 0px solid white;
 }
 
+.profile-title {
+  margin-bottom: 50px;
+  margin-left: 15px;
+}
+
 .profile-label {
    color: #848f99;
    font-size: 13px;
@@ -39,4 +46,12 @@ section {
 .profile-form {
   display: flex;
   flex-wrap: wrap;
+}
+
+.about {
+  height: 120px;
+  margin: 10px;
+  width: 440px;
+  border-radius: 3px;
+  font-size: 14px;
 }
