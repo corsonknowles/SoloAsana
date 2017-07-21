@@ -2,6 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
+import Dropzone from 'react-dropzone';
+import request from 'superagent';
+
+const CLOUDINARY_UPLOAD_PRESET = 'i8cgxpgn';
+const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
+
 
 const customStyles = {
   content : {
@@ -39,7 +45,8 @@ class Greeting extends React.Component {
       role: this.props.currentUser.role,
       department: this.props.currentUser.department,
       about: this.props.currentUser.about,
-      photo: this.props.currentUser.photo
+      photo: this.props.currentUser.photo,
+      uploadedFileCloudinaryUrl: ''
 
     }
     this.logout = this.props.logout;
@@ -100,11 +107,39 @@ class Greeting extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
+  onImageDrop(files) {
+    debugger;
+    this.setState({
+      uploadedFile: files[0]
+    });
+
+    this.handleImageUpload(files[0]);
+  }
+
+  handleImageUpload(file) {
+    let upload = request.post(CLOUDINARY_UPLOAD_URL)
+                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
+                        .field('file', file);
+
+    upload.end((err, response) => {
+      if (err) {
+        console.error(err);
+      }
+
+      if (response.body.secure_url !== '') {
+        this.setState({
+          uploadedFileCloudinaryUrl: response.body.secure_url
+        });
+      }
+    });
+  }
+
   render() {
+
     return (
     <div>
       <nav>
-         <h3>Welcome Awesome User</h3>
+         <h3>Welcome {this.state.username}</h3>
          <div className="nav-right">
          <button className="gold" onClick={this.openModal}>Account</button>
          <button className="header-button gold" onClick={this.logout} >Log Out</button>
@@ -122,6 +157,25 @@ class Greeting extends React.Component {
 
           <h2 className="profile-title">My Profile Settings</h2>
           <br />
+
+            <div>
+              <div className="FileUpload">
+                <Dropzone
+                  multiple={false}
+                  accept="image/*"
+                  onDrop={this.onImageDrop.bind(this)}>
+                  <p>Drop an image or click to select a file to upload.</p>
+                </Dropzone>
+              </div>
+
+              <div>
+                {this.state.uploadedFileCloudinaryUrl === '' ? null :
+                <div>
+                  <p>{this.state.uploadedFile.name}</p>
+                  <img src={this.state.uploadedFileCloudinaryUrl} />
+                </div>}
+              </div>
+          </div>
 
           <br />
           <label className="profile-label">&nbsp;&nbsp; USERNAME <br />

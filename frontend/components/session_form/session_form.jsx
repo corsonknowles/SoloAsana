@@ -35,12 +35,11 @@ class SessionForm extends React.Component {
 		this.state = {
 			email: "",
 			password: "",
-			username: "Awesome User",
+			username: "",
 			modalIsOpen: false,
       pending: false
-
-
 		};
+
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 
@@ -64,6 +63,7 @@ class SessionForm extends React.Component {
 		return () => {
 			if (user === undefined) {
         user = this.state;
+        user.username = "Awesome User";
       }
 			this.props.processForm(user, type);
 		};
