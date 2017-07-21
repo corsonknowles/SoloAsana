@@ -7,6 +7,15 @@ export const signup = user => (
   })
 );
 
+// update: makes an AJAX request that updates an existing user.
+export const update = user => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/users/${user.id}`,
+    data: { user }
+  })
+);
+
 // login: should make an AJAX request that creates a new session.
 export const login = user => (
   $.ajax({

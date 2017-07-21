@@ -8,10 +8,18 @@ export const SIGNUP = "SIGNUP";
 export const RECEIVE_CURRENT_USER = "RECEIVE_CURRENT_USER";
 export const RECEIVE_LOGOUT_SUCCESS = "RECEIVE_LOGOUT_SUCCESS";
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
+export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
 
 // ASYNC ACTIONS
 export const requestSignup = user => dispatch => {
   return APIUtil.signup(user).then(
+    currentUser => dispatch(receiveCurrentUser(currentUser)),
+    error => dispatch(receiveErrors(error.responseJSON))
+  );
+};
+
+export const updateUser = user => dispatch => {
+  return APIUtil.update(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
     error => dispatch(receiveErrors(error.responseJSON))
   );

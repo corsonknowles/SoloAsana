@@ -36,6 +36,8 @@ class SessionForm extends React.Component {
 			username: "Awesome User",
 			modalIsOpen: false,
       pending: false
+
+
 		};
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -182,7 +184,7 @@ class SessionForm extends React.Component {
 									</button>
 									<br />
                   <div className="login-box">
-  									<label for="email" className="login-label"> EMAIL ADDRESS</label>
+  									<label htmlFor="email" className="login-label"> EMAIL ADDRESS</label>
                     <br />
   										<input type="text" name="email" id="email"
   											value={this.state.email}
@@ -193,7 +195,7 @@ class SessionForm extends React.Component {
 
 
   									<br />
-  									<label for="password" className="login-label"> PASSWORD </label>
+  									<label htmlFor="password" className="login-label"> PASSWORD </label>
                     <br />
   										<input type="password" name="password" id="password"
   											value={this.state.password}

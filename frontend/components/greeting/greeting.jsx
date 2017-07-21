@@ -35,7 +35,10 @@ class Greeting extends React.Component {
 
       modalIsOpen: false,
       username: this.props.currentUser.username,
-      email: this.props.currentUser.email
+      role: this.props.currentUser.role,
+      department: this.props.currentUser.department,
+      about: this.props.currentUser.about,
+      photo: this.props.currentUser.photo
 
     }
     this.logout = this.props.logout;
@@ -56,14 +59,19 @@ class Greeting extends React.Component {
     this.setState({
       [name]: event.target.value
     });
+
   }
 
-  handleSubmit(type, user){
+  handleSubmit(user){
     return () => {
-      if (user === undefined) {
-        user = this.state;
-      }
-      this.props.processForm(user, type);
+      let user = this.currentUser;
+      user.role = this.state.role;
+      user.department = this.state.department;
+      user.about = this.state.about;
+      user.photo = this.state.photo;
+
+      this.props.updateUser(user);
+      this.closeModal()
     };
   }
 
@@ -80,7 +88,7 @@ class Greeting extends React.Component {
   // }
 
   openModal() {
-  this.setState({modalIsOpen: true});
+    this.setState({modalIsOpen: true});
   }
 
   afterOpenModal() {
@@ -115,43 +123,42 @@ class Greeting extends React.Component {
           <h2>My Profile Settings</h2>
           <br />
 
-          <label className="profile-label"> EMAIL ADDRESS<br />
-            <input type="text" name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              className="login-input"
-              placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
-               />
-          </label>
-
           <br />
           <label className="profile-label"> USERNAME <br />
             <input type="text" name="username"
               value={this.state.username}
               onChange={this.handleChange}
               className="profile-input"
-              placeholder="6 characters or more"
+              placeholder="Awesome User"
+            />
+          </label>
+          <label className="profile-label"> USERNAME <br />
+            <input type="text" name="username"
+              value={this.state.username}
+              onChange={this.handleChange}
+              className="profile-input"
+              placeholder="Awesome User"
             />
           </label>
           <label className="profile-label"> ROLE <br />
-            <input type="text" name="username"
-              value={this.state.username}
+            <input type="text" name="role"
+              value={this.state.role}
               onChange={this.handleChange}
               className="profile-input"
-              placeholder="6 characters or more"
+              placeholder=""
             />
           </label>
           <label className="profile-label"> DEPARTMENT <br />
-            <input type="text" name="username"
-              value={this.state.username}
+            <input type="text" name="department"
+              value={this.state.department}
               onChange={this.handleChange}
               className="profile-input"
-              placeholder="6 characters or more"
+              placeholder=""
             />
           </label>
           <label className="profile-label"> ABOUT ME <br />
-            <input type="text" name="username"
-              value={this.state.username}
+            <input type="text" name="about"
+              value={this.state.about}
               onChange={this.handleChange}
               className="profile-input"
               placeholder="At work I run dev ops. At home, you'll find me watching murder mysteries and talking my cat off the ledge. Metaphorically."
@@ -159,7 +166,7 @@ class Greeting extends React.Component {
           </label>
 
           <br />
-          <button className="blue right" onClick={this.handleSubmit('signup')}>
+          <button className="blue" onClick={this.handleSubmit()}>
             Update Profile
           </button>
 
