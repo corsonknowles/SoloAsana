@@ -55,3 +55,14 @@ section {
   border-radius: 3px;
   font-size: 14px;
 }
+
+input, textarea {
+  border-radius: 3px 3px 3px 3px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  color: #151b26;
+  padding-left: 10px;
+  border: 1px solid #d5dce0
+}
