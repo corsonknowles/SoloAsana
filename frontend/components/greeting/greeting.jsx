@@ -105,9 +105,10 @@ class Greeting extends React.Component {
     <div>
       <nav>
          <h3>Welcome Awesome User</h3>
-         <button onClick={this.openModal}>Account</button>
-
-         <button className="header-button" onClick={this.logout} >Log Out</button>
+         <div className="nav-right">
+         <button className="gold" onClick={this.openModal}>Account</button>
+         <button className="header-button gold" onClick={this.logout} >Log Out</button>
+         </div>
       </nav>
       <div>
         <Modal
@@ -172,7 +173,7 @@ class Greeting extends React.Component {
       </div>
 
       <section>
-        Progress
+        PROJECTS
       </section>
     </div>
 

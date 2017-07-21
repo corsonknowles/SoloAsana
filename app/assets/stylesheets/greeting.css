@@ -6,7 +6,68 @@ section {
   font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
   line-height: normal;
+  color: white;
+  color: #9ca6af;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  margin-top: 15px;
+  padding-left: 15px;
+  padding-right: 10px;
+  text-transform: uppercase;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
   }
+
+.sidebar-item-row {
+  margin-right: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  fill: #9ca6af;
+  line-height: 28px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 13px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+
+  -webkit-box-direction: normal;
+
+
+}
+
+.sidebar-item-row:hover {
+  fill: #14aaf5;
+  -webkit-box-direction: normal;
+  -webkit-font-smoothing: antialiased;
+  color: white;
+  cursor: pointer;
+  display: block;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  height: 28px;
+  line-height: 28px;
+  margin-right: 76px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  width: 127px;
+}
+
+.sidebar-item-row:focus {
+  outline-color: -webkit-focus-ring-color;
+  outline-style: auto;
+  outline-width: 5px;
+}
 
 .blue {
   line-height: 40px;
@@ -65,4 +126,45 @@ input, textarea {
   color: #151b26;
   padding-left: 10px;
   border: 1px solid #d5dce0
+}
+
+.gold {
+  background: #fcbd01;
+  border-color: #fcbd01;
+  color: white;
+  fill: white;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 9px;
+  margin: 3px 5px 3px 0;
+  display: inline-flex;
+  align-self: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  min-width: 50px;
+  text-align: center;
+  transition-duration: .2s;
+  transition-property: background, border, box-shadow, color;
+  align-items: center;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 13px;
+  -webkit-box-pack: center;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+}
+
+.gold:hover {
+  background: #fcbd01;
+  color: white;
+  fill: white;
+  border-color: #fcbd01;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 1px;
+
 }
