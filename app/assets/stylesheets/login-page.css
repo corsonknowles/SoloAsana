@@ -1,11 +1,13 @@
 body {
   font-size: 16px;
   min-width: 700px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
+
 }
 
 ::selection {
-    background-color: #80e6ff;
-    color: #49505b;
+  background-color: #80e6ff;
+  color: #49505b;
 }
 
 ::-moz-selection {
@@ -25,12 +27,6 @@ nav {
   flex-direction: row;
   align-content: center;
   justify-content: space-between;
-}
-
-.login-box {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 .nav-right {
@@ -142,19 +138,32 @@ button:hover {
   padding: 0 13px;
 }
 
+.demo {
+  height: 50px;
+  font-size: 16px;
+  padding: 0 15px;
+}
+
 button.white:hover {
-    background-color: white;
-    color: #c0bbff;
+  background-color: white;
+  color: #c0bbff;
 }
 
 input {
-  margin: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   height: 40px;
   width: 440px;
   border-radius: 3px;
   font-size: 14px;
 }
 
+.login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px;
+}
 
 .close-modal {
   position: absolute;
@@ -196,9 +205,9 @@ input {
 
 .login-call-to-action {
   font-size: 65px;
-  /*border: solid black 2px;*/
   line-height: 75px;
   font-weight: 700;
+  /*border: solid black 2px;*/
   margin: 20px;
 
 }
@@ -212,21 +221,21 @@ input {
 }
 
 .login-form-container {
+  font-size: 14px;
   color: white;
   line-height:  14px;
-  margin: 0px;
   text-align: left;
   /*border: solid blue 2px;*/
-  font-size: 14px;
+  margin: 0px;
 
 }
 
-.login-form {
+.login {
   color: #49505b;
-  line-height:  12px;
-  margin: 0px;
+  /*line-height:  12px;*/
+  /*margin: 0px;*/
   text-align: center;
-  font-size: 12px;
+  /*font-size: 12px;*/
 
 }
 
@@ -237,10 +246,15 @@ input {
 
 .errors {
   display: flex;
+  flex-direction: column;
   align-content: center;
   justify-content: center;
   margin: 20px;
-  line-height: 0px;
   /*border: solid teal 2px;*/
-  font-size: 12px;
+  font-size: 14px;
+  color: #ad0025;
+  height: 30px;
+}
+
+.eachError {
 }

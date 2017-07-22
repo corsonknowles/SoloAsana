@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import { Link, NavLink } from 'react-router-dom';
+import { withRouter, Link, NavLink } from 'react-router-dom';
+
 
 const customStyles = {
   content : {
@@ -49,7 +50,19 @@ class SessionForm extends React.Component {
 
 		this.handleDemoLogin = this.handleDemoLogin.bind(this);
     this.launchDemo = this.launchDemo.bind(this);
+
+    this.clearErrors = this.props.clearErrors.bind(this);
 	}
+
+  componentWillUnmount() {
+    this.props.clearErrors()
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.loggedIn) {
+      this.props.history.push('/')
+    }
+  }
 
 	handleChange(event) {
 		const target = event.target;
@@ -59,12 +72,15 @@ class SessionForm extends React.Component {
 		});
 	}
 
-	handleSubmit(type, user){
+
+	handleSubmit(event, type, user){
+
 		return () => {
 			if (user === undefined) {
         user = this.state;
         user.username = "Awesome User";
       }
+      // user["location"] = [user["location"]];
 			this.props.processForm(user, type);
 		};
 	}
@@ -101,8 +117,6 @@ class SessionForm extends React.Component {
 
 	handleDemoLogin(event) {
 
-	  event.preventDefault();
-
     this.setState({pending: true})
 
     this.setState({'username': '', 'password': ''});
@@ -122,7 +136,7 @@ class SessionForm extends React.Component {
 	    email: "awesome.user@example.com"
 	  };
 
-	  setTimeout(this.handleSubmit("login", user), 1550);
+	  setTimeout(this.handleSubmit(event, "login", user), 1550);
 	}
 
   disableButtons() {
@@ -149,7 +163,7 @@ class SessionForm extends React.Component {
             </div>
 
             <div className="nav-buttons">
-              <button onClick={this.launchDemo} >Get a Demo for FREE</button>
+              <button onClick={this.openModal}>Sign Up to Get Started</button>
     					<button className='white' onClick={this.openModal} >Log In</button>
             </div>
 
@@ -157,8 +171,8 @@ class SessionForm extends React.Component {
 				</nav>
 				<div className="login-page">
 					<h1 className="login-call-to-action">
-						Move work forward<br />
-        </h1>
+						Move work forward
+          </h1>
 
 					<h3 className="login-tagline">
 						Solo is the easiest way for teams to track their work—
@@ -167,8 +181,8 @@ class SessionForm extends React.Component {
 
 					<div className="login-form-container">
 
-							<button className="white" onClick={this.launchDemo}>Check Out the Demo Account for FREE</button>
-							<button onClick={this.openModal}>Sign Up</button>
+							<button className="white demo" onClick={this.launchDemo}>Check Out the DEMO Account</button>
+
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
 			          onAfterOpen={this.afterOpenModal}
@@ -177,45 +191,44 @@ class SessionForm extends React.Component {
 			          contentLabel="Login Form"
 			        >
 
-								<div className="login-form">
+								<div className="form login">
 									{ this.renderErrors() }
 									<h2>Log In</h2>
-									<br />
+
 									<button disabled={!!(this.state.pending)} onClick={ (event) => this.handleDemoLogin(event)}>
 										Demo User
 									</button>
-									<br />
+
                   <div className="login-box">
-  									<label htmlFor="email" className="login-label"> EMAIL ADDRESS</label>
-                    <br />
-  										<input type="text" name="email" id="email"
-  											value={this.state.email}
-  											onChange={this.handleChange}
-  											className="login-input"
-  											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
-  											 />
+  									<label htmlFor="email" className="login-label">EMAIL ADDRESS</label>
 
+										<input type="text" name="email" id="email"
+											value={this.state.email}
+											onChange={this.handleChange}
+											className="login-input"
+											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
+										/>
 
-  									<br />
-  									<label htmlFor="password" className="login-label"> PASSWORD </label>
-                    <br />
-  										<input type="password" name="password" id="password"
-  											value={this.state.password}
-  											onChange={this.handleChange}
-  											className="login-input"
-  											placeholder="6 characters or more"
-  										/>
+  									<label htmlFor="password" className="login-label">PASSWORD</label>
+
+										<input type="password" name="password" id="password"
+											value={this.state.password}
+											onChange={this.handleChange}
+											className="login-input"
+											placeholder="6 characters or more"
+										/>
 
                   </div>
 
-									<br />
-                  <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit('signup')}>
-										Sign Up
-									</button>
+                  <div>
+                    <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'signup')}>
+  										Sign Up
+  									</button>
 
-                  <button disabled={!!(this.state.pending)} onClick={this.handleSubmit('login')}>
-										Log In
-									</button>
+                    <button disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'login')}>
+  										Log In
+  									</button>
+                  </div>
 
 								</div>
 
@@ -230,4 +243,4 @@ class SessionForm extends React.Component {
 	}
 }
 
-export default SessionForm;
+export default (SessionForm);

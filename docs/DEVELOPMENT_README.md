@@ -32,32 +32,30 @@ Phase 1: React Authentication Built on Top of Rails (2 Days)
   - Demo view
   - BONUS: OAuth for Google Signin
 
+Phase 2: Profiles (1 Day)
+  - Per user
 
-Phase 2: Tasks Main View (2 Days)
+Phase 3: Tasks Main View (4 Days)
   - Tasks can be created, edited, deleted and marked as done or not done
   - Key feature: Enter key creates new tasks
-  - BONUS: Adding a ':' makes a task into a Section heading instead
-  - BONUS: Tasks can be dragged and dropped.
-  - BONUS: Keyboard shortcuts
-
-Phase 3: Tasks Detail View (2 Days)
   - On click, render new component that splits the screen with Task Main View
   - Detail view allows adding additional information to task
   - Detail view can specify a due date
   - Add Project label to task. Sort by Project Label
+
   - BONUS: Change section heading of task
+  - BONUS: Adding a ':' makes a task into a Section heading instead
+  - BONUS: Tasks can be dragged and dropped.
+  - BONUS: Keyboard shortcuts
 
 Phase 4: Projects (1 Day)
-  - Reload task list by project
+  - Reload task list, organized by project
+  - Has Many and Belongs to Database relationships
 
-Phase 5: Profiles (1 Day)
-  - Per user
+Phase 5: Comments & Calendar & Teams (0.5 Day)
+  - Team selection works like Project selection
 
-Phase 6: Comments & Calendar & Teams (0.5 Day)
-  - Team selection works like Project selection 
-
-Phase 7: Cleanup and Seeding of Data (0.5 Days)
-
+Phase 6: Seed Database (0.5 Days)
 
 Total: 9 Work Days.
 
@@ -73,12 +71,22 @@ Enclosed in the docs folder:
 
 # Minimum Viable Product
 
-SoloAsana is a rapid development personal project, dedicated to the amazing task management platform Asana. It provides a complete individualized task management system, including items with due dates and the useful interface that makes Asana great (hit Enter to submit task and start a new one, use Keyboard shortcuts, drag and drop).
+SoloAsana is dedicated to the amazing task management platform Asana.
+The MVP features for this 9 day project are:
+* User Authentication
+* User Profile
+* Tasks
+* Projects
+* Teams
+* Production README
 
 # Even More Bonuses:
+```
+Enter to create new task
+Delete to destroy empty task
 Tab to move
-
-Attachments
+User uploads: File Attachments
+User comments
 
 Sections & corresponding Section selector in detail view (
   create section by adding Colon ':' at end of task
@@ -88,6 +96,5 @@ Import Loading Screen: [Existing Library] (https://github.com/needim/wdtLoading)
 
 Calendar
 
-Self comments (annotations)
-
 Keyboard shortcut walkthrough
+```

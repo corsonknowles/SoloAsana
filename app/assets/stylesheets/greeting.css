@@ -23,6 +23,15 @@ section {
   text-rendering: optimizeLegibility;
   }
 
+.profile-photo {
+  border-radius: 50%;
+  color: #151b26;
+  width: 50px;
+  height: 50px;
+  background-color: #848f99;
+  background: #848f99;
+}
+
 .sidebar-item-row {
   margin-right: auto;
   overflow: hidden;
@@ -49,7 +58,7 @@ section {
   cursor: pointer;
   display: block;
 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: -apple-system, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 13px;
   height: 28px;
   line-height: 28px;
@@ -95,18 +104,28 @@ section {
 }
 
 .profile-title {
-  margin-bottom: 50px;
-  margin-left: 15px;
+  margin-bottom: 20px;
+
+}
+
+label {
+  color: #848f99;
+  font-size: 13px;
 }
 
 .profile-label {
-   color: #848f99;
-   font-size: 13px;
+   width: 440px;
 }
 
-.profile-form {
+.profile {
+
+}
+.form {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
 }
 
 .about {
@@ -156,6 +175,8 @@ input, textarea {
   -webkit-box-pack: center;
   text-decoration: none;
   text-rendering: optimizeLegibility;
+
+  margin: 15px;
 }
 
 .gold:hover {
@@ -166,5 +187,6 @@ input, textarea {
   border-radius: 3px;
   border-style: solid;
   border-width: 1px;
+
 
 }

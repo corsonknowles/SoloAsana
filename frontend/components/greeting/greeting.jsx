@@ -2,12 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
-import Dropzone from 'react-dropzone';
-import request from 'superagent';
-
-const CLOUDINARY_UPLOAD_PRESET = 'i8cgxpgn';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
-
 
 const customStyles = {
   content : {
@@ -33,6 +27,7 @@ const customStyles = {
   }
 };
 
+
 class Greeting extends React.Component {
 
   constructor(props) {
@@ -41,6 +36,7 @@ class Greeting extends React.Component {
     this.state = {
 
       modalIsOpen: false,
+      photoModalIsOpen: false,
       username: this.props.currentUser.username,
       role: this.props.currentUser.role,
       department: this.props.currentUser.department,
@@ -51,7 +47,6 @@ class Greeting extends React.Component {
     }
     this.logout = this.props.logout;
     this.currentUser = this.props.currentUser;
-    // this.username = this.currentUser.username;
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -60,6 +55,8 @@ class Greeting extends React.Component {
     this.afterOpenModal = this.afterOpenModal.bind(this);
 		this.closeModal = this.closeModal.bind(this);
   }
+
+  componentWillUnmount() { this.props.clearErrors()};
 
   handleChange(event) {
     const target = event.target;
@@ -71,8 +68,10 @@ class Greeting extends React.Component {
   }
 
   handleSubmit(user){
+
     return () => {
       let user = this.currentUser;
+      user.username = this.state.username;
       user.role = this.state.role;
       user.department = this.state.department;
       user.about = this.state.about;
@@ -85,9 +84,10 @@ class Greeting extends React.Component {
 
   renderErrors(){
     return(
+
       <ul className="errors">
         {this.props.errors.map( (error, i) => (
-          <li key={`error-${i}`}>
+          <li className="eachError" key={`error-${i}`}>
             {error}
           </li>
         ))}
@@ -108,7 +108,7 @@ class Greeting extends React.Component {
   }
 
   onImageDrop(files) {
-    debugger;
+
     this.setState({
       uploadedFile: files[0]
     });
@@ -130,9 +130,14 @@ class Greeting extends React.Component {
         this.setState({
           uploadedFileCloudinaryUrl: response.body.secure_url
         });
+        this.setState({
+          photo: this.state.uploadedFileCloudinaryUrl
+        })
       }
     });
   }
+
+
 
   render() {
 
@@ -153,65 +158,43 @@ class Greeting extends React.Component {
           style={customStyles}
           contentLabel="User Profile"
         >
-        <div className="profile-form">
+        <div className="form profile">
 
           <h2 className="profile-title">My Profile Settings</h2>
-          <br />
 
-            <div>
-              <div className="FileUpload">
-                <Dropzone
-                  multiple={false}
-                  accept="image/*"
-                  onDrop={this.onImageDrop.bind(this)}>
-                  <p>Drop an image or click to select a file to upload.</p>
-                </Dropzone>
-              </div>
-
-              <div>
-                {this.state.uploadedFileCloudinaryUrl === '' ? null :
-                <div>
-                  <p>{this.state.uploadedFile.name}</p>
-                  <img src={this.state.uploadedFileCloudinaryUrl} />
-                </div>}
-              </div>
-          </div>
-
-          <br />
-          <label className="profile-label">&nbsp;&nbsp; USERNAME <br />
+          <label htmlFor="username" className="profile-label">USERNAME</label>
             <input type="text" name="username"
               value={this.state.username}
               onChange={this.handleChange}
               className="profile-input"
-              placeholder="Awesome User"
+              placeholder="Watch me update in real time"
             />
-          </label>
-          <label className="profile-label">&nbsp;&nbsp; ROLE <br />
+
+          <label htmlFor="role" className="profile-label">ROLE </label>
             <input type="text" name="role"
               value={this.state.role}
               onChange={this.handleChange}
               className="profile-input"
               placeholder=""
             />
-          </label>
-          <label className="profile-label">&nbsp;&nbsp; DEPARTMENT <br />
+
+          <label htmlFor='department' className="profile-label">DEPARTMENT</label>
             <input type="text" name="department"
               value={this.state.department}
               onChange={this.handleChange}
               className="profile-input"
               placeholder=""
             />
-          </label>
-          <label className="profile-label">&nbsp;&nbsp; ABOUT ME <br />
+
+          <label htmlFor="about" className="profile-label">ABOUT ME  </label>
             <input type="text" className="about" name="about"
               value={this.state.about}
               onChange={this.handleChange}
               className="profile-input"
               placeholder="At work I run dev ops. At home, I rescue kittens."
             />
-          </label>
 
-          <br />
+
           <button className="blue" onClick={this.handleSubmit()}>
             Update Profile
           </button>

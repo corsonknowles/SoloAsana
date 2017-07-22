@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { updateUser, requestLogout } from '../../actions/session_actions';
+import { clearErrors, updateUser, requestLogout } from '../../actions/session_actions';
 import Greeting from './greeting';
 
 const mapStateToProps = state => ({
@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  clearErrors: () => dispatch(clearErrors()),
   logout: () => dispatch(requestLogout()),
   updateUser: (user) => dispatch(updateUser(user))
 });
