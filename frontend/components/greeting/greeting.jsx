@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
+import PhotoUploadContainer from '../photo_upload/photo_upload_container';
 
 const customStyles = {
   content : {
@@ -161,6 +162,8 @@ class Greeting extends React.Component {
         <div className="form profile">
 
           <h2 className="profile-title">My Profile Settings</h2>
+
+          <PhotoUploadContainer />
 
           <label htmlFor="username" className="profile-label">USERNAME</label>
             <input type="text" name="username"
