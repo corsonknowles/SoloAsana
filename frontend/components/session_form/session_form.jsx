@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { withRouter, Link, NavLink } from 'react-router-dom';
-
+// import { TiWarningOutline } from 'react-icons/lib/ti/warning-outline';
 
 const customStyles = {
   content : {
@@ -87,13 +87,17 @@ class SessionForm extends React.Component {
 
 	renderErrors(){
 		return(
-			<ul className="errors">
-				{this.props.errors.map( (error, i) => (
-					<li key={`error-${i}`}>
-						{error}
-					</li>
-				))}
-			</ul>
+      <div>
+  			<ul className="errors">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+
+  				{this.props.errors.map( (error, i) => (
+  					<li key={`error-${i}`}>
+  						{error}
+  					</li>
+  				))}
+  			</ul>
+      </div>
 		);
 	}
 

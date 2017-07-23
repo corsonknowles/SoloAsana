@@ -81,6 +81,8 @@ section {
 .photo-button {
   background: transparent;
   color: #151b26;
+  margin: 10px;
+  padding: 10px;
 
 }
 
