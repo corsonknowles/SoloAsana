@@ -2,7 +2,7 @@
   "name": "SoloAsana",
   "private": true,
   "engines": {
-    "node": "6.10.1",
+    "node": "8.2.1",
     "npm": "5.3.0"
   },
   "scripts": {
@@ -22,7 +22,6 @@
     "react-dnd-html5-backend": "^2.4.1",
     "react-dom": "^15.6.1",
     "react-dropzone": "^3.13.3",
-    "react-icons": "^2.2.5",
     "react-modal": "^2.2.2",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.2",
@@ -30,11 +29,11 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.5.2",
-    "thunk": "0.0.1",
-    "webpack": "^3.3.0"
+    "thunk": "0.0.1"
   },
   "devDependencies": {
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "webpack": "^3.3.0"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
