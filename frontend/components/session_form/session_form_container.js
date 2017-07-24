@@ -13,7 +13,6 @@ const mapDispatchToProps = dispatch => {
   return {
     clearErrors: () => dispatch(clearErrors()),
     processForm: (user, type) => {
-      console.log("I called processForm");
       dispatch(clearErrors());
       const processForm = (type === 'login') ? requestLogin : requestSignup;
       dispatch(processForm(user));

@@ -29,7 +29,6 @@ const SessionReducer = function(state = _nullUser, action){
       newState = merge({}, state, errors);
       return newState;
     case CLEAR_ERRORS:
-      console.log("I called Clear Errors");
       newState = merge({}, state);
       newState.errors = [];
       return newState;

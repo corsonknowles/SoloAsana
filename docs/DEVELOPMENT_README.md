@@ -73,6 +73,7 @@ Enclosed in the docs folder:
 
 SoloAsana is dedicated to the amazing task management platform Asana.
 The MVP features for this 9 day project are:
+* Heroku Hosting
 * User Authentication
 * User Profile
 * Tasks
