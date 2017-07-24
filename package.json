@@ -2,7 +2,7 @@
   "name": "SoloAsana",
   "private": true,
   "engines": {
-    "node": "8.2.1",
+    "node": "6.10.1",
     "npm": "5.3.0"
   },
   "scripts": {
