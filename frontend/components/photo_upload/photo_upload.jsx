@@ -148,8 +148,12 @@ class PhotoUpload extends React.Component {
         <div className="profile-photo">
           <img className="profile-photo" src={this.state.photo}></img>
         </div>
+      </button>
+      <div className="profile-photo-update">
+        <button className="photo-button photo-caption" onClick={this.openModal}>
+          Update profile photo
         </button>
-      <div className="profile-photo-update"><button className="photo-button" onClick={this.openModal}> Update profile photo</button></div>
+      </div>
 
       <div>
         <Modal

@@ -84,12 +84,18 @@ section {
   color: #9ca6af;
   margin: 0;
   padding: 5px;
+
 }
 
 .photo-button:hover {
   background: transparent;
   border: 0px solid transparent;
   box-shadow: 0 0 0 0px transparent;
+}
+
+.photo-caption {
+  border-radius: 3px;
+
 }
 
 .photo-container {
@@ -234,7 +240,7 @@ input, textarea {
 
 .file-upload, .instructions {
   font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 16px;
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -246,9 +252,6 @@ input, textarea {
 }
 
 .dropzone {
-  font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -259,4 +262,6 @@ input, textarea {
   height: 220px;
   width: 220px;
   border-radius: 10%;
+  padding: 10%;
+  cursor: pointer;
 }
