@@ -167,8 +167,8 @@ class SessionForm extends React.Component {
             </div>
 
             <div className="nav-buttons">
-              <button onClick={this.openModal}>Sign Up to Get Started</button>
-    					<button className='white' onClick={this.openModal} >Log In</button>
+              <button onClick={this.openModal}>Register to Get Started</button>
+    					<button className='white' onClick={this.openModal}>Log In</button>
             </div>
 
           </div>
@@ -197,7 +197,7 @@ class SessionForm extends React.Component {
 
 								<div className="form login">
 									{ this.renderErrors() }
-									<h2>Log In</h2>
+									<h2>Register or Log In</h2>
 
 									<button disabled={!!(this.state.pending)} onClick={ (event) => this.handleDemoLogin(event)}>
 										Demo User
@@ -226,7 +226,7 @@ class SessionForm extends React.Component {
 
                   <div>
                     <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'signup')}>
-  										Sign Up
+  										Register
   									</button>
 
                     <button disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'login')}>
