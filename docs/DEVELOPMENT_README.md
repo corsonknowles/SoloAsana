@@ -6,20 +6,18 @@ SoloAsana is a rapid deployment personal project, built in less than two weeks, 
 SoloAsana delivers a React.js frontend with a Redux framework.
 The database fueling all this is PostgreSQL.
 
-### Domain: soloasana.com
-### Trello Board: https://trello.com/b/6awTqKyy/soloasana-board
+### [Domain: soloasana.com](http://soloasana.com)
+### [Trello Board:](https://trello.com/b/6awTqKyy/soloasana-board)
 
 # Key Feature Description
-* Tasks (
+* Tasks
   - enter to complete
   - backspace fully to delete
   - click done: task fades
   - blank tasks persist until removed
-  )
-* Task Details (
+* Task Details
   - Description
   - Change Log - username, string interpolation, timestamp.
-  )
 * Due Date
 * Drag and Drop
 
@@ -82,20 +80,14 @@ The MVP features for this 9 day project are:
 * Production README
 
 # Even More Bonuses:
-```
-Enter to create new task
-Delete to destroy empty task
-Tab to move
-User uploads: File Attachments
-User comments
 
-Sections & corresponding Section selector in detail view (
-  create section by adding Colon ':' at end of task
-  )
-
-Import Loading Screen: [Existing Library] (https://github.com/needim/wdtLoading)
-
-Calendar
-
-Keyboard shortcut walkthrough
-```
+* Enter to create new task
+* Delete to destroy empty task
+* Tab to move
+* User uploads: File Attachments
+* User comments
+* Sections & corresponding Section selector in detail view
+  - create section by adding Colon ':' at end of task
+* Import Loading Screen: [Existing Library] (https://github.com/needim/wdtLoading)
+* Calendar
+* Keyboard shortcut walkthrough
