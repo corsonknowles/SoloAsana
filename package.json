@@ -29,11 +29,12 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.5.2",
-    "thunk": "0.0.1"
+    "thunk": "0.0.1",
+    "webpack": "^3.3.0"
   },
   "devDependencies": {
-    "redux-logger": "^3.0.6",
-    "webpack": "^3.3.0"
+    "redux-logger": "^3.0.6"
+
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
   "version": "1.0.0",
