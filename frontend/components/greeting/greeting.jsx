@@ -76,7 +76,6 @@ class Greeting extends React.Component {
       user.role = this.state.role;
       user.department = this.state.department;
       user.about = this.state.about;
-      user.photo = this.state.photo;
 
       this.props.updateUser(user);
       this.closeModal()
@@ -107,38 +106,6 @@ class Greeting extends React.Component {
   closeModal() {
     this.setState({modalIsOpen: false});
   }
-
-  onImageDrop(files) {
-
-    this.setState({
-      uploadedFile: files[0]
-    });
-
-    this.handleImageUpload(files[0]);
-  }
-
-  handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                        .field('file', file);
-
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-      }
-
-      if (response.body.secure_url !== '') {
-        this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
-        });
-        this.setState({
-          photo: this.state.uploadedFileCloudinaryUrl
-        })
-      }
-    });
-  }
-
-
 
   render() {
 
@@ -197,11 +164,9 @@ class Greeting extends React.Component {
               placeholder="At work I run dev ops. At home, I rescue kittens."
             />
 
-
           <button className="blue" onClick={this.handleSubmit()}>
             Update Profile
           </button>
-
 
         </div>
 

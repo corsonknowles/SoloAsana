@@ -8,7 +8,6 @@ import request from 'superagent';
 const CLOUDINARY_UPLOAD_PRESET = 'i8cgxpgn';
 const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
 
-
 const customStyles = {
   content : {
     top                   : '50%',
@@ -46,7 +45,6 @@ class PhotoUpload extends React.Component {
     }
 
     this.currentUser = this.props.currentUser;
-
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleChange = this.handleChange.bind(this);
 
@@ -133,18 +131,18 @@ class PhotoUpload extends React.Component {
         this.setState({
           photo: this.state.uploadedFileCloudinaryUrl
         })
+        this.setState({
+          photo: this.state.uploadedFileCloudinaryUrl
+        })
         this.handleSubmit()();
       }
     });
   }
 
-
-
   render() {
 
     return (
     <div className="photo-container">
-
 
       <button className="photo-button" onClick={this.openModal} >
         <div className="profile-photo">
@@ -161,17 +159,18 @@ class PhotoUpload extends React.Component {
           style={customStyles}
           contentLabel="Profile Photo"
         >
-        <div className="FileUpload">
-          <Dropzone
+        <div className="file-upload">
+          <Dropzone className="dropzone"
            multiple={false}
            accept="image/*"
            onDrop={this.onImageDrop.bind(this)}>
-           <p>Drop an image or click to select a file to upload.</p>
+           <div className="instructions">Drop an image</div>
+           <div className="instructions">Or, click to select a file to upload</div>
          </Dropzone>
         </div>
+
         <button className="inner-modal" onClick={this.closeModal}>X</button>
       </Modal>
-
 
       </div>
 

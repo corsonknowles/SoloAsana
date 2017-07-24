@@ -80,10 +80,16 @@ section {
 
 .photo-button {
   background: transparent;
-  color: #151b26;
-  margin: 10px;
-  padding: 10px;
+  border: 0px solid transparent;
+  color: #9ca6af;
+  margin: 0;
+  padding: 5px;
+}
 
+.photo-button:hover {
+  background: transparent;
+  border: 0px solid transparent;
+  box-shadow: 0 0 0 0px transparent;
 }
 
 .photo-container {
@@ -104,14 +110,14 @@ section {
   height: 50px;
   background-color: #848f99;
   background: #848f99;
-  /*margin: 5px;*/
+  margin: 0;
 }
 
 .profile-photo-update {
   font-size: 13px;
   display: flex;
   align-self: center;
-  margin: 5px;
+  margin: 0px;
 }
 
 
@@ -142,7 +148,6 @@ section {
 
 .profile-title {
   margin-bottom: 20px;
-
 }
 
 label {
@@ -225,5 +230,33 @@ input, textarea {
   border-style: solid;
   border-width: 1px;
 
+}
 
+.file-upload, .instructions {
+  font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  color: #9ca6af;
+  text-align: center;
+}
+
+.dropzone {
+  font-family: -apple-system, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  border: 2px dotted #9ca6af;
+  color: #9ca6af;
+  height: 220px;
+  width: 220px;
+  border-radius: 10%;
 }

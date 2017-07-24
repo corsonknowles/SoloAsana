@@ -89,7 +89,6 @@ class SessionForm extends React.Component {
 		return(
       <div>
   			<ul className="errors">
-          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
 
   				{this.props.errors.map( (error, i) => (
   					<li key={`error-${i}`}>
