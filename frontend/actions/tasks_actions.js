@@ -1,4 +1,4 @@
-import * as TasksApiUtil from '../util/tasks_api_util';
+import * as TASKS from '../util/tasks_api_util';
 
 export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 export const RECEIVE_TASK = 'RECEIVE_TASK';
@@ -34,7 +34,7 @@ export const clearErrors = () => ({
 // async actions
 
 export const createTask = task => dispatch => (
-  TasksApiUtil.createTask(task)
+  TASKS.createTask(task)
     .then(newTask => {
       dispatch(receiveTask(newTask));
       return newTask;
@@ -43,7 +43,7 @@ export const createTask = task => dispatch => (
 );
 
 export const updateTask = task => dispatch => {
-  return TasksApiUtil.updateTask(task)
+  return TASKS.updateTask(task)
     .then(returnTask => {
       dispatch(receiveTask(returnTask));
       return returnTask;
@@ -51,16 +51,15 @@ export const updateTask = task => dispatch => {
   );
 };
 
-export const fetchTasks = projectID => dispatch => {}
-  return TasksApiUtil.fetchTasks(projectID)
+export const fetchTasks = projectID => dispatch => {
+  return TASKS.fetchTasks(projectID)
 };
 
 export const fetchTask = id => dispatch => {
-  return TasksApiUtil.fetchTask(id)
+  return TASKS.fetchTask(id)
 };
 
 export const destroyTask = id => dispatch => {
-  return TasksApiUtil.deleteTask(id)
-    .then( () => dispatch(deleteTask(id));
-  );
+  return TASKS.deleteTask(id)
+    .then( () => dispatch(deleteTask(id)) );
 };

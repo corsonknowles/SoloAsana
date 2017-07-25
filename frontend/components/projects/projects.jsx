@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
 import PhotoUploadContainer from '../photo_upload/photo_upload_container';
-import TaskContainer from '../tasks/task_container'
 
 const customStyles = {
   content : {
@@ -112,15 +111,8 @@ class Greeting extends React.Component {
 
     return (
     <div>
-      <section>
-        <div className="projects-header">PROJECTS</div>
-        <div className="sidebar-item-row">fixed filler text</div>
-        <div className="sidebar-item-row">fixed filler 2</div>
-        <div className="sidebar-item-row">more dfiller</div>
-        <div className="sidebar-item-row">yolo text</div>
-      </section>
-      <nav className="greeting-nav">
-         <h3 className="nav-left">Welcome {this.state.username}</h3>
+      <nav>
+         <h3>Welcome {this.state.username}</h3>
          <div className="nav-right">
          <button className="gold" onClick={this.openModal}>Account</button>
          <button className="header-button gold" onClick={this.logout} >Log Out</button>
@@ -182,11 +174,12 @@ class Greeting extends React.Component {
 
       </Modal>
 
-      <TaskContainer />
 
       </div>
 
-
+      <section>
+        PROJECTS
+      </section>
     </div>
 
   )

@@ -7,7 +7,7 @@ SoloAsana delivers a React.js frontend with a Redux framework.
 The database fueling all this is PostgreSQL.
 
 ### [Domain: soloasana.com](http://soloasana.com)
-### [Trello Board:](https://trello.com/b/6awTqKyy/soloasana-board)
+### [Trello Board](https://trello.com/b/6awTqKyy/soloasana-board)
 
 # Key Feature Description
 * Tasks

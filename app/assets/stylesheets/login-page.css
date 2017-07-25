@@ -1,3 +1,16 @@
+/*prevent page from bouncing when user scrolls to end*/
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body > div {
+    height: 100%;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
 body {
   font-size: 16px;
   min-width: 700px;
@@ -25,7 +38,7 @@ nav {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
-  align-content: center;
+  align-items: center;
   justify-content: space-between;
 }
 
