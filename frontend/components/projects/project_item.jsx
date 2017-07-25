@@ -1,7 +1,7 @@
 import React from 'react';
 import merge from 'lodash/merge';
 
-class ProjectListItem extends React.Component {
+class ProjectItem extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -13,7 +13,7 @@ class ProjectListItem extends React.Component {
     return (
       <li className="project-list-item">
         <div className="project-header">
-          <h3><a >{title}</a></h3>
+          <h3><a > infer things here </a></h3>
           <button>
             test
           </button>
@@ -23,4 +23,4 @@ class ProjectListItem extends React.Component {
   }
 }
 
-export default ProjectListItem;
+export default ProjectItem;

@@ -36,15 +36,15 @@ Phase 2: Profiles (1 Day)
 Phase 3: Tasks Main View (4 Days)
   - Tasks can be created, edited, deleted and marked as done or not done
   - Key feature: Enter key creates new tasks
-  - On click, render new component that splits the screen with Task Main View
-  - Detail view allows adding additional information to task
-  - Detail view can specify a due date
   - Add Project label to task. Sort by Project Label
 
   - BONUS: Change section heading of task
   - BONUS: Adding a ':' makes a task into a Section heading instead
   - BONUS: Tasks can be dragged and dropped.
   - BONUS: Keyboard shortcuts
+  - BONUS: On click, render new component that splits the screen with Task Main View
+  - BONUS: Detail view allows adding additional information to task
+  - BONUS: Detail view can specify a due date
 
 Phase 4: Projects (1 Day)
   - Reload task list, organized by project

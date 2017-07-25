@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
 import PhotoUploadContainer from '../photo_upload/photo_upload_container';
-import TaskContainer from '../tasks/task_container'
+import TaskContainer from '../tasks/task_container';
+import ProjectsContainer from '../projects/projects_container';
 
 const customStyles = {
   content : {
@@ -111,82 +112,83 @@ class Greeting extends React.Component {
   render() {
 
     return (
-    <div>
+    <div className="one-page-app">
+
       <section>
         <div className="projects-header">PROJECTS</div>
-        <div className="sidebar-item-row">fixed filler text</div>
-        <div className="sidebar-item-row">fixed filler 2</div>
-        <div className="sidebar-item-row">more dfiller</div>
-        <div className="sidebar-item-row">yolo text</div>
+        <ProjectsContainer />
       </section>
-      <nav className="greeting-nav">
-         <h3 className="nav-left">Welcome {this.state.username}</h3>
-         <div className="nav-right">
-         <button className="gold" onClick={this.openModal}>Account</button>
-         <button className="header-button gold" onClick={this.logout} >Log Out</button>
-         </div>
-      </nav>
+
       <div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="User Profile"
-        >
-        <div className="form profile">
+        <nav className="greeting-nav">
+           <h3 className="nav-left">Welcome {this.state.username}</h3>
+           <div className="nav-right">
+           <button className="gold" onClick={this.openModal}>Account</button>
+           <button className="header-button gold" onClick={this.logout} >Log Out</button>
+           </div>
+        </nav>
 
-          <h2 className="profile-title">My Profile Settings</h2>
+        <div className="right-side-of-page">
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="User Profile"
+          >
+          <div className="form profile">
 
-          <PhotoUploadContainer />
+            <h2 className="profile-title">My Profile Settings</h2>
 
-          <label htmlFor="username" className="profile-label">USERNAME</label>
-            <input type="text" name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder="Watch me update in real time"
-            />
+            <PhotoUploadContainer />
 
-          <label htmlFor="role" className="profile-label">ROLE </label>
-            <input type="text" name="role"
-              value={this.state.role}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder=""
-            />
+            <label htmlFor="username" className="profile-label">USERNAME</label>
+              <input type="text" name="username"
+                value={this.state.username}
+                onChange={this.handleChange}
+                className="profile-input"
+                placeholder="Watch me update in real time"
+              />
 
-          <label htmlFor='department' className="profile-label">DEPARTMENT</label>
-            <input type="text" name="department"
-              value={this.state.department}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder=""
-            />
+            <label htmlFor="role" className="profile-label">ROLE </label>
+              <input type="text" name="role"
+                value={this.state.role}
+                onChange={this.handleChange}
+                className="profile-input"
+                placeholder=""
+              />
 
-          <label htmlFor="about" className="profile-label">ABOUT ME  </label>
-            <input type="text" className="about" name="about"
-              value={this.state.about}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder="At work I run dev ops. At home, I rescue kittens."
-            />
+            <label htmlFor='department' className="profile-label">DEPARTMENT</label>
+              <input type="text" name="department"
+                value={this.state.department}
+                onChange={this.handleChange}
+                className="profile-input"
+                placeholder=""
+              />
 
-          <button className="blue" onClick={this.handleSubmit()}>
-            Update Profile
-          </button>
+            <label htmlFor="about" className="profile-label">ABOUT ME  </label>
+              <input type="text" className="about" name="about"
+                value={this.state.about}
+                onChange={this.handleChange}
+                className="profile-input"
+                placeholder="At work I run dev ops. At home, I rescue kittens."
+              />
 
+            <button className="blue" onClick={this.handleSubmit()}>
+              Update Profile
+            </button>
+
+          </div>
+
+          <button className="close-modal" onClick={this.closeModal}>X</button>
+
+        </Modal>
+          <div className="tasks-area">
+            <TaskContainer />
+          </div>
         </div>
 
-        <button className="close-modal" onClick={this.closeModal}>X</button>
-
-      </Modal>
-
-      <TaskContainer />
-
       </div>
-
-
     </div>
 
   )

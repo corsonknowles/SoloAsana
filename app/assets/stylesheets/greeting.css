@@ -1,3 +1,8 @@
+.one-page-app {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
 
 section {
   background: #151b26;
@@ -15,7 +20,7 @@ section {
   text-transform: uppercase;
   line-height: normal;
   text-rendering: optimizeLegibility;
-  position: fixed;
+
 }
 
 .greeting-nav {
@@ -52,6 +57,8 @@ section {
   text-rendering: optimizeLegibility;
   -webkit-box-direction: normal;
   -webkit-font-smoothing: antialiased;
+  background-color: #151b26;
+  border: 0;
 }
 
 .sidebar-item-row:hover {
@@ -158,6 +165,7 @@ label {
 .profile {
 
 }
+
 .form {
   display: flex;
   flex-direction: column;
