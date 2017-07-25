@@ -1,14 +1,12 @@
 /*prevent page from bouncing when user scrolls to end*/
-html, body {
-    width: 100%;
-    height: 100%;
+html {
     overflow: hidden;
+    height: 100%;
 }
 
-body > div {
+body {
     height: 100%;
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
+    overflow: auto;
 }
 
 body {
