@@ -33,3 +33,10 @@ export const fetchProject = id => dispatch => (
     .then(project => dispatch(receiveProject(project))
   )
 );
+
+export const updateProject = project => dispatch => {
+  return PROJECTS.updateProject(project).then(
+    currentProject => dispatch(receiveProject(currentProject)),
+    error => dispatch(receiveErrors(error.responseJSON))
+  );
+};

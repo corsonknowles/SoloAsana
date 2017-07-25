@@ -4,15 +4,14 @@ import Projects from './projects';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
-  projects: state.projects,
-  state
+  project: state.project,
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchProjects: (teamID) => dispatch(fetchProjects(teamID)),
   fetchProject: (id) => dispatch(fetchProject(id)),
   createProject: (project) => dispatch(createProject(project)),
-
+  updateProject: (project) => dispatch(updateProject(project))
 });
 
 export default connect(

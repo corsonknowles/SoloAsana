@@ -6,6 +6,15 @@ export const createProject = project => {
   });
 };
 
+// update: makes an AJAX request that updates an existing user.
+export const updateProject = project => (
+  $.ajax({
+    method: 'PATCH',
+    url: `/api/projects/${project.id}`,
+    data: { project }
+  })
+);
+
 // singular
 export const fetchProject = projectID => (
   $.ajax({
