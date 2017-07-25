@@ -2,48 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
-import PhotoUploadContainer from '../photo_upload/photo_upload_container';
+import { ProjectItem } from './project_item';
 
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-		width									: '50%',
-		maxWidth							: '575px',
-    minWidth              : '500px',
-		maxHeight							: '585px',
-		height								: '80%',
-		display								: 'flex',
-		justifyContent				: 'center',
-		alignItems						: 'center',
-		color									: '#49505b',
-		fontWeight						:	'bold',
-		pointerEvents	        : 'auto',
-		borderRadius					: '10px'
-
-  }
-};
-
-
-class Greeting extends React.Component {
+class Project extends React.Component {
 
   constructor(props) {
     super(props)
 
     this.state = {
 
-      modalIsOpen: false,
-      photoModalIsOpen: false,
-      username: this.props.currentUser.username,
-      role: this.props.currentUser.role,
-      department: this.props.currentUser.department,
-      about: this.props.currentUser.about,
-      photo: this.props.currentUser.photo,
-      uploadedFileCloudinaryUrl: ''
+      projects: this.props.projects
 
     }
     this.logout = this.props.logout;
@@ -111,79 +79,53 @@ class Greeting extends React.Component {
 
     return (
     <div>
-      <nav>
-         <h3>Welcome {this.state.username}</h3>
-         <div className="nav-right">
-         <button className="gold" onClick={this.openModal}>Account</button>
-         <button className="header-button gold" onClick={this.logout} >Log Out</button>
-         </div>
-      </nav>
-      <div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="User Profile"
-        >
-        <div className="form profile">
 
-          <h2 className="profile-title">My Profile Settings</h2>
+      this.state.projects.map(project => (
+        <ProjectItem
+          key={ project.id }
+          project={ project }
+          />
+      )
+    );
 
-          <PhotoUploadContainer />
+      <label htmlFor="username" className="profile-label">USERNAME</label>
+        <input type="text" name="username"
+          value={this.state.username}
+          onChange={this.handleChange}
+          className="profile-input"
+          placeholder="Watch me update in real time"
+        />
 
-          <label htmlFor="username" className="profile-label">USERNAME</label>
-            <input type="text" name="username"
-              value={this.state.username}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder="Watch me update in real time"
-            />
+      <label htmlFor="role" className="profile-label">ROLE </label>
+        <input type="text" name="role"
+          value={this.state.role}
+          onChange={this.handleChange}
+          className="profile-input"
+          placeholder=""
+        />
 
-          <label htmlFor="role" className="profile-label">ROLE </label>
-            <input type="text" name="role"
-              value={this.state.role}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder=""
-            />
+      <label htmlFor='department' className="profile-label">DEPARTMENT</label>
+        <input type="text" name="department"
+          value={this.state.department}
+          onChange={this.handleChange}
+          className="profile-input"
+          placeholder=""
+        />
 
-          <label htmlFor='department' className="profile-label">DEPARTMENT</label>
-            <input type="text" name="department"
-              value={this.state.department}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder=""
-            />
-
-          <label htmlFor="about" className="profile-label">ABOUT ME  </label>
-            <input type="text" className="about" name="about"
-              value={this.state.about}
-              onChange={this.handleChange}
-              className="profile-input"
-              placeholder="At work I run dev ops. At home, I rescue kittens."
-            />
-
-          <button className="blue" onClick={this.handleSubmit()}>
-            Update Profile
-          </button>
-
-        </div>
-
-        <button className="close-modal" onClick={this.closeModal}>X</button>
-
-      </Modal>
+      <label htmlFor="about" className="profile-label">ABOUT ME  </label>
+        <input type="text" className="about" name="about"
+          value={this.state.about}
+          onChange={this.handleChange}
+          className="profile-input"
+          placeholder="At work I run dev ops. At home, I rescue kittens."
+        />
 
 
-      </div>
 
-      <section>
-        PROJECTS
-      </section>
     </div>
 
   )
   }
 }
 
-export default Greeting;
+export default Project;

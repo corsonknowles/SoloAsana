@@ -1,15 +1,18 @@
 import { connect } from 'react-redux';
-import { createTask, updateTask, fetchTask, fetchTasks, destroyTask, receiveErrors, clearErrors } from '../../actions/projects_actions';
+import { createProject, updateProject, fetchProject, fetchProjects, destroyProject, receiveErrors, clearErrors } from '../../actions/projects_actions';
 import Projects from './projects';
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser
+  currentUser: state.session.currentUser,
+  projects: state.projects,
+  state
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearErrors: () => dispatch(clearErrors()),
-  logout: () => dispatch(requestLogout()),
-  updateUser: (user) => dispatch(updateUser(user))
+  fetchProjects: (teamID) => dispatch(fetchProjects(teamID),
+  fetchProject: (id) => dispatch(fetchProject),
+  createProject: (project) => dispatch(createProject(project)),
+
 });
 
 export default connect(
