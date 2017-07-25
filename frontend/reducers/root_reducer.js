@@ -5,8 +5,8 @@ import ProjectReducer from './project_reducer';
 
 const rootReducer = combineReducers({
   session: SessionReducer,
-  task: TaskReducer,
-  project: ProjectReducer
+  tasks: TaskReducer,
+  projects: ProjectReducer
 });
 
 export default rootReducer;

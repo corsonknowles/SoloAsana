@@ -11,7 +11,7 @@ class Projects extends React.Component {
     console.log(this.props)
     this.state = {
 
-      projects: this.props.project
+      projects: this.props.projects
 
     }
 
@@ -23,11 +23,24 @@ class Projects extends React.Component {
 
   }
 
+  componentWillMount () {
+    this.props.fetchProjects(1)
+    setTimeout(() => console.log("this.props in willMount", this.props), 2000);
+  }
+
+  componentWillReceiveProps (nextProps) {
+    console.log("will receive props");
+    if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
+      this.setState( { projects: nextProps.projects } )
+    }
+  }
+
   componentWillUnmount() { this.props.clearErrors()};
 
   handleChange(event) {
     const target = event.target;
     const name = target.name;
+    // let editField = this.state.projects[event.target.key];
     this.setState({
       [name]: event.target.value
     });
@@ -37,14 +50,10 @@ class Projects extends React.Component {
   handleSubmit(user){
 
     return () => {
-      let user = this.currentUser;
-      user.username = this.state.username;
-      user.role = this.state.role;
-      user.department = this.state.department;
-      user.about = this.state.about;
+      let projects = this.state.projects;
+      //need to pick out the individual project or bulk update all projects
+      this.props.updateProject(project);
 
-      this.props.updateUser(user);
-      this.closeModal()
     };
   }
 
@@ -65,18 +74,31 @@ class Projects extends React.Component {
 
   render() {
 
+    // console.log("state.projects", this.state.projects);
+    //
+    // console.log("this.state", this.state);
+    // console.log("this.props", this.props);
+    if (!this.state.projects[1]) {
+      this.state.projects = { [1]: {name: "" } }
+    }
+
+    console.log(this.state.projects);
     return (
+
     <div>
 
-
-
-      <label htmlFor="project" className="project-label"></label>
-        <input type="text" name="project"
-          value={this.state.projects}
-          onChange={this.handleChange}
-          className="sidebar-item-row"
-          placeholder="Should be a project input field"
-        />
+      {Object.keys(this.state.projects).map( (projectID) => (
+          <input
+            type="text"
+            name="project"
+            key={projectID}
+            value={this.state.projects[projectID].name}
+            onChange={this.handleChange}
+            className="sidebar-item-row"
+            placeholder="Should be a project input field"
+          />
+        )
+      )}
 
     </div>
 

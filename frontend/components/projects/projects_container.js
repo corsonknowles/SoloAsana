@@ -4,7 +4,7 @@ import Projects from './projects';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
-  project: state.project,
+  projects: state.projects,
 });
 
 const mapDispatchToProps = dispatch => ({
