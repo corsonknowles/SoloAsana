@@ -88,6 +88,6 @@ The MVP features for this 9 day project are:
 * User comments
 * Sections & corresponding Section selector in detail view
   - create section by adding Colon ':' at end of task
-* Import Loading Screen: [Existing Library] (https://github.com/needim/wdtLoading)
+* Import Loading Screen: [Existing Library](https://github.com/needim/wdtLoading)
 * Calendar
 * Keyboard shortcut walkthrough
