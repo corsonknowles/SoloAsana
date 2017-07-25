@@ -8,7 +8,7 @@ import {
   } from '../actions/tasks_actions';
 import merge from 'lodash/merge';
 
-const SessionReducer = function(state = _nullUser, action){
+const TaskReducer = function(state = {}, action){
   Object.freeze(state);
   let newState;
 
@@ -20,7 +20,7 @@ const SessionReducer = function(state = _nullUser, action){
         // tasks: action.tasks,
         // errors: []
     case RECEIVE_TASK:
-      newState = merge({}, state, { action.task.id: action.task });
+      newState = merge({}, state, { [action.task.id]: action.task });
       return newState;
     case DELETE_TASK:
       nextState = merge({}, state);
@@ -39,4 +39,4 @@ const SessionReducer = function(state = _nullUser, action){
   }
 };
 
-export default TasksReducer;
+export default TaskReducer;

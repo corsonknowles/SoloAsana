@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-// import { createTask, updateTask, fetchTask, fetchTasks, destroyTask, receiveErrors, clearErrors } from '../../actions/projects_actions';
+import { createTask, updateTask, fetchTask, fetchTasks, destroyTask, receiveErrors, clearErrors } from '../../actions/projects_actions';
 import Projects from './projects';
 
 const mapStateToProps = state => ({
