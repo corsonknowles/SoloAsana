@@ -15,11 +15,10 @@ const ProjectReducer = function(state = {}, action){
 
   switch(action.type){
     case RECEIVE_PROJECTS:
-      newState = {};
+      newState = { errors: [] };
       action.projects.forEach(project => newState[project.id] = project);
       return newState;
         // projects: action.projects,
-        // errors: []
     case RECEIVE_PROJECT:
       newState = merge({}, state, { [action.project.id]: action.project });
       return newState;
@@ -36,7 +35,6 @@ const ProjectReducer = function(state = {}, action){
       newState.errors = [];
       return newState;
     case RECEIVE_LOGOUT_SUCCESS:
-      console.log("this is the projects reducer r. lgout success");
       newState = {};
       return newState;
     default:

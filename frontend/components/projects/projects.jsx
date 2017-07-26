@@ -19,12 +19,9 @@ class Projects extends React.Component {
 
     this.currentUser = this.props.currentUser;
 
-    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
-
-
   }
 
   componentWillMount () {
@@ -71,34 +68,17 @@ class Projects extends React.Component {
 
       this.setState(newState, () => {
         this.updateEditedProject(projectID);
-      }
-    );
-
+      });
     }
-
-
   }
 
   updateEditedProject(projectID) {
-
     let project = this.state.projects[projectID];
     this.props.updateProject(project);
-
   }
-
-  // handleSubmit(user){
-  //
-  //   return () => {
-  //     let projects = this.state.projects;
-  //     //need to pick out the individual project or bulk update all projects
-  //     this.props.updateProject(project);
-  //
-  //   };
-  // }
 
   renderErrors(){
     return(
-
       <ul className="errors">
         {this.props.errors.map( (error, i) => (
           <li className="eachError" key={`error-${i}`}>
@@ -108,9 +88,6 @@ class Projects extends React.Component {
       </ul>
     );
   }
-
-
-
 
   render() {
 
