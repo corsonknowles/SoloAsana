@@ -20,7 +20,8 @@ class Projects extends React.Component {
     this.currentUser = this.props.currentUser;
 
     this.handleChange = this.handleChange.bind(this);
-    this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
+    // this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
+    this.updateEditedProject = this.updateEditedProject.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
   }
 
@@ -38,7 +39,7 @@ class Projects extends React.Component {
 
   // componentWillUnmount() { this.props.clearErrors()};
 
-  handleKeyPress () {
+  handleKeyPress (projectID) {
     return (event) => {
       if (event.key === 'Enter') {
 
@@ -48,6 +49,10 @@ class Projects extends React.Component {
           user_id: this.currentUser.id
         }
         this.props.createProject(newProject);
+      } else if (event.key === 'Delete' || event.key === 'Backspace' && event.target.value.length === 0) {
+
+        destroyProject(projectID)
+
       }
     }
   }
@@ -65,15 +70,16 @@ class Projects extends React.Component {
       // let editField = this.state.projects[event.target.key];
       const newState = merge({}, this.state);
       newState.projects[projectID].name = event.target.value;
-
-      this.setState(newState, () => {
-        this.updateEditedProject(projectID);
-      });
+      // debugger
+      // this.setState(newState, () => {
+        this.updateEditedProject(projectID, event.target.value);
+      // });
     }
   }
 
-  updateEditedProject(projectID) {
-    let project = this.state.projects[projectID];
+  updateEditedProject(projectID, value) {
+    let project = this.props.projects[projectID];
+    project.name = value;
     this.props.updateProject(project);
   }
 
@@ -100,7 +106,7 @@ class Projects extends React.Component {
 
     //write a selector to return dummy strings
 
-    console.log(this.state.projects);
+    // console.log(this.state.projects);
     return (
       <div>
         {Object.keys(this.props.projects).map( (projectID) => (
@@ -108,14 +114,15 @@ class Projects extends React.Component {
               type="text"
               name={projectID}
               key={projectID}
-              value={this.state.projects[projectID].name}
+              value={this.props.projects[projectID].name ? this.props.projects[projectID].name : ""}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
               placeholder="Name your new project here"
-              onKeyPress={this.handleKeyPress()}
+              onKeyPress={this.handleKeyPress(projectID)}
             />
           )
         )}
+
       </div>
   )}
 

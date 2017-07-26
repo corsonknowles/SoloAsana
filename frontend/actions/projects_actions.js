@@ -22,7 +22,13 @@ export const createProject = project => dispatch => (
   )
 );
 
-export const fetchProjects = teamID => dispatch => (
+export const fetchProjects = () => dispatch => (
+  PROJECTS.fetchProjects()
+    .then(projects => dispatch(receiveProjects(projects))
+  )
+);
+
+export const fetchProjectsByTeam = teamID => dispatch => (
   PROJECTS.fetchProjects(teamID)
     .then(projects => dispatch(receiveProjects(projects))
   )

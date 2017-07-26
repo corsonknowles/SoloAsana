@@ -24,7 +24,14 @@ export const fetchProject = projectID => (
 );
 
 // plural
-export const fetchProjects = teamID => (
+export const fetchProjects = () => (
+  $.ajax({
+    method: 'GET',
+    url: `api/projects`
+  })
+);
+
+export const fetchProjectsByTeam = teamID => (
   $.ajax({
     method: 'GET',
     url: `api/teams/${teamID}/projects`
