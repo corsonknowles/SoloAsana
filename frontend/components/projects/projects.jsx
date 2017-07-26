@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
 import { ProjectItem } from './project_item';
-import debounce from 'lodash/debounce';
+// import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
 
 class Projects extends React.Component {
@@ -39,9 +39,34 @@ class Projects extends React.Component {
 
   // componentWillUnmount() { this.props.clearErrors()};
 
+  // handleEnter () {
+  //   return (event) => {
+  //
+  //     let newProject = {
+  //       name: "",
+  //       team_id: 1,
+  //       user_id: this.currentUser.id
+  //     }
+  //     this.props.createProject(newProject);
+  //
+  //   }
+  // }
+  //
+  // handleDelete (projectID) {
+  //   return event => {
+  //     if (event.target.value.length === 0) {
+  //       this.props.destroyProject(projectID);
+  //     }
+  //   }
+  // }
+
+
+
   handleKeyPress (projectID) {
+
     return (event) => {
-      if (event.key === 'Enter') {
+      // debugger
+      if (event.key === 'Enter' || event.charCode === 13) {
 
         let newProject = {
           name: "",
@@ -49,11 +74,13 @@ class Projects extends React.Component {
           user_id: this.currentUser.id
         }
         this.props.createProject(newProject);
-      } else if (event.key === 'Delete' || event.key === 'Backspace' && event.target.value.length === 0) {
 
-        destroyProject(projectID)
+      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
+
+        this.props.destroyProject(projectID);
 
       }
+
     }
   }
 
@@ -69,6 +96,7 @@ class Projects extends React.Component {
       const name = target.name;
       // let editField = this.state.projects[event.target.key];
       const newState = merge({}, this.state);
+      console.log(newState.projects);
       newState.projects[projectID].name = event.target.value;
       // debugger
       // this.setState(newState, () => {
@@ -100,9 +128,11 @@ class Projects extends React.Component {
     // console.log("state.projects", this.state.projects);
     // console.log("this.state", this.state);
     // console.log("this.props", this.props);
-    if (!this.state.projects[1]) {
-      this.state.projects = { [1]: {name: "" } }
-    }
+    // if (!this.state.projects[1]) {
+    //   this.setState( {
+    //     projects: { [1]: {name: "" } }
+    //   })
+    // }
 
     //write a selector to return dummy strings
 
@@ -118,7 +148,7 @@ class Projects extends React.Component {
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
               placeholder="Name your new project here"
-              onKeyPress={this.handleKeyPress(projectID)}
+              onKeyDown={this.handleKeyPress(projectID)}
             />
           )
         )}

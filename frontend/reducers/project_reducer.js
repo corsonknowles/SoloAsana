@@ -23,9 +23,9 @@ const ProjectReducer = function(state = {}, action){
       newState = merge({}, state, { [action.project.id]: action.project });
       return newState;
     case DELETE_PROJECT:
-      nextState = merge({}, state);
-      delete nextState[action.id];
-      return nextState;
+      newState = merge({}, state);
+      delete newState[action.id];
+      return newState;
     case RECEIVE_ERRORS:
       const errors = {errors: action.errors};
       newState = merge({}, state, errors);

@@ -11,7 +11,8 @@ const mapDispatchToProps = dispatch => ({
   fetchProjects: (teamID) => dispatch(fetchProjects(teamID)),
   fetchProject: (id) => dispatch(fetchProject(id)),
   createProject: (project) => dispatch(createProject(project)),
-  updateProject: (project) => dispatch(updateProject(project))
+  updateProject: (project) => dispatch(updateProject(project)),
+  destroyProject: (id) => dispatch(destroyProject(id))
 });
 
 export default connect(

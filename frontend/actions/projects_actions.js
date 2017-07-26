@@ -2,6 +2,10 @@ import * as PROJECTS from '../util/projects_api_util';
 
 export const RECEIVE_PROJECTS = 'RECEIVE_PROJECTS';
 export const RECEIVE_PROJECT = 'RECEIVE_PROJECT';
+export const DELETE_PROJECT = 'DELETE_PROJECT';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
+
 
 
 // sync actions
@@ -13,6 +17,11 @@ export const receiveProjects = projects => ({
 export const receiveProject = project => ({
   type: RECEIVE_PROJECT,
   project
+});
+
+export const deleteProject = id => ({
+  type: DELETE_PROJECT,
+  id
 });
 
 // async actions
@@ -45,4 +54,9 @@ export const updateProject = project => dispatch => {
     currentProject => dispatch(receiveProject(currentProject)),
     error => dispatch(receiveErrors(error.responseJSON))
   );
+};
+
+export const destroyProject = id => dispatch => {
+  return PROJECTS.deleteProject(id)
+    .then( () => dispatch(deleteProject(id)) );
 };
