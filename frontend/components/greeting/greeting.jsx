@@ -119,7 +119,7 @@ class Greeting extends React.Component {
         <ProjectsContainer />
       </section>
 
-      <div>
+      <div className="content-container">
         <nav className="greeting-nav">
            <h3 className="nav-left">Welcome {this.state.username}</h3>
            <div className="nav-right">

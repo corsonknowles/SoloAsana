@@ -22,6 +22,7 @@ class Projects extends React.Component {
     // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
+    this.handleKeyPress = this.handleKeyPress.bind(this);
 
 
   }
@@ -40,11 +41,25 @@ class Projects extends React.Component {
 
   // componentWillUnmount() { this.props.clearErrors()};
 
+  handleKeyPress () {
+    return (event) => {
+      if (event.key === 'Enter') {
+        console.log('enter key pressed');
+        let newProject = {
+          name: "",
+          team_id: 1,
+          user_id: this.currentUser.id
+        }
+        this.props.createProject(newProject);
+      }
+    }
+  }
+
   handleChange(projectID) {
 
     return (event) => {
       event.preventDefault();
-      if (event.keyCode == 13 || event.which == 13) {
+      if (event.key === 'Enter') {
         console.log('enter key pressed');
       }
       const target = event.target;
@@ -96,6 +111,7 @@ class Projects extends React.Component {
 
 
 
+
   render() {
 
     // console.log("state.projects", this.state.projects);
@@ -113,7 +129,7 @@ class Projects extends React.Component {
 
     <div>
 
-      {Object.keys(this.state.projects).map( (projectID) => (
+      {Object.keys(this.props.projects).map( (projectID) => (
           <input
             type="text"
             name={projectID}
@@ -122,6 +138,7 @@ class Projects extends React.Component {
             onChange={this.handleChange(projectID)}
             className="sidebar-item-row"
             placeholder="Should be a project input field"
+            onKeyPress={this.handleKeyPress()}
           />
         )
       )}

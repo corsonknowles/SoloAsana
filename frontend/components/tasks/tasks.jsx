@@ -30,10 +30,10 @@ class Tasks extends React.Component {
   render() {
 
     return (
-    <div>
+    <div className="task-container">
       This is my placeholder task.
       Replace this with a placeholder form
-      Or better yet a real form. 
+      Or better yet a real form.
 
     </div>
 
