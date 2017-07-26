@@ -42,7 +42,7 @@ class Projects extends React.Component {
     const name = target.name;
     // let editField = this.state.projects[event.target.key];
     this.setState({
-      [name]: event.target.value
+      [this.state.projects[event.target.key][name]]: event.target.value
     });
 
   }
@@ -90,7 +90,7 @@ class Projects extends React.Component {
       {Object.keys(this.state.projects).map( (projectID) => (
           <input
             type="text"
-            name="project"
+            name={projectID}
             key={projectID}
             value={this.state.projects[projectID].name}
             onChange={this.handleChange}
