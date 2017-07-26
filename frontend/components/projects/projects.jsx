@@ -111,7 +111,7 @@ class Projects extends React.Component {
               value={this.state.projects[projectID].name}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
-              placeholder="Enter your new project name here"
+              placeholder="Name your new project here"
               onKeyPress={this.handleKeyPress()}
             />
           )
