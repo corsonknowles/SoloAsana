@@ -6,6 +6,7 @@ import {
   CLEAR_ERRORS
 
   } from '../actions/tasks_actions';
+import RECEIVE_LOGOUT_SUCCESS from '../actions/session_actions'
 import merge from 'lodash/merge';
 
 const TaskReducer = function(state = {}, action){
@@ -33,6 +34,9 @@ const TaskReducer = function(state = {}, action){
     case CLEAR_ERRORS:
       newState = merge({}, state);
       newState.errors = [];
+      return newState;
+    case RECEIVE_LOGOUT_SUCCESS:
+      newState = {};
       return newState;
     default:
       return state;

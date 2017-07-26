@@ -38,7 +38,7 @@ class Projects extends React.Component {
     }
   }
 
-  componentWillUnmount() { this.props.clearErrors()};
+  // componentWillUnmount() { this.props.clearErrors()};
 
   handleChange(projectID) {
 
@@ -62,8 +62,8 @@ class Projects extends React.Component {
   }
 
   updateEditedProject(projectID) {
-    debugger
-    let project = this.state.projects.projectID;
+
+    let project = this.state.projects[projectID];
     this.props.updateProject(project);
 
   }

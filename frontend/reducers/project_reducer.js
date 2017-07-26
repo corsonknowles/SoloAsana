@@ -6,6 +6,7 @@ import {
   CLEAR_ERRORS
 
 } from '../actions/projects_actions';
+import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
 import merge from 'lodash/merge';
 
 const ProjectReducer = function(state = {}, action){
@@ -33,6 +34,10 @@ const ProjectReducer = function(state = {}, action){
     case CLEAR_ERRORS:
       newState = merge({}, state);
       newState.errors = [];
+      return newState;
+    case RECEIVE_LOGOUT_SUCCESS:
+      console.log("this is the projects reducer r. lgout success");
+      newState = {};
       return newState;
     default:
       return state;
