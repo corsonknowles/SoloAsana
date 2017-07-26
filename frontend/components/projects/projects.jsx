@@ -10,7 +10,7 @@ class Projects extends React.Component {
 
   constructor(props) {
     super(props)
-    console.log(this.props)
+    // console.log(this.props)
     this.state = {
 
       projects: this.props.projects
@@ -26,11 +26,11 @@ class Projects extends React.Component {
 
   componentWillMount () {
     this.props.fetchProjects(1)
-    setTimeout(() => console.log("this.props in willMount", this.props), 2000);
+    // setTimeout(() => console.log("this.props in willMount", this.props), 2000);
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log("will receive props");
+    // console.log("will receive props");
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
     }
@@ -41,7 +41,7 @@ class Projects extends React.Component {
   handleKeyPress () {
     return (event) => {
       if (event.key === 'Enter') {
-        console.log('enter key pressed');
+
         let newProject = {
           name: "",
           team_id: 1,
@@ -56,11 +56,11 @@ class Projects extends React.Component {
 
     return (event) => {
       event.preventDefault();
-      if (event.key === 'Enter') {
-        console.log('enter key pressed');
-      }
+      // if (event.key === 'Enter') {
+      //   console.log('enter key pressed');
+      // }
       const target = event.target;
-      console.log(this);
+      // console.log(this);
       const name = target.name;
       // let editField = this.state.projects[event.target.key];
       const newState = merge({}, this.state);
@@ -111,7 +111,7 @@ class Projects extends React.Component {
               value={this.state.projects[projectID].name}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
-              placeholder="Should be a project input field"
+              placeholder="Enter your new project name here"
               onKeyPress={this.handleKeyPress()}
             />
           )
