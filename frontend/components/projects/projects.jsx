@@ -19,7 +19,7 @@ class Projects extends React.Component {
 
     this.currentUser = this.props.currentUser;
 
-    this.handleSubmit = this.handleSubmit.bind(this);
+    // this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
 
@@ -44,6 +44,9 @@ class Projects extends React.Component {
 
     return (event) => {
       event.preventDefault();
+      if (event.keyCode == 13 || event.which == 13) {
+        console.log('enter key pressed');
+      }
       const target = event.target;
       console.log(this);
       const name = target.name;
@@ -68,15 +71,15 @@ class Projects extends React.Component {
 
   }
 
-  handleSubmit(user){
-
-    return () => {
-      let projects = this.state.projects;
-      //need to pick out the individual project or bulk update all projects
-      this.props.updateProject(project);
-
-    };
-  }
+  // handleSubmit(user){
+  //
+  //   return () => {
+  //     let projects = this.state.projects;
+  //     //need to pick out the individual project or bulk update all projects
+  //     this.props.updateProject(project);
+  //
+  //   };
+  // }
 
   renderErrors(){
     return(
