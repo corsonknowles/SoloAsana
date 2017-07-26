@@ -35,6 +35,7 @@ export const fetchProject = id => dispatch => (
 );
 
 export const updateProject = project => dispatch => {
+  debugger;
   return PROJECTS.updateProject(project).then(
     currentProject => dispatch(receiveProject(currentProject)),
     error => dispatch(receiveErrors(error.responseJSON))

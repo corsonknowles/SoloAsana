@@ -13,7 +13,7 @@ class Projects extends React.Component {
     console.log(this.props)
     this.state = {
 
-      projects: this.props.projects
+      projects: { 3: name: "" }
 
     }
 
@@ -62,7 +62,7 @@ class Projects extends React.Component {
   }
 
   updateEditedProject(projectID) {
-    debugger
+
     let project = this.state.projects.projectID;
     this.props.updateProject(project);
 

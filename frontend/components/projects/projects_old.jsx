@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
 import { ProjectItem } from './project_item';
-import debounce from 'lodash/debounce';
-import merge from 'lodash/merge';
 
 class Projects extends React.Component {
 
@@ -21,7 +19,6 @@ class Projects extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
 
 
   }
@@ -38,33 +35,13 @@ class Projects extends React.Component {
     }
   }
 
-  componentWillUnmount() { this.props.clearErrors()};
-
-  handleChange(projectID) {
-
-    return (event) => {
-      event.preventDefault();
-      const target = event.target;
-      console.log(this);
-      const name = target.name;
-      // let editField = this.state.projects[event.target.key];
-      const newState = merge({}, this.state);
-      newState.projects[projectID].name = event.target.value;
-
-      this.setState(newState, () => {
-        this.updateEditedProject(projectID);
-      }
-    );
-
-    }
-
-
-  }
-
-  updateEditedProject(projectID) {
-    debugger
-    let project = this.state.projects.projectID;
-    this.props.updateProject(project);
+  handleChange(event) {
+    const target = event.target;
+    const name = target.name;
+    // let editField = this.state.projects[event.target.key];
+    this.setState({
+      [this.state.projects[event.target.key][name]]: event.target.value
+    });
 
   }
 
@@ -103,8 +80,6 @@ class Projects extends React.Component {
       this.state.projects = { [1]: {name: "" } }
     }
 
-    //write a selector to return dummy strings
-
     console.log(this.state.projects);
     return (
 
@@ -116,7 +91,7 @@ class Projects extends React.Component {
             name={projectID}
             key={projectID}
             value={this.state.projects[projectID].name}
-            onChange={this.handleChange(projectID)}
+            onChange={this.handleChange}
             className="sidebar-item-row"
             placeholder="Should be a project input field"
           />
