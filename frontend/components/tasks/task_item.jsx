@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
+import { Link, NavLink } from 'react-router-dom';
 
 class TaskItem extends React.Component {
   constructor(props) {

@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Modal from 'react-modal';
 import { Link, NavLink } from 'react-router-dom';
-import { ProjectItem } from './project_item';
+// import { ProjectItem } from './project_item';
 // import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
 
@@ -23,8 +22,20 @@ class Projects extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchProjects(1)
+    this.props.fetchProjects(1).then( () => {
+
+      if (Object.keys(this.props.projects).length === 0) {
+
+        const mustHaveProject = {
+          name: "",
+          team_id: 1,
+          user_id: this.currentUser.id
+        }
+        this.props.createProject(mustHaveProject);
+      }
+    });
   }
+
 
   componentWillReceiveProps (nextProps) {
 
@@ -49,6 +60,14 @@ class Projects extends React.Component {
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(projectID);
+      }
+      if (event.key === 'Up' || event.charCode === 38) {
+        document.getElementById(projectID - 1).focus();
+        document.getElementById(projectID - 1).select();
+      }
+      if (event.key === 'Down' || event.charCode === 40) {
+        document.getElementById(projectID + 1).focus();
+        document.getElementById(projectID + 1).select();
       }
 
     }
@@ -87,6 +106,7 @@ class Projects extends React.Component {
 
   render() {
     //write a selector to return dummy strings
+
     return (
       <div>
         {Object.keys(this.props.projects).map( (projectID) => (
@@ -102,6 +122,15 @@ class Projects extends React.Component {
             />
           )
         )}
+        <div className="spacer"></div>
+        <div className="project-help-text">
+          Enter Adds a New Task
+        </div>
+
+        <div className="project-help-text">
+          Delete Removes an Empty Task
+        </div>
+
 
       </div>
   )}

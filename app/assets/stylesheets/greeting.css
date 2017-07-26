@@ -8,6 +8,18 @@
   width: 100%;
 }
 
+.project-help-text {
+  font-size: 13px;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  text-transform: capitalize;
+}
+
+.spacer {
+  margin: 40px;
+}
+
 section {
   background: #151b26;
   width: 270px;

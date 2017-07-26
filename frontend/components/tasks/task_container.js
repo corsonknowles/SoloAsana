@@ -3,13 +3,17 @@ import { createTask, updateTask, fetchTask, fetchTasks, destroyTask, receiveErro
 import Tasks from './tasks';
 
 const mapStateToProps = state => ({
-  currentUser: state.session.currentUser
+  currentUser: state.session.currentUser,
+  tasks: state.tasks
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearErrors: () => dispatch(clearErrors()),
-  logout: () => dispatch(requestLogout()),
-  updateUser: (user) => dispatch(updateUser(user))
+  fetchTasks: (projectID) => dispatch(fetchTasks(projectID)),
+  fetchTask: (id) => dispatch(fetchTask(id)),
+  createTask: (task) => dispatch(createTask(task)),
+  updateTask: (task) => dispatch(updateTask(task)),
+  destroyTask: (id) => dispatch(destroyTask(id))
+
 });
 
 export default connect(
