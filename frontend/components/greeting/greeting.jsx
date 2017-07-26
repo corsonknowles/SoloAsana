@@ -26,10 +26,8 @@ const customStyles = {
 		fontWeight						:	'bold',
 		pointerEvents	        : 'auto',
 		borderRadius					: '10px'
-
   }
 };
-
 
 class Greeting extends React.Component {
 
@@ -37,7 +35,6 @@ class Greeting extends React.Component {
     super(props)
 
     this.state = {
-
       modalIsOpen: false,
       photoModalIsOpen: false,
       username: this.props.currentUser.username,
@@ -46,8 +43,8 @@ class Greeting extends React.Component {
       about: this.props.currentUser.about,
       photo: this.props.currentUser.photo,
       uploadedFileCloudinaryUrl: ''
-
     }
+
     this.logout = this.props.logout;
     this.currentUser = this.props.currentUser;
 
@@ -67,11 +64,9 @@ class Greeting extends React.Component {
     this.setState({
       [name]: event.target.value
     });
-
   }
 
   handleSubmit(user){
-
     return () => {
       let user = this.currentUser;
       user.username = this.state.username;
@@ -86,7 +81,6 @@ class Greeting extends React.Component {
 
   renderErrors(){
     return(
-
       <ul className="errors">
         {this.props.errors.map( (error, i) => (
           <li className="eachError" key={`error-${i}`}>
@@ -191,8 +185,7 @@ class Greeting extends React.Component {
       </div>
     </div>
 
-  )
-  }
-}
+  )}
 
+}
 export default Greeting;

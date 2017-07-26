@@ -14,6 +14,14 @@ class Api::ProjectsController < ApplicationController
     render json: @project, include: :tasks
   end
 
+  def index
+    render json: Project.all.where(user_id: current_user.id), include: :tasks
+  end
+
+  def show
+    render json: Project.find(params[:id]), include: :tasks
+  end
+
   def update
     @project = Project.find(params[:id])
     if @project.update(project_params)
@@ -23,18 +31,10 @@ class Api::ProjectsController < ApplicationController
     end
   end
 
-  def show
-    render json: Project.find(params[:id]), include: :tasks
+  private
+
+  def project_params
+    params.require(:project).permit(:name, :team, :user, :team_id, :user_id)
   end
 
-  def index
-  render json: Project.all.where(user_id: current_user.id), include: :tasks
-  end
-end
-
-
-private
-
-def project_params
-  params.require(:project).permit(:name, :team, :user, :team_id, :user_id)
 end

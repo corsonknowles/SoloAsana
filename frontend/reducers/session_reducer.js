@@ -13,7 +13,6 @@ const _nullUser = {
 
 const SessionReducer = function(state = _nullUser, action){
   let newState;
-  console.log(action);
   switch(action.type){
     case RECEIVE_CURRENT_USER:
       return {

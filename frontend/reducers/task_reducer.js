@@ -6,7 +6,7 @@ import {
   CLEAR_ERRORS
 
   } from '../actions/tasks_actions';
-import RECEIVE_LOGOUT_SUCCESS from '../actions/session_actions'
+import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
 import merge from 'lodash/merge';
 
 const TaskReducer = function(state = {}, action){

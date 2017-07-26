@@ -115,7 +115,6 @@ class Projects extends React.Component {
   render() {
 
     // console.log("state.projects", this.state.projects);
-    //
     // console.log("this.state", this.state);
     // console.log("this.props", this.props);
     if (!this.state.projects[1]) {
@@ -126,27 +125,22 @@ class Projects extends React.Component {
 
     console.log(this.state.projects);
     return (
+      <div>
+        {Object.keys(this.props.projects).map( (projectID) => (
+            <input
+              type="text"
+              name={projectID}
+              key={projectID}
+              value={this.state.projects[projectID].name}
+              onChange={this.handleChange(projectID)}
+              className="sidebar-item-row"
+              placeholder="Should be a project input field"
+              onKeyPress={this.handleKeyPress()}
+            />
+          )
+        )}
+      </div>
+  )}
 
-    <div>
-
-      {Object.keys(this.props.projects).map( (projectID) => (
-          <input
-            type="text"
-            name={projectID}
-            key={projectID}
-            value={this.state.projects[projectID].name}
-            onChange={this.handleChange(projectID)}
-            className="sidebar-item-row"
-            placeholder="Should be a project input field"
-            onKeyPress={this.handleKeyPress()}
-          />
-        )
-      )}
-
-    </div>
-
-  )
-  }
 }
-
 export default Projects;
