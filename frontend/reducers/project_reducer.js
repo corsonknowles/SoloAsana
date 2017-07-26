@@ -15,7 +15,7 @@ const ProjectReducer = function(state = {}, action){
 
   switch(action.type){
     case RECEIVE_PROJECTS:
-      newState = { errors: [] };
+      newState = { };
       action.projects.forEach(project => newState[project.id] = project);
       return newState;
         // projects: action.projects,

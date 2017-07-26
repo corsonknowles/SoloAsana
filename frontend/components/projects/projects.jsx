@@ -10,11 +10,8 @@ class Projects extends React.Component {
 
   constructor(props) {
     super(props)
-    // console.log(this.props)
     this.state = {
-
       projects: this.props.projects
-
     }
 
     this.currentUser = this.props.currentUser;
@@ -27,11 +24,10 @@ class Projects extends React.Component {
 
   componentWillMount () {
     this.props.fetchProjects(1)
-    // setTimeout(() => console.log("this.props in willMount", this.props), 2000);
   }
 
   componentWillReceiveProps (nextProps) {
-    // console.log("will receive props");
+
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
     }
@@ -39,33 +35,9 @@ class Projects extends React.Component {
 
   // componentWillUnmount() { this.props.clearErrors()};
 
-  // handleEnter () {
-  //   return (event) => {
-  //
-  //     let newProject = {
-  //       name: "",
-  //       team_id: 1,
-  //       user_id: this.currentUser.id
-  //     }
-  //     this.props.createProject(newProject);
-  //
-  //   }
-  // }
-  //
-  // handleDelete (projectID) {
-  //   return event => {
-  //     if (event.target.value.length === 0) {
-  //       this.props.destroyProject(projectID);
-  //     }
-  //   }
-  // }
-
-
-
   handleKeyPress (projectID) {
 
     return (event) => {
-      // debugger
       if (event.key === 'Enter' || event.charCode === 13) {
 
         let newProject = {
@@ -76,32 +48,22 @@ class Projects extends React.Component {
         this.props.createProject(newProject);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
-
         this.props.destroyProject(projectID);
-
       }
 
     }
   }
 
   handleChange(projectID) {
-
     return (event) => {
       event.preventDefault();
-      // if (event.key === 'Enter') {
-      //   console.log('enter key pressed');
-      // }
+
       const target = event.target;
-      // console.log(this);
       const name = target.name;
-      // let editField = this.state.projects[event.target.key];
       const newState = merge({}, this.state);
-      console.log(newState.projects);
+
       newState.projects[projectID].name = event.target.value;
-      // debugger
-      // this.setState(newState, () => {
-        this.updateEditedProject(projectID, event.target.value);
-      // });
+      this.updateEditedProject(projectID, event.target.value);
     }
   }
 
@@ -124,19 +86,7 @@ class Projects extends React.Component {
   }
 
   render() {
-
-    // console.log("state.projects", this.state.projects);
-    // console.log("this.state", this.state);
-    // console.log("this.props", this.props);
-    // if (!this.state.projects[1]) {
-    //   this.setState( {
-    //     projects: { [1]: {name: "" } }
-    //   })
-    // }
-
     //write a selector to return dummy strings
-
-    // console.log(this.state.projects);
     return (
       <div>
         {Object.keys(this.props.projects).map( (projectID) => (
