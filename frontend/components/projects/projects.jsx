@@ -10,7 +10,9 @@ class Projects extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      projects: this.props.projects
+      projects: this.props.projects,
+      cursor: 0,
+      result: []
     }
 
     this.currentUser = this.props.currentUser;
@@ -52,6 +54,8 @@ class Projects extends React.Component {
     this.handleChange(projectID);
 
     return (event) => {
+      const { cursor, result } = this.state;
+
       if (event.key === 'Enter' || event.charCode === 13) {
 
         let newProject = {
@@ -64,6 +68,16 @@ class Projects extends React.Component {
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
       }
+      // arrow up/down button should select next/previous list element
+      if (event.keyCode === 38 && cursor > 0) {
+        this.setState( prevState => ({
+          cursor: prevState.cursor - 1
+        }))
+      } else if (event.keyCode === 40 && cursor < result.length - 1) {
+        this.setState( prevState => ({
+          cursor: prevState.cursor + 1
+        }))
+      }
     }
   }
 
@@ -75,8 +89,6 @@ class Projects extends React.Component {
     return (event) => {
       event.preventDefault();
 
-      const target = event.target;
-      const name = target.name;
       const newState = merge({}, this.state);
 
       newState.projects[projectID].name = event.target.value;
@@ -108,11 +120,11 @@ class Projects extends React.Component {
 
   render() {
     //write a selector to return dummy strings
-
+    const { cursor } = this.state
     return (
       <div className="sidebar-container">
-        {Object.keys(this.props.projects).map( (projectID) => (
-          <NavLink className="sidebar-item-row" to={`/projects/${projectID}`} key={`Link${projectID}`}>
+        {Object.keys(this.props.projects).map( (projectID, i) => (
+          <NavLink className={`sidebar-item-row ${cursor === i ? 'active' : ''}`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
               name={projectID}
@@ -121,7 +133,7 @@ class Projects extends React.Component {
               value={this.props.projects[projectID].name ? this.props.projects[projectID].name : ""}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
-              placeholder="Name your new project here"
+              placeholder="_________________________"
               onKeyDown={this.handleKeyDown(projectID)}
               onKeyUp={this.handleKeyUp(projectID)}
             />

@@ -30,10 +30,12 @@ class Tasks extends React.Component {
         if (Object.keys(this.props.tasks).length === 0) {
 
           const mustHaveTask = {
-            name: "",
+            title: "",
             team_id: 1,
             project_id: projectID,
-            user_id: this.currentUser.id
+            user_id: this.currentUser.id,
+            done: false,
+            section: false
           }
           this.props.createTask(mustHaveTask);
         }
@@ -56,9 +58,13 @@ class Tasks extends React.Component {
         if (event.key === 'Enter' || event.charCode === 13) {
 
           let newTask = {
-            name: "",
+            title: "",
             team_id: 1,
-            user_id: this.currentUser.id
+            project_id: projectID,
+            user_id: this.currentUser.id,
+            done: false,
+            section: false
+
           }
           this.props.createTask(newTask);
 
@@ -78,21 +84,23 @@ class Tasks extends React.Component {
     }
 
     handleChange(taskID) {
+
       return (event) => {
         event.preventDefault();
+        console.log(event.target.name);
 
-        const target = event.target;
-        const name = target.name;
+        let id = parseInt(taskID.slice(4))
+        console.log(id);
         const newState = merge({}, this.state);
+        newState.tasks[id].title = event.target.value;
 
-        newState.tasks[taskID].name = event.target.value;
-        this.updateEditedTask(taskID, event.target.value);
+        this.updateEditedTask(id, event.target.value);
       }
     }
 
     updateEditedTask(taskID, value) {
       let task = this.props.tasks[taskID];
-      task.name = value;
+      task.title = value;
       this.props.updateTask(task);
     }
 
@@ -123,7 +131,7 @@ class Tasks extends React.Component {
                 name={`task${taskID}`}
                 id={`task${taskID}`}
                 key={`task${taskID}`}
-                value={this.props.tasks[taskID].name ? this.props.tasks[taskID].name : ""}
+                value={this.props.tasks[taskID].title ? this.props.tasks[taskID].title : ""}
                 onChange={this.handleChange(`task${taskID}`)}
                 className="tasks-item-row"
                 placeholder="Enter your new task here"
