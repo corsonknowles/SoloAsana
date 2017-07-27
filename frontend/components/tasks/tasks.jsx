@@ -53,7 +53,7 @@ class Tasks extends React.Component {
     // componentWillUnmount() { this.props.clearErrors()};
 
     handleKeyDown (taskID) {
-      // this.handleChange(taskID)
+      this.handleChange(taskID)
 
       return (event) => {
         let projectID = parseInt(this.props.match.params.id);
@@ -79,10 +79,10 @@ class Tasks extends React.Component {
             project_id: projectID,
             user_id: this.currentUser.id,
             done: false,
-            section: false
+            section: false,
+            title: value
           }
 
-          newState.tasks[taskID].title = value;
           this.setState(newState);
 
         } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
@@ -101,8 +101,6 @@ class Tasks extends React.Component {
     }
 
     handleChange(taskID) {
-
-
       return (event) => {
         const value = event.target.value;
         const task = this.props.tasks[taskID];
@@ -139,8 +137,7 @@ class Tasks extends React.Component {
                 name={`task${taskID}`}
                 id={`task${taskID}`}
                 key={`task${taskID}`}
-                value={this.props.tasks[taskID].title}
-                onChange={this.handleChange(taskID)}
+                defaultValue={this.props.tasks[taskID].title}
                 className="tasks-item-row"
                 placeholder="Enter your new task here"
                 onKeyDown={this.handleKeyDown(taskID)}

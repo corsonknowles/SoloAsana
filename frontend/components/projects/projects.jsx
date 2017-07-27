@@ -40,7 +40,7 @@ class Projects extends React.Component {
 
 
   handleKeyDown (projectID) {
-    // this.handleChange(projectID);
+    this.handleChange(projectID);
 
     return (event) => {
       const { cursor, result } = this.state;
@@ -52,9 +52,9 @@ class Projects extends React.Component {
         const newState = merge({}, this.state);
         newState.projects[projectID] = {
           team_id: 1,
-          user_id: this.currentUser.id
+          user_id: this.currentUser.id,
+          name: event.target.value
         }
-        newState.projects[projectID].name = event.target.value;
         this.setState(newState);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
@@ -75,12 +75,10 @@ class Projects extends React.Component {
   handleChange(projectID) {
     return (event) => {
       const value = event.target.value
-
       const project = this.props.projects[projectID];
       project.name = value;
 
       this.props.updateProject(project);
-
     }
   }
 
@@ -107,8 +105,7 @@ class Projects extends React.Component {
               name={projectID}
               key={projectID}
               id={projectID}
-              value={this.props.projects[projectID].name}
-              onChange={this.handleChange(projectID)}
+              defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
               onKeyDown={this.handleKeyDown(projectID)}
