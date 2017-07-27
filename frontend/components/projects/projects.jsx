@@ -49,8 +49,15 @@ class Projects extends React.Component {
 
       if (event.key === 'Enter' || event.charCode === 13) {
 
-
         this.props.createProject(this.newProject);
+        
+        const newState = merge({}, this.state);
+        newState.projects[projectID] = {
+          team_id: 1,
+          user_id: this.currentUser.id
+        }
+        newState.projects[projectID].name = event.target.value;
+        this.setState(newState);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
@@ -73,14 +80,6 @@ class Projects extends React.Component {
 
       const project = this.props.projects[projectID];
       project.name = value;
-
-      const newState = merge({}, this.state);
-      newState.projects[projectID] = {
-        team_id: 1,
-        user_id: this.currentUser.id
-      }
-      newState.projects[projectID].name = value;
-      this.setState(newState);
 
       this.props.updateProject(project);
 

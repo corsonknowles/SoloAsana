@@ -16,7 +16,7 @@ class Tasks extends React.Component {
 
       this.handleChange = this.handleChange.bind(this);
 
-      this.handleKeyPress = this.handleKeyPress.bind(this);
+      this.handleKeyDown = this.handleKeyDown.bind(this);
 
     }
 
@@ -52,7 +52,8 @@ class Tasks extends React.Component {
 
     // componentWillUnmount() { this.props.clearErrors()};
 
-    handleKeyPress (taskID) {
+    handleKeyDown (taskID) {
+      this.handleChange(taskID)
 
       return (event) => {
         let projectID = parseInt(this.props.match.params.id);
@@ -69,6 +70,20 @@ class Tasks extends React.Component {
 
           }
           this.props.createTask(newTask);
+
+          const value = event.target.value;
+
+          const newState = merge({}, this.state);
+          newState.tasks[taskID] = {
+            team_id: 1,
+            project_id: projectID,
+            user_id: this.currentUser.id,
+            done: false,
+            section: false
+          }
+
+          newState.tasks[taskID].title = value;
+          this.setState(newState);
 
         } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
           this.props.destroyTask(taskID);
@@ -90,20 +105,6 @@ class Tasks extends React.Component {
 
       return (event) => {
         const value = event.target.value;
-
-        const newState = merge({}, this.state);
-        let projectID = parseInt(this.props.match.params.id);
-        newState.tasks[taskID] = {
-          team_id: 1,
-          project_id: projectID,
-          user_id: this.currentUser.id,
-          done: false,
-          section: false
-        }
-
-        newState.tasks[taskID].title = value;
-        this.setState(newState);
-
         const task = this.props.tasks[taskID];
         task.title = value;
 
@@ -142,7 +143,7 @@ class Tasks extends React.Component {
                 onChange={this.handleChange(taskID)}
                 className="tasks-item-row"
                 placeholder="Enter your new task here"
-                onKeyDown={this.handleKeyPress(taskID)}
+                onKeyDown={this.handleKeyDown(taskID)}
               />
             )
           )}
