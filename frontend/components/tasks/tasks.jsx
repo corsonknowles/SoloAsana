@@ -86,14 +86,8 @@ class Tasks extends React.Component {
     handleChange(taskID) {
 
       return (event) => {
-        event.preventDefault();
-        console.log(event.target.name);
-
         let id = parseInt(taskID.slice(4))
         console.log(id);
-        const newState = merge({}, this.state);
-        newState.tasks[id].title = event.target.value;
-
         this.updateEditedTask(id, event.target.value);
       }
     }

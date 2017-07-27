@@ -23,19 +23,19 @@ class Projects extends React.Component {
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+
+    this.newProject = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    }
   }
 
   componentWillMount () {
-    this.props.fetchProjects(1).then( () => {
+    this.props.fetchProjects().then( () => {
 
       if (Object.keys(this.props.projects).length === 0) {
-
-        const mustHaveProject = {
-          name: "",
-          team_id: 1,
-          user_id: this.currentUser.id
-        }
-        this.props.createProject(mustHaveProject);
+        this.props.createProject(this.newProject);
       }
     });
   }
@@ -51,19 +51,15 @@ class Projects extends React.Component {
   // componentWillUnmount() { this.props.clearErrors()};
 
   handleKeyDown (projectID) {
-    this.handleChange(projectID);
+    // this.handleChange(projectID);
 
     return (event) => {
       const { cursor, result } = this.state;
 
       if (event.key === 'Enter' || event.charCode === 13) {
 
-        let newProject = {
-          name: "",
-          team_id: 1,
-          user_id: this.currentUser.id
-        }
-        this.props.createProject(newProject);
+
+        this.props.createProject(this.newProject);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
@@ -87,11 +83,12 @@ class Projects extends React.Component {
 
   handleChange(projectID) {
     return (event) => {
-      event.preventDefault();
+      // event.preventDefault();
 
-      const newState = merge({}, this.state);
+      // const newState = merge({}, this.state);
 
-      newState.projects[projectID].name = event.target.value;
+      // newState.projects[projectID].name = event.target.value;
+
       this.updateEditedProject(projectID, event.target.value);
     }
   }
