@@ -1,7 +1,54 @@
-Navlink, a {
+a {
   border: 0;
   margin: 0;
   padding: 0;
+}
+
+.tasks-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  -webkit-box-align: center;
+
+  width: 100%;
+  height: 100%;
+  -webkit-box-pack: start;
+
+  min-width: 1px;
+
+  cursor: text;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
+  color: rgb(21, 27, 38);
+
+}
+
+.svg-container {
+  width: 20px;
+  height: 20px;
+}
+
+.check-icon {
+  
+}
+
+.tasks-item-row {
+  width: 95%;
+  display: flex;
+  align-self: center;
+}
+.tasks-item-row::after {
+  bottom: -2px;
+  content: "";
+  display: block;
+  left: 30px;
+  pointer-events: none;
+  position: absolute;
+  right: 30px;
+  border-bottom: 1px solid rgb(224, 230, 232);
 }
 
 .one-page-app {
@@ -63,12 +110,13 @@ section {
   align-items: center;
   justify-content: center;
   align-self: center;
+  padding: 0;
 }
 
 .sidebar-item-row {
   box-sizing: border-box;
   margin: 0;
-  padding-left: 25px;
+  /*padding-left: 25px;*/
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

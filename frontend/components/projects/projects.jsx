@@ -59,15 +59,15 @@ class Projects extends React.Component {
         this.props.createProject(newProject);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
-        this.props.destroyProject(projectID);
+        this.props.destroyProject(parseInt(projectID));
       }
       if (event.key === 'Up' || event.charCode === 38) {
-        document.getElementById(projectID - 1).focus();
-        document.getElementById(projectID - 1).select();
+        document.getElementById(parseInt(projectID) - 1).focus();
+        document.getElementById(parseInt(projectID) - 1).select();
       }
       if (event.key === 'Down' || event.charCode === 40) {
-        document.getElementById(projectID + 1).focus();
-        document.getElementById(projectID + 1).select();
+        document.getElementById(parseInt(projectID) + 1).focus();
+        document.getElementById(parseInt(projectID) + 1).select();
       }
 
     }
