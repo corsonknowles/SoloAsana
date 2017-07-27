@@ -8,9 +8,7 @@ class Projects extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      projects: this.props.projects,
-      cursor: 0,
-      result: []
+      projects: this.props.projects
     }
 
     this.currentUser = this.props.currentUser;
@@ -42,7 +40,7 @@ class Projects extends React.Component {
 
 
   handleKeyDown (projectID) {
-    this.handleChange(projectID);
+    // this.handleChange(projectID);
 
     return (event) => {
       const { cursor, result } = this.state;
@@ -50,7 +48,7 @@ class Projects extends React.Component {
       if (event.key === 'Enter' || event.charCode === 13) {
 
         this.props.createProject(this.newProject);
-        
+
         const newState = merge({}, this.state);
         newState.projects[projectID] = {
           team_id: 1,

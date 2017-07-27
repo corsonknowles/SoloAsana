@@ -53,7 +53,7 @@ class Tasks extends React.Component {
     // componentWillUnmount() { this.props.clearErrors()};
 
     handleKeyDown (taskID) {
-      this.handleChange(taskID)
+      // this.handleChange(taskID)
 
       return (event) => {
         let projectID = parseInt(this.props.match.params.id);
