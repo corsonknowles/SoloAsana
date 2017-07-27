@@ -25,7 +25,7 @@ class Tasks extends React.Component {
       let projectID = parseInt(this.props.match.params.id);
       console.log("this is projectID", projectID);
       if (projectID) {
-        this.props.fetchTasks(projectID).then( () => {
+        this.props.fetchTasksByProject(projectID).then( () => {
 
         if (Object.keys(this.props.tasks).length === 0) {
 

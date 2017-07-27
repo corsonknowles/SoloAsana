@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { createTask, destroyTask, fetchTask, fetchTasks, updateTask, receiveErrors, clearErrors } from '../../actions/tasks_actions';
+import { fetchTasksByProject, createTask, destroyTask, fetchTask, fetchTasks, updateTask, receiveErrors, clearErrors } from '../../actions/tasks_actions';
 import Tasks from './tasks';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -14,7 +14,8 @@ const mapDispatchToProps = dispatch => ({
   destroyTask: (id) => dispatch(destroyTask(id)),
   fetchTasks: (projectID) => dispatch(fetchTasks(projectID)),
   fetchTask: (id) => dispatch(fetchTask(id)),
-  updateTask: (task) => dispatch(updateTask(task))
+  updateTask: (task) => dispatch(updateTask(task)),
+  fetchTasksByProject: (projectID) => dispatch(fetchTasksByProject(projectID))
 
 });
 

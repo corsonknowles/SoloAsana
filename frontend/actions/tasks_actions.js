@@ -5,6 +5,7 @@ export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const RECEIVE_TASK_BY_PROJECT = "RECEIVE_TASK_BY_PROJECT";
 
 // sync actions
 export const receiveTasks = tasks => ({
@@ -16,6 +17,11 @@ export const receiveTask = task => ({
   type: RECEIVE_TASK,
   task
 });
+
+export const receiveTasksByProject = project => ({
+  type: RECEIVE_TASK_BY_PROJECT,
+  project
+})
 
 export const deleteTask = id => ({
   type: DELETE_TASK,
@@ -53,10 +59,20 @@ export const updateTask = task => dispatch => {
 
 export const fetchTasks = projectID => dispatch => {
   return TASKS.fetchTasks(projectID)
+    .then(tasks => dispatch(receiveTasks(tasks))
+  )
 };
 
 export const fetchTask = id => dispatch => {
   return TASKS.fetchTask(id)
+    .then(task => dispatch(receiveTask(task))
+  )
+};
+
+export const fetchTasksByProject = projectID => dispatch => {
+  return TASKS.fetchTasksByProject(projectID)
+    .then(tasks => dispatch(receiveTasksByProject(tasks))
+  )
 };
 
 export const destroyTask = id => dispatch => {

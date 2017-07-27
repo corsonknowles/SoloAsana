@@ -3,7 +3,8 @@ import {
   RECEIVE_TASK,
   DELETE_TASK,
   RECEIVE_ERRORS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  RECEIVE_TASK_BY_PROJECT
 
   } from '../actions/tasks_actions';
 import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
@@ -18,8 +19,13 @@ const TaskReducer = function(state = {}, action){
       newState = {};
       action.tasks.forEach(task => newState[task.id] = task);
       return newState;
+    case RECEIVE_TASK_BY_PROJECT:
+      console.log("in task project reducer");
+      newState = {};
+      action.project.tasks.forEach(task => newState[task.id] = task);
+      return newState;
     case RECEIVE_TASK:
-      console.log("this is action.task in task reducer",action.task);
+      console.log("this is action.task in task reducer", action.task);
 
       newState = merge({}, state, { [action.task.id]: action.task });
 
