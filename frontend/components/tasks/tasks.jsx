@@ -21,8 +21,7 @@ class Tasks extends React.Component {
     }
 
     componentWillMount () {
-      console.log(this.props);
-      console.log(this.props.match.params.id);
+
       let projectID = parseInt(this.props.match.params.id);
 
       if (projectID) {
@@ -67,12 +66,12 @@ class Tasks extends React.Component {
           this.props.destroyTask(taskID);
         }
         if (event.key === 'Up' || event.charCode === 38) {
-          document.getElementById(`task${taskID.id - 1}`).focus();
-          document.getElementById(`task${taskID.id - 1}`).select();
+          document.getElementById(`task${parseInt(taskID) - 1}`).focus();
+          document.getElementById(`task${parseInt(taskID) - 1}`).select();
         }
         if (event.key === 'Down' || event.charCode === 40) {
-          document.getElementById(`task${taskID.id + 1}`).focus();
-          document.getElementById(`task${taskID.id + 1}`).select();
+          document.getElementById(`task${parseInt(taskID) + 1}`).focus();
+          document.getElementById(`task${parseInt(taskID) + 1}`).select();
         }
 
       }
@@ -115,7 +114,7 @@ class Tasks extends React.Component {
       return (
         <div className="tasks-list">
           <div className="svg-container">
-          <svg className="check-icon" title="CheckIcon" viewBox="0 0 32 32"><polygon points="27.672,4.786 10.901,21.557 4.328,14.984 1.5,17.812 10.901,27.214 30.5,7.615 "></polygon></svg>
+          <svg className="check-icon" title="check-icon" viewBox="0 0 32 32"><polygon points="27.672,4.786 10.901,21.557 4.328,14.984 1.5,17.812 10.901,27.214 30.5,7.615 "></polygon></svg>
           </div>
           {Object.keys(this.props.tasks).map( (taskID) => (
 
@@ -127,7 +126,7 @@ class Tasks extends React.Component {
                 value={this.props.tasks[taskID].name ? this.props.tasks[taskID].name : ""}
                 onChange={this.handleChange(`task${taskID}`)}
                 className="tasks-item-row"
-                placeholder=""
+                placeholder="Enter your new task here"
                 onKeyDown={this.handleKeyPress(taskID)}
               />
             )

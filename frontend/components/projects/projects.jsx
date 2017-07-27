@@ -47,6 +47,7 @@ class Projects extends React.Component {
   // componentWillUnmount() { this.props.clearErrors()};
 
   handleKeyPress (projectID) {
+    this.handleChange(projectID);
 
     return (event) => {
       if (event.key === 'Enter' || event.charCode === 13) {
