@@ -121,7 +121,7 @@ class Projects extends React.Component {
     return (
       <div className="sidebar-container">
         {Object.keys(this.props.projects).map( (projectID, i) => (
-          <NavLink className={`sidebar-item-row ${cursor === i ? 'active' : ''}`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
+          <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row ${cursor === i ? 'active' : ''}`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
               name={projectID}

@@ -23,7 +23,7 @@ class Tasks extends React.Component {
     componentWillMount () {
 
       let projectID = parseInt(this.props.match.params.id);
-
+      console.log("this is projectID", projectID);
       if (projectID) {
         this.props.fetchTasks(projectID).then( () => {
 
@@ -55,6 +55,8 @@ class Tasks extends React.Component {
     handleKeyPress (taskID) {
 
       return (event) => {
+        let projectID = parseInt(this.props.match.params.id);
+
         if (event.key === 'Enter' || event.charCode === 13) {
 
           let newTask = {
@@ -87,7 +89,7 @@ class Tasks extends React.Component {
 
       return (event) => {
         let id = parseInt(taskID.slice(4))
-        console.log(id);
+        console.log("Thisi is taskID", id);
         this.updateEditedTask(id, event.target.value);
       }
     }

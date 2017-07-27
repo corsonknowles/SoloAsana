@@ -156,6 +156,10 @@ section {
   color: white;
 }
 
+.sidebar-nav-link {
+  
+}
+
 .inner-modal {
   position: absolute;
   top: 20px;

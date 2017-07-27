@@ -19,7 +19,7 @@ const TaskReducer = function(state = {}, action){
       action.tasks.forEach(task => newState[task.id] = task);
       return newState;
     case RECEIVE_TASK:
-      console.log(action.task);
+      console.log("this is action.task in task reducer",action.task);
 
       newState = merge({}, state, { [action.task.id]: action.task });
 
