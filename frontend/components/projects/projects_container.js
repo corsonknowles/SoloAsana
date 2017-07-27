@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { createProject, updateProject, fetchProject, fetchProjects, destroyProject, receiveErrors, clearErrors } from '../../actions/projects_actions';
 import Projects from './projects';
+import { withRouter } from 'react-router';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
@@ -15,7 +16,7 @@ const mapDispatchToProps = dispatch => ({
   destroyProject: (id) => dispatch(destroyProject(id))
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Projects);
+)(Projects))
