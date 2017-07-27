@@ -14,11 +14,6 @@ class Projects extends React.Component {
     this.currentUser = this.props.currentUser;
     this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.newProject = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
   }
 
   componentWillMount () {
@@ -47,12 +42,18 @@ class Projects extends React.Component {
 
       if (event.key === 'Enter' || event.charCode === 13) {
 
+        const newProject = {
+          name: "",
+          team_id: 1,
+          user_id: this.currentUser.id
+        }
+
         // set a new project in the database
-        this.props.createProject(this.newProject);
+        this.props.createProject(newProject);
 
         // set the new project in state
         const newState = merge({}, this.state);
-        newState.projects[projectID] = this.newProject;
+        newState.projects[projectID] = newProject;
 
         this.setState(newState);
 
