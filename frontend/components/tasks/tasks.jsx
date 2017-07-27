@@ -97,8 +97,11 @@ class Tasks extends React.Component {
     updateEditedTask(taskID, value) {
       let task = this.props.tasks[taskID];
       task.title = value;
+
       let newState = merge({}, this.state);
+      newState.tasks[taskID].title = value;
       this.setState(newState);
+
       this.props.updateTask(task);
     }
 

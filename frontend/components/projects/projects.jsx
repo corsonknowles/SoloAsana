@@ -100,8 +100,11 @@ class Projects extends React.Component {
   updateEditedProject(projectID, value) {
     let project = this.props.projects[projectID];
     project.name = value;
+    
     let newState = merge({}, this.state);
+    newState.projects[projectID].name = value;
     this.setState(newState);
+
     this.props.updateProject(project);
   }
 
