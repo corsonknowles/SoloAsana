@@ -6,8 +6,6 @@ export const DELETE_PROJECT = 'DELETE_PROJECT';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 
-
-
 // sync actions
 export const receiveProjects = projects => ({
   type: RECEIVE_PROJECTS,

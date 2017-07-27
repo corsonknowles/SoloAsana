@@ -80,6 +80,11 @@ section {
 .sidebar-item-row:hover {
   transition: all .15s ease-in-out;
   background: #14aaf5;
+  color: white;
+}
+
+.sidebar-item-row:hover::placeholder {
+  color: white;
 }
 
 .inner-modal {

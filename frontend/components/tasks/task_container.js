@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { createTask, updateTask, fetchTask, fetchTasks, destroyTask, receiveErrors, clearErrors } from '../../actions/tasks_actions';
+import { createTask, destroyTask, fetchTask, fetchTasks, updateTask, receiveErrors, clearErrors } from '../../actions/tasks_actions';
 import Tasks from './tasks';
 
 const mapStateToProps = state => ({
@@ -8,11 +8,12 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+
+  createTask: (task) => dispatch(createTask(task)),
+  destroyTask: (id) => dispatch(destroyTask(id)),
   fetchTasks: (projectID) => dispatch(fetchTasks(projectID)),
   fetchTask: (id) => dispatch(fetchTask(id)),
-  createTask: (task) => dispatch(createTask(task)),
-  updateTask: (task) => dispatch(updateTask(task)),
-  destroyTask: (id) => dispatch(destroyTask(id))
+  updateTask: (task) => dispatch(updateTask(task))
 
 });
 

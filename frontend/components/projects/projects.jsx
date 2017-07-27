@@ -114,6 +114,7 @@ class Projects extends React.Component {
               type="text"
               name={projectID}
               key={projectID}
+              id={projectID}
               value={this.props.projects[projectID].name ? this.props.projects[projectID].name : ""}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
@@ -124,11 +125,15 @@ class Projects extends React.Component {
         )}
         <div className="spacer"></div>
         <div className="project-help-text">
-          Enter Adds a New Task
+          &#9166; Enter Adds a New Task
         </div>
 
         <div className="project-help-text">
-          Delete Removes an Empty Task
+          &#9003; Delete Removes an Empty Task
+        </div>
+
+        <div className="project-help-text">
+          Saving Changes is Automatic
         </div>
 
 
