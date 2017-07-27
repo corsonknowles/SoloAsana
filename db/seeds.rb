@@ -13,7 +13,7 @@ Project.destroy_all
 Task.destroy_all
 User.destroy_all
 
-myUser = User.create!(email: "awesome.user@example.com", username:"Awesome User", password: "secure")
+myUser = User.create!(email: "awesome.user@example.com", username:"Robert", password: "secure")
 
 t1 = Team.create!(name: "The A Team", user_id: myUser.id)
 
