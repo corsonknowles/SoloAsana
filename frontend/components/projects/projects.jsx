@@ -125,11 +125,11 @@ class Projects extends React.Component {
         )}
         <div className="spacer"></div>
         <div className="project-help-text">
-          &#9166; Enter Adds a New Task
+          &#9166; Enter Adds a New Project
         </div>
 
         <div className="project-help-text">
-          &#9003; Delete Removes an Empty Task
+          &#9003; Delete Removes an Empty Project
         </div>
 
         <div className="project-help-text">
