@@ -19,6 +19,8 @@ class Projects extends React.Component {
     // this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
     this.updateEditedProject = this.updateEditedProject.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   componentWillMount () {
@@ -46,7 +48,7 @@ class Projects extends React.Component {
 
   // componentWillUnmount() { this.props.clearErrors()};
 
-  handleKeyPress (projectID) {
+  handleKeyDown (projectID) {
     this.handleChange(projectID);
 
     return (event) => {
@@ -62,16 +64,11 @@ class Projects extends React.Component {
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
       }
-      if (event.key === 'Up' || event.charCode === 38) {
-        document.getElementById(parseInt(projectID) - 1).focus();
-        document.getElementById(parseInt(projectID) - 1).select();
-      }
-      if (event.key === 'Down' || event.charCode === 40) {
-        document.getElementById(parseInt(projectID) + 1).focus();
-        document.getElementById(parseInt(projectID) + 1).select();
-      }
-
     }
+  }
+
+  handleKeyUp () {
+
   }
 
   handleChange(projectID) {
@@ -85,6 +82,10 @@ class Projects extends React.Component {
       newState.projects[projectID].name = event.target.value;
       this.updateEditedProject(projectID, event.target.value);
     }
+  }
+
+  handleKeyPress () {
+    console.log("handleKeyDown is not in use");
   }
 
   updateEditedProject(projectID, value) {
@@ -121,7 +122,8 @@ class Projects extends React.Component {
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
               placeholder="Name your new project here"
-              onKeyDown={this.handleKeyPress(projectID)}
+              onKeyDown={this.handleKeyDown(projectID)}
+              onKeyUp={this.handleKeyUp(projectID)}
             />
         </NavLink>
 

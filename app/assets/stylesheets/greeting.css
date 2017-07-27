@@ -32,7 +32,7 @@ a {
 }
 
 .check-icon {
-  
+
 }
 
 .tasks-item-row {
@@ -74,6 +74,7 @@ a {
 }
 
 section {
+  text-decoration: none;
   background: #151b26;
   width: 270px;
   height: 100vh;
@@ -105,6 +106,7 @@ section {
 }
 
 .sidebar-container {
+  text-decoration: none;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,6 +116,7 @@ section {
 }
 
 .sidebar-item-row {
+  text-decoration: none;
   box-sizing: border-box;
   margin: 0;
   /*padding-left: 25px;*/
@@ -143,6 +146,10 @@ section {
   transition: all .15s ease-in-out;
   background: #14aaf5;
   color: white;
+}
+
+.sidebar-item-row:focus {
+    outline:none;
 }
 
 .sidebar-item-row:hover::placeholder {
