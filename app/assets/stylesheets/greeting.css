@@ -1,3 +1,9 @@
+Navlink, a {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .one-page-app {
   display: flex;
   flex-direction: row;
@@ -49,6 +55,14 @@ section {
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
 }
 
 .sidebar-item-row {

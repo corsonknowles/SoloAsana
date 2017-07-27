@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 // import { ProjectItem } from './project_item';
 // import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
@@ -108,8 +108,9 @@ class Projects extends React.Component {
     //write a selector to return dummy strings
 
     return (
-      <div>
+      <div className="sidebar-container">
         {Object.keys(this.props.projects).map( (projectID) => (
+          <NavLink className="sidebar-item-row" to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
               name={projectID}
@@ -121,8 +122,11 @@ class Projects extends React.Component {
               placeholder="Name your new project here"
               onKeyDown={this.handleKeyPress(projectID)}
             />
+        </NavLink>
+
           )
         )}
+
         <div className="spacer"></div>
         <div className="project-help-text">
           &#9166; Enter Adds a New Project
@@ -141,4 +145,4 @@ class Projects extends React.Component {
   )}
 
 }
-export default Projects;
+export default withRouter(Projects);

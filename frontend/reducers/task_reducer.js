@@ -18,23 +18,16 @@ const TaskReducer = function(state = {}, action){
       newState = {};
       action.tasks.forEach(task => newState[task.id] = task);
       return newState;
-        // tasks: action.tasks,
-        // errors: []
     case RECEIVE_TASK:
+      console.log(action.task);
+
       newState = merge({}, state, { [action.task.id]: action.task });
+
       return newState;
     case DELETE_TASK:
       nextState = merge({}, state);
       delete nextState[action.id];
       return nextState;
-    case RECEIVE_ERRORS:
-      const errors = {errors: action.errors};
-      newState = merge({}, state, errors);
-      return newState;
-    case CLEAR_ERRORS:
-      newState = merge({}, state);
-      newState.errors = [];
-      return newState;
     case RECEIVE_LOGOUT_SUCCESS:
       newState = {};
       return newState;

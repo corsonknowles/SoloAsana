@@ -65,11 +65,4 @@ ActiveRecord::Schema.define(version: 20170718161915) do
     t.index ["email"], name: "index_users_on_email"
   end
 
-  add_foreign_key "projects", "teams"
-  add_foreign_key "projects", "users"
-  add_foreign_key "tasks", "projects"
-  add_foreign_key "tasks", "tasks"
-  add_foreign_key "tasks", "teams"
-  add_foreign_key "tasks", "users"
-  add_foreign_key "teams", "users"
 end

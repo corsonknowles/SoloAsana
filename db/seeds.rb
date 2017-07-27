@@ -11,9 +11,18 @@
 Team.destroy_all
 Project.destroy_all
 Task.destroy_all
+User.destroy_all
 
-Team.create!(name: "The A Team", user_id: 1)
-Project.create!(name: "It's alive!", team_id: 1, user_id: 1)
-Project.create!(name: "This is amazing!", team_id: 1, user_id: 1)
-Project.create!(name: "Project 3 is the Charm", team_id: 1, user_id: 1)
-Task.create!(title: "Test the test-making test tasks", body: "Not all who wander", done: false, user_id: 1, project_id: 1, team_id: 1, section: false)
+myUser = User.create!(email: "awesome.user@example.com", username:"Awesome User", password: "secure")
+
+t1 = Team.create!(name: "The A Team", user_id: myUser.id)
+
+
+
+p1 = Project.create!(name: "It's alive!", team_id: t1.id, user_id: myUser.id)
+p2 = Project.create!(name: "This is amazing!", team_id: t1.id, user_id: myUser.id)
+p3 = Project.create!(name: "Project 3 is the Charm", team_id: t1.id, user_id: myUser.id)
+
+task1 = Task.create!(title: "Test the test-making test tasks", body: "Not all who wander", done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
+task2 = Task.create!(title: "Test the test-making test tasks", body: "Not all who wander", done: false, user_id: myUser.id, project_id: p2.id, team_id: t1.id, section: false)
+task3 = Task.create!(title: "Test the test-making test tasks", body: "Not all who wander", done: false, user_id: myUser.id, project_id: p3.id, team_id: t1.id, section: false)

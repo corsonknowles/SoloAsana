@@ -21,8 +21,12 @@ class Tasks extends React.Component {
     }
 
     componentWillMount () {
-      projectID = this.props.params.match.id
-      this.props.fetchTasks(projectID).then( () => {
+      console.log(this.props);
+      console.log(this.props.match.params.id);
+      let projectID = parseInt(this.props.match.params.id);
+
+      if (projectID) {
+        this.props.fetchTasks(projectID).then( () => {
 
         if (Object.keys(this.props.tasks).length === 0) {
 
@@ -35,6 +39,7 @@ class Tasks extends React.Component {
           this.props.createTask(mustHaveTask);
         }
       });
+    }
     }
 
     componentWillReceiveProps (nextProps) {
@@ -112,10 +117,10 @@ class Tasks extends React.Component {
           {Object.keys(this.props.tasks).map( (taskID) => (
               <input
                 type="text"
-                name={taskID}
-                key={taskID}
+                name={`task${taskID}`}
+                key={`task${taskID}`}
                 value={this.props.tasks[taskID].name ? this.props.tasks[taskID].name : ""}
-                onChange={this.handleChange(taskID)}
+                onChange={this.handleChange(`task${taskID}`)}
                 className="tasks-item-row"
                 placeholder=""
                 onKeyDown={this.handleKeyPress(taskID)}

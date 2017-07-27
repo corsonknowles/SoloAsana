@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { createTask, destroyTask, fetchTask, fetchTasks, updateTask, receiveErrors, clearErrors } from '../../actions/tasks_actions';
 import Tasks from './tasks';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   currentUser: state.session.currentUser,
   tasks: state.tasks
 });
@@ -17,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Tasks);
+)(Tasks))

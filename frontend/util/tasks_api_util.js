@@ -17,12 +17,20 @@ export const updateTask = task => {
 };
 
 // plural
-export const fetchTasks = projectID => (
-  $.ajax({
+export const fetchTasks = projectID => {
+  return $.ajax({
     method: 'GET',
-    url: `api/projects/${projectID}/tasks`
-  })
-);
+    url: `api/tasks/`,
+    data: { id: projectID }
+  });
+};
+
+export const fetchTasksByProject = projectID => {
+  return $.ajax({
+    method: 'GET',
+    url: `api/projects/${projectID}`
+  });
+};
 
 // singular
 export const fetchTask = id => (

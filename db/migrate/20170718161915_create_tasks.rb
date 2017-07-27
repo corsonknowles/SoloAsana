@@ -5,11 +5,11 @@ class CreateTasks < ActiveRecord::Migration[5.1]
       t.text :body
       t.integer :due
       t.boolean :done
-      t.references :user, foreign_key: true, index: true
-      t.references :project, foreign_key: true, index: true
-      t.references :team, foreign_key: true, index: true
+      t.references :user, index: true
+      t.references :project, index: true
+      t.references :team, index: true
       t.boolean :section
-      t.references :task, foreign_key: true, index: true
+      t.references :task, index: true
 
       t.timestamps
     end
