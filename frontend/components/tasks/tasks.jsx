@@ -16,8 +16,8 @@ class Tasks extends React.Component {
 
       this.handleChange = this.handleChange.bind(this);
 
-      this.updateEditedTask = this.updateEditedTask.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
+
     }
 
     componentWillMount () {
@@ -87,22 +87,28 @@ class Tasks extends React.Component {
 
     handleChange(taskID) {
 
+
       return (event) => {
-        let id = parseInt(taskID.slice(4))
-        console.log("Thisi is taskID", id);
-        this.updateEditedTask(id, event.target.value);
+        const value = event.target.value;
+
+        const newState = merge({}, this.state);
+        let projectID = parseInt(this.props.match.params.id);
+        newState.tasks[taskID] = {
+          team_id: 1,
+          project_id: projectID,
+          user_id: this.currentUser.id,
+          done: false,
+          section: false
+        }
+
+        newState.tasks[taskID].title = value;
+        this.setState(newState);
+
+        const task = this.props.tasks[taskID];
+        task.title = value;
+
+        this.props.updateTask(task)
       }
-    }
-
-    updateEditedTask(taskID, value) {
-      let task = this.props.tasks[taskID];
-      task.title = value;
-
-      let newState = merge({}, this.state);
-      newState.tasks[taskID].title = value;
-      this.setState(newState);
-
-      this.props.updateTask(task);
     }
 
     renderErrors(){
@@ -133,7 +139,7 @@ class Tasks extends React.Component {
                 id={`task${taskID}`}
                 key={`task${taskID}`}
                 value={this.props.tasks[taskID].title ? this.props.tasks[taskID].title : ""}
-                onChange={this.handleChange(`task${taskID}`)}
+                onChange={this.handleChange(taskID)}
                 className="tasks-item-row"
                 placeholder="Enter your new task here"
                 onKeyDown={this.handleKeyPress(taskID)}

@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link, NavLink, withRouter } from 'react-router-dom';
-// import { ProjectItem } from './project_item';
-// import debounce from 'lodash/debounce';
 import merge from 'lodash/merge';
 
 class Projects extends React.Component {
@@ -16,14 +14,8 @@ class Projects extends React.Component {
     }
 
     this.currentUser = this.props.currentUser;
-
     this.handleChange = this.handleChange.bind(this);
-    // this.updateEditedProject = debounce(this.updateEditedProject, 500).bind(this);
-    this.updateEditedProject = this.updateEditedProject.bind(this);
-    this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
-    this.handleKeyUp = this.handleKeyUp.bind(this);
-
     this.newProject = {
       name: "",
       team_id: 1,
@@ -48,10 +40,9 @@ class Projects extends React.Component {
     }
   }
 
-  // componentWillUnmount() { this.props.clearErrors()};
 
   handleKeyDown (projectID) {
-    // this.handleChange(projectID);
+    this.handleChange(projectID);
 
     return (event) => {
       const { cursor, result } = this.state;
@@ -63,9 +54,7 @@ class Projects extends React.Component {
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
-      }
-      // arrow up/down button should select next/previous list element
-      if (event.keyCode === 38 && cursor > 0) {
+      } else if (event.keyCode === 38 && cursor > 0) {
         this.setState( prevState => ({
           cursor: prevState.cursor - 1
         }))
@@ -77,35 +66,25 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyUp () {
-
-  }
 
   handleChange(projectID) {
     return (event) => {
-      // event.preventDefault();
+      const value = event.target.value
 
-      // const newState = merge({}, this.state);
+      const project = this.props.projects[projectID];
+      project.name = value;
 
-      // newState.projects[projectID].name = event.target.value;
+      const newState = merge({}, this.state);
+      newState.projects[projectID] = {
+        team_id: 1,
+        user_id: this.currentUser.id
+      }
+      newState.projects[projectID].name = value;
+      this.setState(newState);
 
-      this.updateEditedProject(projectID, event.target.value);
+      this.props.updateProject(project);
+
     }
-  }
-
-  handleKeyPress () {
-    console.log("handleKeyDown is not in use");
-  }
-
-  updateEditedProject(projectID, value) {
-    let project = this.props.projects[projectID];
-    project.name = value;
-    
-    let newState = merge({}, this.state);
-    newState.projects[projectID].name = value;
-    this.setState(newState);
-
-    this.props.updateProject(project);
   }
 
   renderErrors(){
@@ -121,7 +100,6 @@ class Projects extends React.Component {
   }
 
   render() {
-    //write a selector to return dummy strings
     const { cursor } = this.state
     return (
       <div className="sidebar-container">
@@ -132,12 +110,11 @@ class Projects extends React.Component {
               name={projectID}
               key={projectID}
               id={projectID}
-              value={this.props.projects[projectID].name ? this.props.projects[projectID].name : ""}
+              value={this.props.projects[projectID].name}
               onChange={this.handleChange(projectID)}
               className="sidebar-item-row"
               placeholder="_________________________"
               onKeyDown={this.handleKeyDown(projectID)}
-              onKeyUp={this.handleKeyUp(projectID)}
             />
         </NavLink>
 

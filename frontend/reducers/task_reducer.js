@@ -31,9 +31,9 @@ const TaskReducer = function(state = {}, action){
 
       return newState;
     case DELETE_TASK:
-      nextState = merge({}, state);
-      delete nextState[action.id];
-      return nextState;
+      newState = merge({}, state);
+      delete newState[action.id];
+      return newState;
     case RECEIVE_LOGOUT_SUCCESS:
       newState = {};
       return newState;
