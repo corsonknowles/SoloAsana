@@ -35,8 +35,14 @@ class Tasks extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
+      let projectID = parseInt(nextProps.match.params.id);
+
       if (Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
         this.setState( { tasks: nextProps.tasks } )
+      }
+      if (this.props.match.params.id !== nextProps.match.params.id ) {
+        this.props.fetchTasksByProject(projectID)
+
       }
     }
 
@@ -92,7 +98,7 @@ class Tasks extends React.Component {
       return (
 
         <div className="tasks-area">
-            
+
           <div className="tasks-list">
             {Object.keys(this.props.tasks).map( (taskNumber) => (
                 <input
