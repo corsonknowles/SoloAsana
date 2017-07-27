@@ -20,15 +20,11 @@ const TaskReducer = function(state = {}, action){
       action.tasks.forEach(task => newState[task.id] = task);
       return newState;
     case RECEIVE_TASK_BY_PROJECT:
-      console.log("in task project reducer");
       newState = {};
       action.project.tasks.forEach(task => newState[task.id] = task);
       return newState;
     case RECEIVE_TASK:
-      console.log("this is action.task in task reducer", action.task);
-
       newState = merge({}, state, { [action.task.id]: action.task });
-
       return newState;
     case DELETE_TASK:
       newState = merge({}, state);

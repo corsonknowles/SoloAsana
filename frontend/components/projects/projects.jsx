@@ -47,14 +47,13 @@ class Projects extends React.Component {
 
       if (event.key === 'Enter' || event.charCode === 13) {
 
+        // set a new project in the database
         this.props.createProject(this.newProject);
 
+        // set the new project in state
         const newState = merge({}, this.state);
-        newState.projects[projectID] = {
-          team_id: 1,
-          user_id: this.currentUser.id,
-          name: event.target.value
-        }
+        newState.projects[projectID] = this.newProject;
+
         this.setState(newState);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {

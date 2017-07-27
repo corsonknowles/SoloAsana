@@ -11,31 +11,23 @@ class Tasks extends React.Component {
       this.state = {
         tasks: this.props.tasks
       }
-
       this.currentUser = this.props.currentUser;
-
       this.handleChange = this.handleChange.bind(this);
-
       this.handleKeyDown = this.handleKeyDown.bind(this);
-
     }
 
     componentWillMount () {
-
       let projectID = parseInt(this.props.match.params.id);
-      console.log("this is projectID", projectID);
       if (projectID) {
         this.props.fetchTasksByProject(projectID).then( () => {
-
-        if (Object.keys(this.props.tasks).length === 0) {
-
-          const mustHaveTask = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
+          if (Object.keys(this.props.tasks).length === 0) {
+            const mustHaveTask = {
+              title: "",
+              team_id: 1,
+              project_id: projectID,
+              user_id: this.currentUser.id,
+              done: false,
+              section: false
           }
           this.props.createTask(mustHaveTask);
         }
@@ -44,22 +36,17 @@ class Tasks extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
-
       if (Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
         this.setState( { tasks: nextProps.tasks } )
       }
     }
 
-    // componentWillUnmount() { this.props.clearErrors()};
-
     handleKeyDown (taskID) {
-      this.handleChange(taskID)
+      this.handleChange(taskID);
 
       return (event) => {
         let projectID = parseInt(this.props.match.params.id);
-
         if (event.key === 'Enter' || event.charCode === 13) {
-
           let newTask = {
             title: "",
             team_id: 1,
@@ -67,34 +54,18 @@ class Tasks extends React.Component {
             user_id: this.currentUser.id,
             done: false,
             section: false
-
           }
+
+          // push the new task to the database
           this.props.createTask(newTask);
 
-          const value = event.target.value;
-
+          // set the new task to state
           const newState = merge({}, this.state);
-          newState.tasks[taskID] = {
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false,
-            title: value
-          }
-
+          newState.tasks[taskID] = newTask;
           this.setState(newState);
 
         } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
           this.props.destroyTask(taskID);
-        }
-        if (event.key === 'Up' || event.charCode === 38) {
-          document.getElementById(`task${parseInt(taskID) - 1}`).focus();
-          document.getElementById(`task${parseInt(taskID) - 1}`).select();
-        }
-        if (event.key === 'Down' || event.charCode === 40) {
-          document.getElementById(`task${parseInt(taskID) + 1}`).focus();
-          document.getElementById(`task${parseInt(taskID) + 1}`).select();
         }
 
       }
