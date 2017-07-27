@@ -138,7 +138,7 @@ class Tasks extends React.Component {
                 name={`task${taskID}`}
                 id={`task${taskID}`}
                 key={`task${taskID}`}
-                value={this.props.tasks[taskID].title ? this.props.tasks[taskID].title : ""}
+                value={this.props.tasks[taskID].title}
                 onChange={this.handleChange(taskID)}
                 className="tasks-item-row"
                 placeholder="Enter your new task here"
