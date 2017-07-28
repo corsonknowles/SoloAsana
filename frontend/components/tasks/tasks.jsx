@@ -48,12 +48,11 @@ class Tasks extends React.Component {
 
     handleKeyDown (taskID) {
       return (event) => {
-        const value = event.target.value;
-        const task = this.props.tasks[taskID];
+        let value = event.target.value;
+        let task = this.props.tasks[taskID];
         task.title = value;
 
         this.props.updateTask(task)
-
 
         let projectID = parseInt(this.props.match.params.id);
         if (event.key === 'Enter' || event.charCode === 13) {
@@ -70,7 +69,7 @@ class Tasks extends React.Component {
           this.props.createTask(newTask);
 
           // set the new task to state
-          const newState = merge({}, this.state);
+          let newState = merge({}, this.state);
           newState.tasks[taskID] = newTask;
           this.setState(newState);
 
@@ -78,18 +77,6 @@ class Tasks extends React.Component {
           this.props.destroyTask(taskID);
         }
       }
-    }
-
-    renderErrors(){
-      return(
-        <ul className="errors">
-          {this.props.errors.map( (error, i) => (
-            <li className="eachError" key={`error-${i}`}>
-              {error}
-            </li>
-          ))}
-        </ul>
-      );
     }
 
     render() {

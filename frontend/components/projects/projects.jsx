@@ -12,15 +12,20 @@ class Projects extends React.Component {
     }
 
     this.currentUser = this.props.currentUser;
-    this.handleChange = this.handleChange.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   componentWillMount () {
+    const newProject = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    }
+    
     this.props.fetchProjects().then( () => {
 
       if (Object.keys(this.props.projects).length === 0) {
-        this.props.createProject(this.newProject);
+        this.props.createProject(newProject);
       }
     });
   }
@@ -30,7 +35,6 @@ class Projects extends React.Component {
       this.setState( { projects: nextProps.projects } )
     }
   }
-
 
   handleKeyDown (projectID) {
 
@@ -61,20 +65,7 @@ class Projects extends React.Component {
     }
   }
 
-  renderErrors(){
-    return(
-      <ul className="errors">
-        {this.props.errors.map( (error, i) => (
-          <li className="eachError" key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   render() {
-    const { cursor } = this.state
     return (
       <div className="sidebar-container">
         {Object.keys(this.props.projects).map( (projectID) => (
