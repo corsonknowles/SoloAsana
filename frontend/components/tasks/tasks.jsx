@@ -46,11 +46,11 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyDown (taskID) {
+    handleKeyDown (taskID, i) {
       return (event) => {
 
         const projectID = parseInt(this.props.match.params.id);
-        if (event.key === 'Enter' || event.charCode === 13) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
           let newTask = {
             title: "",
             team_id: 1,
@@ -73,8 +73,30 @@ class Tasks extends React.Component {
           newState.tasks[taskID] = newTask;
           this.setState(newState);
 
-        } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
+          let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
+          if (itemBelow) {
+            itemBelow.focus();
+            itemBelow.select();
+          }
+
+        } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
           this.props.destroyTask(taskID);
+
+        } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
+          event.preventDefault();
+          let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+          if (previousItem) {
+            previousItem.focus();
+            previousItem.select();
+          }
+        } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+          event.preventDefault();
+          let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+          if (nextItem) {
+            nextItem.focus();
+            nextItem.select();
+          }
+
         } else {
           const value = event.target.value;
           const task = this.props.tasks[taskID];
@@ -90,16 +112,16 @@ class Tasks extends React.Component {
         <div className="tasks-area">
 
           <div className="tasks-list">
-            {Object.keys(this.props.tasks).map( (taskNumber) => (
+            {Object.keys(this.props.tasks).map( (taskNumber, i) => (
                 <input
                   type="text"
                   name={`task${taskNumber}`}
-                  id={`task${taskNumber}`}
+                  id={`task${i}`}
                   key={`task${taskNumber}`}
                   defaultValue={this.props.tasks[taskNumber].title}
                   className="tasks-item-row"
                   placeholder="Enter your new task here"
-                  onKeyDown={this.handleKeyDown(taskNumber)}
+                  onKeyDown={this.handleKeyDown(taskNumber, i)}
                 />
               )
             )}

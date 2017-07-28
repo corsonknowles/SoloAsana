@@ -39,9 +39,10 @@ class Projects extends React.Component {
   handleKeyDown (projectID) {
 
     return (event) => {
+      console.log(event.key);
+      console.log(event.keyCode);
 
-
-      if (event.key === 'Enter' || event.charCode === 13) {
+      if (event.key === 'Enter' || event.keyCode === 13) {
         const value = event.target.value
         const project = this.props.projects[projectID];
         project.name = value;
@@ -60,9 +61,24 @@ class Projects extends React.Component {
         newState.projects[projectID] = newProject;
         this.setState(newState);
 
-      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
+      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
 
+      } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
+        event.preventDefault();
+        let previousItem = document.getElementById(String(parseInt(projectID) - 1))
+        if (previousItem) {
+          previousItem.focus();
+          previousItem.select();
+        }
+
+      } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+        event.preventDefault();
+        let nextItem = document.getElementById(String(parseInt(projectID) + 1))
+        if (nextItem) {
+          nextItem.focus();
+          nextItem.select();
+        }
       } else {
         const value = event.target.value
         const project = this.props.projects[projectID];
