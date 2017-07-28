@@ -3,7 +3,7 @@ Stretch yourself to complete all your tasks!
 
 # Technology Description
 SoloAsana is a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
-SoloAsana delivers a React.js frontend with a Redux framework.
+SoloAsana delivers a React.js frontend using the Redux framework.
 The database fueling all this is PostgreSQL.
 
 ### [Domain: soloasana.com](http://soloasana.com)
@@ -11,15 +11,16 @@ The database fueling all this is PostgreSQL.
 
 # Key Feature Description
 * Tasks
-  - enter to complete
-  - backspace fully to delete
-  - click done: task fades
-  - blank tasks persist until removed
-* Task Details
-  - Description
-  - Change Log - username, string interpolation, timestamp.
-* Due Date
-* Drag and Drop
+  - Hitting enter creates new task
+  - Backspace fully to delete an empty task
+  - Blank tasks persist until removed
+* Projects
+  - Editable and creatable projects
+  - Selecting a project renders its list of associated tasks
+  - Extend the Asana-style user interface to work on projects as well as tasks
+* User profiles
+  - The user profile permits photo uploading
+  - Editable descriptions that save on submit
 
 # Development Timeline
 
