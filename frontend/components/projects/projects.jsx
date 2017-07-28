@@ -21,7 +21,7 @@ class Projects extends React.Component {
       team_id: 1,
       user_id: this.currentUser.id
     }
-    
+
     this.props.fetchProjects().then( () => {
 
       if (Object.keys(this.props.projects).length === 0) {
@@ -39,13 +39,15 @@ class Projects extends React.Component {
   handleKeyDown (projectID) {
 
     return (event) => {
-      const value = event.target.value
-      const project = this.props.projects[projectID];
-      project.name = value;
 
-      this.props.updateProject(project);
 
       if (event.key === 'Enter' || event.charCode === 13) {
+        const value = event.target.value
+        const project = this.props.projects[projectID];
+        project.name = value;
+
+        this.props.updateProject(project);
+
         const newProject = {
           name: "",
           team_id: 1,
@@ -61,6 +63,12 @@ class Projects extends React.Component {
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
         this.props.destroyProject(parseInt(projectID));
 
+      } else {
+        const value = event.target.value
+        const project = this.props.projects[projectID];
+        project.name = value;
+
+        this.props.updateProject(project);
       }
     }
   }

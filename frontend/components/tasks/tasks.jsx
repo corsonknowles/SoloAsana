@@ -48,13 +48,8 @@ class Tasks extends React.Component {
 
     handleKeyDown (taskID) {
       return (event) => {
-        let value = event.target.value;
-        let task = this.props.tasks[taskID];
-        task.title = value;
 
-        this.props.updateTask(task)
-
-        let projectID = parseInt(this.props.match.params.id);
+        const projectID = parseInt(this.props.match.params.id);
         if (event.key === 'Enter' || event.charCode === 13) {
           let newTask = {
             title: "",
@@ -64,17 +59,28 @@ class Tasks extends React.Component {
             done: false,
             section: false
           }
+          const value = event.target.value;
+          const task = this.props.tasks[taskID];
+          task.title = value;
+
+          this.props.updateTask(task)
 
           // push the new task to the database
           this.props.createTask(newTask);
 
           // set the new task to state
-          let newState = merge({}, this.state);
+          const newState = merge({}, this.state);
           newState.tasks[taskID] = newTask;
           this.setState(newState);
 
         } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
           this.props.destroyTask(taskID);
+        } else {
+          const value = event.target.value;
+          const task = this.props.tasks[taskID];
+          task.title = value;
+
+          this.props.updateTask(task)
         }
       }
     }
