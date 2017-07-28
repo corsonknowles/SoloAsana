@@ -26,15 +26,15 @@ The database fueling all this is PostgreSQL.
   - Each user profile has editable description fields that save only on submit
 
 
-### How It Works
+## How It Works
 
   SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the auth form and logs the guest user directly into the site.
 
   Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool, selecting any list will render the associated tasks and allow the user to add, edit and delete tasks from the list.
 
-### Cool Tech Included Within
+## Cool Tech Included Within
 
-#### Slick CSS: Removing Overdragging and Bounce effects from OSX
+### Slick CSS: Removing Overdragging and Bounce effects from OSX
 These simple lines of CSS allow SoloAsana to render as fixed site within the browser window. While the bounce effect that occurs when you overscroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering that Asana also employs.
 
 ```
@@ -50,7 +50,7 @@ body {
 ```
 
 
-#### Rockin Javascript (ES6)
+### Rockin Javascript (ES6)
 
 I used React's synthetic event handlers to allow custom behavior for the enter and delete keys and the up and down arrows. Let's look at a detailed example.
 This code allows you to move up and down a list of tasks, without generating any errors at the beginning or end of the list where there is no where to move to. It overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, they will take the user to the next item in the list, making the To Do editor much more like a text editor in the browser.
@@ -82,7 +82,7 @@ render () {
 
 Movement between projects was handled similarly, using a different set of unique ID's.
 
-#### Showing off HTML5 for Better User Experience
+### Showing off HTML5 for Better User Experience
 
 Solo allows the user to both edit a project by selecting it and navigate to the enclosed tasks for that project at the same time. I accomplished this by simply wrapping the React NavLinks around customized input fields. In order to preserve the standard flow of user navigation with the Tab key to switch between fields, I set:
 ```
@@ -91,9 +91,8 @@ tabIndex="-1"
 
 which is the React version of the HTML5 tabindex attribute. This skips over the enclosing links and lets the cursor arrive at the next input field, as would generally be expected.
 
-####
-
-And more! Here are a few other features I enjoyed:
+### And more from React and Redux! 
+Here are a few other features I enjoyed:
 
 * React Controlled Forms: allowing rapid updating between the database and the user, allowing for rapid saving of each new character as its entered
 * Authenticated routes: taking the one-page-app to its logical conclusion, this renders just a logged out page and a logged in page. Once the user is logged in, all the content of the app can be served to them from one page using conditionally rendered React Components which appear and disappear based on the route showing in the URL -- no new page load or refresh is ever required, as content arrives and departs from the page as it's called for.
