@@ -6,9 +6,12 @@
 
 [heroku]: http://soloasana.herokuapp.com
 
-SoloAsana is a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
+SoloAsana is a lean, sleek task management app.
+It began as a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
 SoloAsana delivers a React.js frontend using the Redux framework.
 The database fueling all this is PostgreSQL.
+
+![Solo Home Page](docs/Screenshots/Solo_Home_Page.png)
 
 ## Major Features
 
@@ -25,12 +28,13 @@ The database fueling all this is PostgreSQL.
   - This is rendered through an awesome modal-within-a-modal interface, that loads seamlessly for the user
   - Each user profile has editable description fields that save only on submit
 
+![Solo Projects](docs/Screenshots/Solo_Projects.png)
 
 ## How It Works
 
   SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the auth form and logs the guest user directly into the site.
 
-  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool, selecting any list will render the associated tasks and allow the user to add, edit and delete tasks from the list.
+  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool, selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
 
 ## Cool Tech Included Within
 
@@ -103,6 +107,8 @@ Here are a few other features I enjoyed:
 * React Controlled Forms: allowing rapid updating between the database and the user, allowing for rapid saving of each new character as its entered
 * Authenticated routes: taking the one-page-app to its logical conclusion, this renders just a logged out page and a logged in page. Once the user is logged in, all the content of the app can be served to them from one page using conditionally rendered React Components which appear and disappear based on the route showing in the URL -- no new page load or refresh is ever required, as content arrives and departs from the page as it's called for.
 * React style key listeners: The up and down arrows weren't the only user inputs to get custom styling. The enter key was also attached to the React event listener onKeyDown, allowing it to create a new task on demand for the user. The delete key was similarly enhanced. Wrapping it in a little logic to detect an empty input field, it will only delete a field from the interface (and the database, simultaneously) when all of the content has first been removed from that field. Hit delete again on an empty field and it all goes away.
+
+![Solo Profile Page](docs/Screenshots/Solo_Profile_Page.png)
 
 ## Onwards to the Future!
 
