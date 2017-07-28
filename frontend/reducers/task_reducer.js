@@ -4,7 +4,7 @@ import {
   DELETE_TASK,
   RECEIVE_ERRORS,
   CLEAR_ERRORS,
-  RECEIVE_TASK_BY_PROJECT
+  RECEIVE_TASKS_BY_PROJECT
 
   } from '../actions/tasks_actions';
 import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
@@ -19,7 +19,7 @@ const TaskReducer = function(state = {}, action){
       newState = {};
       action.tasks.forEach(task => newState[task.id] = task);
       return newState;
-    case RECEIVE_TASK_BY_PROJECT:
+    case RECEIVE_TASKS_BY_PROJECT:
       newState = {};
       action.project.tasks.forEach(task => newState[task.id] = task);
       return newState;

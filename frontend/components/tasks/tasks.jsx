@@ -94,15 +94,14 @@ class Tasks extends React.Component {
           }
 
           // push the new task to the database
-          this.props.createTask(newTask);
-
-          // set the new task to state
-
-          const newState = merge({}, this.state);
-          console.log(newState);
-          newState.tasks[taskID] = newTask;
-          console.log("newState with newTask merged in at TaskID variable", newState);
-          this.setState(newState);
+          this.props.createTask(newTask).then (
+            (createdTask) => {
+              // set the new task to state
+              const newState = merge({}, this.state);
+              newState.tasks[createdTask.id] = mustHaveTask;
+              this.setState(newState);
+            }
+          )
 
           let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
           if (itemBelow) {

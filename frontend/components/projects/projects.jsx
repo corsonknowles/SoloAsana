@@ -25,7 +25,17 @@ class Projects extends React.Component {
     this.props.fetchProjects().then( () => {
 
       if (Object.keys(this.props.projects).length === 0) {
-        this.props.createProject(newProject);
+        this.props.createProject(newProject).then (
+          (createdTask) => {
+            // set the new task to state
+            const newState = merge({}, this.state);
+            newState.tasks[createdTask.id] = mustHaveTask;
+            this.setState(newState);
+          }
+        )
+
+
+
       }
     });
   }
@@ -58,7 +68,7 @@ class Projects extends React.Component {
             newState.projects[createdProject.id] = createdProject;
             this.setState(newState);
 
-          }  
+          }
         )
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {

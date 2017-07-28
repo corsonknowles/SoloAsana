@@ -5,7 +5,7 @@ export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
-export const RECEIVE_TASK_BY_PROJECT = "RECEIVE_TASK_BY_PROJECT";
+export const RECEIVE_TASKS_BY_PROJECT = "RECEIVE_TASKS_BY_PROJECT";
 
 // sync actions
 export const receiveTasks = tasks => ({
@@ -19,7 +19,7 @@ export const receiveTask = task => ({
 });
 
 export const receiveTasksByProject = project => ({
-  type: RECEIVE_TASK_BY_PROJECT,
+  type: RECEIVE_TASKS_BY_PROJECT,
   project
 })
 
