@@ -65,7 +65,7 @@ class Tasks extends React.Component {
               done: false,
               section: false
           }
-            
+
             this.props.createTask(mustHaveTask2).then (
               (createdTask) => {
                 // set the new task to state
@@ -150,7 +150,6 @@ class Tasks extends React.Component {
     }
 
     render() {
-      console.log(this.props.tasks, "in render");
       return (
         <div className="tasks-area">
 
