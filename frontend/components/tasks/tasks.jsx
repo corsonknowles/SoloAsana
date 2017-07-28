@@ -17,7 +17,6 @@ class Tasks extends React.Component {
 
     componentWillMount () {
       let projectID;
-      console.log(this.props.match);
       if (this.props.match.params.id) {
         projectID = parseInt(this.props.match.params.id);
         this.props.fetchTasksByProject(projectID).then( () => {
@@ -55,12 +54,8 @@ class Tasks extends React.Component {
       }
 
       if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
-        console.log("did we change routes?");
         this.props.fetchTasksByProject(projectID).then( (tasks) => {
-          console.log("this is a string");
-          console.log(Object.keys(tasks).length);
-          console.log(this.props.tasks);
-          console.log(nextProps.tasks);
+
           if (Object.keys(tasks).length === 0) {
             const mustHaveTask2 = {
               title: "",
@@ -70,7 +65,7 @@ class Tasks extends React.Component {
               done: false,
               section: false
           }
-            console.log("hello");
+            
             this.props.createTask(mustHaveTask2).then (
               (createdTask) => {
                 // set the new task to state
