@@ -28,7 +28,14 @@ class Tasks extends React.Component {
               done: false,
               section: false
           }
-          this.props.createTask(mustHaveTask);
+          this.props.createTask(mustHaveTask).then (
+            (createdTask) => {
+              // set the new task to state
+              const newState = merge({}, this.state);
+              newState.tasks[createdTask.id] = createdTask;
+              this.setState(newState);
+            }
+          )
         }
       });
     }
@@ -41,7 +48,27 @@ class Tasks extends React.Component {
         this.setState( { tasks: nextProps.tasks } )
       }
       if (this.props.match.params.id !== nextProps.match.params.id ) {
-        this.props.fetchTasksByProject(projectID)
+        this.props.fetchTasksByProject(projectID).then( (tasks) => {
+          if (Object.keys(tasks).length === 0) {
+            const mustHaveTask = {
+              title: "",
+              team_id: 1,
+              project_id: projectID,
+              user_id: this.currentUser.id,
+              done: false,
+              section: false
+          }
+          this.props.createTask(mustHaveTask).then (
+            (createdTask) => {
+              // set the new task to state
+              const newState = merge({}, this.state);
+              newState.tasks[createdTask.id] = mustHaveTask;
+              this.setState(newState);
+            }
+          )
+
+        }
+      });
 
       }
     }
@@ -70,8 +97,11 @@ class Tasks extends React.Component {
           this.props.createTask(newTask);
 
           // set the new task to state
+
           const newState = merge({}, this.state);
+          console.log(newState);
           newState.tasks[taskID] = newTask;
+          console.log("newState with newTask merged in at TaskID variable", newState);
           this.setState(newState);
 
           let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);

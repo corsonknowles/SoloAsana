@@ -52,23 +52,14 @@ class Projects extends React.Component {
           user_id: this.currentUser.id
         }
         // set a new project in the database
-        this.props.createProject(newProject).then ( () =>
-        {
-          const mustHaveTask = {
-            title: "",
-            team_id: 1,
-            project_id: newProject.id,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
-        }
-        this.props.createTask(mustHaveTask);
-        })
+        this.props.createProject(newProject).then (
+          (createdProject) => {
+            const newState = merge({}, this.state);
+            newState.projects[createdProject.id] = createdProject;
+            this.setState(newState);
 
-        // set the new project in state
-        const newState = merge({}, this.state);
-        newState.projects[projectID] = newProject;
-        this.setState(newState);
+          }  
+        )
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
 
