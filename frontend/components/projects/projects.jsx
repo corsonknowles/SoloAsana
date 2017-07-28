@@ -39,14 +39,11 @@ class Projects extends React.Component {
   handleKeyDown (projectID) {
 
     return (event) => {
-      console.log(event.key);
-      console.log(event.keyCode);
+      const value = event.target.value
+      const project = this.props.projects[projectID];
+      project.name = value;
 
       if (event.key === 'Enter' || event.keyCode === 13) {
-        const value = event.target.value
-        const project = this.props.projects[projectID];
-        project.name = value;
-
         this.props.updateProject(project);
 
         const newProject = {
@@ -81,10 +78,6 @@ class Projects extends React.Component {
           nextItem.select();
         }
       } else {
-        const value = event.target.value
-        const project = this.props.projects[projectID];
-        project.name = value;
-
         this.props.updateProject(project);
       }
     }

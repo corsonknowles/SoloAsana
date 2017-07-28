@@ -50,7 +50,13 @@ class Tasks extends React.Component {
       return (event) => {
 
         const projectID = parseInt(this.props.match.params.id);
+        const value = event.target.value;
+        const task = this.props.tasks[taskID];
+        task.title = value;
+
         if (event.key === 'Enter' || event.keyCode === 13) {
+          this.props.updateTask(task)
+
           let newTask = {
             title: "",
             team_id: 1,
@@ -59,11 +65,6 @@ class Tasks extends React.Component {
             done: false,
             section: false
           }
-          const value = event.target.value;
-          const task = this.props.tasks[taskID];
-          task.title = value;
-
-          this.props.updateTask(task)
 
           // push the new task to the database
           this.props.createTask(newTask);
@@ -98,10 +99,6 @@ class Tasks extends React.Component {
           }
 
         } else {
-          const value = event.target.value;
-          const task = this.props.tasks[taskID];
-          task.title = value;
-
           this.props.updateTask(task)
         }
       }
