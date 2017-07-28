@@ -26,14 +26,6 @@ const ProjectReducer = function(state = {}, action){
       newState = merge({}, state);
       delete newState[action.id];
       return newState;
-    case RECEIVE_ERRORS:
-      const errors = {errors: action.errors};
-      newState = merge({}, state, errors);
-      return newState;
-    case CLEAR_ERRORS:
-      newState = merge({}, state);
-      newState.errors = [];
-      return newState;
     case RECEIVE_LOGOUT_SUCCESS:
       newState = {};
       return newState;

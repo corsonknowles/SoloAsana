@@ -13,13 +13,13 @@ Project.destroy_all
 Task.destroy_all
 User.destroy_all
 
-myUser = User.create!(email: "awesome.user@example.com", username:"Robert", password: "secure")
+myUser = User.create!(email: "awesome.user@example.com", username:"Robert", password: "secure", photo: "https://res.cloudinary.com/cloudfunded/image/upload/v1501203375/hetwrlqq3rw3udsygkat.jpg")
 
 t1 = Team.create!(name: "The A Team", user_id: myUser.id)
 
 p1 = Project.create!(name: "San Francisco Daily Life", team_id: t1.id, user_id: myUser.id)
 
-task1 = Task.create!(title: "Walk my best friend/'s corgi in Golden Gate Park", body: "", done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
+task1 = Task.create!(title: "Walk my best friend's corgi in Golden Gate Park", body: "", done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
 task2 = Task.create!(title: 'Pick up lunch from MealPal', body: '', done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
 task3 = Task.create!(title: 'LYFT to the MoMA', body: '', done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
 task4 = Task.create!(title: 'Kitesurf in the bay. Fall over. Get back up again. Fall over.', body: '', done: false, user_id: myUser.id, project_id: p1.id, team_id: t1.id, section: false)
