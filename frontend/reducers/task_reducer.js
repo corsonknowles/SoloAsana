@@ -24,7 +24,9 @@ const TaskReducer = function(state = {}, action){
       action.project.tasks.forEach(task => newState[task.id] = task);
       return newState;
     case RECEIVE_TASK:
-      newState = merge({}, state, { [action.task.id]: action.task });
+      newState = merge({}, state);
+      newState[action.task.id] = action.task;
+      console.log("this is newState in RECEIVE_TASK",newState);
       return newState;
     case DELETE_TASK:
       newState = merge({}, state);

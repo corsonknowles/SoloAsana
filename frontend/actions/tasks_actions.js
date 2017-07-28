@@ -39,14 +39,15 @@ export const clearErrors = () => ({
 
 // async actions
 
-export const createTask = task => dispatch => (
-  TASKS.createTask(task)
+export const createTask = task => dispatch => {
+  return (TASKS.createTask(task)
     .then(newTask => {
+      console.log("this is newTask in task creater callback", newTask);
       dispatch(receiveTask(newTask));
       return newTask;
-    }, error => dispatch(receiveErrors(error.responseJSON))
+    }
   )
-);
+)};
 
 export const updateTask = task => dispatch => {
   return TASKS.updateTask(task)

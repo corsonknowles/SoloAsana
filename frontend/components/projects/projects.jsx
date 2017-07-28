@@ -64,6 +64,7 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject).then (
           (createdProject) => {
+            console.log("this is createdProject", createdProject);
             const newState = merge({}, this.state);
             newState.projects[createdProject.id] = createdProject;
             this.setState(newState);

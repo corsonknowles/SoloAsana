@@ -98,7 +98,7 @@ class Tasks extends React.Component {
             (createdTask) => {
               // set the new task to state
               const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = mustHaveTask;
+              newState.tasks[createdTask.id] = createdTask;
               this.setState(newState);
             }
           )
