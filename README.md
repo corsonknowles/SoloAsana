@@ -72,6 +72,7 @@ render () {
     {Object.keys(this.props.tasks).map( (taskNumber, i) => (
         <input
         id={`task${i}`}
+        defaultValue={this.props.projects[projectID].name}
 
         ...
         />
@@ -80,7 +81,7 @@ render () {
 }
 ```
 
-Movement between projects was handled similarly, using a different set of unique ID's.
+Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old javascript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array from the database or transforming it before rendering. 
 
 ### Showing off HTML5 for Better User Experience
 
@@ -91,7 +92,7 @@ tabIndex="-1"
 
 which is the React version of the HTML5 tabindex attribute. This skips over the enclosing links and lets the cursor arrive at the next input field, as would generally be expected.
 
-### And more from React and Redux! 
+### And more from React and Redux!
 Here are a few other features I enjoyed:
 
 * React Controlled Forms: allowing rapid updating between the database and the user, allowing for rapid saving of each new character as its entered

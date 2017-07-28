@@ -62,6 +62,7 @@ class Projects extends React.Component {
         this.setState(newState);
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
+
         this.props.destroyProject(parseInt(projectID));
 
       } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
