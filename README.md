@@ -28,7 +28,7 @@ The database fueling all this is PostgreSQL.
   - This is rendered through an awesome modal-within-a-modal interface, that loads seamlessly for the user
   - Each user profile has editable description fields that save only on submit
 
-![Solo Projects](docs/Screenshots/Solo_Projects.png)
+![Solo Profile Page](docs/Screenshots/Solo_Profile_Page.png)
 
 ## How It Works
 
@@ -108,7 +108,7 @@ Here are a few other features I enjoyed:
 * Authenticated routes: taking the one-page-app to its logical conclusion, this renders just a logged out page and a logged in page. Once the user is logged in, all the content of the app can be served to them from one page using conditionally rendered React Components which appear and disappear based on the route showing in the URL -- no new page load or refresh is ever required, as content arrives and departs from the page as it's called for.
 * React style key listeners: The up and down arrows weren't the only user inputs to get custom styling. The enter key was also attached to the React event listener onKeyDown, allowing it to create a new task on demand for the user. The delete key was similarly enhanced. Wrapping it in a little logic to detect an empty input field, it will only delete a field from the interface (and the database, simultaneously) when all of the content has first been removed from that field. Hit delete again on an empty field and it all goes away.
 
-![Solo Profile Page](docs/Screenshots/Solo_Profile_Page.png)
+![Solo Projects](docs/Screenshots/Solo_Projects.png)
 
 ## Onwards to the Future!
 
