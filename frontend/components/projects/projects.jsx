@@ -25,9 +25,7 @@ class Projects extends React.Component {
     });
   }
 
-
   componentWillReceiveProps (nextProps) {
-
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
     }
@@ -35,50 +33,31 @@ class Projects extends React.Component {
 
 
   handleKeyDown (projectID) {
-    this.handleChange(projectID);
 
-    return (event) => {
-      const { cursor, result } = this.state;
-
-      if (event.key === 'Enter' || event.charCode === 13) {
-
-        const newProject = {
-          name: "",
-          team_id: 1,
-          user_id: this.currentUser.id
-        }
-
-        // set a new project in the database
-        this.props.createProject(newProject);
-
-        // set the new project in state
-        const newState = merge({}, this.state);
-        newState.projects[projectID] = newProject;
-
-        this.setState(newState);
-
-      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
-        this.props.destroyProject(parseInt(projectID));
-      } else if (event.keyCode === 38 && cursor > 0) {
-        this.setState( prevState => ({
-          cursor: prevState.cursor - 1
-        }))
-      } else if (event.keyCode === 40 && cursor < result.length - 1) {
-        this.setState( prevState => ({
-          cursor: prevState.cursor + 1
-        }))
-      }
-    }
-  }
-
-
-  handleChange(projectID) {
     return (event) => {
       const value = event.target.value
       const project = this.props.projects[projectID];
       project.name = value;
 
       this.props.updateProject(project);
+
+      if (event.key === 'Enter' || event.charCode === 13) {
+        const newProject = {
+          name: "",
+          team_id: 1,
+          user_id: this.currentUser.id
+        }
+        // set a new project in the database
+        this.props.createProject(newProject);
+        // set the new project in state
+        const newState = merge({}, this.state);
+        newState.projects[projectID] = newProject;
+        this.setState(newState);
+
+      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.charCode === 8 || event.charCode === 46) ) {
+        this.props.destroyProject(parseInt(projectID));
+
+      }
     }
   }
 
@@ -98,8 +77,8 @@ class Projects extends React.Component {
     const { cursor } = this.state
     return (
       <div className="sidebar-container">
-        {Object.keys(this.props.projects).map( (projectID, i) => (
-          <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row ${cursor === i ? 'active' : ''}`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
+        {Object.keys(this.props.projects).map( (projectID) => (
+          <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
               name={projectID}

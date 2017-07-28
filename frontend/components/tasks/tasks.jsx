@@ -93,10 +93,7 @@ class Tasks extends React.Component {
     }
 
     render() {
-      //write a selector to return dummy strings
-
       return (
-
         <div className="tasks-area">
 
           <div className="tasks-list">
@@ -127,7 +124,7 @@ class Tasks extends React.Component {
               </div>
 
           </div>
-          </div>
+        </div>
     )}
   }
 export default Tasks;
