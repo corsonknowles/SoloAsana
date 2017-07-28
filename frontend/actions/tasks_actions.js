@@ -42,7 +42,6 @@ export const clearErrors = () => ({
 export const createTask = task => dispatch => {
   return (TASKS.createTask(task)
     .then(newTask => {
-      console.log("this is newTask in task creater callback", newTask);
       dispatch(receiveTask(newTask));
       return newTask;
     }
@@ -72,7 +71,11 @@ export const fetchTask = id => dispatch => {
 
 export const fetchTasksByProject = projectID => dispatch => {
   return TASKS.fetchTasksByProject(projectID)
-    .then(tasks => dispatch(receiveTasksByProject(tasks))
+    .then(projectwithtasks => {
+      dispatch(receiveTasksByProject(projectwithtasks))
+      return projectwithtasks.tasks;
+    }
+
   )
 };
 

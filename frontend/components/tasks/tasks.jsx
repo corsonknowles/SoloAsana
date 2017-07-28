@@ -16,8 +16,10 @@ class Tasks extends React.Component {
     }
 
     componentWillMount () {
-      let projectID = parseInt(this.props.match.params.id);
-      if (projectID) {
+      let projectID;
+      console.log(this.props.match);
+      if (this.props.match.params.id) {
+        projectID = parseInt(this.props.match.params.id);
         this.props.fetchTasksByProject(projectID).then( () => {
           if (Object.keys(this.props.tasks).length === 0) {
             const mustHaveTask = {
@@ -42,15 +44,25 @@ class Tasks extends React.Component {
     }
 
     componentWillReceiveProps (nextProps) {
-      let projectID = parseInt(nextProps.match.params.id);
 
-      if (Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
+      let projectID;
+      if (nextProps.match.params.id) {
+        projectID = nextProps.match.params.id;
+      }
+
+      if (projectID && Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
         this.setState( { tasks: nextProps.tasks } )
       }
-      if (this.props.match.params.id !== nextProps.match.params.id ) {
+
+      if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
+        console.log("did we change routes?");
         this.props.fetchTasksByProject(projectID).then( (tasks) => {
+          console.log("this is a string");
+          console.log(Object.keys(tasks).length);
+          console.log(this.props.tasks);
+          console.log(nextProps.tasks);
           if (Object.keys(tasks).length === 0) {
-            const mustHaveTask = {
+            const mustHaveTask2 = {
               title: "",
               team_id: 1,
               project_id: projectID,
@@ -58,12 +70,13 @@ class Tasks extends React.Component {
               done: false,
               section: false
           }
-          this.props.createTask(mustHaveTask).then (
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = mustHaveTask;
-              this.setState(newState);
+            console.log("hello");
+            this.props.createTask(mustHaveTask2).then (
+              (createdTask) => {
+                // set the new task to state
+                const newState = merge({}, this.state);
+                newState.tasks[createdTask.id] = mustHaveTask2;
+                this.setState(newState);
             }
           )
 
@@ -72,6 +85,14 @@ class Tasks extends React.Component {
 
       }
     }
+
+
+    // componentDidMount () {
+    //   if (Object.keys(this.props.tasks).length === 0) {
+    //     let projectID = parseInt(this.props.match.params.id);
+    //     this.props.fetchTasksByProject(projectID)
+    //   }
+    // }
 
     handleKeyDown (taskID, i) {
       return (event) => {
@@ -134,6 +155,7 @@ class Tasks extends React.Component {
     }
 
     render() {
+      console.log(this.props.tasks, "in render");
       return (
         <div className="tasks-area">
 

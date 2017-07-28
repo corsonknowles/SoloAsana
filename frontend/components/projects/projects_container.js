@@ -7,6 +7,7 @@ import { createTask } from '../../actions/tasks_actions';
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
   projects: state.projects,
+  tasks: state.tasks
 });
 
 const mapDispatchToProps = dispatch => ({

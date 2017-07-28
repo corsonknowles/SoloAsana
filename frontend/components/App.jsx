@@ -10,7 +10,7 @@ const App = ({currentUser}) => {
   return (
     <Switch>
       <AuthRoute path="/login" component={SessionForm} />
-      <ProtectedRoute path="/projects/:id" component={GreetingContainer} />
+      <ProtectedRoute exact path="/projects/:id" component={GreetingContainer} />
       <ProtectedRoute path="/" component={GreetingContainer} />
     </Switch>
 

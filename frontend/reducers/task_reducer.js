@@ -7,6 +7,7 @@ import {
   RECEIVE_TASKS_BY_PROJECT
 
   } from '../actions/tasks_actions';
+import { CLEAR_TASKS } from '../actions/projects_actions';
 import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
 import merge from 'lodash/merge';
 
@@ -26,7 +27,6 @@ const TaskReducer = function(state = {}, action){
     case RECEIVE_TASK:
       newState = merge({}, state);
       newState[action.task.id] = action.task;
-      console.log("this is newState in RECEIVE_TASK",newState);
       return newState;
     case DELETE_TASK:
       newState = merge({}, state);
@@ -34,6 +34,9 @@ const TaskReducer = function(state = {}, action){
       return newState;
     case RECEIVE_LOGOUT_SUCCESS:
       newState = {};
+      return newState;
+    case CLEAR_TASKS:
+      newState = {}
       return newState;
     default:
       return state;

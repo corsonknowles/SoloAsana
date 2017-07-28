@@ -25,17 +25,7 @@ class Projects extends React.Component {
     this.props.fetchProjects().then( () => {
 
       if (Object.keys(this.props.projects).length === 0) {
-        this.props.createProject(newProject).then (
-          (createdTask) => {
-            // set the new task to state
-            const newState = merge({}, this.state);
-            newState.tasks[createdTask.id] = mustHaveTask;
-            this.setState(newState);
-          }
-        )
-
-
-
+        this.props.createProject(newProject)
       }
     });
   }
@@ -45,6 +35,7 @@ class Projects extends React.Component {
       this.setState( { projects: nextProps.projects } )
     }
   }
+
 
   handleKeyDown (projectID) {
 
@@ -62,19 +53,12 @@ class Projects extends React.Component {
           user_id: this.currentUser.id
         }
         // set a new project in the database
-        this.props.createProject(newProject).then (
-          (createdProject) => {
-            console.log("this is createdProject", createdProject);
-            const newState = merge({}, this.state);
-            newState.projects[createdProject.id] = createdProject;
-            this.setState(newState);
-
-          }
-        )
+        this.props.createProject(newProject)
 
       } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
 
         this.props.destroyProject(parseInt(projectID));
+        this.props.history.push('/');
 
       } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
         event.preventDefault();
