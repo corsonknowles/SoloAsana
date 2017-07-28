@@ -55,7 +55,8 @@ body {
 I used React's synthetic event handlers to allow custom behavior for the enter and delete keys and the up and down arrows. Let's look at a detailed example.
 This code allows you to move up and down a list of tasks, without generating any errors at the beginning or end of the list where there is no where to move to. It overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, they will take the user to the next item in the list, making the To Do editor much more like a text editor in the browser.
 ```
-// look up the potential next item in the list, then only if it exists, focus on and select that element.
+// look up the potential next item in the list
+// then only if it exists, focus on and select that element.
 ...
 } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
   event.preventDefault();
@@ -66,7 +67,11 @@ This code allows you to move up and down a list of tasks, without generating any
   }
 
 // add an iterator (i) to the map function to create unique ID's
-// since there are multiple lists on the page, use a naming convention which will not create any overlap with the id's from other lists
+// since there are multiple lists on the page,
+// use a naming convention which will not create any overlap
+// with the unique id's from other lists.
+// This requires the text parsing and text interpolation used above
+// to move between unique elements.
 render () {
   <div className="tasks-list">
     {Object.keys(this.props.tasks).map( (taskNumber, i) => (
@@ -81,7 +86,7 @@ render () {
 }
 ```
 
-Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old javascript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array from the database or transforming it before rendering. 
+Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old javascript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array from the database or transforming it before rendering.
 
 ### Showing off HTML5 for Better User Experience
 
