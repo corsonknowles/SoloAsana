@@ -119,6 +119,10 @@ class Tasks extends React.Component {
             }
           )
 
+          // refactor this for tasks and projects: getElementsByName,
+          // more tasks than projects on avg, so change projects names to be project{i} and these names to be {i}
+          // map the projects name lists to plain numbers
+          // user Array.prototype.findIndex() then add 1
           let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
           if (itemBelow) {
             itemBelow.focus();
