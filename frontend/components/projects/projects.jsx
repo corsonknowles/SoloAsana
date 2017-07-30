@@ -23,17 +23,26 @@ class Projects extends React.Component {
       user_id: this.currentUser.id
     }
 
-    this.props.fetchProjects().then( () => {
-
-      if (Object.keys(this.props.projects).length === 0) {
-        this.props.createProject(newProject)
-      }
-    });
+    this.props.fetchProjects()
+      // .then( () => {
+      //
+      //   if (Object.keys(this.props.projects).length === 0) {
+      //     this.props.createProject(newProject)
+      //   }
+      // });
   }
 
   componentWillReceiveProps (nextProps) {
+    const newProject2 = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    }
+
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
+    } else if (Object.keys(nextProps.projects).length === 0) {
+      this.props.createProject(newProject2)
     }
   }
 
@@ -43,7 +52,10 @@ class Projects extends React.Component {
   handleKeyUp (projectID) {
 
     return (event) => {
-      const value = event.target.value
+      const key = event.key;
+      const keyCode = event.keyCode;
+      
+      const value = event.target.value;
       const project = this.props.projects[projectID];
       project.name = value;
 
