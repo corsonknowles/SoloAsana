@@ -49,7 +49,7 @@ class Projects extends React.Component {
   handleKeyDown () {
     //as needed
   }
-  handleKeyUp (projectID) {
+  handleKeyUp (projectID, i) {
 
     return (event) => {
       const key = event.key;
@@ -77,15 +77,16 @@ class Projects extends React.Component {
 
       } else if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = document.getElementById(String(parseInt(projectID) - 1))
+        let previousItem = document.getElementById(String(parseInt(i) - 1))
         if (previousItem) {
           previousItem.focus();
           previousItem.select();
         }
 
       } else if (key === 'ArrowDown' || keyCode === 40) {
+
         event.preventDefault();
-        let nextItem = document.getElementById(String(parseInt(projectID) + 1))
+        let nextItem = document.getElementById(String(parseInt(i) + 1))
         if (nextItem) {
           nextItem.focus();
           nextItem.select();
@@ -99,17 +100,17 @@ class Projects extends React.Component {
   render() {
     return (
       <div className="sidebar-container">
-        {Object.keys(this.props.projects).map( (projectID) => (
+        {Object.keys(this.props.projects).map( (projectID, i) => (
           <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
               name={projectID}
               key={projectID}
-              id={projectID}
+              id={i}
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
-              onKeyUp={this.handleKeyUp(projectID)}
+              onKeyUp={this.handleKeyUp(projectID, i)}
             />
         </NavLink>
 
