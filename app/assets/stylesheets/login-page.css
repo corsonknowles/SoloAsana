@@ -9,96 +9,6 @@ body {
     overflow: auto;
 }
 
-body {
-  font-size: 16px;
-  min-width: 700px;
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
-
-}
-
-::selection {
-  background-color: #80e6ff;
-  color: #49505b;
-}
-
-::-moz-selection {
-  background-color: #80e6ff;
-  color: #49505b;
-}
-
-ol, ul, li {
-  list-style: none;
-}
-
-nav, header {
-  height: 60px;
-  background-color: white;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.nav-right {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  margin-right: 5%;
-}
-
-.nav-left{
-  display: flex;
-  align-self: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  align-content: center;
-  justify-content: center;
-  margin-left: 5%;
-
-}
-
-.nav-buttons {
-  display: flex;
-  flex-direction: row;
-  font-size: 14px;
-  min-width: 300px;
-}
-
-.hire-me {
-
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: space-around;
-  align-self: center;
-  flex-wrap: nowrap;
-
-  min-width: 90px;
-
-  border-color: transparent;
-  color: #a1a4aa;
-  margin-right: 12px;
-
-  text-decoration: none;
-  cursor: pointer;
-  transition: all .15s;
-  background: transparent;
-
-  line-height: 0px;
-
-  font-size: 16px;
-  letter-spacing: 1px;
-  font-weight: 500;
-
-}
-
-.hire-me:hover {
-  color: #80e6ff;
-}
-
 a {
   line-height: 0px;
   margin: 20px;
@@ -113,11 +23,7 @@ h2 {
 
 button {
   background-color: #6a67ce;
-
   color: white;
-  text-decoration: none;
-  -webkit-appearance: none;
-
   border: 1px solid #6a67ce;
   border-radius: 5px;
   cursor: pointer;
@@ -126,12 +32,13 @@ button {
   line-height: 2;
   text-align: center;
   padding: 0 15px;
-  transition: all .15s ease-in-out;
-  box-shadow: 0 0 0 0 #d0bbff;
   margin: 10px;
   padding-left: 20px;
   padding-right: 20px;
-
+  text-decoration: none;
+  -webkit-appearance: none;
+  transition: all .15s ease-in-out;
+  box-shadow: 0 0 0 0 #d0bbff;
 }
 
 button:hover {
@@ -141,18 +48,12 @@ button:hover {
   border-color: #a177ff;
 }
 
-.white {
+button.white {
   background-color: white;
   border-color: #6a67ce;
   color: #6a67ce;
   border-width: 2px;
   padding: 0 13px;
-}
-
-.demo {
-  height: 50px;
-  font-size: 16px;
-  padding: 0 15px;
 }
 
 button.white:hover {
@@ -169,11 +70,34 @@ input {
   font-size: 14px;
 }
 
-.login-box {
+body {
+  font-size: 16px;
+  min-width: 700px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+header, nav {
+  height: 60px;
+  background-color: white;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 10px;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ol, ul, li {
+  list-style: none;
+}
+
+::selection {
+  background-color: #80e6ff;
+  color: #49505b;
+}
+
+::-moz-selection {
+  background-color: #80e6ff;
+  color: #49505b;
 }
 
 .close-modal {
@@ -194,65 +118,10 @@ input {
   border-color: white;
 }
 
-.login-page {
-
-  height: 540px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
-  background-size: 300vw 300vh;
-  background-position: -100vw -120vh;
-
-  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
-  color: white;
-  font-size: 65px;
-  line-height: 60px;
-  /*border: solid red 2px;*/
-  text-align: center;
-
-}
-
-.login-call-to-action {
-  font-size: 65px;
-  line-height: 75px;
-  font-weight: 700;
-  /*border: solid black 2px;*/
-  margin: 20px;
-
-}
-
-.login-tagline {
-  font-size: 22px;
-  line-height: 30px;
-  /*border: solid green 2px;*/
-  margin-bottom: 50px;
-
-}
-
-.login-form-container {
-  font-size: 14px;
-  color: white;
-  line-height:  14px;
-  text-align: left;
-  /*border: solid blue 2px;*/
-  margin: 0px;
-
-}
-
-.login {
-  color: #49505b;
-  /*line-height:  12px;*/
-  /*margin: 0px;*/
-  text-align: center;
-  /*font-size: 12px;*/
-
-}
-
-.login-label {
-  display: flex;
-  align-self: flex-start;
+.demo {
+  height: 50px;
+  font-size: 16px;
+  padding: 0 15px;
 }
 
 .errors {
@@ -261,11 +130,119 @@ input {
   align-content: center;
   justify-content: center;
   margin: 20px;
-  /*border: solid teal 2px;*/
   font-size: 14px;
   color: #ad0025;
   height: 30px;
 }
 
 .eachError {
+}
+
+.hire-me {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-around;
+  align-self: center;
+  flex-wrap: nowrap;
+
+  border-color: transparent;
+  color: #a1a4aa;
+  margin-right: 12px;
+
+  min-width: 90px;
+  line-height: 0px;
+
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-weight: 500;
+
+  text-decoration: none;
+  cursor: pointer;
+  transition: all .15s;
+  background: transparent;
+}
+
+.hire-me:hover {
+  color: #80e6ff;
+}
+
+.login {
+  color: #49505b;
+  text-align: center;
+}
+
+.login-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.login-call-to-action {
+  font-size: 65px;
+  line-height: 75px;
+  font-weight: 700;
+  margin: 20px;
+}
+
+.login-form-container {
+  font-size: 14px;
+  color: white;
+  line-height:  14px;
+  text-align: left;
+  margin: 0px;
+}
+
+.login-label {
+  display: flex;
+  align-self: flex-start;
+}
+
+.login-page {
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ff6d92 radial-gradient(circle at center,#f5b200 0,#fc636b 30%,#ff6d92 70%);
+  background-size: 300vw 300vh;
+  background-position: -100vw -120vh;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, sans-serif;
+  color: white;
+  font-size: 65px;
+  line-height: 60px;
+  text-align: center;
+}
+
+.login-tagline {
+  font-size: 22px;
+  line-height: 30px;
+  margin-bottom: 50px;
+}
+
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  min-width: 300px;
+}
+
+.nav-left{
+  display: flex;
+  align-self: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: center;
+  justify-content: center;
+  margin-left: 5%;
+}
+
+.nav-right {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-right: 5%;
 }
