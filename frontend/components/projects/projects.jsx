@@ -13,6 +13,7 @@ class Projects extends React.Component {
 
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
   }
 
   componentWillMount () {
@@ -36,8 +37,10 @@ class Projects extends React.Component {
     }
   }
 
-
-  handleKeyDown (projectID) {
+  handleKeyDown () {
+    //as needed
+  }
+  handleKeyUp (projectID) {
 
     return (event) => {
       const value = event.target.value
@@ -94,7 +97,7 @@ class Projects extends React.Component {
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
-              onKeyDown={this.handleKeyDown(projectID)}
+              onKeyUp={this.handleKeyUp(projectID)}
             />
         </NavLink>
 

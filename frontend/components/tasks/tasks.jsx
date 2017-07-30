@@ -13,6 +13,7 @@ class Tasks extends React.Component {
       }
       this.currentUser = this.props.currentUser;
       this.handleKeyDown = this.handleKeyDown.bind(this);
+      this.handleKeyUp = this.handleKeyUp.bind(this);
     }
 
     componentWillMount () {
@@ -89,7 +90,10 @@ class Tasks extends React.Component {
     //   }
     // }
 
-    handleKeyDown (taskID, i) {
+    handleKeyDown () {
+      //as needed
+    }
+    handleKeyUp (taskID, i) {
       return (event) => {
 
         const projectID = parseInt(this.props.match.params.id);
@@ -167,7 +171,7 @@ class Tasks extends React.Component {
                   defaultValue={this.props.tasks[taskNumber].title}
                   className="tasks-item-row"
                   placeholder="Enter your new task here"
-                  onKeyDown={this.handleKeyDown(taskNumber, i)}
+                  onKeyUp={this.handleKeyUp(taskNumber, i)}
                 />
               )
             )}
