@@ -178,7 +178,7 @@ class SessionForm extends React.Component {
           </h1>
 
 					<h3 className="login-tagline">
-						Solo is the easiest way for teams to track their work—
+						Solo is the easiest way to track your work—
 						<br />and get results.
 					</h3>
 
