@@ -150,14 +150,14 @@ class SessionForm extends React.Component {
 
 		return (
 			<div>
-				<nav>
-          <div className="nav-left">
+				<header>
+          <nav className="nav-left">
             <Link to="/">
             <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
             </Link>
-          </div>
+          </nav>
 
-          <div className="nav-right">
+          <nav className="nav-right">
 
             <div className='hire-me'>
     					<a className='hire-me' href='https://github.com/corsonknowles'>GitHub</a><br />
@@ -170,9 +170,9 @@ class SessionForm extends React.Component {
     					<button className='white' onClick={this.openModal}>Log In</button>
             </div>
 
-          </div>
-				</nav>
-				<div className="login-page">
+          </nav>
+				</header>
+				<main className="login-page">
 					<h1 className="login-call-to-action">
 						Move work forward
           </h1>
@@ -240,7 +240,7 @@ class SessionForm extends React.Component {
 			        </Modal>
 
 					</div>
-				</div>
+				</main>
 			</div>
 		);
 	}

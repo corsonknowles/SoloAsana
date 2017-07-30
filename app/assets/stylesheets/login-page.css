@@ -30,7 +30,7 @@ ol, ul, li {
   list-style: none;
 }
 
-nav {
+nav, header {
   height: 60px;
   background-color: white;
   display: flex;

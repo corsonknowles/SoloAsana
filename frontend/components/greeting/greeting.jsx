@@ -114,15 +114,16 @@ class Greeting extends React.Component {
       </section>
 
       <div className="content-container">
-        <nav className="greeting-nav">
+        <header className="greeting-nav">
            <h3 className="nav-left">Welcome {this.state.username}</h3>
-           <div className="nav-right">
+           <nav className="nav-right">
            <button className="gold" onClick={this.openModal}>Account</button>
            <button className="header-button gold" onClick={this.logout} >Log Out</button>
-           </div>
-        </nav>
+           </nav>
+        </header>
 
         <div className="right-side-of-page">
+
           <Modal
             isOpen={this.state.modalIsOpen}
             onAfterOpen={this.afterOpenModal}
@@ -130,58 +131,56 @@ class Greeting extends React.Component {
             style={customStyles}
             contentLabel="User Profile"
           >
-          <div className="form profile">
+            <div className="form profile">
 
-            <h2 className="profile-title">My Profile Settings</h2>
+              <h2 className="profile-title">My Profile Settings</h2>
 
-            <PhotoUploadContainer />
+              <PhotoUploadContainer />
 
-            <label htmlFor="username" className="profile-label">USERNAME</label>
-              <input type="text" name="username"
-                value={this.state.username}
-                onChange={this.handleChange}
-                className="profile-input"
-                placeholder="Watch me update in real time"
-              />
+              <label htmlFor="username" className="profile-label">USERNAME</label>
+                <input type="text" name="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
+                  className="profile-input"
+                  placeholder="Watch me update in real time"
+                />
 
-            <label htmlFor="role" className="profile-label">ROLE </label>
-              <input type="text" name="role"
-                value={this.state.role}
-                onChange={this.handleChange}
-                className="profile-input"
-                placeholder=""
-              />
+              <label htmlFor="role" className="profile-label">ROLE </label>
+                <input type="text" name="role"
+                  value={this.state.role}
+                  onChange={this.handleChange}
+                  className="profile-input"
+                  placeholder=""
+                />
 
-            <label htmlFor='department' className="profile-label">DEPARTMENT</label>
-              <input type="text" name="department"
-                value={this.state.department}
-                onChange={this.handleChange}
-                className="profile-input"
-                placeholder=""
-              />
+              <label htmlFor='department' className="profile-label">DEPARTMENT</label>
+                <input type="text" name="department"
+                  value={this.state.department}
+                  onChange={this.handleChange}
+                  className="profile-input"
+                  placeholder=""
+                />
 
-            <label htmlFor="about" className="profile-label">ABOUT ME  </label>
-              <input type="text" className="about" name="about"
-                value={this.state.about}
-                onChange={this.handleChange}
-                className="profile-input"
-                placeholder="At work I run dev ops. At home, I rescue kittens."
-              />
+              <label htmlFor="about" className="profile-label">ABOUT ME  </label>
+                <input type="text" className="about" name="about"
+                  value={this.state.about}
+                  onChange={this.handleChange}
+                  className="profile-input"
+                  placeholder="At work I run dev ops. At home, I rescue kittens."
+                />
 
-            <button className="blue" onClick={this.handleSubmit()}>
-              Update Profile
-            </button>
+              <button className="blue" onClick={this.handleSubmit()}>
+                Update Profile
+              </button>
+            </div>
+            <button className="close-modal" onClick={this.closeModal}>X</button>
+          </Modal>
 
-          </div>
-
-          <button className="close-modal" onClick={this.closeModal}>X</button>
-
-        </Modal>
-          <div className="tasks-area">
+          <main className="tasks-area">
             <TaskContainer />
-          </div>
+          </main>
+          
         </div>
-
       </div>
     </div>
 
