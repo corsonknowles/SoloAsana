@@ -82,17 +82,10 @@ class Tasks extends React.Component {
       }
     }
 
-
-    // componentDidMount () {
-    //   if (Object.keys(this.props.tasks).length === 0) {
-    //     let projectID = parseInt(this.props.match.params.id);
-    //     this.props.fetchTasksByProject(projectID)
-    //   }
-    // }
-
     handleKeyDown () {
       //as needed
     }
+
     handleKeyUp (taskID, i) {
       return (event) => {
         const key = event.key;
@@ -125,14 +118,19 @@ class Tasks extends React.Component {
             }
           )
 
-          let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
-          if (itemBelow) {
-            itemBelow.focus();
-            itemBelow.select();
+          let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+          if (nextItem) {
+            nextItem.focus();
+            nextItem.select();
           }
 
         } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
           this.props.destroyTask(taskID);
+          let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+          if (previousItem) {
+            previousItem.focus();
+            previousItem.select();
+          }
 
         } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
           event.preventDefault();

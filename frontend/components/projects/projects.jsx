@@ -68,12 +68,24 @@ class Projects extends React.Component {
           user_id: this.currentUser.id
         }
         // set a new project in the database
-        this.props.createProject(newProject)
+        this.props.createProject(newProject);
+
+        let nextItem = document.getElementById(String(parseInt(i) + 1))
+        if (nextItem) {
+          nextItem.focus();
+          nextItem.select();
+        }
 
       } else if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
 
         this.props.destroyProject(parseInt(projectID));
         this.props.history.push('/');
+
+        let previousItem = document.getElementById(String(parseInt(i) - 1))
+        if (previousItem) {
+          previousItem.focus();
+          previousItem.select();
+        }
 
       } else if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
