@@ -54,8 +54,7 @@ export const fetchProject = id => dispatch => (
 
 export const updateProject = project => dispatch => {
   return PROJECTS.updateProject(project).then(
-    currentProject => dispatch(receiveProject(currentProject)),
-    error => dispatch(receiveErrors(error.responseJSON))
+    currentProject => dispatch(receiveProject(currentProject))
   );
 };
 

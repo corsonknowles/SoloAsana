@@ -71,6 +71,16 @@ class Projects extends React.Component {
           nextItem.focus();
           nextItem.select();
         }
+      } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+
+        this.props.destroyProject(parseInt(projectID));
+        this.props.history.push('/');
+
+        let previousItem = document.getElementById(String(parseInt(i) - 1))
+        if (previousItem) {
+          previousItem.focus();
+        }
+
       }
     }
   }
@@ -85,18 +95,7 @@ class Projects extends React.Component {
       const project = this.props.projects[projectID];
       project.name = value;
 
-      if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
-
-        this.props.destroyProject(parseInt(projectID));
-        this.props.history.push('/');
-
-        let previousItem = document.getElementById(String(parseInt(i) - 1))
-        if (previousItem) {
-          previousItem.focus();
-          previousItem.select();
-        }
-
-      } else if (key === 'ArrowUp' || keyCode === 38) {
+      if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
         let previousItem = document.getElementById(String(parseInt(i) - 1))
         if (previousItem) {

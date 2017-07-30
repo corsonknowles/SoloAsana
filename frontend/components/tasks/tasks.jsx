@@ -84,8 +84,10 @@ class Tasks extends React.Component {
 
     handleKeyDown (taskID, i) {
       return (event) => {
-        if (event.key === 'Enter' || event.keyCode === 13) {
+        const key = event.key;
+        const keyCode = event.keyCode;
 
+        if (key === 'Enter' || keyCode === 13) {
           const projectID = parseInt(this.props.match.params.id);
           // const value = event.target.value;
           // const task = this.props.tasks[taskID];
@@ -114,12 +116,17 @@ class Tasks extends React.Component {
           // )
 
           let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
-          if (nextItem) {
-            nextItem.focus();
-            nextItem.select();
-          }
-
+        if (nextItem) {
+          nextItem.focus();
+          nextItem.select();
         }
+      } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+        this.props.destroyTask(taskID);
+        let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+        if (previousItem) {
+          previousItem.focus();
+        }
+      }
       }
     }
 
@@ -133,15 +140,7 @@ class Tasks extends React.Component {
         const task = this.props.tasks[taskID];
         task.title = value;
 
-        if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
-          this.props.destroyTask(taskID);
-          let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
-          if (previousItem) {
-            previousItem.focus();
-            previousItem.select();
-          }
-
-        } else if (key === 'ArrowUp' || keyCode === 38) {
+        if (key === 'ArrowUp' || keyCode === 38) {
           event.preventDefault();
           let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
           if (previousItem) {

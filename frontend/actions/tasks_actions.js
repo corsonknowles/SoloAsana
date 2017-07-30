@@ -53,7 +53,7 @@ export const updateTask = task => dispatch => {
     .then(returnTask => {
       dispatch(receiveTask(returnTask));
       return returnTask;
-    }, error => dispatch(receiveErrors(error.responseJSON))
+    }
   );
 };
 
