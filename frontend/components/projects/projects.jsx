@@ -54,12 +54,12 @@ class Projects extends React.Component {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
-      
+
       const value = event.target.value;
       const project = this.props.projects[projectID];
       project.name = value;
 
-      if (event.key === 'Enter' || event.keyCode === 13) {
+      if (key === 'Enter' || keyCode === 13) {
         this.props.updateProject(project);
 
         const newProject = {
@@ -70,12 +70,12 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject)
 
-      } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
+      } else if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
 
         this.props.destroyProject(parseInt(projectID));
         this.props.history.push('/');
 
-      } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
+      } else if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
         let previousItem = document.getElementById(String(parseInt(projectID) - 1))
         if (previousItem) {
@@ -83,7 +83,7 @@ class Projects extends React.Component {
           previousItem.select();
         }
 
-      } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+      } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
         let nextItem = document.getElementById(String(parseInt(projectID) + 1))
         if (nextItem) {
