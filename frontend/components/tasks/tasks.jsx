@@ -82,8 +82,45 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyDown () {
-      //as needed
+    handleKeyDown (taskID, i) {
+      return (event) => {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+
+          const projectID = parseInt(this.props.match.params.id);
+          // const value = event.target.value;
+          // const task = this.props.tasks[taskID];
+
+          // task.title = value;
+          // this.props.updateTask(task)
+
+          let newTask = {
+            title: "",
+            team_id: 1,
+            project_id: projectID,
+            user_id: this.currentUser.id,
+            done: false,
+            section: false
+          }
+
+          // push the new task to the database
+          this.props.createTask(newTask)
+          // .then (
+          //   (createdTask) => {
+          //     // set the new task to state
+          //     const newState = merge({}, this.state);
+          //     newState.tasks[createdTask.id] = createdTask;
+          //     this.setState(newState);
+          //   }
+          // )
+
+          let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+          if (nextItem) {
+            nextItem.focus();
+            nextItem.select();
+          }
+
+        }
+      }
     }
 
     handleKeyUp (taskID, i) {
@@ -96,35 +133,7 @@ class Tasks extends React.Component {
         const task = this.props.tasks[taskID];
         task.title = value;
 
-        if (key === 'Enter' || keyCode === 13) {
-          this.props.updateTask(task)
-
-          let newTask = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
-          }
-
-          // push the new task to the database
-          this.props.createTask(newTask).then (
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = createdTask;
-              this.setState(newState);
-            }
-          )
-
-          let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
-          if (nextItem) {
-            nextItem.focus();
-            nextItem.select();
-          }
-
-        } else if (event.target.value.length === 0 && (event.key === 'Delete' || event.key === 'Backspace' || event.keyCode === 8 || event.keyCode === 46) ) {
+        if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
           this.props.destroyTask(taskID);
           let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
           if (previousItem) {
@@ -132,14 +141,14 @@ class Tasks extends React.Component {
             previousItem.select();
           }
 
-        } else if (event.key === 'ArrowUp' || event.keyCode === 38) {
+        } else if (key === 'ArrowUp' || keyCode === 38) {
           event.preventDefault();
           let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
             previousItem.select();
           }
-        } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+        } else if (key === 'ArrowDown' || keyCode === 40) {
           event.preventDefault();
           let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
           if (nextItem) {
@@ -168,6 +177,8 @@ class Tasks extends React.Component {
                   className="tasks-item-row"
                   placeholder="Enter your new task here"
                   onKeyUp={this.handleKeyUp(taskNumber, i)}
+                  onKeyDown={this.handleKeyDown(taskNumber, i)}
+
                 />
               )
             )}

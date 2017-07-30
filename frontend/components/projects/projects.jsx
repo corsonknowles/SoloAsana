@@ -46,21 +46,17 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyDown () {
-    //as needed
-  }
-  handleKeyUp (projectID, i) {
-
+  handleKeyDown (projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
 
-      const value = event.target.value;
-      const project = this.props.projects[projectID];
-      project.name = value;
+      // const value = event.target.value;
+      // const project = this.props.projects[projectID];
 
       if (key === 'Enter' || keyCode === 13) {
-        this.props.updateProject(project);
+        // project.name = value;
+        // this.props.updateProject(project);
 
         const newProject = {
           name: "",
@@ -75,8 +71,21 @@ class Projects extends React.Component {
           nextItem.focus();
           nextItem.select();
         }
+      }
+    }
+  }
 
-      } else if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+  handleKeyUp (projectID, i) {
+
+    return (event) => {
+      const key = event.key;
+      const keyCode = event.keyCode;
+
+      const value = event.target.value;
+      const project = this.props.projects[projectID];
+      project.name = value;
+
+      if (value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
 
         this.props.destroyProject(parseInt(projectID));
         this.props.history.push('/');
@@ -123,6 +132,7 @@ class Projects extends React.Component {
               className="sidebar-item-row"
               placeholder="_________________________"
               onKeyUp={this.handleKeyUp(projectID, i)}
+              onKeyDown={this.handleKeyDown(projectID, i)}
             />
         </NavLink>
 
