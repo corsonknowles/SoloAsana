@@ -40,7 +40,8 @@ class PhotoUpload extends React.Component {
 
       modalIsOpen: false,
       photo: this.props.currentUser.photo,
-      uploadedFileCloudinaryUrl: ''
+      uploadedFileCloudinaryUrl: '',
+      pending: false
 
     }
 
@@ -106,7 +107,8 @@ class PhotoUpload extends React.Component {
   onImageDrop(files) {
 
     this.setState({
-      uploadedFile: files[0]
+      uploadedFile: files[0],
+      pending: true
     });
 
     this.handleImageUpload(files[0]);
@@ -126,14 +128,11 @@ class PhotoUpload extends React.Component {
 
       if (response.body.secure_url !== '') {
         this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url
+          uploadedFileCloudinaryUrl: response.body.secure_url,
+          photo: response.body.secure_url,
+          pending: false
         });
-        this.setState({
-          photo: this.state.uploadedFileCloudinaryUrl
-        })
-        this.setState({
-          photo: this.state.uploadedFileCloudinaryUrl
-        })
+
         this.handleSubmit()();
       }
     });
@@ -145,15 +144,17 @@ class PhotoUpload extends React.Component {
     <div className="photo-container">
 
       <button className="photo-button" onClick={this.openModal} >
-        <div className="profile-photo">
+        <figure className="profile-photo">
           <img className="profile-photo" src={this.state.photo}></img>
-        </div>
+
+        </figure>
       </button>
-      <div className="profile-photo-update">
+
+      <figcaption className="profile-photo-update">
         <button className="photo-button photo-caption" onClick={this.openModal}>
-          Update profile photo
+          {this.state.pending ? "Upload in progress" : "Update profile photo" }
         </button>
-      </div>
+      </figcaption>
 
       <div>
         <Modal
