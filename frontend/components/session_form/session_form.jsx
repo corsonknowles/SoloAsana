@@ -209,7 +209,7 @@ class SessionForm extends React.Component {
 											value={this.state.email}
 											onChange={this.handleChange}
 											className="login-input"
-											placeholder="format like: &nbsp; recruiter.inquiries@soloasana.com"
+											placeholder="recruiter.inquiries@soloasana.com"
 										/>
 
   									<label htmlFor="password" className="login-label">PASSWORD</label>
