@@ -59,7 +59,7 @@ body {
 ### Rockin Javascript (ES6)
 
 I used React's synthetic event handlers to allow custom behavior for the enter and delete keys and the up and down arrows. Let's look at a detailed example.
-This code allows you to move up and down a list of tasks, without generating any errors at the beginning or end of the list where there is no where to move to. It overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, they will take the user to the next item in the list, making the To Do editor much more like a text editor in the browser.
+This code allows you to move up and down a list of tasks. It is logic gated to prevent generating any errors at the beginning or end of the list, when there would be no place to move the cursor to. This snippet overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, these keys will now take the user to the next item in the list. These effects make the To Do editor much more like a text editor in the browser.
 ```
 // look up the potential next item in the list
 // then only if it exists, focus on and select that element.
@@ -92,7 +92,7 @@ render () {
 }
 ```
 
-Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old javascript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array from the database or transforming it before rendering.
+Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old JavaScript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array format from the database or transforming it before rendering.
 
 ### Showing off HTML5 for Better User Experience
 
@@ -106,7 +106,7 @@ which is the React version of the HTML5 tabindex attribute. This skips over the 
 ### And more from React and Redux!
 Here are a few other features I enjoyed:
 
-* React Controlled Forms: allowing rapid updating between the database and the user, allowing for rapid saving of each new character as its entered
+* React Controlled Forms: allowing rapid updating between the database and the user, allowing for rapid saving of each new character as it is entered
 * Authenticated routes: taking the one-page-app to its logical conclusion, this renders just a logged out page and a logged in page. Once the user is logged in, all the content of the app can be served to them from one page using conditionally rendered React Components which appear and disappear based on the route showing in the URL -- no new page load or refresh is ever required, as content arrives and departs from the page as it's called for.
 * React style key listeners: The up and down arrows weren't the only user inputs to get custom styling. The enter key was also attached to the React event listener onKeyDown, allowing it to create a new task on demand for the user. The delete key was similarly enhanced. Wrapping it in a little logic to detect an empty input field, it will only delete a field from the interface (and the database, simultaneously) when all of the content has first been removed from that field. Hit delete again on an empty field and it all goes away.
 

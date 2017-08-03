@@ -77,7 +77,6 @@ The MVP features for this 9 day project are:
 * User Profile
 * Tasks
 * Projects
-* Teams
 * Production README
 
 # Even More Bonuses:
