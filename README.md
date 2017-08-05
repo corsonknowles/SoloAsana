@@ -41,7 +41,7 @@ The database fueling all this is PostgreSQL.
 ![Solo Demo Account](docs/Screenshots/Demo_Login.gif)
 
 ### Slick CSS: Removing Overdragging and Bounce effects from OSX
-These simple lines of CSS allow SoloAsana to render as fixed site within the browser window. While the bounce effect that occurs when you overscroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering that Asana also employs.
+These simple lines of CSS allow SoloAsana to render as a fixed site within the browser window. While the bounce effect that occurs when you overscroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering that Asana also employs.
 
 ```
 html {
