@@ -207,7 +207,7 @@ class SessionForm extends React.Component {
 
 										<input type="text" name="email" id="email"
 											value={this.state.email}
-											onChange={this.handleChange}
+											onChange={(event) => this.handleChange(event)}
 											className="login-input"
 											placeholder="recruiter.inquiries@soloasana.com"
 										/>
@@ -216,7 +216,7 @@ class SessionForm extends React.Component {
 
 										<input type="password" name="password" id="password"
 											value={this.state.password}
-											onChange={this.handleChange}
+											onChange={(event) => this.handleChange(event)}
 											className="login-input"
 											placeholder="6 characters or more"
 										/>

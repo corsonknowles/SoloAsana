@@ -140,7 +140,7 @@ class Greeting extends React.Component {
               <label htmlFor="username" className="profile-label">USERNAME</label>
                 <input type="text" name="username"
                   value={this.state.username}
-                  onChange={this.handleChange}
+                  onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="Watch me update in real time"
                 />
@@ -148,7 +148,7 @@ class Greeting extends React.Component {
               <label htmlFor="role" className="profile-label">ROLE </label>
                 <input type="text" name="role"
                   value={this.state.role}
-                  onChange={this.handleChange}
+                  onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
                 />
@@ -156,7 +156,7 @@ class Greeting extends React.Component {
               <label htmlFor='department' className="profile-label">DEPARTMENT</label>
                 <input type="text" name="department"
                   value={this.state.department}
-                  onChange={this.handleChange}
+                  onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
                 />
@@ -164,12 +164,12 @@ class Greeting extends React.Component {
               <label htmlFor="about" className="profile-label">ABOUT ME  </label>
                 <input type="text" className="about" name="about"
                   value={this.state.about}
-                  onChange={this.handleChange}
+                  onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="At work I run dev ops. At home, I rescue kittens."
                 />
 
-              <button className="blue" onClick={this.handleSubmit(event)}>
+              <button className="blue" onClick={(event) => this.handleSubmit(event)}>
                 Update Profile
               </button>
             </div>
