@@ -126,7 +126,7 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyUp (taskID, i) {
+    handleKeyUp (event, taskID, i) {
       return (event) => {
         const key = event.key;
         const keyCode = event.keyCode;
