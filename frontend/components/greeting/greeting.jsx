@@ -169,7 +169,7 @@ class Greeting extends React.Component {
                   placeholder="At work I run dev ops. At home, I rescue kittens."
                 />
 
-              <button className="blue" onClick={this.handleSubmit()}>
+              <button className="blue" onClick={this.handleSubmit(event)}>
                 Update Profile
               </button>
             </div>
@@ -179,7 +179,7 @@ class Greeting extends React.Component {
           <main className="tasks-area">
             <TaskContainer />
           </main>
-          
+
         </div>
       </div>
     </div>

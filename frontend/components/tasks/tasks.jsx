@@ -171,8 +171,8 @@ class Tasks extends React.Component {
                   defaultValue={this.props.tasks[taskNumber].title}
                   className="tasks-item-row"
                   placeholder="Enter your new task here"
-                  onKeyUp={this.handleKeyUp(taskNumber, i)}
-                  onKeyDown={this.handleKeyDown(taskNumber, i)}
+                  onKeyUp={this.handleKeyUp(event, taskNumber, i)}
+                  onKeyDown={this.handleKeyDown(event, taskNumber, i)}
 
                 />
               )

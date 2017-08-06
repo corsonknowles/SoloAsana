@@ -130,8 +130,8 @@ class Projects extends React.Component {
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
-              onKeyUp={this.handleKeyUp(projectID, i)}
-              onKeyDown={this.handleKeyDown(projectID, i)}
+              onKeyUp={this.handleKeyUp(event, projectID, i)}
+              onKeyDown={this.handleKeyDown(event, projectID, i)}
             />
         </NavLink>
 
