@@ -47,7 +47,6 @@ class PhotoUpload extends React.Component {
 
     this.currentUser = this.props.currentUser;
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -56,17 +55,6 @@ class PhotoUpload extends React.Component {
     this.onImageDrop = this.onImageDrop.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
   }
-
-  // componentWillUnmount() { this.props.clearErrors()};
-
-  // handleChange(event) {
-  //   const target = event.target;
-  //   const name = target.name;
-  //   this.setState({
-  //     [name]: event.target.value
-  //   });
-  //
-  // }
 
   handleSubmit(){
 

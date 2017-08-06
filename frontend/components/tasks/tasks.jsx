@@ -82,18 +82,13 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyDown (taskID, i) {
+    handleKeyDown (event, taskID, i) {
       return (event) => {
         const key = event.key;
         const keyCode = event.keyCode;
 
         if (key === 'Enter' || keyCode === 13) {
           const projectID = parseInt(this.props.match.params.id);
-          // const value = event.target.value;
-          // const task = this.props.tasks[taskID];
-
-          // task.title = value;
-          // this.props.updateTask(task)
 
           let newTask = {
             title: "",
