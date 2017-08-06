@@ -56,7 +56,7 @@ body {
 ```
 
 
-### Rockin Javascript (ES6)
+### Rockin JavaScript (ES6)
 
 I used React's synthetic event handlers to allow custom behavior for the enter and delete keys and the up and down arrows. Let's look at a detailed example.
 This code allows you to move up and down a list of tasks. It is logic gated to prevent generating any errors at the beginning or end of the list, when there would be no place to move the cursor to. This snippet overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, these keys will now take the user to the next item in the list. These effects make the To Do editor much more like a text editor in the browser.

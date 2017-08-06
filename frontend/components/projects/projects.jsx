@@ -46,7 +46,7 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyDown (projectID, i) {
+  handleKeyDown (event, projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -85,7 +85,7 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyUp (projectID, i) {
+  handleKeyUp (event, projectID, i) {
 
     return (event) => {
       const key = event.key;
