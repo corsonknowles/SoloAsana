@@ -66,7 +66,7 @@ class Greeting extends React.Component {
     });
   }
 
-  handleSubmit(user){
+  handleSubmit(event, user){
     return () => {
       let user = this.currentUser;
       user.username = this.state.username;

@@ -153,7 +153,7 @@ class SessionForm extends React.Component {
 				<header>
           <nav className="nav-left">
             <Link to="/">
-            <img src='http://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
+            <img src='https://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
             </Link>
           </nav>
 
@@ -184,7 +184,7 @@ class SessionForm extends React.Component {
 
 					<div className="login-form-container">
 
-							<button className="white demo" onClick={this.launchDemo}>Check Out the DEMO Account</button>
+							<button className="white demo" onClick={(event) => this.launchDemo(event)}>Check Out the DEMO Account</button>
 
 			        <Modal
 			          isOpen={this.state.modalIsOpen}
