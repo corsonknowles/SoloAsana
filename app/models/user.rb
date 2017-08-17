@@ -29,13 +29,13 @@ class User < ApplicationRecord
   def reset_session_token!
     ensure_session_token_uniqueness
     save!
-    self.session_token
+    session_token
   end
 
   private
 
   def ensure_session_token
-    ensure_session_token_uniqueness unless self.session_token
+    ensure_session_token_uniqueness unless session_token
   end
 
   def new_session_token
@@ -44,9 +44,9 @@ class User < ApplicationRecord
 
   def ensure_session_token_uniqueness
     self.session_token = new_session_token
-    while User.find_by(session_token: self.session_token)
+    while User.find_by(session_token: session_token)
       self.session_token = new_session_token
     end
-    self.session_token
+    session_token
   end
 end

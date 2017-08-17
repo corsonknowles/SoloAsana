@@ -1,5 +1,4 @@
 class Api::TeamsController < ApplicationController
-
   def create
     @team = current_user.teams.new(team_params)
     if @team.save
@@ -37,5 +36,4 @@ class Api::TeamsController < ApplicationController
   def team_params
     params.require(:team).permit(:name, :user, :user_id)
   end
-
 end

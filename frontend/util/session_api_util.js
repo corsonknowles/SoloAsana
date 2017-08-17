@@ -1,4 +1,4 @@
-// login: should make an AJAX request that creates a new session.
+// login: makes an AJAX request that creates a new session
 export const login = user => (
   $.ajax({
     method: 'POST',
@@ -7,7 +7,7 @@ export const login = user => (
   })
 );
 
-// logout: should make an AJAX request that deletes the current session.
+// logout: makes an AJAX request that deletes the current session
 export const logout = () => (
   $.ajax({
     method: 'DELETE',
@@ -15,7 +15,7 @@ export const logout = () => (
   })
 );
 
-// signup: makes an AJAX request that creates a new user.
+// signup: makes an AJAX request that creates a new user
 export const signup = user => (
   $.ajax({
     method: 'POST',
@@ -24,7 +24,7 @@ export const signup = user => (
   })
 );
 
-// update: makes an AJAX request that updates an existing user.
+// update: makes an AJAX request that updates an existing user
 export const update = user => (
   $.ajax({
     method: 'PATCH',
