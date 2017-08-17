@@ -26,24 +26,25 @@ The database fueling all this is PostgreSQL.
 * User profiles
   - The user profile permits photo uploading
   - This is rendered through an awesome modal-within-a-modal interface, that loads seamlessly for the user
+    - UI touches: The inner modal's closing X button is offset from the outer modal, to prevent unexpected behavior and double-clicking. The modals also close, one at a time, when the user clicks the page to return to it.
   - Each user profile has editable description fields that save only on submit
 
 ![Solo Profile Page](docs/Screenshots/Solo_Profile_Page.png)
 
 ## How It Works
 
-  SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the auth form and logs the guest user directly into the site.
+  SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the secure authentication form and logs the guest user directly into the site.
 
-  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool, selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
+  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool. Selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
 
 ## Cool Tech Included Within
 
 ![Solo Demo Account](docs/Screenshots/Demo_Login.gif)
 
-### Slick CSS: Removing Overdragging and Bounce effects from OSX
+### Slick CSS: Removing the Overdragging and Bounce effects from OSX
 These simple lines of CSS allow SoloAsana to render as a fixed site within the browser window. While the bounce effect that occurs when you overscroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering that Asana also employs.
 
-```
+```CSS
 html {
     overflow: hidden;
     height: 100%;
@@ -60,7 +61,7 @@ body {
 
 I used React's synthetic event handlers to allow custom behavior for the enter and delete keys and the up and down arrows. Let's look at a detailed example.
 This code allows you to move up and down a list of tasks. It is logic gated to prevent generating any errors at the beginning or end of the list, when there would be no place to move the cursor to. This snippet overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, these keys will now take the user to the next item in the list. These effects make the To Do editor much more like a text editor in the browser.
-```
+```JavaScript
 // look up the potential next item in the list
 // then only if it exists, focus on and select that element.
 ...
@@ -92,12 +93,12 @@ render () {
 }
 ```
 
-Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old JavaScript object to render values to HTML fields in React. Because hash lookup is so fast O(1), this can be on par or faster than retrieving the data in array format from the database or transforming it before rendering.
+Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old JavaScript object to render values to HTML fields in React. Because hash lookup is so fast, O(1), this can be on par or faster than either retrieving data in an array format from the database or transforming it before rendering. Since all tasks are fetched when you retrieve the project they belong to, and all tasks are retrieved when you retrieve all projects, this prevents expensive N+1 queries to the database.
 
 ### Showing off HTML5 for Better User Experience
 
 Solo allows the user to both edit a project by selecting it and navigate to the enclosed tasks for that project at the same time. I accomplished this by simply wrapping the React NavLinks around customized input fields. In order to preserve the standard flow of user navigation with the Tab key to switch between fields, I set:
-```
+```HTML5
 tabIndex="-1"
 ```
 
@@ -120,12 +121,12 @@ Solo is already a fully functional to-do list. But since it was so enjoyable to 
 
 Allow a user to pick up and drop tasks or projects to reposition them and order them to suit their needs.
 
-### User comments
+### Due Dates
 
-This will permit users to comment on tasks. The user profile photos can render next to comments to make it easy to visually track contributors to the conversation.
+Allow users to specify a due date for tasks and sort by time created and time due.
 
 ### File Attachments
 
 File attachments can be allowed in a manner very similar to the interface for click-to-select file and drag-to-upload that users enjoy on the profile screen for image uploading. Allowing file attachment to tasks is a nice future direction that will lend additional versatility to the clean interface of the app.
 
-See the [Development README](./docs/DEVELOPMENT_README.md)
+Here it is in production: [SoloAsana live](http://soloasana.com)
