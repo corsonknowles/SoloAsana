@@ -34,15 +34,23 @@ class Greeting extends React.Component {
   constructor(props) {
     super(props)
 
+    // let props = this.props;
+    let currentUser = props.currentUser;
+    let username = currentUser.username || "";
+    let role = currentUser.role || "";
+    let department = currentUser.department || "";
+    let about = currentUser.about || "";
+    let photo = currentUser.photo || "";
+
     this.state = {
       modalIsOpen: false,
       photoModalIsOpen: false,
-      username: this.props.currentUser.username,
-      role: this.props.currentUser.role,
-      department: this.props.currentUser.department,
-      about: this.props.currentUser.about,
-      photo: this.props.currentUser.photo,
-      uploadedFileCloudinaryUrl: ''
+      uploadedFileCloudinaryUrl: '',
+      username,
+      role,
+      department,
+      about,
+      photo
     }
 
     this.logout = this.props.logout;
@@ -61,8 +69,9 @@ class Greeting extends React.Component {
   handleChange(event) {
     const target = event.target;
     const name = target.name;
+    let val = target.value || "";
     this.setState({
-      [name]: event.target.value
+      [name]: val
     });
   }
 

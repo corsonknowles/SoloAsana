@@ -25,7 +25,6 @@ const customStyles = {
     fontWeight            : 'bold',
     pointerEvents         : 'auto',
     borderRadius          : '10px'
-
   }
 };
 
@@ -71,7 +70,6 @@ class SessionForm extends React.Component {
       [name]: event.target.value
     });
   }
-
 
   handleSubmit(event, type, user){
 
@@ -172,6 +170,7 @@ class SessionForm extends React.Component {
 
               </nav>
             </header>
+
             <main className="login-page">
               <h1 className="login-call-to-action">
                 Move work forward
