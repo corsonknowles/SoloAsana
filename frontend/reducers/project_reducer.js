@@ -1,9 +1,7 @@
 import {
   RECEIVE_PROJECTS,
   RECEIVE_PROJECT,
-  DELETE_PROJECT,
-  RECEIVE_ERRORS,
-  CLEAR_ERRORS
+  DELETE_PROJECT
 
 } from '../actions/projects_actions';
 import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
@@ -18,7 +16,6 @@ const ProjectReducer = function(state = {}, action){
       newState = { };
       action.projects.forEach(project => newState[project.id] = project);
       return newState;
-        // projects: action.projects,
     case RECEIVE_PROJECT:
       newState = merge({}, state, { [action.project.id]: action.project });
       return newState;

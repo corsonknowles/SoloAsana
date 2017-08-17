@@ -12,6 +12,19 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
 
 // ASYNC ACTIONS
+export const requestLogin = user => dispatch => {
+  return APIUtil.login(user).then(
+    currentUser => dispatch(receiveCurrentUser(currentUser)),
+    error => dispatch(receiveErrors(error.responseJSON))
+  );
+};
+
+export const requestLogout = () => dispatch => {
+  return APIUtil.logout().then(
+    () => dispatch(receiveLogoutSuccess())
+  );
+};
+
 export const requestSignup = user => dispatch => {
   return APIUtil.signup(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
@@ -26,28 +39,14 @@ export const updateUser = user => dispatch => {
   );
 };
 
-export const requestLogin = user => dispatch => {
-  return APIUtil.login(user).then(
-    currentUser => dispatch(receiveCurrentUser(currentUser)),
-    error => dispatch(receiveErrors(error.responseJSON))
-  );
-};
-
-export const requestLogout = () => dispatch => {
-  return APIUtil.logout().then(
-    () => dispatch(receiveLogoutSuccess())
-  );
-};
-//
-//
 // // SYNC ACTIONS
+export const clearErrors = () => ({
+  type: CLEAR_ERRORS
+});
+
 export const receiveCurrentUser = currentUser => ({
   type: RECEIVE_CURRENT_USER,
   currentUser
-});
-
-export const receiveLogoutSuccess = () => ({
-  type: RECEIVE_LOGOUT_SUCCESS
 });
 
 export const receiveErrors = errors => ({
@@ -55,6 +54,6 @@ export const receiveErrors = errors => ({
   errors
 });
 
-export const clearErrors = () => ({
-  type: CLEAR_ERRORS
+export const receiveLogoutSuccess = () => ({
+  type: RECEIVE_LOGOUT_SUCCESS
 });

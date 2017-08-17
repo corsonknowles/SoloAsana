@@ -14,18 +14,18 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-		width									: '50%',
-		maxWidth							: '575px',
+    width                 : '50%',
+    maxWidth              : '575px',
     minWidth              : '500px',
-		maxHeight							: '585px',
-		height								: '80%',
-		display								: 'flex',
-		justifyContent				: 'center',
-		alignItems						: 'center',
-		color									: '#49505b',
-		fontWeight						:	'bold',
-		pointerEvents	        : 'auto',
-		borderRadius					: '10px'
+    maxHeight             : '585px',
+    height                : '80%',
+    display               : 'flex',
+    justifyContent        : 'center',
+    alignItems            : 'center',
+    color                 : '#49505b',
+    fontWeight            : 'bold',
+    pointerEvents         : 'auto',
+    borderRadius          : '10px'
   }
 };
 
@@ -53,7 +53,7 @@ class Greeting extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   componentWillUnmount() { this.props.clearErrors()};
@@ -106,85 +106,85 @@ class Greeting extends React.Component {
   render() {
 
     return (
-    <div className="one-page-app">
+      <div className="one-page-app">
 
-      <section>
-        <div className="projects-header">PROJECTS</div>
-        <ProjectsContainer />
-      </section>
+        <section>
+          <div className="projects-header">PROJECTS</div>
+          <ProjectsContainer />
+        </section>
 
-      <div className="content-container">
-        <header className="greeting-nav">
-           <h3 className="nav-left">Welcome {this.state.username}</h3>
-           <nav className="nav-right">
-           <button className="gold" onClick={this.openModal}>Account</button>
-           <button className="header-button gold" onClick={this.logout} >Log Out</button>
-           </nav>
-        </header>
+        <div className="content-container">
+          <header className="greeting-nav">
+            <h3 className="nav-left">Welcome {this.state.username}</h3>
+            <nav className="nav-right">
+              <button className="gold" onClick={this.openModal}>Account</button>
+              <button className="header-button gold" onClick={this.logout} >Log Out</button>
+            </nav>
+          </header>
 
-        <div className="right-side-of-page">
+          <div className="right-side-of-page">
 
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}
-            style={customStyles}
-            contentLabel="User Profile"
-          >
-            <div className="form profile">
+            <Modal
+              isOpen={this.state.modalIsOpen}
+              onAfterOpen={this.afterOpenModal}
+              onRequestClose={this.closeModal}
+              style={customStyles}
+              contentLabel="User Profile"
+              >
+              <div className="form profile">
 
-              <h2 className="profile-title">My Profile Settings</h2>
+                <h2 className="profile-title">My Profile Settings</h2>
 
-              <PhotoUploadContainer />
+                <PhotoUploadContainer />
 
-              <label htmlFor="username" className="profile-label">USERNAME</label>
+                <label htmlFor="username" className="profile-label">USERNAME</label>
                 <input type="text" name="username"
                   value={this.state.username}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="Watch me update in real time"
-                />
+                  />
 
-              <label htmlFor="role" className="profile-label">ROLE </label>
+                <label htmlFor="role" className="profile-label">ROLE </label>
                 <input type="text" name="role"
                   value={this.state.role}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
-                />
+                  />
 
-              <label htmlFor='department' className="profile-label">DEPARTMENT</label>
+                <label htmlFor='department' className="profile-label">DEPARTMENT</label>
                 <input type="text" name="department"
                   value={this.state.department}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
-                />
+                  />
 
-              <label htmlFor="about" className="profile-label">ABOUT ME  </label>
+                <label htmlFor="about" className="profile-label">ABOUT ME  </label>
                 <input type="text" className="about" name="about"
                   value={this.state.about}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="At work I run dev ops. At home, I rescue kittens."
-                />
+                  />
 
-              <button className="blue" onClick={(event) => this.handleSubmit(event)}>
-                Update Profile
-              </button>
-            </div>
-            <button className="close-modal" onClick={this.closeModal}>X</button>
-          </Modal>
+                <button className="blue" onClick={(event) => this.handleSubmit(event)}>
+                  Update Profile
+                </button>
+              </div>
+              <button className="close-modal" onClick={this.closeModal}>X</button>
+            </Modal>
 
-          <main className="tasks-area">
-            <TaskContainer />
-          </main>
+            <main className="tasks-area">
+              <TaskContainer />
+            </main>
 
+          </div>
         </div>
       </div>
-    </div>
 
-  )}
+    )}
 
-}
-export default Greeting;
+  }
+  export default Greeting;

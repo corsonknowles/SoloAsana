@@ -15,7 +15,7 @@ class Api::TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.all.where(user_id: current_user.id, project_id: params[:id] )
+    @tasks = Task.all.where(user_id: current_user.id, project_id: params[:id])
     render :index
   end
 
@@ -36,7 +36,19 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :body, :due, :done, :section, :project_id, :project, :team, :user, :team_id, :user_id, :id)
+    params.require(:task).permit(
+      :title,
+      :body,
+      :due,
+      :done,
+      :section,
+      :project_id,
+      :project,
+      :team,
+      :user,
+      :team_id,
+      :user_id,
+      :id
+    )
   end
-
 end

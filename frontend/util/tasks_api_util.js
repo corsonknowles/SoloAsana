@@ -7,15 +7,6 @@ export const createTask = task => {
   });
 };
 
-// updateTask: makes an AJAX request that updates a task (takes Task not task.id as argument)
-export const updateTask = task => {
-  return $.ajax({
-    method: 'PATCH',
-    url: `api/tasks/${task.id}`,
-    data: { task }
-  });
-};
-
 // plural
 export const fetchTasks = projectID => {
   return $.ajax({
@@ -32,20 +23,12 @@ export const fetchTasksByProject = projectID => {
   });
 };
 
-// singular
-export const fetchTask = id => (
-  $.ajax({
-    method: 'GET',
-    url: `api/tasks/${id}`
-  })
-);
-
-// TODO figure out if this should be nested -- match the routes.rb file
-export const fetchTasksByTeam = teamId => {
+// updateTask: makes an AJAX request that updates a task (takes Task not task.id as argument)
+export const updateTask = task => {
   return $.ajax({
-    method: 'GET',
-    url: `api/teams/${teamId}/tasks`,
-    data: { type: "TASKS-BY-TEAM" }
+    method: 'PATCH',
+    url: `api/tasks/${task.id}`,
+    data: { task }
   });
 };
 

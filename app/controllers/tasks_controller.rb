@@ -14,6 +14,14 @@ class TasksController < ApplicationController
     render json: @task
   end
 
+  def index
+    render json: Task.all.where(user_id: current_user.id)
+  end
+
+  def show
+    render json: Task.find(params[:id])
+  end
+
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
@@ -23,13 +31,6 @@ class TasksController < ApplicationController
     end
   end
 
-  def show
-    render json: Task.find(params[:id])
-  end
-
-  def index
-    render json: Task.all.where(user_id: current_user.id)
-  end
 
   private
   def task_params

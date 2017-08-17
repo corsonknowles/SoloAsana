@@ -16,18 +16,18 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-		width									: '50%',
-		maxWidth							: '575px',
+    width                 : '50%',
+    maxWidth              : '575px',
     minWidth              : '500px',
-		maxHeight							: '585px',
-		height								: '80%',
-		display								: 'flex',
-		justifyContent				: 'center',
-		alignItems						: 'center',
-		color									: '#49505b',
-		fontWeight						:	'bold',
-		pointerEvents	        : 'auto',
-		borderRadius					: '10px'
+    maxHeight             : '585px',
+    height                : '80%',
+    display               : 'flex',
+    justifyContent        : 'center',
+    alignItems            : 'center',
+    color                 : '#49505b',
+    fontWeight            :  'bold',
+    pointerEvents         : 'auto',
+    borderRadius          : '10px'
 
   }
 };
@@ -50,7 +50,7 @@ class PhotoUpload extends React.Component {
 
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
-		this.closeModal = this.closeModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
 
     this.onImageDrop = this.onImageDrop.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);

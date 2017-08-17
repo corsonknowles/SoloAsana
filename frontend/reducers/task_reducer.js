@@ -2,8 +2,6 @@ import {
   RECEIVE_TASKS,
   RECEIVE_TASK,
   DELETE_TASK,
-  RECEIVE_ERRORS,
-  CLEAR_ERRORS,
   RECEIVE_TASKS_BY_PROJECT
 
   } from '../actions/tasks_actions';
