@@ -64,6 +64,7 @@ class SessionForm extends React.Component {
   }
 
   handleChange(event) {
+    if( !event ) event = window.event;
     const target = event.target;
     const name = target.name;
     this.setState({
@@ -72,6 +73,7 @@ class SessionForm extends React.Component {
   }
 
   handleSubmit(event, type, user){
+    if( !event ) event = window.event;
 
     return () => {
       if (user === undefined) {
@@ -111,12 +113,14 @@ class SessionForm extends React.Component {
   }
 
   launchDemo(event) {
+    if( !event ) event = window.event;
     event.preventDefault();
     this.openModal();
     setTimeout(() => this.handleDemoLogin(event), 1000);
   }
 
   handleDemoLogin(event) {
+    if( !event ) event = window.event;
 
     this.setState({pending: true})
 
