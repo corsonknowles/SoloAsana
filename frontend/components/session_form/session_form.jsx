@@ -23,7 +23,7 @@ const customStyles = {
     alignItems            : 'center',
     color                 : '#49505b',
     fontWeight            : 'bold',
-    pointerEvents         : 'auto',
+    pointerchangeEvents         : 'auto',
     borderRadius          : '10px'
   }
 };
@@ -63,17 +63,17 @@ class SessionForm extends React.Component {
     }
   }
 
-  handleChange(event) {
-    if( !event ) event = window.event;
-    const target = event.target;
+  handleChange(changeEvent) {
+    if( !changeEvent ) changeEvent = window.changeEvent;
+    const target = changeEvent.target;
     const name = target.name;
     this.setState({
-      [name]: event.target.value
+      [name]: changeEvent.target.value
     });
   }
 
-  handleSubmit(event, type, user){
-    if( !event ) event = window.event;
+  handleSubmit(changeEvent, type, user){
+    if( !changeEvent ) changeEvent = window.changeEvent;
 
     return () => {
       if (user === undefined) {
@@ -112,15 +112,15 @@ class SessionForm extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
-  launchDemo(event) {
-    if( !event ) event = window.event;
-    event.preventDefault();
+  launchDemo(changeEvent) {
+    if( !changeEvent ) changeEvent = window.changeEvent;
+    changeEvent.prchangeEventDefault();
     this.openModal();
-    setTimeout(() => this.handleDemoLogin(event), 1000);
+    setTimeout(() => this.handleDemoLogin(changeEvent), 1000);
   }
 
-  handleDemoLogin(event) {
-    if( !event ) event = window.event;
+  handleDemoLogin(changeEvent) {
+    if( !changeEvent ) changeEvent = window.changeEvent;
 
     this.setState({pending: true})
 
@@ -141,7 +141,7 @@ class SessionForm extends React.Component {
           email: "awesome.user@example.com"
         };
 
-        setTimeout(this.handleSubmit(event, "login", user), 1550);
+        setTimeout(this.handleSubmit(changeEvent, "login", user), 1550);
       }
 
       disableButtons() {
@@ -187,7 +187,7 @@ class SessionForm extends React.Component {
 
                 <div className="login-form-container">
 
-                  <button className="white demo" onClick={(event) => this.launchDemo(event)}>Check Out the DEMO Account</button>
+                  <button className="white demo" onClick={(changeEvent) => this.launchDemo(changeEvent)}>Check Out the DEMO Account</button>
 
                   <Modal
                     isOpen={this.state.modalIsOpen}
@@ -201,7 +201,7 @@ class SessionForm extends React.Component {
                       { this.renderErrors() }
                       <h2>Register or Log In</h2>
 
-                      <button disabled={!!(this.state.pending)} onClick={ (event) => this.handleDemoLogin(event)}>
+                      <button disabled={!!(this.state.pending)} onClick={ (changeEvent) => this.handleDemoLogin(changeEvent)}>
                         Demo User
                       </button>
 
@@ -210,7 +210,7 @@ class SessionForm extends React.Component {
 
                         <input type="text" name="email" id="email"
                           value={this.state.email}
-                          onChange={(event) => this.handleChange(event)}
+                          onChange={(changeEvent) => this.handleChange(changeEvent)}
                           className="login-input"
                           placeholder="recruiter.inquiries@soloasana.com"
                           />
@@ -219,7 +219,7 @@ class SessionForm extends React.Component {
 
                         <input type="password" name="password" id="password"
                           value={this.state.password}
-                          onChange={(event) => this.handleChange(event)}
+                          onChange={(changeEvent) => this.handleChange(changeEvent)}
                           className="login-input"
                           placeholder="6 characters or more"
                           />
@@ -227,11 +227,11 @@ class SessionForm extends React.Component {
                       </div>
 
                       <div>
-                        <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'signup')}>
+                        <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit(changeEvent, 'signup')}>
                           Register
                         </button>
 
-                        <button disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'login')}>
+                        <button disabled={!!(this.state.pending)} onClick={this.handleSubmit(changeEvent, 'login')}>
                           Log In
                         </button>
                       </div>
