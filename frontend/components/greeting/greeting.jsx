@@ -75,17 +75,15 @@ class Greeting extends React.Component {
     });
   }
 
-  handleSubmit(event, user){
-    return () => {
-      let user = this.currentUser;
-      user.username = this.state.username;
-      user.role = this.state.role;
-      user.department = this.state.department;
-      user.about = this.state.about;
+  handleSubmit(){
+    let user = this.currentUser;
+    user.username = this.state.username;
+    user.role = this.state.role;
+    user.department = this.state.department;
+    user.about = this.state.about;
 
-      this.props.updateUser(user);
-      this.closeModal()
-    };
+    this.props.updateUser(user);
+    this.closeModal()
   }
 
   renderErrors(){
@@ -178,7 +176,7 @@ class Greeting extends React.Component {
                   placeholder="At work I run dev ops. At home, I rescue kittens."
                   />
 
-                <button className="blue" onClick={(event) => this.handleSubmit(event)}>
+                <button className="blue" onClick={this.handleSubmit}>
                   Update Profile
                 </button>
               </div>
