@@ -46,7 +46,7 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyDown (event, projectID, i) {
+  handleKeyDown (projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -85,7 +85,7 @@ class Projects extends React.Component {
     }
   }
 
-  handleKeyUp (event, projectID, i) {
+  handleKeyUp (projectID, i) {
 
     return (event) => {
       const key = event.key;
@@ -130,8 +130,8 @@ class Projects extends React.Component {
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
-              onKeyUp={this.handleKeyUp(event, projectID, i)}
-              onKeyDown={this.handleKeyDown(event, projectID, i)}
+              onKeyUp={this.handleKeyUp(projectID, i)}
+              onKeyDown={this.handleKeyDown(projectID, i)}
             />
         </NavLink>
 
