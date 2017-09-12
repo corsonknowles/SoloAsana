@@ -64,7 +64,7 @@ class SessionForm extends React.Component {
   }
 
   handleChange(event) {
-    if( !event ) event = window.event;
+
     const target = event.target;
     const name = target.name;
     const val = target.value
@@ -119,7 +119,6 @@ class SessionForm extends React.Component {
   }
 
   handleDemoLogin(event) {
-    if( !event ) event = window.event;
 
     this.setState({pending: true});
 
