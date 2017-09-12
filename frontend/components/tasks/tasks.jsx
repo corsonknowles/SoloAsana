@@ -82,7 +82,7 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyDown (event, taskID, i) {
+    handleKeyDown (taskID, i) {
       return (event) => {
         const key = event.key;
         const keyCode = event.keyCode;
@@ -126,7 +126,7 @@ class Tasks extends React.Component {
       }
     }
 
-    handleKeyUp (event, taskID, i) {
+    handleKeyUp (taskID, i) {
       return (event) => {
         const key = event.key;
         const keyCode = event.keyCode;
@@ -171,8 +171,8 @@ class Tasks extends React.Component {
                   defaultValue={this.props.tasks[taskNumber].title}
                   className="tasks-item-row"
                   placeholder="Enter your new task here"
-                  onKeyUp={this.handleKeyUp(event, taskNumber, i)}
-                  onKeyDown={this.handleKeyDown(event, taskNumber, i)}
+                  onKeyUp={this.handleKeyUp(taskNumber, i)}
+                  onKeyDown={this.handleKeyDown(taskNumber, i)}
 
                 />
               )
