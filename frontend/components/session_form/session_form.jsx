@@ -67,15 +67,14 @@ class SessionForm extends React.Component {
     if( !event ) event = window.event;
     const target = event.target;
     const name = target.name;
+    const val = target.value
     this.setState({
-      [name]: event.target.value
+      [name]: val
     });
   }
 
-  handleSubmit(event, type, user){
-    if( !event ) event = window.event;
-
-    return () => {
+  handleSubmit(type, user){
+    return (event) => {
       if (user === undefined) {
         user = this.state;
         user.username = "Awesome User";
@@ -122,7 +121,7 @@ class SessionForm extends React.Component {
   handleDemoLogin(event) {
     if( !event ) event = window.event;
 
-    this.setState({pending: true})
+    this.setState({pending: true});
 
     this.setState({'username': '', 'password': ''});
 
@@ -141,7 +140,7 @@ class SessionForm extends React.Component {
           email: "awesome.user@example.com"
         };
 
-        setTimeout(this.handleSubmit(event, "login", user), 1550);
+        setTimeout(this.handleSubmit("login", user), 1550);
       }
 
       disableButtons() {
@@ -227,11 +226,11 @@ class SessionForm extends React.Component {
                       </div>
 
                       <div>
-                        <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'signup')}>
+                        <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit('signup')}>
                           Register
                         </button>
 
-                        <button disabled={!!(this.state.pending)} onClick={this.handleSubmit(event, 'login')}>
+                        <button disabled={!!(this.state.pending)} onClick={this.handleSubmit('login')}>
                           Log In
                         </button>
                       </div>
