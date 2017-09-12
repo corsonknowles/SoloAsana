@@ -58,7 +58,7 @@ class PhotoUpload extends React.Component {
 
   handleSubmit(){
 
-    return () => {
+    return (event) => {
       let user = this.currentUser;
       user.photo = this.state.photo;
 

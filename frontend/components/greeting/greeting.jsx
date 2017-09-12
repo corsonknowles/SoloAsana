@@ -67,7 +67,6 @@ class Greeting extends React.Component {
   componentWillUnmount() { this.props.clearErrors()};
 
   handleChange(event) {
-    if( !event ) event = window.event;
     const target = event.target;
     const name = target.name;
     let val = target.value || "";
@@ -77,7 +76,6 @@ class Greeting extends React.Component {
   }
 
   handleSubmit(event, user){
-    if( !event ) event = window.event;
     return () => {
       let user = this.currentUser;
       user.username = this.state.username;
