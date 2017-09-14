@@ -46,7 +46,6 @@ class Projects extends React.Component {
       const keyCode = event.keyCode;
 
       if (key === 'Enter' || keyCode === 13) {
-
         const newProject = {
           name: "",
           team_id: 1,

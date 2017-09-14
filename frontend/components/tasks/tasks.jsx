@@ -103,7 +103,7 @@ class Tasks extends React.Component {
         let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
       if (nextItem) {
         nextItem.focus();
-        nextItem.select();
+        // nextItem.select();
       }
     } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
       event.preventDefault();
@@ -131,14 +131,14 @@ class Tasks extends React.Component {
         let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
-          previousItem.select();
+          // previousItem.select();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
         let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
-          nextItem.select();
+          // nextItem.select();
         }
 
       } else {
