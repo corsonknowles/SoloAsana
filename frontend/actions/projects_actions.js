@@ -7,7 +7,7 @@ export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const RECEIVE_ERRORS = 'RECEIVE_ERRORS';
 export const CLEAR_TASKS = 'CLEAR_TASKS';
 
-// sync actions
+// synchronous actions
 export const clearTasks = () => ({
   type: CLEAR_TASKS
 })
@@ -28,7 +28,7 @@ export const receiveProjects = projects => ({
 });
 
 
-// async actions
+// asynchronous actions
 export const createProject = project => dispatch => (
   PROJECTS.createProject(project)
     .then(savedProject => { dispatch(receiveProject(savedProject)) }

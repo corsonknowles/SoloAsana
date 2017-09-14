@@ -11,7 +11,7 @@ export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
 
-// ASYNC ACTIONS
+// asynchronous actions
 export const requestLogin = user => dispatch => {
   return APIUtil.login(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
@@ -39,7 +39,7 @@ export const updateUser = user => dispatch => {
   );
 };
 
-// // SYNC ACTIONS
+// synchronous actions
 export const clearErrors = () => ({
   type: CLEAR_ERRORS
 });
