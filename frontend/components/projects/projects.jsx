@@ -58,7 +58,7 @@ class Projects extends React.Component {
         if (nextItem) {
           nextItem.focus();
         }
-      } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+      } else if (event.target.value.length === 0 && Object.keys(this.props.projects).length > 1 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
         event.preventDefault();
         this.props.destroyProject(parseInt(projectID));
         this.props.history.push('/');

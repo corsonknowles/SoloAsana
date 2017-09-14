@@ -105,7 +105,7 @@ class Tasks extends React.Component {
         nextItem.focus();
         // nextItem.select();
       }
-    } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+    } else if (event.target.value.length === 0 && Object.keys(this.props.tasks).length > 1 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
       event.preventDefault();
       this.props.destroyTask(taskID);
       let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
