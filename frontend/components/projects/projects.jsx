@@ -38,6 +38,13 @@ class Projects extends React.Component {
     } else if (Object.keys(nextProps.projects).length === 0) {
       this.props.createProject(newProject2)
     }
+
+    // TODO solve this with routing or create a way for it to work in DidMount
+    // let firstProject = this.props.projects[0].id;
+    // let projectURL = `/projects/${firstProject}`;
+    // return (
+    //   <Redirect to={projectURL} />
+    // );
   }
 
   handleKeyDown (projectID, i) {
