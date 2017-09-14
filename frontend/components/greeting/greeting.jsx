@@ -34,7 +34,6 @@ class Greeting extends React.Component {
   constructor(props) {
     super(props)
 
-    // let props = this.props;
     let currentUser = props.currentUser;
     let username = currentUser.username || "";
     let role = currentUser.role || "";
@@ -192,4 +191,5 @@ class Greeting extends React.Component {
       </div>
     )}
   }
+  
   export default Greeting;

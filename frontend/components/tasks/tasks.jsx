@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import { Link, NavLink } from 'react-router-dom';
 import merge from 'lodash/merge';
 
