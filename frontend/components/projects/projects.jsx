@@ -24,12 +24,6 @@ class Projects extends React.Component {
     }
 
     this.props.fetchProjects()
-      // .then( () => {
-      //
-      //   if (Object.keys(this.props.projects).length === 0) {
-      //     this.props.createProject(newProject)
-      //   }
-      // });
   }
 
   componentWillReceiveProps (nextProps) {
@@ -51,12 +45,7 @@ class Projects extends React.Component {
       const key = event.key;
       const keyCode = event.keyCode;
 
-      // const value = event.target.value;
-      // const project = this.props.projects[projectID];
-
       if (key === 'Enter' || keyCode === 13) {
-        // project.name = value;
-        // this.props.updateProject(project);
 
         const newProject = {
           name: "",
@@ -69,7 +58,6 @@ class Projects extends React.Component {
         let nextItem = document.getElementById(String(parseInt(i) + 1))
         if (nextItem) {
           nextItem.focus();
-          nextItem.select();
         }
       } else if (event.target.value.length === 0 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
         event.preventDefault();
@@ -80,7 +68,6 @@ class Projects extends React.Component {
         if (previousItem) {
           previousItem.focus();
         }
-
       }
     }
   }
@@ -100,7 +87,6 @@ class Projects extends React.Component {
         let previousItem = document.getElementById(String(parseInt(i) - 1))
         if (previousItem) {
           previousItem.focus();
-          previousItem.select();
         }
 
       } else if (key === 'ArrowDown' || keyCode === 40) {
@@ -109,7 +95,6 @@ class Projects extends React.Component {
         let nextItem = document.getElementById(String(parseInt(i) + 1))
         if (nextItem) {
           nextItem.focus();
-          nextItem.select();
         }
       } else {
         this.props.updateProject(project);
@@ -133,27 +118,22 @@ class Projects extends React.Component {
               onKeyUp={this.handleKeyUp(projectID, i)}
               onKeyDown={this.handleKeyDown(projectID, i)}
             />
-        </NavLink>
-
+          </NavLink>
           )
         )}
 
-        <div className="spacer"></div>
+        <div className="spacer">
+        </div>
         <div className="project-help-text">
           &#9166; Enter Adds a New Project
         </div>
-
         <div className="project-help-text">
           &#9003; Delete Removes an Empty Project
         </div>
-
         <div className="project-help-text">
           Saving Changes is Automatic
         </div>
-
-
       </div>
   )}
-
 }
 export default withRouter(Projects);
