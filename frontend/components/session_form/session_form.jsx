@@ -206,6 +206,7 @@ class SessionForm extends React.Component {
                     onChange={(event) => this.handleChange(event)}
                     className="login-input"
                     placeholder="recruiter.inquiries@soloasana.com"
+                    disabled={!!(this.state.pending)}
                     />
 
                   <label htmlFor="password" className="login-label">PASSWORD</label>
@@ -215,6 +216,7 @@ class SessionForm extends React.Component {
                     onChange={(event) => this.handleChange(event)}
                     className="login-input"
                     placeholder="6 characters or more"
+                    disabled={!!(this.state.pending)}
                     />
                 </div>
 

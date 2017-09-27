@@ -51,6 +51,15 @@ class Projects extends React.Component {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
+      const target = event.target;
+      const value = target.value;
+      const empty = function _empty () {
+        value.length === 0
+      };
+      const deleteKeys = function _deleteKeys () {
+        key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46
+      };
+      // const mustHaveProject = Object.keys(this.props.projects).length
 
       if (key === 'Enter' || keyCode === 13) {
         const newProject = {
@@ -65,7 +74,7 @@ class Projects extends React.Component {
         if (nextItem) {
           nextItem.focus();
         }
-      } else if (event.target.value.length === 0 && Object.keys(this.props.projects).length > 1 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
+      } else if (empty && Object.keys(this.props.projects).length > 1 && deleteKeys) {
         event.preventDefault();
         this.props.destroyProject(parseInt(projectID));
         this.props.history.push('/');
