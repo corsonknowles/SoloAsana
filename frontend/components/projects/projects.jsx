@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter, Redirect } from 'react-router-dom';
 import merge from 'lodash/merge';
 
 class Projects extends React.Component {
@@ -37,22 +37,41 @@ class Projects extends React.Component {
       this.setState( { projects: nextProps.projects } )
     } else if (Object.keys(nextProps.projects).length === 0) {
       this.props.createProject(newProject2)
-    }
+    };
 
     // TODO solve this with routing or create a way for it to work in DidMount
     // let firstProject = this.props.projects[0].id;
-    // let projectURL = `/projects/${firstProject}`;
-    // return (
-    //   <Redirect to={projectURL} />
-    // );
+    // console.log(this.props.match.params.id);
+    // console.log((this.props.match.params.id));
+    // if (this.props.match.params.id) {
+    //   let firstProject = 108;
+    //   let projectURL = `/projects/${firstProject}`;
+    //   return (
+    //     <Redirect to={projectURL} />
+    //   );
+    // }
+
   }
+
+  // componentWillMount () {
+  //   // let firstProject = this.props.projects[0].id;
+  //   if (!!this.props.match.params.id) {
+  //
+  //     let firstProject = 111;
+  //     let projectURL = `/projects/${firstProject}`;
+  //     return (
+  //       <Redirect to={projectURL} />
+  //     );
+  //   }
+  //   console.log("did mount");
+  //   console.log(this.props.match.params.id);
+  //   console.log(!this.props.match.params.id);
+  // }
 
   handleKeyDown (projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
-
-      // const mustHaveProject = Object.keys(this.props.projects).length
 
       if (key === 'Enter' || keyCode === 13) {
         const newProject = {
