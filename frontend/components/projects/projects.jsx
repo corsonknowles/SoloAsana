@@ -51,14 +51,7 @@ class Projects extends React.Component {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
-      const target = event.target;
-      const value = target.value;
-      const empty = function _empty () {
-        value.length === 0
-      };
-      const deleteKeys = function _deleteKeys () {
-        key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46
-      };
+
       // const mustHaveProject = Object.keys(this.props.projects).length
 
       if (key === 'Enter' || keyCode === 13) {
@@ -74,14 +67,25 @@ class Projects extends React.Component {
         if (nextItem) {
           nextItem.focus();
         }
-      } else if (empty && Object.keys(this.props.projects).length > 1 && deleteKeys) {
-        event.preventDefault();
-        this.props.destroyProject(parseInt(projectID));
-        this.props.history.push('/');
+      } else {
+        const target = event.target;
+        const value = target.value;
+        const empty = (value.length === 0);
 
-        let previousItem = document.getElementById(String(parseInt(i) - 1))
-        if (previousItem) {
-          previousItem.focus();
+        const deleteKeys = (key === 'Delete' ||
+          key === 'Backspace' ||
+           keyCode === 8 ||
+           keyCode === 46);
+        const mustBeOneProject = (Object.keys(this.props.projects).length > 1);
+        if (empty && mustBeOneProject && deleteKeys) {
+          event.preventDefault();
+          this.props.destroyProject(parseInt(projectID));
+          this.props.history.push('/');
+
+          let previousItem = document.getElementById(String(parseInt(i) - 1))
+          if (previousItem) {
+            previousItem.focus();
+          }
         }
       }
     }

@@ -104,14 +104,19 @@ class Tasks extends React.Component {
         nextItem.focus();
         // nextItem.select();
       }
-    } else if (event.target.value.length === 0 && Object.keys(this.props.tasks).length > 1 && (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) ) {
-      event.preventDefault();
-      this.props.destroyTask(taskID);
-      let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
-      if (previousItem) {
-        previousItem.focus();
+    } else {
+        const empty = (event.target.value.length === 0);
+        const mustBeOneTask = (Object.keys(this.props.tasks).length > 1);
+        const deleteKeys = (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46);
+        if (empty && mustBeOneTask && deleteKeys) {
+          event.preventDefault();
+          this.props.destroyTask(taskID);
+          let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+          if (previousItem) {
+            previousItem.focus();
+          }
+        }
       }
-    }
     }
   }
 
