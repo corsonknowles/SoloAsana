@@ -114,6 +114,12 @@ class Tasks extends React.Component {
           let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
+          } else {
+            // this will focus on the last remaining task if all preceding ones are deleted
+            let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+            if (nextItem) {
+              nextItem.focus();
+            }
           }
         }
       }
