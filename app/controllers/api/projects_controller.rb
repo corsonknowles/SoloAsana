@@ -25,6 +25,8 @@ class Api::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update(project_params)
+      # current_user.latest_project = :id
+      # current_user.save
       render json: @project, include: :tasks
     else
       render json: @project.errors.full_messages, status: 422
@@ -34,6 +36,6 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :team, :user, :team_id, :user_id)
+    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :id, :created_at, :updated_at, :tasks)
   end
 end

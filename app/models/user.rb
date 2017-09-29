@@ -6,6 +6,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: :true
 
   after_initialize :ensure_session_token
+  after_touch :ensure_latest_project
 
   has_many :tasks
   has_many :projects
@@ -36,6 +37,14 @@ class User < ApplicationRecord
 
   def ensure_session_token
     ensure_session_token_uniqueness unless session_token
+  end
+
+  def ensure_latest_project
+    unless latest_project
+      unless self.projects.empty?
+        self.latest_project = self.projects.first
+      end
+    end
   end
 
   def new_session_token
