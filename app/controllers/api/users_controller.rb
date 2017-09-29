@@ -30,7 +30,8 @@ class Api::UsersController < ApplicationController
       :photo,
       :role,
       :department,
-      :about
+      :about,
+      :latest_project
     )
   end
 
@@ -40,7 +41,8 @@ class Api::UsersController < ApplicationController
       :photo,
       :role,
       :department,
-      :about
+      :about,
+      :latest_project
     )
   end
 end
