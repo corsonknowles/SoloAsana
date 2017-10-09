@@ -53,6 +53,10 @@ class Projects extends React.Component {
 
   }
 
+  // componentDidMount () {
+  //   this.currentUser.latest_project =
+  // }
+
   // componentWillMount () {
   //   // let firstProject = this.props.projects[0].id;
   //   if (!!this.props.match.params.id) {

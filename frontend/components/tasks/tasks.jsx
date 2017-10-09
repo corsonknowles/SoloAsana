@@ -173,7 +173,6 @@ class Tasks extends React.Component {
                 placeholder="Enter your new task here"
                 onKeyUp={this.handleKeyUp(taskNumber, i)}
                 onKeyDown={this.handleKeyDown(taskNumber, i)}
-
               />
             )
           )}
