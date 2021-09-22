@@ -20,5 +20,4 @@ class Api::TeamsControllerTest < ActionDispatch::IntegrationTest
     get api_teams_destroy_url
     assert_response :success
   end
-
 end
