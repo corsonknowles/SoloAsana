@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   validates :username, :email, :password_digest, :session_token, presence: true
   validates :email, uniqueness: true
-  validates :password, length: { minimum: 6 }, allow_nil: :true
+  validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
   after_touch :ensure_latest_project
@@ -19,7 +19,8 @@ class User < ApplicationRecord
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
-    return nil unless user
+    return unless user
+
     user.password_is?(password) ? user : nil
   end
 
@@ -40,11 +41,10 @@ class User < ApplicationRecord
   end
 
   def ensure_latest_project
-    unless latest_project
-      unless self.projects.empty?
-        self.latest_project = self.projects.first
-      end
-    end
+    return unless latest_project
+    return unless projects.empty?
+
+    self.latest_project = projects.first
   end
 
   def new_session_token
