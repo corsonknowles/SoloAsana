@@ -1,4 +1,6 @@
 class Api::TeamsController < ApplicationController
+  before_action :require_logged_in!
+
   def create
     @team = current_user.teams.new(team_params)
     if @team.save

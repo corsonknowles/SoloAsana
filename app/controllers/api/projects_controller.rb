@@ -1,4 +1,6 @@
 class Api::ProjectsController < ApplicationController
+  before_action :require_logged_in!
+
   def create
     @project = current_user.projects.new(project_params)
     if @project.save

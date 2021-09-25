@@ -31,21 +31,35 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:teams) }
 
   describe '.find_by_credentials' do
+    subject { described_class.find_by_credentials(email, example_password) }
+
+    let(:user) { create :user }
+    let(:example_password) { 'example_password' }
+    let(:email) { user.email }
+
+    context 'when set to the example password' do
+      before do
+        user.password = example_password
+        user.save!
+      end
+
+      it { is_expected.to eq user }
+    end
+
+    it { is_expected.to be nil }
   end
 
   describe '#password=' do
   end
 
   describe '#password_is?' do
-    subject(:password_check) { user.password_is?(example_password) }
+    subject { user.password_is?(example_password) }
 
-    let(:user) { create(:user) }
     let(:example_password) { 'example_password' }
+    let(:user) { create(:user) }
 
     context 'when set to the example password' do
-      before do
-        user.password = example_password
-      end
+      before { user.password = example_password }
 
       it { is_expected.to be true }
     end
@@ -58,10 +72,12 @@ RSpec.describe User, type: :model do
 
     let(:user) { create(:user) }
 
-    it 'returns a token' do
-    end
+    context 'with multiple users' do
+      let(:user_id) { user.id }
+      let(:user2) { create(:user) }
 
-    it 'will never match another user session token' do
+      it 'will never match another user session token' do
+      end
     end
   end
 end
