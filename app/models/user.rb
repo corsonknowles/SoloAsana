@@ -41,8 +41,8 @@ class User < ApplicationRecord
   end
 
   def ensure_latest_project
-    return unless latest_project
-    return unless projects.empty?
+    return if latest_project
+    return if projects.empty?
 
     self.latest_project = projects.first
   end
