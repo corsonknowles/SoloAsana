@@ -50,6 +50,14 @@ RSpec.describe User, type: :model do
   end
 
   describe '#password=' do
+    subject { user.password = example_password }
+
+    let(:user) { create :user }
+    let(:example_password) { 'example_password' }
+
+    it 'alters the password digest' do
+      expect { subject }.to(change { user.password_digest })
+    end
   end
 
   describe '#password_is?' do
