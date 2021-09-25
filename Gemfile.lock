@@ -78,6 +78,9 @@ GEM
     execjs (2.8.1)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
     ffi (1.15.4)
@@ -234,6 +237,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   factory_bot
+  factory_bot_rails
   faker
   figaro
   jbuilder (~> 2.5)

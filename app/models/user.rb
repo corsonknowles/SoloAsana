@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  about           :string
+#  department      :string
+#  email           :string           not null
+#  latest_project  :integer
+#  password_digest :string           not null
+#  photo           :string
+#  role            :string
+#  session_token   :string
+#  username        :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email)
+#
+# The User allows for login and profile settings.
+# Tasks and Projects belong to User.
 class User < ApplicationRecord
   attr_reader :password
 
@@ -44,7 +67,7 @@ class User < ApplicationRecord
     return if latest_project
     return if projects.empty?
 
-    self.latest_project = projects.first
+    self.latest_project = projects.last
   end
 
   def new_session_token
