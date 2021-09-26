@@ -1,7 +1,17 @@
+name: Rubocop
+
 jobs:
   rubocop-test:
     name: Rubocop
     runs-on: ubuntu-latest
+    on:
+      push:
+        branches: [ master ]
+      pull_request:
+        branches: [ master ]
+
+      # Allows you to run this workflow manually from the Actions tab
+      workflow_dispatch:
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-ruby@v1
