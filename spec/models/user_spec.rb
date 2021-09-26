@@ -24,6 +24,8 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:username) }
   it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_presence_of(:password_digest) }
+  it { is_expected.to validate_presence_of(:session_token) }
   it { is_expected.to validate_presence_of(:password).allow_nil }
 
   it { is_expected.to have_many(:tasks) }
@@ -37,22 +39,19 @@ RSpec.describe User, type: :model do
     let(:example_password) { 'example_password' }
     let(:email) { user.email }
 
-    context 'when set to the example password' do
-      before do
-        user.password = example_password
-        user.save!
-      end
+    it { is_expected.to be nil }
+
+    context 'when user has the example password' do
+      let(:user) { create(:user, password: example_password) }
 
       it { is_expected.to eq user }
     end
-
-    it { is_expected.to be nil }
   end
 
   describe '#password=' do
     subject { user.password = example_password }
 
-    let(:user) { create :user }
+    let(:user) { build :user }
     let(:example_password) { 'example_password' }
 
     it 'alters the password digest' do
@@ -63,11 +62,11 @@ RSpec.describe User, type: :model do
   describe '#password_is?' do
     subject { user.password_is?(example_password) }
 
+    let(:user) { build(:user) }
     let(:example_password) { 'example_password' }
-    let(:user) { create(:user) }
 
     context 'when set to the example password' do
-      before { user.password = example_password }
+      let(:user) { build(:user, password: example_password) }
 
       it { is_expected.to be true }
     end
@@ -80,12 +79,10 @@ RSpec.describe User, type: :model do
 
     let(:user) { create(:user) }
 
-    context 'with multiple users' do
-      let(:user_id) { user.id }
-      let(:user2) { create(:user) }
-
-      it 'will never match another user session token' do
-      end
+    it "changes the session token" do
+      expect { reset }.to(change { user.session_token })
     end
+
+    it { is_expected.to eq user.session_token }
   end
 end
