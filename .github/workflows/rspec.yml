@@ -65,8 +65,7 @@ jobs:
     - name: Setup test database
       env:
         RAILS_ENV: test
-      run: |
-        bin/rails db:setup
+      run: bin/setup
 
     - name: Run tests
       run: bundle exec rspec
