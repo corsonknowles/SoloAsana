@@ -1,25 +1,38 @@
 name: Rubocop
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
+name: My workflow
+on: [push, pull_request]
 jobs:
-  rubocop-test:
-    name: Rubocop
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ env.RUBY_VERSION }}
-      - name: Install Rubocop
-        run: gem install rubocop
-      - name: Check code
-        run: rubocop
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.5 # Not needed with a .ruby-version file
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - run: bundle exec rubocop
+
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+#
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
+#
+# jobs:
+#   rubocop-test:
+#     name: Rubocop
+#     runs-on: ubuntu-latest
+#
+#     steps:
+#       - uses: actions/checkout@v1
+#       - uses: actions/setup-ruby@v1
+#         with:
+#           ruby-version: ${{ env.RUBY_VERSION }}
+#       - name: Install Rubocop
+#         run: gem install rubocop
+#       - name: Check code
+#         run: rubocop
