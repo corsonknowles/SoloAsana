@@ -1,6 +1,5 @@
 name: Rubocop
 
-name: My workflow
 on: [push, pull_request]
 jobs:
   test:
