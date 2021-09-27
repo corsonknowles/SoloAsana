@@ -72,8 +72,7 @@ jobs:
         RAILS_ENV: test
         PGHOST: SoloAsana_test
         PGUSER: SoloAsana
-        run: |
-          bin/rails db:setup
+      run: bin/rails setup
 
     - name: Run tests
       run: bundle exec rspec
