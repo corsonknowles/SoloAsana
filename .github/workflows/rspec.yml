@@ -48,10 +48,10 @@ jobs:
     #     path: vendor/bundle
     #     key: bundle-${{ hashFiles('**/Gemfile.lock') }}
 
-    - name: Setup test database
-      env:
-        RAILS_ENV: test
-      run: bin/rails db:setup
+    # - name: Setup test database
+    #   env:
+    #     RAILS_ENV: test
+    #   run: bin/rails db:setup
 
     - name: Run tests
       run: bundle exec rspec
