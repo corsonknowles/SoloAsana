@@ -28,6 +28,10 @@ jobs:
         image: postgres:9
         ports:
         - 5432:5432
+        env:
+          RAILS_ENV: test
+          PGHOST: SoloAsana_test
+          PGUSER: SoloAsana
 
     steps:
     - uses: actions/checkout@v2
