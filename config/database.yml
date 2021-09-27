@@ -59,8 +59,8 @@ test:
   <<: *default
   database: <%= ENV.fetch('PG_DATABASE', 'SoloAsana_test') %>
   host:     <%= ENV.fetch('PG_HOST', '/var/run/postgresql') %>
-  username: <%= ENV.fetch('PG_USER', nil) %>
-  password: <%= ENV.fetch('PG_PASSWORD', nil) %>
+  username: <%= ENV.fetch('PG_USER', 'SoloAsana') %>
+  password: <%= ENV.fetch('PG_PASSWORD', 'password') %>
   port:     <%= ENV.fetch('PG_PORT', 5432) %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
