@@ -28,7 +28,6 @@ jobs:
         image: postgres:9
         ports:
         - 5432:5432
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
     - uses: actions/checkout@v2
@@ -68,15 +67,16 @@ jobs:
     - name: Yarn install
       run: yarn install
 
-    - name: Setup DB, Run tests
+    - name: Setup test database
       env:
+        RAILS_ENV: test
         PGHOST: SoloAsana_test
         PGUSER: SoloAsana
-        PGPORT: ${{ job.services.postgres.ports[5432] }}
-        RAILS_ENV: test
-      run: |
-        bin/rails db:create db:schema:load
-        bundle exec rspec
+        run: |
+          bin/rails db:setup
+
+    - name: Run tests
+      run: bundle exec rspec
     # - name: Set up Ruby
     # # To automatically get bug fixes and new Ruby versions for ruby/setup-ruby,
     # # change this to (see https://github.com/ruby/setup-ruby#versioning):
