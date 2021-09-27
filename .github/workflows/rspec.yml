@@ -26,11 +26,11 @@ jobs:
 
     services:
       postgres:
-        image: postgres:10
-        ports:
-        - 5432:5432
+        image: postgres:12
+        ports: ["5432:5432"]
         env:
           RAILS_ENV: test
+          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -64,6 +64,14 @@ jobs:
       run: |
         bin/rails db:setup
         bundle exec rspec
+
+
+    # # TODO: Set this up after configuring SimpleCov
+    # - name: Upload Code Coverage
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: code-coverage
+    #     path: coverage/
 
 
     # - name: Gem cache
