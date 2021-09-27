@@ -31,17 +31,20 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
     - uses: actions/setup-node@v1
       with:
         node-version: '6.x'
         registry-url: 'https://registry.npmjs.org'
 
-    - name: Gem cache
-      id: cache-bundle
-      uses: actions/cache@v2
-      with:
-        path: vendor/bundle
-        key: bundle-${{ hashFiles('**/Gemfile.lock') }}
+    # - name: Gem cache
+    #   id: cache-bundle
+    #   uses: actions/cache@v2
+    #   with:
+    #     path: vendor/bundle
+    #     key: bundle-${{ hashFiles('**/Gemfile.lock') }}
 
     - name: Setup test database
       env:
