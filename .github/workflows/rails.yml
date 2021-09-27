@@ -22,11 +22,11 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.5.x
-      - name: Install Node dependencies
       - uses: actions/setup-node@v1
         with:
           node-version: '6.x'
           registry-url: 'https://registry.npmjs.org'
+      - name: Install Node dependencies
         run: npm install
       - uses: nanasess/setup-chromedriver@master
       - name: Build and run tests
