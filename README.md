@@ -1,4 +1,7 @@
 # README
+![example workflow](https://github.com/corsonknowles/SoloAsana/.github/workflows/rails.yml/badge.svg)
+![example workflow](https://github.com/corsonknowles/SoloAsana/.github/workflows/rubocop.yml/badge.svg)
+
 
 # SoloAsana
 
