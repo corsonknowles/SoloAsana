@@ -22,10 +22,14 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.5.x
-      - uses: borales/actions-yarn@v2.0.0
+      - uses: actions/setup-node@v1
         with:
           node-version: '6.x'
-          cmd: install
+          registry-url: 'https://registry.npmjs.org'
+      # - uses: borales/actions-yarn@v2.0.0
+      #   with:
+      #     node-version: '6.x'
+      #     cmd: install
       - name: Build and run tests
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/test
