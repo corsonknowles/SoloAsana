@@ -24,6 +24,7 @@ jobs:
           ruby-version: 2.5.x
       - uses: borales/actions-yarn@v2.0.0
         with:
+          node-version: '6.x'
           cmd: install
       - name: Build and run tests
         env:

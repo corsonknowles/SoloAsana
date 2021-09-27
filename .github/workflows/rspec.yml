@@ -58,6 +58,7 @@ jobs:
         PG_HOST: localhost
         PG_USER: SoloAsana
         PG_PASSWORD: password
+        POSTGRES_PASSWORD: password
         RAILS_ENV: test
         WITH_COVERAGE: true
         DISABLE_SPRING: 1
