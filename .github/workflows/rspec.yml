@@ -38,7 +38,7 @@ jobs:
 
     - name: Gem cache
       id: cache-bundle
-      uses: actions/cache@v1
+      uses: actions/cache@v2
       with:
         path: vendor/bundle
         key: bundle-${{ hashFiles('**/Gemfile.lock') }}
@@ -48,7 +48,8 @@ jobs:
         RAILS_ENV: test
       run: |
         gem install bundler
-        bundle install --jobs 4 --retry 3 --path vendor/bundle
+        bundle exec bundle install --jobs 4 --retry 3 --path vendor/bundle
+
     - name: Install yarn
       run: npm install -g yarn
 
