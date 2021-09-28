@@ -74,6 +74,7 @@ jobs:
           PG_USER: SoloAsana
           PG_PASSWORD: password
           PG_PORT: 5432
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}} 
         with:
           coverageCommand: |
             export DISPLAY=:99
