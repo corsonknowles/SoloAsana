@@ -64,7 +64,7 @@ jobs:
       #     ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
 
       - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v2.7.5
+        uses: paambaati/codeclimate-action
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
           RAILS_ENV: test
@@ -74,7 +74,7 @@ jobs:
           PG_USER: SoloAsana
           PG_PASSWORD: password
           PG_PORT: 5432
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}} 
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
         with:
           coverageCommand: |
             export DISPLAY=:99
