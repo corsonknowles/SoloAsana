@@ -54,9 +54,7 @@ jobs:
           bundle exec rspec
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
-        coverageLocations: /coverage:simplecov
+        coverageLocations: ${{github.workspace}}/coverage:simplecov
+        # coverageCommand: bundle exec rspec
         env:
           CC_TEST_REPORTER_ID: d5fc21d43ec274f192880fb1facefe7c7e4632b663bdd433908a953765945723
-
-
-# coverageCommand
