@@ -29,7 +29,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
-  after_touch :ensure_latest_project
+  # after_touch :ensure_latest_project
 
   has_many :tasks
   has_many :projects
@@ -63,12 +63,13 @@ class User < ApplicationRecord
     ensure_session_token_uniqueness unless session_token
   end
 
-  def ensure_latest_project
-    return if latest_project
-    return if projects.empty?
-
-    self.latest_project = projects.last
-  end
+  # NOTE: feature under development
+  # def ensure_latest_project
+  #   return if latest_project
+  #   return if projects.empty?
+  #
+  #   self.latest_project = projects.last
+  # end
 
   def new_session_token
     SecureRandom.urlsafe_base64

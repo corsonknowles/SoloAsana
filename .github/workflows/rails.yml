@@ -10,6 +10,10 @@ jobs:
         env:
           RAILS_ENV: test
           POSTGRES_PASSWORD: password
+          PG_HOST: /var/run/postgresql
+          PG_USER: SoloAsana
+          PG_PASSWORD: password
+          PG_PORT: 5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -34,6 +38,11 @@ jobs:
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+          POSTGRES_PASSWORD: password
+          PG_HOST: /var/run/postgresql
+          PG_USER: SoloAsana
+          PG_PASSWORD: password
+          PG_PORT: 5432
         run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &

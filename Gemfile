@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'selenium-webdriver'
+  gem 'simplecov', require: false
   gem 'shoulda-matchers'
 end
 

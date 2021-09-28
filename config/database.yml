@@ -58,10 +58,10 @@ development:
 test:
   <<: *default
   database: <%= ENV.fetch('PG_DATABASE', 'SoloAsana_test') %>
-  host:     <%= ENV.fetch('PG_HOST', '/var/run/postgresql') %>
-  username: <%= ENV.fetch('PG_USER', 'SoloAsana') %>
-  password: <%= ENV.fetch('PG_PASSWORD', 'password') %>
-  port:     <%= ENV.fetch('PG_PORT', 5432) %>
+  host:     <%= ENV.fetch('PG_HOST', '') %>
+  username: <%= ENV.fetch('PG_USER', '') %>
+  password: <%= ENV.fetch('PG_PASSWORD', '') %>
+  port:     <%= ENV.fetch('PG_PORT', '') %>
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
