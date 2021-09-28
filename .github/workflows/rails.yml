@@ -59,12 +59,21 @@ jobs:
           bundle exec rails db:setup
           bundle exec rspec
 
-      - name: Code Climate test reporter
+      # - name: Code Climate test reporter
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #     GIT_BRANCH: ${{github.event.workflow_run.head_branch }}
+      #     GIT_COMMIT_SHA: ${{github.event.workflow_run.head_commit.id }}
+      #   run: ./cc-test-reporter after-build -t simplecov --exit-code $?
+
+      - name: Format, sum & upload results to Code Climate
+        uses: paambaati/codeclimate-action@v2.7.4
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-          GIT_BRANCH: ${{github.event.workflow_run.head_branch }}
-          GIT_COMMIT_SHA: ${{github.event.workflow_run.head_commit.id }}
-        run: ./cc-test-reporter after-build -t simplecov --exit-code $?
+        with:
+          debug: true
+          coverageLocations: coverage/*.json:simplecov
+
 
       # - name: Publish code coverage
       #   run: |
