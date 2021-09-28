@@ -63,13 +63,8 @@ jobs:
           export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
           ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
 
-      # ${{secrets.CC_TEST_REPORTER_ID}}
-
-      # - name: Test & publish code coverage
-      #   uses: paambaati/codeclimate-action@v2.7.5
-      #   env:
-      #     CC_TEST_REPORTER_ID: d5fc21d43ec274f192880fb1facefe7c7e4632b663bdd433908a953765945723
-      #   with:
-      #     with:
-      #       coverageCommand: bundle exec rspec
-      #       coverageLocations: ${{github.workspace}}/coverage/.resultset.json:simplecov
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.7.5
+        with:
+          coverageCommand: bundle exec rspec
+          coverageLocations: ${{github.workspace}}/coverage/.resultset.json:simplecov
