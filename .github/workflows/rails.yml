@@ -66,14 +66,14 @@ jobs:
       #     GIT_COMMIT_SHA: ${{github.event.workflow_run.head_commit.id }}
       #   run: ./cc-test-reporter after-build -t simplecov --exit-code $?
 
-      - name: Format, sum & upload results to Code Climate
-        uses: paambaati/codeclimate-action@v2.7.5
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          debug: true
-          coverageLocations: coverage/.resultset.json:simplecov
-
+      # - name: Format, sum & upload results to Code Climate
+      #   uses: paambaati/codeclimate-action@v2.7.5
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #   with:
+      #     debug: true
+      #     coverageLocations: coverage/.resultset.json:simplecov
+      #
 
       # - name: Publish code coverage
       #   run: |
