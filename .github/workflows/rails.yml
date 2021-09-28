@@ -64,7 +64,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           GIT_BRANCH: ${{github.event.workflow_run.head_branch }}
           GIT_COMMIT_SHA: ${{github.event.workflow_run.head_commit.id }}
-        run: ./cc-test-reporter after-build --exit-code $?
+        run: ./cc-test-reporter after-build -t simplecov --exit-code $?
 
       # - name: Publish code coverage
       #   run: |
