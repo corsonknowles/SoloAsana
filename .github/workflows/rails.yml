@@ -58,10 +58,10 @@ jobs:
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup
           bundle exec rspec
-      - name: Publish code coverage
-        run: |
-          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-          ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
+      # - name: Publish code coverage
+      #   run: |
+      #     export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+      #     ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
 
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v2.7.5
