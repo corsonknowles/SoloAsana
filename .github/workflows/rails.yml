@@ -34,37 +34,12 @@ jobs:
       - name: Install Node dependencies
         run: npm install
       - uses: nanasess/setup-chromedriver@master
-      # - name: Setup Code Climate test-reporter
-      #   run: |
-      #     curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-      #     chmod +x ./cc-test-reporter
-      #     ./cc-test-reporter before-build
-      # - name: Build and run tests
-      #   env:
-      #     DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
-      #     RAILS_ENV: test
-      #     RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-      #     POSTGRES_PASSWORD: password
-      #     PG_HOST: /var/run/postgresql
-      #     PG_USER: SoloAsana
-      #     PG_PASSWORD: password
-      #     PG_PORT: 5432
-      #   run: |
-      #     export DISPLAY=:99
-      #     chromedriver --url-base=/wd/hub &
-      #     sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-      #     sudo apt-get -yqq install libpq-dev
-      #     gem install bundler
-      #     bundle install --jobs 4 --retry 3
-      #     bundle exec rails db:setup
-      #     bundle exec rspec
-      # - name: Publish code coverage
-      #   run: |
-      #     export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
-      #     ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
-
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action
+      - name: Setup Code Climate test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Build and run tests
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
           RAILS_ENV: test
@@ -74,14 +49,47 @@ jobs:
           PG_USER: SoloAsana
           PG_PASSWORD: password
           PG_PORT: 5432
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-        with:
-          coverageCommand: |
-            export DISPLAY=:99
-            chromedriver --url-base=/wd/hub &
-            sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
-            sudo apt-get -yqq install libpq-dev
-            gem install bundler
-            bundle install --jobs 4 --retry 3
-            bundle exec rails db:setup
-            bundle exec rspec
+        run: |
+          export DISPLAY=:99
+          chromedriver --url-base=/wd/hub &
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+          sudo apt-get -yqq install libpq-dev
+          gem install bundler
+          bundle install --jobs 4 --retry 3
+          bundle exec rails db:setup
+          bundle exec rspec
+
+      - name: Code Climate test reporter
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+          GIT_BRANCH: ${{github.event.workflow_run.head_branch }}
+          GIT_COMMIT_SHA: ${{github.event.workflow_run.head_commit.id }}
+        run: ./cc-test-reporter after-build --exit-code $?
+
+      # - name: Publish code coverage
+      #   run: |
+      #     export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+      #     ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}} -t simplecov
+
+      # - name: Test & publish code coverage
+      #   uses: paambaati/codeclimate-action
+      #   env:
+      #     DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
+      #     RAILS_ENV: test
+      #     RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      #     POSTGRES_PASSWORD: password
+      #     PG_HOST: /var/run/postgresql
+      #     PG_USER: SoloAsana
+      #     PG_PASSWORD: password
+      #     PG_PORT: 5432
+      #     CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+      #   with:
+      #     coverageCommand: |
+      #       export DISPLAY=:99
+      #       chromedriver --url-base=/wd/hub &
+      #       sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+      #       sudo apt-get -yqq install libpq-dev
+      #       gem install bundler
+      #       bundle install --jobs 4 --retry 3
+      #       bundle exec rails db:setup
+      #       bundle exec rspec
