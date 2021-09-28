@@ -72,7 +72,7 @@ jobs:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           debug: true
-          coverageLocations: /coverage/.resultset.json:simplecov
+          coverageLocations: /coverage/coverage.json:simplecov
 
 
       # - name: Publish code coverage
