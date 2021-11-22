@@ -47,6 +47,7 @@ class User < ApplicationRecord
 
   def reset_session_token!
     set_unique_session!
+    save!
     session_token
   end
 
@@ -77,6 +78,5 @@ class User < ApplicationRecord
     while User.find_by(session_token: session_token)
       self.session_token = new_session_token
     end
-    save!
   end
 end
