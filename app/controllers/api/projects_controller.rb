@@ -25,8 +25,6 @@ class Api::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update(project_params)
-      # current_user.latest_project = :id
-      # current_user.save
       render json: @project, include: :tasks
     else
       render json: @project.errors.full_messages, status: 422

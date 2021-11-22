@@ -4,7 +4,6 @@ import { Link, NavLink, withRouter, Redirect } from 'react-router-dom';
 import merge from 'lodash/merge';
 
 class Projects extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -121,7 +120,6 @@ class Projects extends React.Component {
   }
 
   handleKeyUp (projectID, i) {
-
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -136,9 +134,7 @@ class Projects extends React.Component {
         if (previousItem) {
           previousItem.focus();
         }
-
       } else if (key === 'ArrowDown' || keyCode === 40) {
-
         event.preventDefault();
         let nextItem = document.getElementById(String(parseInt(i) + 1))
         if (nextItem) {
@@ -169,9 +165,7 @@ class Projects extends React.Component {
           </NavLink>
           )
         )}
-
-        <div className="spacer">
-        </div>
+        <div className="spacer"></div>
         <div className="project-help-text">
           &#9166; Enter Adds a New Project
         </div>
@@ -182,7 +176,8 @@ class Projects extends React.Component {
           Saving Changes is Automatic
         </div>
       </div>
-  )}
+    )
+  }
 }
 
 export default withRouter(Projects);

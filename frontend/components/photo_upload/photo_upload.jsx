@@ -28,21 +28,17 @@ const customStyles = {
     fontWeight            :  'bold',
     pointerEvents         : 'auto',
     borderRadius          : '10px'
-
   }
 };
 
 class PhotoUpload extends React.Component {
-
   constructor(props) {
     super(props)
     this.state = {
-
       modalIsOpen: false,
       photo: this.props.currentUser.photo,
       uploadedFileCloudinaryUrl: '',
       pending: false
-
     }
 
     this.currentUser = this.props.currentUser;
@@ -57,7 +53,6 @@ class PhotoUpload extends React.Component {
   }
 
   handleSubmit(){
-
     return (event) => {
       let user = this.currentUser;
       user.photo = this.state.photo;
@@ -69,7 +64,6 @@ class PhotoUpload extends React.Component {
 
   renderErrors(){
     return(
-
       <ul className="errors">
         {this.props.errors.map( (error, i) => (
           <li className="eachError" key={`error-${i}`}>
@@ -93,7 +87,6 @@ class PhotoUpload extends React.Component {
   }
 
   onImageDrop(files) {
-
     this.setState({
       uploadedFile: files[0],
       pending: true
@@ -127,48 +120,43 @@ class PhotoUpload extends React.Component {
   }
 
   render() {
-
     return (
-    <div className="photo-container">
-
-      <button className="photo-button" onClick={this.openModal} >
-        <figure className="profile-photo">
-          <img className="profile-photo" src={this.state.photo}></img>
-
-        </figure>
-      </button>
-
-      <figcaption className="profile-photo-update">
-        <button className="photo-button photo-caption" onClick={this.openModal}>
-          {this.state.pending ? "Upload in progress" : "Update profile photo" }
+      <div className="photo-container">
+        <button className="photo-button" onClick={this.openModal} >
+          <figure className="profile-photo">
+            <img className="profile-photo" src={this.state.photo}></img>
+          </figure>
         </button>
-      </figcaption>
 
-      <div>
-        <Modal
-          isOpen={this.state.modalIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal}
-          style={customStyles}
-          contentLabel="Profile Photo"
-        >
-        <div className="file-upload">
-          <Dropzone className="dropzone"
-           multiple={false}
-           accept="image/*"
-           onDrop={this.onImageDrop.bind(this)}>
-           <div className="instructions">Drop an image</div>
-           <div className="instructions">Or, click to select a file to upload</div>
-         </Dropzone>
+        <figcaption className="profile-photo-update">
+          <button className="photo-button photo-caption" onClick={this.openModal}>
+            {this.state.pending ? "Upload in progress" : "Update profile photo" }
+          </button>
+        </figcaption>
+
+        <div>
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal}
+            style={customStyles}
+            contentLabel="Profile Photo"
+          >
+          <div className="file-upload">
+            <Dropzone className="dropzone"
+             multiple={false}
+             accept="image/*"
+             onDrop={this.onImageDrop.bind(this)}>
+             <div className="instructions">Drop an image</div>
+             <div className="instructions">Or, click to select a file to upload</div>
+           </Dropzone>
+          </div>
+          <button className="inner-modal" onClick={this.closeModal}>X</button>
+        </Modal>
         </div>
-
-        <button className="inner-modal" onClick={this.closeModal}>X</button>
-      </Modal>
-
       </div>
-
-    </div>
-  )}
+    )
+  }
 }
 
 export default PhotoUpload;

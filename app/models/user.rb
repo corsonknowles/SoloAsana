@@ -6,7 +6,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: :true
 
   after_initialize :ensure_session_token
-  after_touch :ensure_latest_project
+  # after_touch :ensure_latest_project # TODO: add front end and then enable this
 
   has_many :tasks
   has_many :projects
@@ -19,24 +19,22 @@ class User < ApplicationRecord
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
-    return nil unless user
-    user.password_is?(password) ? user : nil
-  end
-
-  def password_is?(password)
-    BCrypt::Password.new(password_digest).is_password?(password)
+    user if user&.password_is?(password)
   end
 
   def reset_session_token!
-    ensure_session_token_uniqueness
-    save!
+    set_unique_session!
     session_token
   end
 
   private
 
+  def password_is?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
+  end
+
   def ensure_session_token
-    ensure_session_token_uniqueness unless session_token
+    set_unique_session! unless session_token
   end
 
   def ensure_latest_project
@@ -51,11 +49,11 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  def ensure_session_token_uniqueness
+  def set_unique_session!
     self.session_token = new_session_token
     while User.find_by(session_token: session_token)
       self.session_token = new_session_token
     end
-    session_token
+    save!
   end
 end

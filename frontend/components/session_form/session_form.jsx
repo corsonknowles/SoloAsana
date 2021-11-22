@@ -142,7 +142,6 @@ class SessionForm extends React.Component {
   }
 
   render() {
-
     return (
       <div>
         <header>
@@ -151,20 +150,16 @@ class SessionForm extends React.Component {
               <img src='https://res.cloudinary.com/cloudfunded/image/upload/c_scale,w_140/v1500505306/solo_logo_jukva4.png' />
             </Link>
           </nav>
-
           <nav className="nav-right">
-
             <div className='hire-me'>
               <a className='hire-me' href='https://github.com/corsonknowles'>GitHub</a><br />
               <a className='hire-me' href='http://linkedin.com/in/davidcorsonknowles/'>LinkedIn</a><br />
               <a className='hire-me' href='mailto:recruiter.inquiries@soloasana.com'>Contact</a><br />
             </div>
-
             <div className="nav-buttons">
               <button onClick={this.openModal}>Register to Get Started</button>
               <button className='white' onClick={this.openModal}>Log In</button>
             </div>
-
           </nav>
         </header>
 
@@ -179,17 +174,14 @@ class SessionForm extends React.Component {
           </h3>
 
           <div className="login-form-container">
-
             <button className="white demo" onClick={(event) => this.launchDemo(event)}>Check Out the DEMO Account</button>
-
             <Modal
               isOpen={this.state.modalIsOpen}
               onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
               style={customStyles}
               contentLabel="Login Form"
-              >
-
+            >
               <div className="form login">
                 { this.renderErrors() }
                 <h2>Register or Log In</h2>
@@ -200,42 +192,33 @@ class SessionForm extends React.Component {
 
                 <div className="login-box">
                   <label htmlFor="email" className="login-label">EMAIL ADDRESS</label>
-
                   <input type="text" name="email" id="email"
                     value={this.state.email}
                     onChange={(event) => this.handleChange(event)}
                     className="login-input"
                     placeholder="recruiter.inquiries@soloasana.com"
                     disabled={!!(this.state.pending)}
-                    />
-
+                  />
                   <label htmlFor="password" className="login-label">PASSWORD</label>
-
                   <input type="password" name="password" id="password"
                     value={this.state.password}
                     onChange={(event) => this.handleChange(event)}
                     className="login-input"
                     placeholder="6 characters or more"
                     disabled={!!(this.state.pending)}
-                    />
+                  />
                 </div>
-
                 <div>
                   <button className="white" disabled={!!(this.state.pending)} onClick={this.handleSubmit('signup')}>
                     Register
                   </button>
-
                   <button disabled={!!(this.state.pending)} onClick={this.handleSubmit('login')}>
                     Log In
                   </button>
                 </div>
-
               </div>
-
               <button className="close-modal" onClick={this.closeModal}>X</button>
-
             </Modal>
-
           </div>
         </main>
       </div>

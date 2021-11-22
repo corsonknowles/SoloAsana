@@ -21,7 +21,6 @@
         DELETE /api/session
 
         Tasks
-
         GET /api/tasks
         POST /api/tasks
         GET /api/tasks/:id
