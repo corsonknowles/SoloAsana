@@ -14,8 +14,10 @@
 #  index_projects_on_team_id  (team_id)
 #  index_projects_on_user_id  (user_id)
 #
-class Project < ApplicationRecord
-  belongs_to :user
-  belongs_to :team
-  has_many :tasks, dependent: :destroy
+require 'rails_helper'
+
+RSpec.describe Project, type: :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:team) }
+  it { is_expected.to have_many(:tasks) }
 end

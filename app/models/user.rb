@@ -1,9 +1,32 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :bigint           not null, primary key
+#  about           :string
+#  department      :string
+#  email           :string           not null
+#  latest_project  :integer
+#  password_digest :string           not null
+#  photo           :string
+#  role            :string
+#  session_token   :string
+#  username        :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email)
+#
+# The User allows for login and profile settings.
+# Tasks and Projects belong to User.
 class User < ApplicationRecord
   attr_reader :password
 
   validates :username, :email, :password_digest, :session_token, presence: true
   validates :email, uniqueness: true
-  validates :password, length: { minimum: 6 }, allow_nil: :true
+  validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
   # after_touch :ensure_latest_project # TODO: add front end and then enable this
@@ -37,13 +60,13 @@ class User < ApplicationRecord
     set_unique_session! unless session_token
   end
 
-  def ensure_latest_project
-    unless latest_project
-      unless self.projects.empty?
-        self.latest_project = self.projects.first
-      end
-    end
-  end
+  # NOTE: feature under development
+  # def ensure_latest_project
+  #   return if latest_project
+  #   return if projects.empty?
+  #
+  #   self.latest_project = projects.last
+  # end
 
   def new_session_token
     SecureRandom.urlsafe_base64

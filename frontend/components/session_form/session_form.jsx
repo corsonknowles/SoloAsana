@@ -213,7 +213,7 @@ class SessionForm extends React.Component {
                     Register
                   </button>
                   <button disabled={!!(this.state.pending)} onClick={this.handleSubmit('login')}>
-                    Log In
+                    Sign In
                   </button>
                 </div>
               </div>

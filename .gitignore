@@ -23,6 +23,7 @@ bundle.js
 bundle.js.map
 
 node_modules
+yarn.lock
 
 # Ignore application configuration
 /config/application.yml

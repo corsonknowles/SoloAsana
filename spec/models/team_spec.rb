@@ -12,8 +12,10 @@
 #
 #  index_teams_on_user_id  (user_id)
 #
-class Team < ApplicationRecord
-  belongs_to :user
-  has_many :projects
-  has_many :tasks
+require 'rails_helper'
+
+RSpec.describe Team, type: :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to have_many(:projects) }
+  it { is_expected.to have_many(:tasks) }
 end

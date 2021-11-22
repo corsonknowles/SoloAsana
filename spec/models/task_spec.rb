@@ -22,8 +22,10 @@
 #  index_tasks_on_team_id     (team_id)
 #  index_tasks_on_user_id     (user_id)
 #
-class Task < ApplicationRecord
-  belongs_to :user
-  belongs_to :project
-  belongs_to :team
+require 'rails_helper'
+
+RSpec.describe Task, type: :model do
+  it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:project) }
+  it { is_expected.to belong_to(:team) }
 end
