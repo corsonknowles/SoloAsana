@@ -46,14 +46,12 @@ class Tasks extends React.Component {
     if (nextProps.match.params.id) {
       projectID = nextProps.match.params.id;
     }
-
     if (projectID && Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
       this.setState( { tasks: nextProps.tasks } )
     }
 
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.fetchTasksByProject(projectID).then( (tasks) => {
-
+      this.props.fetchTasksByProject(projectID).then((tasks) => {
         if (Object.keys(tasks).length === 0) {
           const mustHaveTask2 = {
             title: "",
@@ -62,7 +60,7 @@ class Tasks extends React.Component {
             user_id: this.currentUser.id,
             done: false,
             section: false
-        }
+          }
 
           this.props.createTask(mustHaveTask2).then (
             (createdTask) => {
@@ -70,12 +68,10 @@ class Tasks extends React.Component {
               const newState = merge({}, this.state);
               newState.tasks[createdTask.id] = mustHaveTask2;
               this.setState(newState);
-          }
-        )
-
-      }
-    });
-
+            }
+          )
+        }
+      });
     }
   }
 
@@ -130,10 +126,10 @@ class Tasks extends React.Component {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
-
       const projectID = parseInt(this.props.match.params.id);
       const value = event.target.value;
       const task = this.props.tasks[taskID];
+
       task.title = value;
 
       if (key === 'ArrowUp' || keyCode === 38) {
@@ -141,16 +137,13 @@ class Tasks extends React.Component {
         let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
-          // previousItem.select();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
         let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
-          // nextItem.select();
         }
-
       } else {
         this.props.updateTask(task)
       }
@@ -160,33 +153,24 @@ class Tasks extends React.Component {
   render() {
     return (
       <div className="tasks-area">
-
         <div className="tasks-list">
-          {Object.keys(this.props.tasks).map( (taskNumber, i) => (
-              <input
-                type="text"
-                name={`task${taskNumber}`}
-                id={`task${i}`}
-                key={`task${taskNumber}`}
-                defaultValue={this.props.tasks[taskNumber].title}
-                className="tasks-item-row"
-                placeholder="Enter your new task here"
-                onKeyUp={this.handleKeyUp(taskNumber, i)}
-                onKeyDown={this.handleKeyDown(taskNumber, i)}
-              />
-            )
-          )}
-          <div className="spacer">
-          </div>
-          <div className="task-help-text">
-            &#9166; Enter Adds a New Task
-          </div>
-          <div className="task-help-text">
-            &#9003; Delete Removes an Empty Task
-          </div>
-          <div className="task-help-text">
-            Saving Changes is Automatic
-          </div>
+          { Object.keys(this.props.tasks).map((taskNumber, i) => (
+            <input
+              type="text"
+              name={`task${taskNumber}`}
+              id={`task${i}`}
+              key={`task${taskNumber}`}
+              defaultValue={this.props.tasks[taskNumber].title}
+              className="tasks-item-row"
+              placeholder="Enter your new task here"
+              onKeyUp={this.handleKeyUp(taskNumber, i)}
+              onKeyDown={this.handleKeyDown(taskNumber, i)}
+            />
+          ))}
+          <div className="spacer"></div>
+          <div className="task-help-text">&#9166; Enter Adds a New Task</div>
+          <div className="task-help-text">&#9003; Delete Removes an Empty Task</div>
+          <div className="task-help-text">Saving Changes is Automatic</div>
         </div>
       </div>
     )

@@ -44,12 +44,10 @@ name        | string    | not null
 
         rails g model Team name:string user:references
 
-        rails g model Project name:string team:references  user:references
+        rails g model Project name:string team:references user:references
 
         rails g model Task title:string body:text due:integer done:boolean user:references project:references team:references section:boolean task:references
 
         rails g controller Users new create
         rails g controller Sessions new create destroy
-        rails g controller Task new create update destroy finish unfinish
-
-        #### Example Models can go here
+        rails g controller Task new create update destroy

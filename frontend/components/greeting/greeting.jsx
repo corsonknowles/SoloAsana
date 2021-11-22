@@ -30,7 +30,6 @@ const customStyles = {
 };
 
 class Greeting extends React.Component {
-
   constructor(props) {
     super(props)
 
@@ -110,15 +109,12 @@ class Greeting extends React.Component {
   }
 
   render() {
-
     return (
       <div className="one-page-app">
-
         <section>
           <div className="projects-header">PROJECTS</div>
           <ProjectsContainer />
         </section>
-
         <div className="content-container">
           <header className="greeting-nav">
             <h3 className="nav-left">Welcome {this.state.username}</h3>
@@ -127,21 +123,17 @@ class Greeting extends React.Component {
               <button className="header-button gold" onClick={this.logout} >Log Out</button>
             </nav>
           </header>
-
           <div className="right-side-of-page">
-
             <Modal
               isOpen={this.state.modalIsOpen}
               onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
               style={customStyles}
               contentLabel="User Profile"
-              >
+            >
               <div className="form profile">
-
                 <h2 className="profile-title">My Profile Settings</h2>
-
-                <PhotoUploadContainer />
+                <PhotoUploadContainer/>
 
                 <label htmlFor="username" className="profile-label">USERNAME</label>
                 <input type="text" name="username"
@@ -149,7 +141,7 @@ class Greeting extends React.Component {
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="Watch me update in real time"
-                  />
+                />
 
                 <label htmlFor="role" className="profile-label">ROLE </label>
                 <input type="text" name="role"
@@ -157,7 +149,7 @@ class Greeting extends React.Component {
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
-                  />
+                />
 
                 <label htmlFor='department' className="profile-label">DEPARTMENT</label>
                 <input type="text" name="department"
@@ -165,7 +157,7 @@ class Greeting extends React.Component {
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder=""
-                  />
+                />
 
                 <label htmlFor="about" className="profile-label">ABOUT ME  </label>
                 <input type="text" className="about" name="about"
@@ -173,7 +165,7 @@ class Greeting extends React.Component {
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
                   placeholder="At work I run dev ops. At home, I rescue kittens."
-                  />
+                />
 
                 <button className="blue" onClick={this.handleSubmit}>
                   Update Profile
@@ -181,15 +173,13 @@ class Greeting extends React.Component {
               </div>
               <button className="close-modal" onClick={this.closeModal}>X</button>
             </Modal>
-
             <main className="tasks-area">
               <TaskContainer />
             </main>
-
           </div>
         </div>
       </div>
     )}
   }
-  
+
   export default Greeting;

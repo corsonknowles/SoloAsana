@@ -25,7 +25,7 @@ The database fueling all this is PostgreSQL.
 * Projects
   - SoloAsana has editable and creatable projects
   - Each project renders a list of associated tasks
-  - This feature extends the best part of the Asana-style user interface, allowing easy editing,  addition, and deletion of projects without leaving the main page
+  - This feature extends the best part of the Asana-style user interface, allowing easy editing, addition, and deletion of projects without leaving the main page
 * User profiles
   - The user profile permits photo uploading
   - This is rendered through an awesome modal-within-a-modal interface, that loads seamlessly for the user
@@ -38,14 +38,16 @@ The database fueling all this is PostgreSQL.
 
   SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the secure authentication form and logs the guest user directly into the site.
 
-  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side. This project list also serves as a navigation tool. Selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
+  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side.
+
+  The project list also serves as a navigation tool. Selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
 
 ## Cool Tech Included Within
 
 ![Solo Demo Account](docs/Screenshots/Demo_Login.gif)
 
 ### Slick CSS: Removing the Overdragging and Bounce effects from OSX
-These simple lines of CSS allow SoloAsana to render as a fixed site within the browser window. While the bounce effect that occurs when you overscroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering that Asana also employs.
+These simple lines of CSS allow SoloAsana to render as a fixed site within the browser window. While the bounce effect that occurs when you over-scroll a site in an OSX browser is generally a pleasing user interaction, in a content rich task editing application like Solo, it's merely a distraction. Creating a fixed page allows the user to focus on the tasks at hand, pun fully intended. This is one of the most clean and elegant ways to implement this fixed page rendering.
 
 ```CSS
 html {

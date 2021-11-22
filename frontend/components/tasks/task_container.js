@@ -9,14 +9,12 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-
   createTask: (task) => dispatch(createTask(task)),
   destroyTask: (id) => dispatch(destroyTask(id)),
   fetchTasks: (projectID) => dispatch(fetchTasks(projectID)),
   fetchTask: (id) => dispatch(fetchTask(id)),
   updateTask: (task) => dispatch(updateTask(task)),
   fetchTasksByProject: (projectID) => dispatch(fetchTasksByProject(projectID))
-
 });
 
 export default withRouter(connect(
