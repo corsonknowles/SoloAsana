@@ -42,7 +42,12 @@ class User < ApplicationRecord
 
   def self.find_by_credentials(email, password)
     user = User.find_by(email: email)
+
     user if user&.password_is?(password)
+  end
+
+  def password_is?(password)
+    BCrypt::Password.new(password_digest).is_password?(password)
   end
 
   def reset_session_token!
@@ -52,10 +57,6 @@ class User < ApplicationRecord
   end
 
   private
-
-  def password_is?(password)
-    BCrypt::Password.new(password_digest).is_password?(password)
-  end
 
   def ensure_session_token
     set_unique_session! unless session_token

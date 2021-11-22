@@ -48,12 +48,6 @@ Layout/LeadingEmptyLines:
   Exclude:
     - 'app/controllers/application_controller.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Layout/SpaceAfterColon:
-  Exclude:
-    - 'db/seeds.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBrackets.
