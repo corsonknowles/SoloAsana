@@ -19,14 +19,12 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
       - uses: actions/checkout@v1
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.5.x
-          bundler-cache: true
       - uses: actions/setup-node@v1
         with:
           node-version: '6.x'
@@ -34,8 +32,14 @@ jobs:
       - name: Install Node dependencies
         run: npm install
       - uses: nanasess/setup-chromedriver@master
-      - name: Build and run tests
+      - name: Setup Code Climate test-reporter
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Run rspec
         env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
           RAILS_ENV: test
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
@@ -47,9 +51,13 @@ jobs:
         run: |
           export DISPLAY=:99
           chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
           sudo apt-get -yqq install libpq-dev
           gem install bundler
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup
           bundle exec rspec
+      - name: Test & publish code coverage
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        uses: paambaati/codeclimate-action@v3.0.0
