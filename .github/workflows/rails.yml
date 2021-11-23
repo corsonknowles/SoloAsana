@@ -58,7 +58,14 @@ jobs:
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup
           bundle exec rspec
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      # - name: Test and publish code coverage
+      #   uses: paambaati/codeclimate-action@v3.0.0
+      #   env:
+      #     CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      #   with:
+      #     coverageCommand: mvn test
+      - name: Code Climate Test Reporter
+        uses: aktions/codeclimate-test-reporter@v1
+        with:
+          codeclimate-test-reporter-id: ${{ secrets.CC_TEST_REPORTER_ID }}
+          command: after-build
