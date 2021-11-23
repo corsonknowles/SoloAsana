@@ -84,5 +84,16 @@ RSpec.describe User, type: :model do
     end
 
     it { is_expected.to eq user.session_token }
+
+    context 'when another user exists with the same token' do
+      let(:user2) { create(:user) }
+
+      it "ensures token uniqueness" do
+        allow(:user).to receive(:new_session_token).and_return(user2.session_token)
+
+        expect { reset }.to(change { user.session_token } )
+        expect(user2.session_token).not_to eq(user.session_token)
+      end
+    end
   end
 end
