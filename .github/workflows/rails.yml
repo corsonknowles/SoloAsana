@@ -34,10 +34,6 @@ jobs:
       - name: Install Node dependencies
         run: npm install
       - uses: nanasess/setup-chromedriver@master
-      - name: Test & publish code coverage
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
       - name: Build and run tests
         env:
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
