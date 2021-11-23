@@ -16,7 +16,7 @@ RSpec.describe "React", type: :system do
   context 'with a user' do
     let(:user) { create(:user) }
 
-    it "has user login" do
+    before do
       visit "/"
 
       click_button "Log In"
@@ -24,6 +24,24 @@ RSpec.describe "React", type: :system do
       fill_in "PASSWORD", with: "rainbow_table"
 
       click_button "Sign In"
+    end
+
+    it "has user greeting" do
+      expect(page).to have_text("Welcome Robert")
+    end
+
+    it 'makes valid updates' do
+      click_button 'Account'
+      fill_in "USERNAME", with: 'The Best User'
+      click_button "UPDATE PROFILE"
+
+      expect(page).to have_text("Welcome The Best User")
+    end
+
+    it 'errors on invalid updates' do
+      click_button 'Account'
+      fill_in "USERNAME", with: ''
+      click_button "UPDATE PROFILE"
 
       expect(page).to have_text("Welcome Robert")
     end
