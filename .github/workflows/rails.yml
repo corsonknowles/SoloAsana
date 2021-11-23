@@ -57,9 +57,6 @@ jobs:
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup
           bundle exec rspec
-  coverage:
-    needs: [ rspec ]
-    steps:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
