@@ -19,7 +19,6 @@
 #
 #  index_users_on_email  (email)
 #
-require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:username) }
@@ -92,7 +91,7 @@ RSpec.describe User, type: :model do
         allow(user).to receive(:new_session_token).and_return(user2.session_token)
 
         expect { reset }.to(change { user.session_token })
-        expect(user2.session_token).not_to eq(user.session_token)
+        expect(user.session_token).not_to eq(user2.session_token)
       end
     end
   end

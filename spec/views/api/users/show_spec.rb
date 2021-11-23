@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe User, type: :view do
   let(:user) { create(:user, role: "Victor", department: "CS", about: "Short bio", photo: photo) }
   let(:photo) { File.new "#{Rails.root}/app/assets/images/favicon.png" } # re-use Favicon because it is a small file

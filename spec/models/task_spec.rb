@@ -22,7 +22,6 @@
 #  index_tasks_on_team_id     (team_id)
 #  index_tasks_on_user_id     (user_id)
 #
-require 'rails_helper'
 
 RSpec.describe Task, type: :model do
   it { is_expected.to belong_to(:user) }
