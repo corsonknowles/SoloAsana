@@ -1,6 +1,20 @@
 name: Rubocop
-
-on: [push, pull_request]
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+  # Also trigger on page_build, as well as release created events
+  page_build:
+  release:
+    types: # This configuration does not affect the page_build event above
+      - created
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -10,27 +24,3 @@ jobs:
       with:
         ruby-version: 2.5 # Not needed with a .ruby-version file
     - run: gem install rubocop && rubocop
-
-# on:
-#   push:
-#     branches: [ master ]
-#   pull_request:
-#     branches: [ master ]
-#
-#   # Allows you to run this workflow manually from the Actions tab
-#   workflow_dispatch:
-#
-# jobs:
-#   rubocop-test:
-#     name: Rubocop
-#     runs-on: ubuntu-latest
-#
-#     steps:
-#       - uses: actions/checkout@v1
-#       - uses: actions/setup-ruby@v1
-#         with:
-#           ruby-version: ${{ env.RUBY_VERSION }}
-#       - name: Install Rubocop
-#         run: gem install rubocop
-#       - name: Check code
-#         run: rubocop
