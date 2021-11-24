@@ -21,6 +21,7 @@ jobs:
     strategy:
       matrix:
         node: [ '6', '12', '14', '16' ]
+        ruby: [2.5, 2.6, 2.7]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
         image: postgres:12
@@ -42,7 +43,7 @@ jobs:
       - name: Setup Ruby
         uses: actions/setup-ruby@v1
         with:
-          ruby-version: 2.5.x
+          ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Setup Node
         uses: actions/setup-node@v1
