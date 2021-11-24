@@ -4,12 +4,22 @@ RSpec.describe "React", type: :system do
     expect(page).to have_content('Move work forward')
   end
 
-  context 'when unauthorized' do
+  context 'with a bad login' do
     let(:user) { create(:user) }
-    it "renders 401" do
-      visit "/#/projects/1"
 
-      expect(page).to have_text("Check Out the DEMO Account")
+    before do
+      visit "/"
+
+      click_button "Log In"
+      fill_in "EMAIL ADDRESS", with: user.email
+      fill_in "PASSWORD", with: "bad_password"
+
+      click_button "Sign In"
+    end
+
+    it 'remains logged out' do
+      expect(page).not_to have_text("Welcome Robert")
+      expect(page).to have_content('Move work forward')
     end
   end
 

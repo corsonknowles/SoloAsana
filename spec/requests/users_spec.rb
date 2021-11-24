@@ -19,4 +19,27 @@ RSpec.describe Api::UsersController, type: :request do
       expect(response).to have_http_status(:unprocessable_entity)
     end
   end
+
+  context 'with a newly created user' do
+    let(:user) { create(:user) }
+
+    before do
+      allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
+    end
+
+    it "errors on invalid update" do
+      patch "/api/users/#{user.id}", params: { user: { username: "", email: "user@example.com", password: "good_example"} }, headers: headers
+
+      expect(response.content_type).to eq("application/json")
+      expect(response).to have_http_status(:unprocessable_entity)
+    end
+
+    it "accepts valid updates" do
+      patch "/api/users/#{user.id}", params: { user: { username: "My Awesome User", email: "user@example.com", password: "good_example"} }, headers: headers
+
+      expect(response.body).to match("My Awesome User")
+      expect(response.content_type).to eq("application/json")
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
