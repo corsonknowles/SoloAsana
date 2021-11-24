@@ -13,6 +13,25 @@ RSpec.describe "React", type: :system do
     end
   end
 
+  context 'with a bad login' do
+    let(:user) { create(:user) }
+
+    before do
+      visit "/"
+
+      click_button "Log In"
+      fill_in "EMAIL ADDRESS", with: user.email
+      fill_in "PASSWORD", with: "bad_password"
+
+      click_button "Sign In"
+    end
+
+    it 'remains logged out' do
+      expect(page).not_to have_text("Welcome Robert")
+      expect(page).to have_content('Move work forward')
+    end
+  end
+
   context 'with a user' do
     let(:user) { create(:user) }
 
@@ -51,6 +70,14 @@ RSpec.describe "React", type: :system do
 
     it 'can log back out' do
       expect(page).to have_text("Welcome Robert")
+      click_button 'Log Out'
+      expect(page).not_to have_text("Welcome Robert")
+      expect(page).to have_content('Move work forward')
+    end
+
+    it 'handles double click log back' do
+      expect(page).to have_text("Welcome Robert")
+      click_button 'Log Out'
       click_button 'Log Out'
       expect(page).not_to have_text("Welcome Robert")
       expect(page).to have_content('Move work forward')
