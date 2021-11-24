@@ -21,11 +21,8 @@ RSpec.describe "React", type: :system do
       click_button "Sign In"
     end
 
-    it 'can create projects and tasks' do
+    it 'can enter a project title' do
       fill_in "0", with: 'This is my new project\n'
-      fill_in "task0", with: 'This is my new task\n'
-
-      expect(page).to have_content("This is my new task")
     end
   end
 end
