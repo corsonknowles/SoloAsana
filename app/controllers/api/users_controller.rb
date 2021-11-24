@@ -13,10 +13,8 @@ class Api::UsersController < ApplicationController
 
   def update
     @user = current_user
-    puts session[:session_token]
     if @user.update_attributes(update_params)
       render :show
-      puts session[:session_token]
     else
       render json: @user.errors.full_messages, status: 422
     end

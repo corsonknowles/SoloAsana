@@ -4,15 +4,6 @@ RSpec.describe "React", type: :system do
     expect(page).to have_content('Move work forward')
   end
 
-  context 'when unauthorized' do
-    let(:user) { create(:user) }
-    it "renders 401" do
-      visit "/#/projects/1"
-
-      expect(page).to have_text("Check Out the DEMO Account")
-    end
-  end
-
   context 'with a bad login' do
     let(:user) { create(:user) }
 
@@ -70,14 +61,6 @@ RSpec.describe "React", type: :system do
 
     it 'can log back out' do
       expect(page).to have_text("Welcome Robert")
-      click_button 'Log Out'
-      expect(page).not_to have_text("Welcome Robert")
-      expect(page).to have_content('Move work forward')
-    end
-
-    it 'handles double click log back' do
-      expect(page).to have_text("Welcome Robert")
-      click_button 'Log Out'
       click_button 'Log Out'
       expect(page).not_to have_text("Welcome Robert")
       expect(page).to have_content('Move work forward')
