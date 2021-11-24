@@ -12,7 +12,6 @@
 #
 #  index_teams_on_user_id  (user_id)
 #
-require 'rails_helper'
 
 RSpec.describe Team, type: :model do
   it { is_expected.to belong_to(:user) }

@@ -1,5 +1,3 @@
-require 'rails_helper'
-
 RSpec.describe Project, type: :view do
   let(:project) { build(:project) }
 

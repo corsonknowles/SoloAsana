@@ -19,7 +19,6 @@
 #
 #  index_users_on_email  (email)
 #
-require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:username) }
@@ -79,10 +78,22 @@ RSpec.describe User, type: :model do
 
     let(:user) { create(:user) }
 
-    it "changes the session token" do
+    it 'changes the session token' do
       expect { reset }.to(change { user.session_token })
     end
 
     it { is_expected.to eq user.session_token }
+
+    context 'when another user exists with the same token' do
+      let(:user2) { create(:user) }
+      let(:taken_token) { user2.session_token }
+
+      it 'ensures token uniqueness' do
+        allow(user).to receive(:new_session_token).and_return(taken_token, "new_token")
+
+        expect { reset }.to(change { user.session_token })
+        expect(user.session_token).not_to eq(taken_token)
+      end
+    end
   end
 end

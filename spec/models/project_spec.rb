@@ -14,7 +14,6 @@
 #  index_projects_on_team_id  (team_id)
 #  index_projects_on_user_id  (user_id)
 #
-require 'rails_helper'
 
 RSpec.describe Project, type: :model do
   it { is_expected.to belong_to(:user) }
