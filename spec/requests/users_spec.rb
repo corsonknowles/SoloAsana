@@ -20,8 +20,13 @@ RSpec.describe Api::UsersController, type: :request do
     end
   end
 
-  context 'with an existing user' do
+  context 'with a newly created user' do
     let(:user) { create(:user) }
+
+    before do
+      allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
+    end
+
     it "errors on invalid update" do
       patch "/api/users/#{user.id}", params: { user: { username: "", email: "user@example.com", password: "good_example"} }, headers: headers
 
