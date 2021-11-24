@@ -41,19 +41,21 @@ jobs:
         with:
           ruby-version: 2.5.x
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-      - uses: actions/setup-node@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
         with:
           node-version: '6.x'
           registry-url: 'https://registry.npmjs.org'
-      - name: Install Node dependencies
+          cache: 'npm'
         run: npm install
-      - uses: nanasess/setup-chromedriver@master
-      - name: Setup Code Climate test-reporter
+      - name: Install Chromedriver
+        uses: nanasess/setup-chromedriver@master
+      - name: Install Code Climate test-reporter
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
-      - name: Run rspec
+      - name: Run RSpec with Chromedriver and System Specs
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           DATABASE_URL: postgres://postgres:@localhost:5432/SoloAsana_test
@@ -73,7 +75,7 @@ jobs:
           bundle install --jobs 4 --retry 3
           bundle exec rails db:setup
           bundle exec rspec
-      - name: Test & publish code coverage
+      - name: Publish Coverage Report to CodeClimate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         uses: paambaati/codeclimate-action@v3.0.0
