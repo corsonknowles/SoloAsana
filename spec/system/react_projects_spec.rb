@@ -22,7 +22,7 @@ RSpec.describe "React", type: :system do
     end
 
     it 'can create projects and tasks' do
-      fill_in "1", with: 'This is my new project\n'
+      fill_in "0", with: 'This is my new project\n'
 
       expect(page).to have_text("This is my new project")
 
