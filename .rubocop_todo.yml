@@ -75,7 +75,9 @@ Lint/UselessAssignment:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.
 # IgnoredMethods: refine
 Metrics/BlockLength:
-  Max: 48
+  Max: 56
+  Exclude:
+    - 'spec/'
 
 # Offense count: 3
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, IgnoredMethods.

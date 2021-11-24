@@ -31,6 +31,8 @@ RSpec.describe "React", type: :system do
     end
 
     it 'makes valid updates' do
+      expect(page).to have_text("Welcome Robert")
+
       click_button 'Account'
       fill_in "username", with: 'The Best User'
       click_button "Update Profile"
@@ -39,6 +41,7 @@ RSpec.describe "React", type: :system do
     end
 
     it 'errors on invalid updates' do
+      expect(page).to have_text("Welcome Robert")
       click_button 'Account'
       fill_in "username", with: ''
       click_button "Update Profile"
