@@ -18,6 +18,9 @@ on:
 jobs:
   rspec:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ '6', '12', '14', '16' ]
     services:
       postgres:
         image: postgres:12
@@ -44,10 +47,10 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '6.x'
+          node-version: ${{ matrix.node }}
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
-        run: npm install
+      - run: npm install
       - name: Install Chromedriver
         uses: nanasess/setup-chromedriver@master
       - name: Install Code Climate test-reporter
