@@ -9,7 +9,7 @@ RSpec.describe "React", type: :system do
     it "renders 401" do
       visit "/#/projects/1"
 
-      expect(page).to have_text("Welcome Robert")
+      expect(page).to have_text("Check Out the DEMO Account")
     end
   end
 
@@ -32,16 +32,16 @@ RSpec.describe "React", type: :system do
 
     it 'makes valid updates' do
       click_button 'Account'
-      fill_in "USERNAME", with: 'The Best User'
-      click_button "UPDATE PROFILE"
+      fill_in "username", with: 'The Best User'
+      click_button "Update Profile"
 
       expect(page).to have_text("Welcome The Best User")
     end
 
     it 'errors on invalid updates' do
       click_button 'Account'
-      fill_in "USERNAME", with: ''
-      click_button "UPDATE PROFILE"
+      fill_in "username", with: ''
+      click_button "Update Profile"
 
       expect(page).to have_text("Welcome Robert")
     end
