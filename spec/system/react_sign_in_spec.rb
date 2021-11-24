@@ -48,5 +48,12 @@ RSpec.describe "React", type: :system do
 
       expect(page).to have_text("Welcome Robert")
     end
+
+    it 'can log back out' do
+      expect(page).to have_text("Welcome Robert")
+      click_button 'Log Out'
+      expect(page).not_to have_text("Welcome Robert")
+      expect(page).to have_content('Move work forward')
+    end
   end
 end

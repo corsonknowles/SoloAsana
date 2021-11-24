@@ -17,10 +17,14 @@ on:
       - created
 jobs:
   test:
+    strategy:
+      matrix:
+        ruby: [2.5, 2.6, 2.7, 3.0]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 2.5 # Not needed with a .ruby-version file
+        ruby-version: ${{ matrix.ruby }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - run: gem install rubocop && rubocop

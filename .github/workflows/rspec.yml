@@ -40,6 +40,7 @@ jobs:
         uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.5.x
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - uses: actions/setup-node@v1
         with:
           node-version: '6.x'
