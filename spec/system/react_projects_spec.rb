@@ -24,5 +24,12 @@ RSpec.describe "React", type: :system do
     it 'can enter a project title' do
       fill_in "0", with: 'This is my new project\n'
     end
+
+    it 'can delete a project' do
+      fill_in "0", with: 'This is my new project\n'
+      fill_in "1", with: 'This is my 2nd project\n'
+      field = find('1')
+      (field.value.length + 1).times { field.send_keys [:backspace] }
+    end
   end
 end
