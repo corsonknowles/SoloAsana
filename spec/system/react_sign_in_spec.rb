@@ -1,4 +1,4 @@
-RSpec.describe "React", type: :system do
+RSpec.describe "React Sign In", type: :system do
   it 'renders a React component' do
     visit '/'
     expect(page).to have_content('Move work forward')
