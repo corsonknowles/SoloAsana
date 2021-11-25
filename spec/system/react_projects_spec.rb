@@ -20,26 +20,29 @@ RSpec.describe "React Project Changes", type: :system do
       click_button "Sign In"
     end
 
+    let(:team) { create(:team) }
+    let!(:project) { create(:project, user: user, team: team) }
+
     it 'can enter a project title' do
       fill_in "project0", with: 'This is my new project\n'
+      byebug
     end
 
     it 'can delete a 2nd project' do
-      expect(page).to have_field("project1")
-      expect(page).not_to have_field("project2")
-      # within "#sidebar-container" do
-      #   fill_in "project1", with: 'This is my new project\n'
-      # end
-      #
-      # project_one = find("project1")
-      # project_one.native.send_keys(:return)
-      # expect(page).to have_selector("project2")
-      #
-      # second_project = find("project2")
-      # fill_in second_project, with: 'This is my 2nd project\n'
-      # second_project.native.send_keys(:return)
-      # (second_project.value.length + 1).times { field.send_keys [:backspace] }
-      # expect(page).not_to have_selector("project2")
+
+      byebug
+      expect(page).to have_field("project0")
+      expect(page).not_to have_field("project1")
+      fill_in "project0", with: 'This is my new project\n'
+      seeded_project = find_by_id("project0")
+      seeded_project.native.send_keys(:return)
+      expect(page).to have_selector("project1")
+
+      newly_entered_project = find("project2")
+      fill_in newly_entered_project, with: 'This is my 2nd project\n'
+      newly_entered_project.native.send_keys(:return)
+      (newly_entered_project.value.length + 1).times { field.send_keys [:backspace] }
+      expect(page).not_to have_selector("project2")
     end
   end
 end

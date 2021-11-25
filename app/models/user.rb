@@ -19,8 +19,6 @@
 #
 #  index_users_on_email  (email)
 #
-# The User allows for login and profile settings.
-# Tasks and Projects belong to User.
 class User < ApplicationRecord
   attr_reader :password
 

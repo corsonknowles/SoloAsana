@@ -85,7 +85,7 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject);
 
-        let nextItem = stepToNextItem(i)
+        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
         }
@@ -106,12 +106,12 @@ class Projects extends React.Component {
           this.props.destroyProject(`project${String(parseInt(i))}`);
           this.props.history.push('/');
 
-          let previousItem = stepToPreviousItem(i);
+          let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`)
           if (previousItem) {
             previousItem.focus();
           } else {
             // this will focus on the last remaining project if all previous projects are deleted
-            let nextItem = stepToNextItem(i);
+            let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`)
             if (nextItem) {
               nextItem.focus();
             }
@@ -132,13 +132,13 @@ class Projects extends React.Component {
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = stepToPreviousItem(i)
+        let previousItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (previousItem) {
           previousItem.focus();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
-        let nextItem = stepToNextItem(i)
+        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
         }
@@ -146,14 +146,6 @@ class Projects extends React.Component {
         this.props.updateProject(project);
       }
     }
-  }
-
-  stepToNextItem(i) {
-    return document.getElementById(`project${String(parseInt(i) + 1)}`)
-  }
-
-  stepToPreviousItem(i) {
-    return document.getElementById(`project${String(parseInt(i) - 1)}`)
   }
 
   render() {
