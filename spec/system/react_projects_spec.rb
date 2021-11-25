@@ -25,15 +25,19 @@ RSpec.describe "React", type: :system do
       fill_in "0", with: 'This is my new project\n'
     end
 
-    it 'can delete a project' do
-      project_one = find_by_id("0")
+    it 'can delete a 2nd project' do
+      expect(page).not_to have_selector("project1")
+
+      project_one = find("project0")
       fill_in project_one, with: 'This is my new project\n'
       project_one.native.send_keys(:return)
-      second_project = find_by_id("1")
+      expect(page).to have_selector("project1")
+
+      second_project = find("project1")
       fill_in second_project, with: 'This is my 2nd project\n'
       second_project.native.send_keys(:return)
       (second_project.value.length + 1).times { field.send_keys [:backspace] }
-      expect(page).not_to have_selector("1")
+      expect(page).not_to have_selector("project1")
     end
   end
 end
