@@ -31,3 +31,10 @@ yarn.lock
 
 # Everyone keeps their own coverage
 /coverage
+
+spec/examples.txt
+
+## Environment normalization:
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
