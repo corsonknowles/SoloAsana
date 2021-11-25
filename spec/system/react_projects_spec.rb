@@ -22,7 +22,7 @@ RSpec.describe "React", type: :system do
     end
 
     it 'can enter a project title' do
-      fill_in "0", with: 'This is my new project\n'
+      fill_in "project0", with: 'This is my new project\n'
     end
 
     it 'can delete a 2nd project' do
