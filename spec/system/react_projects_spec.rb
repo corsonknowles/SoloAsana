@@ -26,10 +26,10 @@ RSpec.describe "React", type: :system do
     end
 
     it 'can delete a project' do
-      project_one = find("0")
+      project_one = find_by_id("0")
       fill_in project_one, with: 'This is my new project\n'
       project_one.native.send_keys(:return)
-      second_project = find("1")
+      second_project = find_by_id("1")
       fill_in second_project, with: 'This is my 2nd project\n'
       second_project.native.send_keys(:return)
       (second_project.value.length + 1).times { field.send_keys [:backspace] }
