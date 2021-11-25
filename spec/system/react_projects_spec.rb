@@ -25,8 +25,8 @@ RSpec.describe "React Project Changes", type: :system do
     end
 
     it 'can delete a 2nd project' do
-      expect(page).to have_selector("project1")
-      expect(page).not_to have_selector("project2")
+      expect(page).to have_field("project1")
+      expect(page).not_to have_field("project2")
       # within "#sidebar-container" do
       #   fill_in "project1", with: 'This is my new project\n'
       # end

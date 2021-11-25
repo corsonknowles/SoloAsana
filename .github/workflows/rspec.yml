@@ -20,8 +20,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '6', '12', '14', '16' ]
-        ruby: [2.5, 2.6, 2.7]  # note, must use '3.0' with quotes due to known bug
+        node: [ '6', '16' ]
+        ruby: [2.5, 2.7]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
         image: postgres:12
