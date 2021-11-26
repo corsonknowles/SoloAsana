@@ -24,16 +24,16 @@ RSpec.describe "React Project Changes", type: :system do
     let!(:project) { create(:project, user: user, team: team) }
 
     it 'can enter a project title' do
-      fill_in "project0", with: 'This is my new project\n'
+      fill_in "project0", with: 'This is my new project'
+      expect(page).to have_text("This is my new project")
       byebug
     end
 
     it 'can delete a 2nd project' do
-
       byebug
       expect(page).to have_field("project0")
       expect(page).not_to have_field("project1")
-      fill_in "project0", with: 'This is my new project\n'
+      fill_in "project0", with: 'This is my new project'
       seeded_project = find_by_id("project0")
       seeded_project.native.send_keys(:return)
       expect(page).to have_selector("project1")
