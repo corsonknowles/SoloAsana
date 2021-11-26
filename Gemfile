@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13' # for System Tests
+  gem 'capybara' # for System Tests
   gem 'factory_bot'
   gem 'factory_bot_rails'
   gem 'faker'
