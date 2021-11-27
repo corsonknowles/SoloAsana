@@ -25,7 +25,7 @@ class Projects extends React.Component {
     this.props.fetchProjects()
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (nextProps) {
     const newProject2 = {
       name: "",
       team_id: 1,

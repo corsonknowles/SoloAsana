@@ -41,7 +41,7 @@ class Tasks extends React.Component {
     }
   }
 
-  componentWillReceiveProps (nextProps) {
+  componentDidUpdate (nextProps) {
     let projectID;
     if (nextProps.match.params.id) {
       projectID = nextProps.match.params.id;
