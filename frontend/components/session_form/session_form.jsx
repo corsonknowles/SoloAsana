@@ -76,7 +76,6 @@ class SessionForm extends React.Component {
         user = this.state;
         user.username = "Awesome User";
       }
-      // user["location"] = [user["location"]];
       this.props.processForm(user, type);
     };
   }
@@ -85,7 +84,6 @@ class SessionForm extends React.Component {
     return(
       <div>
         <ul className="errors">
-
           {this.props.errors.map( (error, i) => (
             <li key={`error-${i}`}>
               {error}

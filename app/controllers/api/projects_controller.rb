@@ -17,15 +17,15 @@ class Api::ProjectsController < ApplicationController
   end
 
   def index
-    render json: Project.all.where(user_id: current_user.id), include: :tasks
+    render json: current_user.projects, include: :tasks
   end
 
   def show
-    render json: Project.find(params[:id]), include: :tasks
+    render json: current_user.projects.find(params[:id]), include: :tasks
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = current_user.projects.find(params[:id])
     if @project.update(project_params)
       render json: @project, include: :tasks
     else
