@@ -85,7 +85,7 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject);
 
-        let nextItem = document.getElementById(String(parseInt(i) + 1))
+        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
         }
@@ -94,22 +94,24 @@ class Projects extends React.Component {
         const value = target.value;
         const empty = (value.length === 0);
 
-        const deleteKeys = (key === 'Delete' ||
+        const deleteKeys = (
+          key === 'Delete' ||
           key === 'Backspace' ||
-           keyCode === 8 ||
-           keyCode === 46);
+          keyCode === 8 ||
+          keyCode === 46
+        );
         const mustBeOneProject = (Object.keys(this.props.projects).length > 1);
         if (empty && mustBeOneProject && deleteKeys) {
           event.preventDefault();
-          this.props.destroyProject(parseInt(projectID));
+          this.props.destroyProject(projectID);
           this.props.history.push('/');
 
-          let previousItem = document.getElementById(String(parseInt(i) - 1));
+          let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
           } else {
             // this will focus on the last remaining project if all previous projects are deleted
-            let nextItem = document.getElementById(String(parseInt(i) + 1));
+            let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
             }
@@ -130,13 +132,13 @@ class Projects extends React.Component {
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = document.getElementById(String(parseInt(i) - 1))
+        let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
-        let nextItem = document.getElementById(String(parseInt(i) + 1))
+        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
         }
@@ -153,9 +155,9 @@ class Projects extends React.Component {
           <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
-              name={projectID}
-              key={projectID}
-              id={i}
+              name={`project${projectID}`}
+              id={`project${i}`}
+              key={`project${projectID}`}
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"

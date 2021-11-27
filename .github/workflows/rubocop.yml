@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -19,7 +17,7 @@ jobs:
   test:
     strategy:
       matrix:
-        ruby: [2.5, 2.6, 2.7]  # note, must use '3.0' with quotes due to known bug
+        ruby: [2.7]  # note, must use '3.0' with quotes due to known bug
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

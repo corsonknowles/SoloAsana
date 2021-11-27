@@ -17,17 +17,17 @@ class Api::TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.all.where(user_id: current_user.id, project_id: params[:id])
+    @tasks = current_user.tasks.where(project_id: params[:id])
     render :index
   end
 
   def show
-    @task = Task.find(params[:id])
+    @task = current_user.find(params[:id])
     render :show
   end
 
   def update
-    @task = Task.find(params[:id])
+    @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
       render json: @task
     else

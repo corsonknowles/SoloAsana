@@ -98,7 +98,6 @@ class Tasks extends React.Component {
         let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
       if (nextItem) {
         nextItem.focus();
-        // nextItem.select();
       }
     } else {
         const empty = (event.target.value.length === 0);

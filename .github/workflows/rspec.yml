@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -20,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '6', '12', '14', '16' ]
-        ruby: [2.5, 2.6, 2.7]  # note, must use '3.0' with quotes due to known bug
+        node: [ '14', '16' ]
+        ruby: [2.7.4, 2.7.5]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
         image: postgres:12
@@ -39,14 +37,14 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup Ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Setup Node
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           registry-url: 'https://registry.npmjs.org'
@@ -75,8 +73,7 @@ jobs:
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
           sudo apt-get -yqq install libpq-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+
           bundle exec rails db:setup
           bundle exec rspec
       - name: Publish Coverage Report to CodeClimate
