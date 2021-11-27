@@ -28,47 +28,37 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_field("project0", with: 'This is my new project')
     end
 
-    context 'with a task' do
-      let!(:task) { create(:task, user: user, team: team, project: project) }
+    it 'cannot delete the only project' do
+      expect(page).to have_field("project0")
 
-      it 'can enter a task' do
-        find_by_id("project0").click # TODO: add a feature to make this unneccessary
-        fill_in "task0", with: 'This is my new task'
-        expect(page).to have_field("task0", with: 'This is my new task')
-      end
+      the_only_project = find_by_id("project0")
 
-      it 'can delete a 2nd task' do
-        expect(page).not_to have_field("task1")
-
-        find_by_id("project0").click # TODO: add a feature to make this unneccessary
-        fill_in "task0", with: 'This is my new task'
-        seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys(:return)
-        expect(page).to have_field("task1")
-
-        fill_in "task1", with: 'test'
-        newly_entered_task = find_by_id("task1")
-        (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
-
-        expect(page).not_to have_field("task1")
-      end
+      (the_only_project.value.length + 1).times { the_only_project.send_keys [:backspace] }
+      expect(page).to have_field("project0")
     end
 
-    it 'can delete a 2nd project' do
+    it 'can create a 2nd project' do
       expect(page).to have_field("project0")
       expect(page).not_to have_field("project1")
+
       fill_in "project0", with: 'This is my new project'
       seeded_project = find_by_id("project0")
       seeded_project.native.send_keys(:return)
 
-      fill_in "project1", with: 'added'
-      newly_entered_project = find_by_id("project1")
-      newly_entered_project.native.send_keys(:return)
-
       expect(page).to have_field("project1")
+    end
 
-      (newly_entered_project.value.length + 1).times { newly_entered_project.send_keys [:backspace] }
-      expect(page).not_to have_selector("project1")
+    context 'with 2 seeded projects' do
+      let!(:second_project) { create(:project, user: user, team: team) }
+
+      it 'can delete a 2nd project' do
+        expect(page).to have_field("project1")
+
+        not_the_only_project = find_by_id("project1")
+        (not_the_only_project.value.length + 1).times { not_the_only_project.send_keys [:backspace] }
+
+        expect(page).not_to have_selector("project1")
+      end
     end
   end
 end
