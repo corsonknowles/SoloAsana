@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
-gem 'coffee-rails', '~> 4.2'
 gem 'figaro'
 gem 'jbuilder', '~> 2.5' # https://github.com/rails/jbuilder
 gem 'jquery-rails'
 gem 'pg' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.7' # Use Puma as the app server
-gem 'rails', '~> 5.1.2'
+gem 'rails'
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 # gem 'autoprefixer-rails'
@@ -18,7 +17,7 @@ gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '~> 2.13' # for System Tests
+  gem 'capybara' # for System Tests
   gem 'factory_bot'
   gem 'factory_bot_rails'
   gem 'faker'
