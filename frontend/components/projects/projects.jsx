@@ -132,7 +132,7 @@ class Projects extends React.Component {
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
         }
