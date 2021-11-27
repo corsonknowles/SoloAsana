@@ -46,7 +46,7 @@ RSpec.describe "React Project Changes", type: :system do
         seeded_task.native.send_keys(:return)
         expect(page).to have_field("task1")
 
-        fill_in "task1", with: 'test text'
+        fill_in "task1", with: 'test'
         newly_entered_task = find_by_id("task1")
         (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
 
@@ -61,7 +61,7 @@ RSpec.describe "React Project Changes", type: :system do
       seeded_project = find_by_id("project0")
       seeded_project.native.send_keys(:return)
 
-      fill_in "project1", with: 'This is my 2nd project\n'
+      fill_in "project1", with: 'added'
       newly_entered_project = find_by_id("project1")
       newly_entered_project.native.send_keys(:return)
 
