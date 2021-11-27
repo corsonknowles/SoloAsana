@@ -18,4 +18,6 @@ class Project < ApplicationRecord
   belongs_to :user
   belongs_to :team, optional: true
   has_many :tasks, dependent: :destroy
+
+  validates :user_id, presence: true
 end
