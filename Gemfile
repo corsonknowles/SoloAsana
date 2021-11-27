@@ -2,14 +2,13 @@ source 'https://rubygems.org'
 
 gem 'autoprefixer-rails'
 gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
-gem 'coffee-rails', '~> 4.2'
 gem 'figaro'
 gem 'jbuilder', '~> 2.5' # https://github.com/rails/jbuilder
 gem 'jquery-rails'
 gem 'newrelic_rpm', '~> 8.1' # Heroku dyno monitor
 gem 'pg' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.7' # Use Puma as the app server
-gem 'rails', '~> 5.1.2'
+gem 'rails'
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 
