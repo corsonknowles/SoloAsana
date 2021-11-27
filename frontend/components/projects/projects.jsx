@@ -103,7 +103,7 @@ class Projects extends React.Component {
         const mustBeOneProject = (Object.keys(this.props.projects).length > 1);
         if (empty && mustBeOneProject && deleteKeys) {
           event.preventDefault();
-          this.props.destroyProject(`project${String(parseInt(i))}`);
+          this.props.destroyProject(projectID);
           this.props.history.push('/');
 
           let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`)
