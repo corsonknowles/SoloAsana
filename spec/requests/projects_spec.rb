@@ -45,7 +45,7 @@ RSpec.describe Api::ProjectsController, type: :request do
       let(:project) { create(:project, user: user) }
 
       it "errors on invalid update" do
-        patch "/api/projects/#{project.id}", params: { project: { user_id: nil, bad: "bad example" } }, headers: headers
+        patch "/api/projects/#{project.id}", params: { project: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
