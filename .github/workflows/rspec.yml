@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -21,7 +19,7 @@ jobs:
     strategy:
       matrix:
         node: [ '14', '16' ]
-        ruby: [2.74, 2.7.5]  # note, must use '3.0' with quotes due to known bug
+        ruby: [2.7.4, 2.7.5]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
         image: postgres:12

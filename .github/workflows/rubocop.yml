@@ -5,11 +5,9 @@ on:
   push:
     branches:
       - main
-      - master
   pull_request:
     branches:
       - main
-      - master
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
