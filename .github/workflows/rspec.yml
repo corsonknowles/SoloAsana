@@ -75,8 +75,7 @@ jobs:
           chromedriver --url-base=/wd/hub &
           sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
           sudo apt-get -yqq install libpq-dev
-          gem install bundler
-          bundle install --jobs 4 --retry 3
+
           bundle exec rails db:setup
           bundle exec rspec
       - name: Publish Coverage Report to CodeClimate
