@@ -20,7 +20,7 @@ RSpec.describe Api::UsersController, type: :request do
     end
   end
 
-  context 'with a newly created user' do
+  context 'with stubbed login' do
     let(:user) { create(:user) }
 
     before do
@@ -28,14 +28,22 @@ RSpec.describe Api::UsersController, type: :request do
     end
 
     it "errors on invalid update" do
-      patch "/api/users/#{user.id}", params: { user: { username: "", email: "user@example.com", password: "good_example"} }, headers: headers
+      put "/api/users/#{user.id}", params: { user: { username: "", email: "user@example.com", password: "good_example"} }, headers: headers
 
       expect(response.content_type).to include("application/json")
       expect(response).to have_http_status(:unprocessable_entity)
     end
 
-    it "accepts valid updates" do
+    it "accepts valid PATCH updates" do
       patch "/api/users/#{user.id}", params: { user: { username: "My Awesome User", email: "user@example.com", password: "good_example"} }, headers: headers
+
+      expect(response.body).to match("My Awesome User")
+      expect(response.content_type).to include("application/json")
+      expect(response).to have_http_status(:ok)
+    end
+
+    it "accepts valid PUT updates" do
+      put "/api/users/#{user.id}", params: { user: { username: "My Awesome User", email: "user@example.com", password: "good_example"} }, headers: headers
 
       expect(response.body).to match("My Awesome User")
       expect(response.content_type).to include("application/json")

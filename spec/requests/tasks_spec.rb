@@ -30,8 +30,10 @@ RSpec.describe Api::TasksController, type: :request do
       end
 
       context 'with invalid params' do
+        let(:task) { build(:task, user: user, project: nil) }
+
         it "does not create a Task and renders errors" do
-          post "/api/tasks", params: { task: task_params.to_h.merge!(project_id: nil) }, headers: headers
+          post "/api/tasks", params: { task: task_params }, headers: headers
 
           expect(response.body).to match("Project must exist")
           expect(response.content_type).to include("application/json")
@@ -44,13 +46,13 @@ RSpec.describe Api::TasksController, type: :request do
       let(:task) { create(:task, user: user, project: project) }
 
       it "errors on invalid update" do
-        patch "/api/tasks/#{task.id}", params: { task: { user_id: nil } }, headers: headers
+        put "/api/tasks/#{task.id}", params: { task: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
-      it "accepts valid patch updates" do
+      it "accepts valid PATCH updates" do
         patch "/api/tasks/#{task.id}", params: { task: { title: "Better task" } }, headers: headers
 
         expect(response.body).to match("Better task")
@@ -58,7 +60,7 @@ RSpec.describe Api::TasksController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it "accepts valid put updates" do
+      it "accepts valid PUT updates" do
         put "/api/tasks/#{task.id}", params: { task: { title: "Better task" } }, headers: headers
 
         expect(response.body).to match("Better task")
