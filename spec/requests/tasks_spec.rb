@@ -1,12 +1,13 @@
-RSpec.describe Api::ProjectsController, type: :request do
+RSpec.describe Api::TasksController, type: :request do
   let(:headers) { { "ACCEPT" => "application/json" } }
   let(:user) { create(:user) }
-  let(:project) { build(:project, user: user) }
-  let(:project_params) { project.attributes }
+  let(:project) { create(:project, user: user) }
+  let(:task) { build(:task, user: user, project: project) }
+  let(:task_params) { task.attributes }
 
   context 'without a login' do
-    it "does not create a Project and renders errors" do
-      post "/api/projects", params: { project: project_params }, headers: headers
+    it "does not create a Task and renders errors" do
+      post "/api/tasks", params: { task: task_params }, headers: headers
 
       expect(response.body).to match("invalid credentials")
       expect(response.content_type).to include("application/json")
@@ -19,20 +20,20 @@ RSpec.describe Api::ProjectsController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
-    context 'with a draft project' do
-      it "creates a project and renders it as JSON" do
-        post "/api/projects", params: { project: project_params }, headers: headers
+    context 'with a draft task' do
+      it "creates a task and renders it as JSON" do
+        post "/api/tasks", params: { task: task_params }, headers: headers
 
-        expect(response.body).to match(project.name)
+        expect(response.body).to match(task.title)
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:ok)
       end
 
-      xcontext 'with invalid params' do
-        it "does not create a Project and renders errors" do
-          post "/api/projects", params: { project: { name: "ALTER USER", bad: "test" } }, headers: headers
+      context 'with invalid params' do
+        it "does not create a Task and renders errors" do
+          post "/api/tasks", params:  { task: task_params.to_h.merge!(project_id: nil) }, headers: headers
 
-          expect(response.body).to match("invalid credentials")
+          expect(response.body).to match("Project must exist")
           expect(response.content_type).to include("application/json")
           expect(response).to have_http_status(:unprocessable_entity)
         end
@@ -40,27 +41,27 @@ RSpec.describe Api::ProjectsController, type: :request do
     end
 
     context 'with a newly created project' do
-      let(:project) { create(:project, user: user) }
+      let(:task) { create(:task, user: user, project: project) }
 
       it "errors on invalid update" do
-        patch "/api/projects/#{project.id}", params: { project: { user_id: nil } }, headers: headers
+        patch "/api/tasks/#{task.id}", params: { task: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it "accepts valid patch updates" do
-        patch "/api/projects/#{project.id}", params: { project: { name: "New and now improved" } }, headers: headers
+        patch "/api/tasks/#{task.id}", params: { task: { title: "Better task" } }, headers: headers
 
-        expect(response.body).to match("New and now improved")
+        expect(response.body).to match("Better task")
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:ok)
       end
 
       it "accepts valid put updates" do
-        put "/api/projects/#{project.id}", params: { project: { name: "New and now improved" } }, headers: headers
+        put "/api/tasks/#{task.id}", params: { task: { title: "Better task" } }, headers: headers
 
-        expect(response.body).to match("New and now improved")
+        expect(response.body).to match("Better task")
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:ok)
       end
