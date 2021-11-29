@@ -2,7 +2,7 @@
   "name": "SoloAsana",
   "private": true,
   "engines": {
-    "node": "17.0.1",
+    "node": "16.13.0",
     "npm": "8.1.0"
   },
   "scripts": {
@@ -52,5 +52,8 @@
   "bugs": {
     "url": "https://github.com/corsonknowles/SoloAsana/issues"
   },
-  "homepage": "https://github.com/corsonknowles/SoloAsana#readme"
+  "homepage": "https://github.com/corsonknowles/SoloAsana#readme",
+  "devDependencies": {
+    "webpack-cli": "^4.9.1"
+  }
 }
