@@ -31,7 +31,7 @@ RSpec.describe Api::TasksController, type: :request do
 
       context 'with invalid params' do
         it "does not create a Task and renders errors" do
-          post "/api/tasks", params:  { task: task_params.to_h.merge!(project_id: nil) }, headers: headers
+          post "/api/tasks", params: { task: task_params.to_h.merge!(project_id: nil) }, headers: headers
 
           expect(response.body).to match("Project must exist")
           expect(response.content_type).to include("application/json")
