@@ -28,11 +28,11 @@ RSpec.describe Api::ProjectsController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      xcontext 'with invalid params' do
-        it "does not create a Project and renders errors" do
-          post "/api/projects", params: { project: { name: "ALTER USER", bad: "test" } }, headers: headers
+      context 'with invalid params' do
+        it "does not create a Project when the name is too long and renders errors" do
+          post "/api/projects", params: { project: project_params.to_h.merge!(name: "*" * 256) }, headers: headers
 
-          expect(response.body).to match("invalid credentials")
+          expect(response.body).to match("Name is too long")
           expect(response.content_type).to include("application/json")
           expect(response).to have_http_status(:unprocessable_entity)
         end
