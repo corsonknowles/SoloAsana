@@ -33,12 +33,12 @@ class Greeting extends React.Component {
   constructor(props) {
     super(props)
 
-    let currentUser = props.currentUser;
-    let username = currentUser.username || "";
-    let role = currentUser.role || "";
-    let department = currentUser.department || "";
-    let about = currentUser.about || "";
-    let photo = currentUser.photo || "";
+    const currentUser = props.currentUser;
+    const username = currentUser.username || "";
+    const role = currentUser.role || "";
+    const department = currentUser.department || "";
+    const about = currentUser.about || "";
+    const photo = currentUser.photo || "";
 
     this.state = {
       modalIsOpen: false,
@@ -60,21 +60,26 @@ class Greeting extends React.Component {
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
+    this.clearErrors = this.props.clearErrors.bind(this);
+    this.renderErrors = this.renderErrors.bind(this);
   }
 
-  componentWillUnmount() { this.props.clearErrors()};
+  componentWillUnmount() {
+    this.props.clearErrors()
+  };
 
   handleChange(event) {
     const target = event.target;
     const name = target.name;
-    let val = target.value || "";
+    const val = target.value || "";
     this.setState({
       [name]: val
     });
   }
 
   handleSubmit(){
-    let user = this.currentUser;
+    const user = this.currentUser;
     user.username = this.state.username;
     user.role = this.state.role;
     user.department = this.state.department;
@@ -94,6 +99,20 @@ class Greeting extends React.Component {
 
   closeModal() {
     this.setState({modalIsOpen: false});
+  }
+
+  renderErrors(){
+    return(
+      <div>
+        <ul className="errors">
+          {this.props.errors.map( (error, i) => (
+            <li key={`error-${i}`}>
+              {error}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 
   render() {
