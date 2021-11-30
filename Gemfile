@@ -12,7 +12,6 @@ gem 'pg' # Use postgresql as the database for Active Record
 gem 'puma' # Use Puma as the app server
 gem 'rails'
 gem 'sass-rails' # Use SCSS for stylesheets
-gem 'uglifier' # Use Uglifier as compressor for JavaScript assets
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'

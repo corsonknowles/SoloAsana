@@ -11,11 +11,6 @@ let prodPlugins = [
       'NODE_ENV': JSON.stringify('production')
     }
   }),
-  new webpack.optimize.UglifyJsPlugin({
-    compress: {
-      warnings: true
-    }
-  })
 ];
 
 plugins = plugins.concat(
@@ -34,13 +29,18 @@ module.exports = {
     extensions: ['.js', '.jsx', '*']
   },
   module: {
-    loaders: [
+    rules: [
       {
-        test: /.jsx?$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react', 'es2015']
+        test: /\.m?jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: "defaults" }],
+              ['@babel/preset-react', { targets: "defaults" }]
+            ]
+          }
         }
       }
     ]
