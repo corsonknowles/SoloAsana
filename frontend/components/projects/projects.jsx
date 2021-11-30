@@ -108,7 +108,7 @@ class Projects extends React.Component {
             previousItem.click();
 
           } else {
-            // this will focus on the last remaining project if all previous projects are deleted
+            // this will focus and display tasks for the last remaining project if all previous projects are deleted
             const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
