@@ -81,7 +81,7 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject);
 
-        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
           nextItem.click();
@@ -102,14 +102,14 @@ class Projects extends React.Component {
           event.preventDefault();
           this.props.destroyProject(projectID);
 
-          let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+          const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
             previousItem.click();
 
           } else {
             // this will focus on the last remaining project if all previous projects are deleted
-            let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+            const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
               nextItem.click();

@@ -83,7 +83,7 @@ class Tasks extends React.Component {
       if (key === 'Enter' || keyCode === 13) {
         const projectID = parseInt(this.props.match.params.id);
 
-        let newTask = {
+        const newTask = {
           title: "",
           team_id: 1,
           project_id: projectID,
@@ -95,23 +95,24 @@ class Tasks extends React.Component {
         // push the new task to the database
         this.props.createTask(newTask)
 
-        let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
-      if (nextItem) {
-        nextItem.focus();
-      }
-    } else {
+        // Move down 1 in the list by focusing on the next item
+        const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+        if (nextItem) {
+          nextItem.focus();
+        }
+      } else {
         const empty = (event.target.value.length === 0);
         const mustBeOneTask = (Object.keys(this.props.tasks).length > 1);
         const deleteKeys = (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46);
         if (empty && mustBeOneTask && deleteKeys) {
           event.preventDefault();
           this.props.destroyTask(taskID);
-          let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+          const previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
           } else {
             // this will focus on the last remaining task if all preceding ones are deleted
-            let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+            const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
             }
@@ -125,25 +126,24 @@ class Tasks extends React.Component {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
-      const projectID = parseInt(this.props.match.params.id);
-      const value = event.target.value;
-      const task = this.props.tasks[taskID];
-
-      task.title = value;
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
+        const previousItem = document.getElementById(`task${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
-        let nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+        const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
         }
       } else {
+        const value = event.target.value;
+        const task = this.props.tasks[taskID];
+        task.title = value;
+
         this.props.updateTask(task)
       }
     }
