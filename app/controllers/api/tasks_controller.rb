@@ -16,16 +16,6 @@ class Api::TasksController < ApplicationController
     render json: @task
   end
 
-  def index
-    @tasks = current_user.tasks.where(project_id: params[:id])
-    render :index
-  end
-
-  def show
-    @task = current_user.find(params[:id])
-    render :show
-  end
-
   def update
     @task = current_user.tasks.find(params[:id])
     if @task.update(task_params)
