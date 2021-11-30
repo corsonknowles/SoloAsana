@@ -18,6 +18,7 @@ plugins = plugins.concat(
 )
 
 module.exports = {
+  mode: 'production',
   context: __dirname,
   entry: './frontend/index.jsx',
   output: {
@@ -46,5 +47,5 @@ module.exports = {
     ]
   },
   devtool: 'source-map',
-  // watch: true,
+  watch: true,
 };

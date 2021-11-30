@@ -63,12 +63,6 @@ export const fetchTasks = projectID => dispatch => {
   )
 };
 
-export const fetchTask = id => dispatch => {
-  return TASKS.fetchTask(id)
-    .then(task => dispatch(receiveTask(task))
-  )
-};
-
 export const fetchTasksByProject = projectID => dispatch => {
   return TASKS.fetchTasksByProject(projectID)
     .then(projectwithtasks => {
