@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ '16' ]
+        node: [ '14', '16' ]
         ruby: [2.7.4]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
