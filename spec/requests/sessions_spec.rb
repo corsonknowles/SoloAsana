@@ -43,4 +43,17 @@ RSpec.describe Api::SessionsController, type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
+
+  context 'with stubbed before_action and no current user' do
+    before do
+      allow_any_instance_of(described_class).to receive(:require_logged_in!)
+    end
+    it 'renders errors' do
+      delete "/api/session/", headers: headers
+
+      expect(response.body).to match('Nobody signed in')
+      expect(response.content_type).to include("application/json")
+      expect(response).to have_http_status(:not_found)
+    end
+  end
 end
