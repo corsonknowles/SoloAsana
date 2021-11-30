@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.7.4'
+
 gem 'autoprefixer-rails'
 gem 'bcrypt' # Use ActiveModel has_secure_password
 gem 'figaro'

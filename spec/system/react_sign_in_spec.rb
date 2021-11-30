@@ -23,7 +23,7 @@ RSpec.describe "React Sign In", type: :system do
     end
   end
 
-  context 'with a user' do
+  context 'with a valid login' do
     let(:user) { create(:user) }
 
     before do

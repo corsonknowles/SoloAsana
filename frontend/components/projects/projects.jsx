@@ -16,12 +16,6 @@ class Projects extends React.Component {
   }
 
   componentWillMount () {
-    const newProject = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
-
     this.props.fetchProjects()
   }
 
@@ -77,6 +71,8 @@ class Projects extends React.Component {
       const keyCode = event.keyCode;
 
       if (key === 'Enter' || keyCode === 13) {
+        event.preventDefault();
+
         const newProject = {
           name: "",
           team_id: 1,
@@ -85,9 +81,10 @@ class Projects extends React.Component {
         // set a new project in the database
         this.props.createProject(newProject);
 
-        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
+          nextItem.click();
         }
       } else {
         const target = event.target;
@@ -104,16 +101,18 @@ class Projects extends React.Component {
         if (empty && mustBeOneProject && deleteKeys) {
           event.preventDefault();
           this.props.destroyProject(projectID);
-          this.props.history.push('/');
 
-          let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+          const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
           if (previousItem) {
             previousItem.focus();
+            previousItem.click();
+
           } else {
-            // this will focus on the last remaining project if all previous projects are deleted
-            let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+            // this will focus and display tasks for the last remaining project if all previous projects are deleted
+            const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
+              nextItem.click();
             }
           }
         }
@@ -126,23 +125,25 @@ class Projects extends React.Component {
       const key = event.key;
       const keyCode = event.keyCode;
 
-      const value = event.target.value;
-      const project = this.props.projects[projectID];
-      project.name = value;
-
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+        const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
         if (previousItem) {
           previousItem.focus();
+          previousItem.click();
         }
       } else if (key === 'ArrowDown' || keyCode === 40) {
         event.preventDefault();
-        let nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
+          nextItem.click();
         }
       } else {
+        const value = event.target.value;
+        const project = this.props.projects[projectID];
+        project.name = value;
+
         this.props.updateProject(project);
       }
     }
@@ -157,7 +158,7 @@ class Projects extends React.Component {
               type="text"
               name={`project${projectID}`}
               id={`project${i}`}
-              key={`project${projectID}`}
+              key={`project_key_${projectID}`}
               defaultValue={this.props.projects[projectID].name}
               className="sidebar-item-row"
               placeholder="_________________________"
