@@ -22,7 +22,7 @@
 class User < ApplicationRecord
   attr_reader :password
 
-  validates :username, presence: true
+  validates :username, presence: true, length: { maximum: 256 }
   validates :email, presence: true
   validates :password_digest, presence: true
   validates :session_token, presence: true
