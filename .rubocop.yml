@@ -5,4 +5,4 @@ Metrics/BlockLength:
   Max: 56
   IgnoredMethods: ['describe', 'context']
   Exclude:
-    - 'spec'
+    - 'spec/**/*'
