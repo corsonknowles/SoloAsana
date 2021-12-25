@@ -30,6 +30,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
+  before_validation :truncate_username
   # after_touch :ensure_latest_project # TODO: add front end and then enable this
 
   has_many :tasks
@@ -58,6 +59,13 @@ class User < ApplicationRecord
   end
 
   private
+
+  def truncate_username
+    return unless username
+    return unless username.length > 255
+
+    self.username = username.truncate(255)
+  end
 
   def ensure_session_token
     set_unique_session! unless session_token
