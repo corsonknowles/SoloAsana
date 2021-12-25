@@ -31,7 +31,6 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
   before_validation :truncate_username
-  # after_touch :ensure_latest_project # TODO: add front end and then enable this
 
   has_many :tasks
   has_many :projects
@@ -70,14 +69,6 @@ class User < ApplicationRecord
   def ensure_session_token
     set_unique_session! unless session_token
   end
-
-  # NOTE: feature under development
-  # def ensure_latest_project
-  #   return if latest_project
-  #   return if projects.empty?
-  #
-  #   self.latest_project = projects.last
-  # end
 
   def new_session_token
     SecureRandom.urlsafe_base64
