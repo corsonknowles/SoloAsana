@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe "React Tasks Changes", type: :system do
   let(:user) { create(:user) }
 

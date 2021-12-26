@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Api::UsersController, type: :request do
   let(:headers) { { "ACCEPT" => "application/json" } }
 

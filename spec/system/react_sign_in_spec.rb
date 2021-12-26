@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe "React Sign In", type: :system do
   it "renders a React component" do
     visit "/"
