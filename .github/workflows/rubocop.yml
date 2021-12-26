@@ -14,7 +14,7 @@ on:
     types: # This configuration does not affect the page_build event above
       - created
 jobs:
-  test:
+  rubocop:
     strategy:
       matrix:
         ruby: [2.7.4]  # note, must use '3.0' with quotes due to known bug
