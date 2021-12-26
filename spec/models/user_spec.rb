@@ -31,49 +31,49 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:projects) }
   it { is_expected.to have_many(:teams) }
 
-  describe 'active record hooks' do
+  describe "active record hooks" do
     let(:user) { create :user }
 
-    it 'trunctates username before validations' do
-      user.username = '*' * 260
+    it "trunctates username before validations" do
+      user.username = "*" * 260
       expect { user.save! }.to change { user.username.length }.from(260).to(255)
     end
   end
 
-  describe '.find_by_credentials' do
+  describe ".find_by_credentials" do
     subject { described_class.find_by_credentials(email, example_password) }
 
     let(:user) { create :user }
-    let(:example_password) { 'example_password' }
+    let(:example_password) { "example_password" }
     let(:email) { user.email }
 
     it { is_expected.to be nil }
 
-    context 'when user has the example password' do
+    context "when user has the example password" do
       let(:user) { create(:user, password: example_password) }
 
       it { is_expected.to eq user }
     end
   end
 
-  describe '#password=' do
+  describe "#password=" do
     subject { user.password = example_password }
 
     let(:user) { build :user }
-    let(:example_password) { 'example_password' }
+    let(:example_password) { "example_password" }
 
-    it 'alters the password digest' do
+    it "alters the password digest" do
       expect { subject }.to(change { user.password_digest })
     end
   end
 
-  describe '#password_is?' do
+  describe "#password_is?" do
     subject { user.password_is?(example_password) }
 
     let(:user) { build(:user) }
-    let(:example_password) { 'example_password' }
+    let(:example_password) { "example_password" }
 
-    context 'when set to the example password' do
+    context "when set to the example password" do
       let(:user) { build(:user, password: example_password) }
 
       it { is_expected.to be true }
@@ -82,22 +82,22 @@ RSpec.describe User, type: :model do
     it { is_expected.to be false }
   end
 
-  describe '#reset_session_token!' do
+  describe "#reset_session_token!" do
     subject(:reset) { user.reset_session_token! }
 
     let(:user) { create(:user) }
 
-    it 'changes the session token' do
+    it "changes the session token" do
       expect { reset }.to(change { user.session_token })
     end
 
     it { is_expected.to eq user.session_token }
 
-    context 'when another user exists with the same token' do
+    context "when another user exists with the same token" do
       let(:user2) { create(:user) }
       let(:taken_token) { user2.session_token }
 
-      it 'ensures token uniqueness' do
+      it "ensures token uniqueness" do
         allow(user).to receive(:new_session_token).and_return(taken_token, "new_token")
 
         expect { reset }.to(change { user.session_token })

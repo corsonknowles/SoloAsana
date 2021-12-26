@@ -1,4 +1,3 @@
-
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -30,8 +29,6 @@ class ApplicationController < ActionController::Base
   end
 
   def require_logged_in!
-    unless logged_in?
-      render json: { base: ['invalid credentials'] }, status: 401
-    end
+    render json: { base: ["invalid credentials"] }, status: 401 unless logged_in?
   end
 end

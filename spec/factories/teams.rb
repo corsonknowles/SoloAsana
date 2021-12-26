@@ -14,7 +14,7 @@
 #
 FactoryBot.define do
   factory :team do
-    name { 'Important Team' }
+    name { "Important Team" }
     user
   end
 end

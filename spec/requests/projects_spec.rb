@@ -4,7 +4,7 @@ RSpec.describe Api::ProjectsController, type: :request do
   let(:project) { build(:project, user: user) }
   let(:project_params) { project.attributes }
 
-  context 'without a login' do
+  context "without a login" do
     it "does not create a Project and renders errors" do
       post "/api/projects", params: { project: project_params }, headers: headers
 
@@ -14,12 +14,12 @@ RSpec.describe Api::ProjectsController, type: :request do
     end
   end
 
-  context 'with user login stubbed' do
+  context "with user login stubbed" do
     before do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
-    context 'with a draft project' do
+    context "with a draft project" do
       it "creates a project and renders it as JSON" do
         post "/api/projects", params: { project: project_params }, headers: headers
 
@@ -28,7 +28,7 @@ RSpec.describe Api::ProjectsController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context 'with invalid params' do
+      context "with invalid params" do
         let(:project) { build(:project, user: user, name: "*" * 256) }
 
         it "does not create a Project when the name is too long and renders errors" do
@@ -41,7 +41,7 @@ RSpec.describe Api::ProjectsController, type: :request do
       end
     end
 
-    context 'with a newly created project' do
+    context "with a newly created project" do
       let(:project) { create(:project, user: user) }
 
       it "errors on invalid update" do

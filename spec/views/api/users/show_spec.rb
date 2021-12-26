@@ -7,11 +7,11 @@ RSpec.describe User, type: :view do
 
     user_hash = JSON.parse(rendered)
 
-    expect(user_hash['id']).to eq(user.id)
-    expect(user_hash['role']).to eq(user.role)
-    expect(user_hash['username']).to eq(user.username)
-    expect(user_hash['department']).to eq(user.department)
-    expect(user_hash['about']).to eq(user.about)
-    expect(user_hash['photo']).to eq(user.photo)
+    expect(user_hash["id"]).to eq(user.id)
+    expect(user_hash["role"]).to eq(user.role)
+    expect(user_hash["username"]).to eq(user.username)
+    expect(user_hash["department"]).to eq(user.department)
+    expect(user_hash["about"]).to eq(user.about)
+    expect(user_hash["photo"]).to eq(user.photo)
   end
 end

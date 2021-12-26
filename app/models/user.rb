@@ -76,8 +76,6 @@ class User < ApplicationRecord
 
   def set_unique_session!
     self.session_token = new_session_token
-    while User.find_by(session_token: session_token)
-      self.session_token = new_session_token
-    end
+    self.session_token = new_session_token while User.find_by(session_token: session_token)
   end
 end

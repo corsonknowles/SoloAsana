@@ -5,7 +5,7 @@ RSpec.describe Api::TasksController, type: :request do
   let(:task) { build(:task, user: user, project: project) }
   let(:task_params) { task.attributes }
 
-  context 'without a login' do
+  context "without a login" do
     it "does not create a Task and renders errors" do
       post "/api/tasks", params: { task: task_params }, headers: headers
 
@@ -15,12 +15,12 @@ RSpec.describe Api::TasksController, type: :request do
     end
   end
 
-  context 'with user login stubbed' do
+  context "with user login stubbed" do
     before do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
-    context 'with a draft task' do
+    context "with a draft task" do
       it "creates a task and renders it as JSON" do
         post "/api/tasks", params: { task: task_params }, headers: headers
 
@@ -29,7 +29,7 @@ RSpec.describe Api::TasksController, type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      context 'with invalid params' do
+      context "with invalid params" do
         let(:task) { build(:task, user: user, project: nil) }
 
         it "does not create a Task and renders errors" do
@@ -42,7 +42,7 @@ RSpec.describe Api::TasksController, type: :request do
       end
     end
 
-    context 'with a newly created project' do
+    context "with a newly created project" do
       let(:task) { create(:task, user: user, project: project) }
 
       it "errors on invalid update" do

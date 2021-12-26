@@ -1,7 +1,7 @@
 RSpec.describe "React Tasks Changes", type: :system do
   let(:user) { create(:user) }
 
-  context 'when unauthorized' do
+  context "when unauthorized" do
     it "renders 401" do
       visit "/#/projects/tasks"
 
@@ -9,7 +9,7 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
   end
 
-  context 'when signed in' do
+  context "when signed in" do
     before do
       visit "/"
 
@@ -24,29 +24,29 @@ RSpec.describe "React Tasks Changes", type: :system do
     let!(:project) { create(:project, user: user, team: team) }
     let!(:task) { create(:task, user: user, team: team, project: project) }
 
-    it 'can enter a new task' do
+    it "can enter a new task" do
       find_by_id("project0").click # TODO: add a feature to make this unneccessary
-      fill_in "task0", with: 'This is my new task'
-      expect(page).to have_field("task0", with: 'This is my new task')
+      fill_in "task0", with: "This is my new task"
+      expect(page).to have_field("task0", with: "This is my new task")
     end
 
-    it 'can delete a 2nd task' do
+    it "can delete a 2nd task" do
       expect(page).not_to have_field("task1")
 
       find_by_id("project0").click # TODO: add a feature to make this unneccessary
-      fill_in "task0", with: 'This is my new task'
+      fill_in "task0", with: "This is my new task"
       seeded_task = find_by_id("task0")
       seeded_task.native.send_keys(:return)
       expect(page).to have_field("task1")
 
-      fill_in "task1", with: 'test'
+      fill_in "task1", with: "test"
       newly_entered_task = find_by_id("task1")
       (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
 
       expect(page).not_to have_field("task1")
     end
 
-    it 'cannot delete the only project' do
+    it "cannot delete the only project" do
       expect(page).to have_field("project0")
 
       the_only_project = find_by_id("project0")

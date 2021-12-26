@@ -1,7 +1,7 @@
 RSpec.describe "React Project Changes", type: :system do
   let(:user) { create(:user) }
 
-  context 'when unauthorized' do
+  context "when unauthorized" do
     it "renders 401" do
       visit "/#/projects/1"
 
@@ -9,7 +9,7 @@ RSpec.describe "React Project Changes", type: :system do
     end
   end
 
-  context 'when signed in' do
+  context "when signed in" do
     before do
       visit "/"
 
@@ -23,12 +23,12 @@ RSpec.describe "React Project Changes", type: :system do
     let(:team) { create(:team) }
     let!(:project) { create(:project, user: user, team: team) }
 
-    it 'can enter a project title' do
-      fill_in "project0", with: 'This is my new project'
-      expect(page).to have_field("project0", with: 'This is my new project')
+    it "can enter a project title" do
+      fill_in "project0", with: "This is my new project"
+      expect(page).to have_field("project0", with: "This is my new project")
     end
 
-    it 'cannot delete the only project' do
+    it "cannot delete the only project" do
       expect(page).to have_field("project0")
 
       the_only_project = find_by_id("project0")
@@ -37,21 +37,21 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_field("project0")
     end
 
-    it 'can create a 2nd project' do
+    it "can create a 2nd project" do
       expect(page).to have_field("project0")
       expect(page).not_to have_field("project1")
 
-      fill_in "project0", with: 'This is my new project'
+      fill_in "project0", with: "This is my new project"
       seeded_project = find_by_id("project0")
       seeded_project.native.send_keys(:return)
 
       expect(page).to have_field("project1")
     end
 
-    context 'with 2 seeded projects' do
+    context "with 2 seeded projects" do
       let!(:second_project) { create(:project, user: user, team: team) }
 
-      it 'can delete a 2nd project' do
+      it "can delete a 2nd project" do
         expect(page).to have_field("project1")
 
         not_the_only_project = find_by_id("project1")

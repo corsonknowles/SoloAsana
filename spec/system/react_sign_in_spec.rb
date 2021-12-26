@@ -1,10 +1,10 @@
 RSpec.describe "React Sign In", type: :system do
-  it 'renders a React component' do
-    visit '/'
-    expect(page).to have_content('Move work forward')
+  it "renders a React component" do
+    visit "/"
+    expect(page).to have_content("Move work forward")
   end
 
-  context 'with a bad login' do
+  context "with a bad login" do
     let(:user) { create(:user) }
 
     before do
@@ -17,13 +17,13 @@ RSpec.describe "React Sign In", type: :system do
       click_button "Sign In"
     end
 
-    it 'remains logged out' do
+    it "remains logged out" do
       expect(page).not_to have_text("Welcome Robert")
-      expect(page).to have_content('Move work forward')
+      expect(page).to have_content("Move work forward")
     end
   end
 
-  context 'with a valid login' do
+  context "with a valid login" do
     let(:user) { create(:user) }
 
     before do
@@ -40,21 +40,21 @@ RSpec.describe "React Sign In", type: :system do
       expect(page).to have_text("Welcome Robert")
     end
 
-    it 'makes valid updates' do
+    it "makes valid updates" do
       expect(page).to have_text("Welcome Robert")
 
-      click_button 'Account'
-      fill_in "username", with: 'The Best User'
+      click_button "Account"
+      fill_in "username", with: "The Best User"
       click_button "Update Profile"
 
       expect(page).to have_text("Welcome The Best User")
     end
 
-    it 'can log back out' do
+    it "can log back out" do
       expect(page).to have_text("Welcome Robert")
-      click_button 'Log Out'
+      click_button "Log Out"
       expect(page).not_to have_text("Welcome Robert")
-      expect(page).to have_content('Move work forward')
+      expect(page).to have_content("Move work forward")
     end
   end
 end

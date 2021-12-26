@@ -6,9 +6,9 @@ RSpec.describe Project, type: :view do
 
     project_hash = JSON.parse(rendered)
 
-    expect(project_hash['id']).to eq(project.id)
-    expect(project_hash['user_id']).to eq(project.user_id)
-    expect(project_hash['name']).to eq(project.name)
-    expect(project_hash['team_id']).to eq(project.team_id)
+    expect(project_hash["id"]).to eq(project.id)
+    expect(project_hash["user_id"]).to eq(project.user_id)
+    expect(project_hash["name"]).to eq(project.name)
+    expect(project_hash["team_id"]).to eq(project.team_id)
   end
 end
