@@ -4,5 +4,8 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
 
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
