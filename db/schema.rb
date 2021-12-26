@@ -12,56 +12,56 @@
 
 ActiveRecord::Schema.define(version: 20_170_929_010_842) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'projects', force: :cascade do |t|
-    t.string 'name'
-    t.bigint 'team_id'
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['team_id'], name: 'index_projects_on_team_id'
-    t.index ['user_id'], name: 'index_projects_on_user_id'
+  create_table "projects", force: :cascade do |t|
+    t.string "name"
+    t.bigint "team_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_projects_on_team_id"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
-  create_table 'tasks', force: :cascade do |t|
-    t.string 'title'
-    t.text 'body'
-    t.integer 'due'
-    t.boolean 'done'
-    t.bigint 'user_id'
-    t.bigint 'project_id'
-    t.bigint 'team_id'
-    t.boolean 'section'
-    t.bigint 'task_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['project_id'], name: 'index_tasks_on_project_id'
-    t.index ['task_id'], name: 'index_tasks_on_task_id'
-    t.index ['team_id'], name: 'index_tasks_on_team_id'
-    t.index ['user_id'], name: 'index_tasks_on_user_id'
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.integer "due"
+    t.boolean "done"
+    t.bigint "user_id"
+    t.bigint "project_id"
+    t.bigint "team_id"
+    t.boolean "section"
+    t.bigint "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_tasks_on_project_id"
+    t.index ["task_id"], name: "index_tasks_on_task_id"
+    t.index ["team_id"], name: "index_tasks_on_team_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
-  create_table 'teams', force: :cascade do |t|
-    t.string 'name'
-    t.bigint 'user_id'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_teams_on_user_id'
+  create_table "teams", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'username'
-    t.string 'email', null: false
-    t.string 'password_digest', null: false
-    t.string 'session_token'
-    t.string 'role'
-    t.string 'department'
-    t.string 'about'
-    t.string 'photo'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'latest_project'
-    t.index ['email'], name: 'index_users_on_email'
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email", null: false
+    t.string "password_digest", null: false
+    t.string "session_token"
+    t.string "role"
+    t.string "department"
+    t.string "about"
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "latest_project"
+    t.index ["email"], name: "index_users_on_email"
   end
 end
