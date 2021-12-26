@@ -98,7 +98,7 @@ RSpec.describe User, type: :model do
       let(:taken_token) { user2.session_token }
 
       it 'ensures token uniqueness' do
-        allow(user).to receive(:new_session_token).and_return(taken_token, "new_token")
+        allow(user).to receive(:new_session_token).and_return(taken_token, 'new_token')
 
         expect { reset }.to(change { user.session_token })
         expect(user.session_token).not_to eq(taken_token)

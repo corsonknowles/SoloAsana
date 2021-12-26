@@ -1,8 +1,8 @@
 RSpec.describe Project, type: :view do
   let(:project) { build(:project) }
 
-  it "renders project json" do
-    render partial: "api/projects/project.json.jbuilder", locals: { project: project }
+  it 'renders project json' do
+    render partial: 'api/projects/project.json.jbuilder', locals: { project: project }
 
     project_hash = JSON.parse(rendered)
 

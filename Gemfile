@@ -18,7 +18,7 @@ gem 'sass-rails' # Use SCSS for stylesheets
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'capybara' # for System Tests
   gem 'factory_bot'
   gem 'factory_bot_rails'
@@ -31,6 +31,7 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'standard'
   # gem 'therubyracer', platforms: :ruby # See https://github.com/rails/execjs#readme
 end
 
