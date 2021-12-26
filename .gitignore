@@ -38,3 +38,4 @@ spec/examples.txt
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
+app/assets/javascripts/bundle.js.LICENSE.txt
