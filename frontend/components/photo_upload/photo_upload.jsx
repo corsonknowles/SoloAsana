@@ -132,6 +132,7 @@ class PhotoUpload extends React.Component {
           >
           <div className="file-upload">
             <Dropzone className="dropzone"
+             id="profile-dropzone"
              multiple={false}
              accept="image/*"
              onDrop={this.onImageDrop.bind(this)}>
