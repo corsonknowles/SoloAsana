@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def new_session_token
-    SecureRandom.urlsafe_base64
+    SecureRandom.urlsafe_base64(256)
   end
 
   def set_unique_session!
