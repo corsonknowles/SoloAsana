@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe "React Profile Photo", type: :system do
   context "with a valid login" do
     let(:user) { create(:user) }

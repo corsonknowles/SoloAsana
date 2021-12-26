@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe Project, type: :view do
   let(:project) { build(:project) }
 

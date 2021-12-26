@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 current_user.projects.each do |project|
   project.tasks.each do |task|
     json.set! task.id do

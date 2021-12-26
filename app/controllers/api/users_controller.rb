@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::UsersController < ApplicationController
   before_action :require_logged_in!, only: %i[show update]
 
