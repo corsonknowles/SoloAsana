@@ -22,7 +22,7 @@
 class User < ApplicationRecord
   attr_reader :password
 
-  validates :username, presence: true
+  validates :username, presence: true, length: { maximum: 256 }
   validates :email, presence: true
   validates :password_digest, presence: true
   validates :session_token, presence: true
@@ -30,7 +30,7 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, allow_nil: true
 
   after_initialize :ensure_session_token
-  # after_touch :ensure_latest_project # TODO: add front end and then enable this
+  before_validation :truncate_username
 
   has_many :tasks
   has_many :projects
@@ -59,17 +59,16 @@ class User < ApplicationRecord
 
   private
 
+  def truncate_username
+    return unless username
+    return unless username.length > 255
+
+    self.username = username.truncate(255)
+  end
+
   def ensure_session_token
     set_unique_session! unless session_token
   end
-
-  # NOTE: feature under development
-  # def ensure_latest_project
-  #   return if latest_project
-  #   return if projects.empty?
-  #
-  #   self.latest_project = projects.last
-  # end
 
   def new_session_token
     SecureRandom.urlsafe_base64

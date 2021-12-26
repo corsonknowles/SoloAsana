@@ -1,6 +1,7 @@
 # README
 ![example workflow](https://github.com/corsonknowles/SoloAsana/actions/workflows/rails.yml/badge.svg)
 ![example workflow](https://github.com/corsonknowles/SoloAsana/actions/workflows/rubocop.yml/badge.svg)
+<a href="https://codeclimate.com/github/corsonknowles/SoloAsana/test_coverage"><img src="https://api.codeclimate.com/v1/badges/da6c32130bf13fc96f1a/test_coverage" /></a>
 
 
 # SoloAsana

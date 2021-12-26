@@ -50,16 +50,6 @@ RSpec.describe "React Sign In", type: :system do
       expect(page).to have_text("Welcome The Best User")
     end
 
-    # TODO: add error handling and reject state changes for this
-    xit 'errors on invalid updates' do
-      expect(page).to have_text("Welcome Robert")
-      click_button 'Account'
-      fill_in "username", with: ''
-      click_button "Update Profile"
-
-      expect(page).to have_text("Welcome Robert")
-    end
-
     it 'can log back out' do
       expect(page).to have_text("Welcome Robert")
       click_button 'Log Out'

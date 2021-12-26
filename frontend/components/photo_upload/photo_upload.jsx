@@ -62,18 +62,6 @@ class PhotoUpload extends React.Component {
     };
   }
 
-  renderErrors(){
-    return(
-      <ul className="errors">
-        {this.props.errors.map( (error, i) => (
-          <li className="eachError" key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
-  }
-
   openModal() {
     this.setState({modalIsOpen: true});
   }
@@ -144,6 +132,7 @@ class PhotoUpload extends React.Component {
           >
           <div className="file-upload">
             <Dropzone className="dropzone"
+             id="profile-dropzone"
              multiple={false}
              accept="image/*"
              onDrop={this.onImageDrop.bind(this)}>

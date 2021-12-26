@@ -31,6 +31,15 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:projects) }
   it { is_expected.to have_many(:teams) }
 
+  describe 'active record hooks' do
+    let(:user) { create :user }
+
+    it 'trunctates username before validations' do
+      user.username = '*' * 260
+      expect { user.save! }.to change { user.username.length }.from(260).to(255)
+    end
+  end
+
   describe '.find_by_credentials' do
     subject { described_class.find_by_credentials(email, example_password) }
 
