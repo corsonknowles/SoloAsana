@@ -2,8 +2,7 @@
 
 RSpec.describe "React Demo Sign In", type: :system do
   subject(:visit_page_with_seed_user) do
-    create(
-      :user,
+    User.first_or_create(
       email: "awesome.user@example.com", # match the seed user
       username: "Robert",
       password: "secure",
