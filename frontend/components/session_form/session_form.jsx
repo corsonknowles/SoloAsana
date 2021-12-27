@@ -55,12 +55,6 @@ class SessionForm extends React.Component {
     this.props.clearErrors()
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.loggedIn) {
-      this.props.history.push('/')
-    }
-  }
-
   handleChange(event) {
     const target = event.target;
     const name = target.name;
@@ -109,34 +103,30 @@ class SessionForm extends React.Component {
   launchDemo(event) {
     event.preventDefault();
     this.openModal();
-    setTimeout(() => this.handleDemoLogin(event), 1000);
+    setTimeout(() => this.handleDemoLogin(event), 100);
   }
 
   handleDemoLogin(event) {
     this.setState({pending: true});
     this.setState({'username': '', 'password': ''});
 
-    let password = "secure";
-    let email = "awesome.user@example.com";
+    const password = "secure";
+    const email = "awesome.user@example.com";
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => this.setState({
-        email: email.slice(0, i + 1)}), (i * 50));
+        email: email.slice(0, i + 1)}), (i * 25));
     }
 
     for (let j = 0; j < password.length; j++) {
-      setTimeout(() => this.setState({ password: password.slice(0, j + 1) }), ((j + 24) * 50));
+      setTimeout(() => this.setState({ password: password.slice(0, j + 1) }), ((j + 24) * 25));
     }
 
     const user = {
-      password: "secure",
-      email: "awesome.user@example.com"
+      password,
+      email
     };
 
-    setTimeout(this.handleSubmit("login", user), 1550);
-  }
-
-  disableButtons() {
-    this.state.pending = true;
+    setTimeout(this.handleSubmit("login", user), 800);
   }
 
   render() {

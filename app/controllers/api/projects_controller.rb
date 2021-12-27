@@ -6,7 +6,7 @@ class Api::ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(project_params)
     if @project.save
-      render json: @project, include: :tasks
+      render json: @project
     else
       render json: @project.errors.full_messages, status: 422
     end
@@ -15,21 +15,23 @@ class Api::ProjectsController < ApplicationController
   def destroy
     @project = current_user.projects.find(params[:id])
     @project.destroy
-    render json: @project, include: :tasks
+    render json: @project
   end
 
   def index
-    render json: current_user.projects, include: :tasks
+    @projects = current_user.projects.includes(:tasks)
+    render json: @projects, include: :tasks
   end
 
   def show
-    render json: current_user.projects.find(params[:id]), include: :tasks
+    @project = current_user.projects.includes(:tasks).find(params[:id])
+    render json: @project, include: :tasks
   end
 
   def update
     @project = current_user.projects.find(params[:id])
-    if @project.update(project_params)
-      render json: @project, include: :tasks
+    if @project.update(update_params)
+      render json: @project
     else
       render json: @project.errors.full_messages, status: 422
     end
@@ -38,6 +40,10 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :id, :created_at, :updated_at, :tasks)
+    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :created_at, :updated_at)
+  end
+
+  def update_params
+    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :created_at, :updated_at)
   end
 end

@@ -1,5 +1,4 @@
 import {
-  RECEIVE_TASKS,
   RECEIVE_TASK,
   DELETE_TASK,
   RECEIVE_TASKS_BY_PROJECT
@@ -14,10 +13,6 @@ const TaskReducer = function(state = {}, action){
   let newState;
 
   switch(action.type){
-    case RECEIVE_TASKS:
-      newState = {};
-      action.tasks.forEach(task => newState[task.id] = task);
-      return newState;
     case RECEIVE_TASKS_BY_PROJECT:
       newState = {};
       action.project.tasks.forEach(task => newState[task.id] = task);

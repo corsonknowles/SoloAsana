@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+# See: https://www.fastruby.io/blog/rails/javascript/code-coverage/js-code-coverage-in-rails.html
+if ENV["RAILS_ENV"] == "test"
+  require "simplecov"
+  FileUtils.mkdir_p(".nyc_output") # make sure the directory exists
+end
+
+# this function should be executed when we want to store the current `window.__coverage__` info in a file
+def dump_js_coverage
+  return unless ENV["COVERAGE"]
+
+  page_coverage = page.evaluate_script("JSON.stringify(window.__coverage__);")
+  return if page_coverage.blank?
+
+  # we will store one `js-....json` file for each system test, and we save all of them in the .nyc_output dir
+  File.open(Rails.root.join(".nyc_output", "js-#{Random.rand(10_000_000_000)}.json"), "w") do |report|
+    report.puts page_coverage
+  end
+end
+
 require "active_support/core_ext/integer/time"
 
 # The test environment is used exclusively to run your application's

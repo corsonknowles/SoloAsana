@@ -4,7 +4,7 @@ RSpec.describe "React Project Changes", type: :system do
   let(:user) { create(:user) }
 
   context "when unauthorized" do
-    it "renders 401" do
+    it "renders 401 on the projects view" do
       visit "/#/projects/1"
 
       expect(page).to have_text("Check Out the DEMO Account")
@@ -60,6 +60,20 @@ RSpec.describe "React Project Changes", type: :system do
         (not_the_only_project.value.length + 1).times { not_the_only_project.send_keys [:backspace] }
 
         expect(page).not_to have_selector("project1")
+      end
+
+      it "can navigate between projects" do
+        expect(page).to have_field("project1")
+
+        fill_in "project0", with: "This is my first project"
+        seeded_project = find_by_id("project0")
+        seeded_project.native.send_keys(:down)
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
+
+        fill_in "project1", with: "This is my second project"
+        next_project = find_by_id("project1")
+        next_project.native.send_keys(:up)
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
     end
   end

@@ -27,7 +27,6 @@ export const receiveProjects = projects => ({
   projects
 });
 
-
 // asynchronous actions
 export const createProject = project => dispatch => (
   PROJECTS.createProject(project)
