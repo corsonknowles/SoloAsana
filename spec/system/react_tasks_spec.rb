@@ -4,7 +4,7 @@ RSpec.describe "React Tasks Changes", type: :system do
   let(:user) { create(:user) }
 
   context "when unauthorized" do
-    it "renders 401" do
+    it "renders 401 on the tasks view" do
       visit "/#/projects/tasks"
 
       expect(page).to have_text("Check Out the DEMO Account")
