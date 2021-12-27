@@ -19,7 +19,7 @@ jobs:
     strategy:
       matrix:
         node: [ '14', '16' ]
-        ruby: [2.7.4]  # note, must use '3.0' with quotes due to known bug
+        ruby: [2.7.4, 2.7.5]  # note, must use '3.0' with quotes due to known bug
     services:
       postgres:
         image: postgres:12

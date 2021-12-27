@@ -37,7 +37,7 @@ export const fetchProjectsByTeam = teamID => (
   })
 );
 
-// update: makes an AJAX request that updates an existing user.
+// update: makes an AJAX request that updates an existing project.
 export const updateProject = project => (
   $.ajax({
     method: 'PATCH',

@@ -5,7 +5,9 @@ RSpec.describe User, type: :view do
   let(:photo) { File.new "#{Rails.root}/app/assets/images/favicon.png" } # re-use Favicon because it is a small file
 
   it "renders user json" do
-    render partial: "api/users/user.json.jbuilder", locals: { user: user }
+    render partial: "api/users/user",
+           formats: [:json],
+           locals: { user: user }
 
     user_hash = JSON.parse(rendered)
 

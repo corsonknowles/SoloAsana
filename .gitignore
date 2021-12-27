@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
+# Knock it off, mac
+.DS_Store
+
 # Ignore bundler config.
 /.bundle
 
@@ -30,7 +33,9 @@ yarn.lock
 /vendor
 
 # Everyone keeps their own coverage
+.nyc_output
 /coverage
+js-coverage
 
 spec/examples.txt
 

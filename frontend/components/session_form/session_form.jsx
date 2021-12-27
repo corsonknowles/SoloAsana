@@ -109,7 +109,7 @@ class SessionForm extends React.Component {
   launchDemo(event) {
     event.preventDefault();
     this.openModal();
-    setTimeout(() => this.handleDemoLogin(event), 1000);
+    setTimeout(() => this.handleDemoLogin(event), 100);
   }
 
   handleDemoLogin(event) {
@@ -120,11 +120,11 @@ class SessionForm extends React.Component {
     let email = "awesome.user@example.com";
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => this.setState({
-        email: email.slice(0, i + 1)}), (i * 50));
+        email: email.slice(0, i + 1)}), (i * 25));
     }
 
     for (let j = 0; j < password.length; j++) {
-      setTimeout(() => this.setState({ password: password.slice(0, j + 1) }), ((j + 24) * 50));
+      setTimeout(() => this.setState({ password: password.slice(0, j + 1) }), ((j + 24) * 25));
     }
 
     const user = {
