@@ -55,12 +55,6 @@ class SessionForm extends React.Component {
     this.props.clearErrors()
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.loggedIn) {
-      this.props.history.push('/')
-    }
-  }
-
   handleChange(event) {
     const target = event.target;
     const name = target.name;
@@ -133,10 +127,6 @@ class SessionForm extends React.Component {
     };
 
     setTimeout(this.handleSubmit("login", user), 1550);
-  }
-
-  disableButtons() {
-    this.state.pending = true;
   }
 
   render() {
