@@ -102,8 +102,6 @@ class Greeting extends React.Component {
   }
 
   renderErrors(){
-    console.log("Here are the errors")
-    console.log(this.props)
     return(
       <div>
         <ul className="errors">
