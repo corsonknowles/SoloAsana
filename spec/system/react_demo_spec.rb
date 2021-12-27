@@ -11,11 +11,6 @@ RSpec.describe "React Demo Sign In", type: :system do
     )
   end
 
-  it "renders a React component" do
-    visit "/"
-    expect(page).to have_content("Move work forward")
-  end
-
   context "with the full demo login" do
     before do
       visit "/"

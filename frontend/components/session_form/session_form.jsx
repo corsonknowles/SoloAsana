@@ -110,8 +110,8 @@ class SessionForm extends React.Component {
     this.setState({pending: true});
     this.setState({'username': '', 'password': ''});
 
-    let password = "secure";
-    let email = "awesome.user@example.com";
+    const password = "secure";
+    const email = "awesome.user@example.com";
     for (let i = 0; i < email.length; i++) {
       setTimeout(() => this.setState({
         email: email.slice(0, i + 1)}), (i * 25));
@@ -122,11 +122,11 @@ class SessionForm extends React.Component {
     }
 
     const user = {
-      password: "secure",
-      email: "awesome.user@example.com"
+      password,
+      email
     };
 
-    setTimeout(this.handleSubmit("login", user), 1550);
+    setTimeout(this.handleSubmit("login", user), 800);
   }
 
   render() {
