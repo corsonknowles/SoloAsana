@@ -14,7 +14,7 @@ def dump_js_coverage
   return if page_coverage.blank?
 
   # we will store one `js-....json` file for each system test, and we save all of them in the .nyc_output dir
-  File.open(Rails.root.join(".nyc_output", "js-#{Random.rand(10_000_000_000)}.json"), "w") do |report|
+  File.open(Rails.root.join(".nyc_output", "js-#{Random.rand(10_000_000_000_000)}.json"), "w") do |report|
     report.puts page_coverage
   end
 end

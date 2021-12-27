@@ -75,6 +75,32 @@ RSpec.describe "React Project Changes", type: :system do
         next_project.native.send_keys(:up)
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
+
+      it "changes focus after hitting enter" do
+        expect(page).to have_field("project0")
+        expect(page).to have_field("project1")
+        expect(page).not_to have_field("project2")
+
+        seeded_project = find_by_id("project0")
+        seeded_project.native.send_keys(:return)
+
+        expect(page).to have_field("project2")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
+      end
+
+      it "focusses on the last remaining project after deleting the rest" do
+        expect(page).to have_field("project0")
+        expect(page).to have_field("project1")
+        expect(page).not_to have_field("project2")
+
+        fill_in "project0", with: "0"
+        fill_in "project1", with: ""
+        latest_project = find_by_id("project1")
+        latest_project.native.send_keys(:delete)
+
+        expect(page).not_to have_field("project1")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+      end
     end
   end
 end
