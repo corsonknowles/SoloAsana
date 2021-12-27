@@ -8,14 +8,6 @@ export const createTask = task => {
 };
 
 // plural
-export const fetchTasks = projectID => {
-  return $.ajax({
-    method: 'GET',
-    url: `api/tasks/`,
-    data: { id: projectID }
-  });
-};
-
 export const fetchTasksByProject = projectID => {
   return $.ajax({
     method: 'GET',

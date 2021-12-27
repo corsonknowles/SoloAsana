@@ -1,6 +1,5 @@
 import * as TASKS from '../util/tasks_api_util';
 
-export const RECEIVE_TASKS = 'RECEIVE_TASKS';
 export const RECEIVE_TASK = 'RECEIVE_TASK';
 export const DELETE_TASK = 'DELETE_TASK';
 export const RECEIVE_ERRORS = "RECEIVE_ERRORS";
@@ -8,10 +7,6 @@ export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const RECEIVE_TASKS_BY_PROJECT = "RECEIVE_TASKS_BY_PROJECT";
 
 // synchronous actions
-export const receiveTasks = tasks => ({
-  type: RECEIVE_TASKS,
-  tasks
-});
 
 export const receiveTask = task => ({
   type: RECEIVE_TASK,
@@ -55,12 +50,6 @@ export const updateTask = task => dispatch => {
       return returnTask;
     }
   );
-};
-
-export const fetchTasks = projectID => dispatch => {
-  return TASKS.fetchTasks(projectID)
-    .then(tasks => dispatch(receiveTasks(tasks))
-  )
 };
 
 export const fetchTasksByProject = projectID => dispatch => {
