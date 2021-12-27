@@ -102,10 +102,12 @@ class Greeting extends React.Component {
   }
 
   renderErrors(){
+    console.log("Here are the errors")
+    console.log(this.props)
     return(
       <div>
         <ul className="errors">
-          {this.props.errors.map( (error, i) => (
+          {this.props.errors && this.props.errors.map( (error, i) => (
             <li key={`error-${i}`}>
               {error}
             </li>
@@ -125,6 +127,9 @@ class Greeting extends React.Component {
         <div className="content-container">
           <header className="greeting-nav">
             <h3 className="nav-left">Welcome {this.state.username}</h3>
+            <div className="form login">
+              { this.renderErrors() }
+            </div>
             <nav className="nav-right">
               <button className="gold" onClick={this.openModal}>Account</button>
               <button className="header-button gold" onClick={this.logout} >Log Out</button>
@@ -167,7 +172,7 @@ class Greeting extends React.Component {
                 />
 
                 <label htmlFor="about" className="profile-label">ABOUT ME</label>
-                <input type="text" className="about" name="about me"
+                <input type="text" className="about" name="about"
                   value={this.state.about}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"

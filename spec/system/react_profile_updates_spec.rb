@@ -21,7 +21,7 @@ RSpec.describe "React Profile Updates", type: :system do
       fill_in "username", with: "i made this"
       fill_in "role", with: "nachos"
       fill_in "department", with: "cats"
-      fill_in "about me", with: "catherd"
+      fill_in "about", with: "catherd"
 
       click_button "Update Profile"
 
