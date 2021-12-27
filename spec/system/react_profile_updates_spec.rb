@@ -27,5 +27,16 @@ RSpec.describe "React Profile Updates", type: :system do
 
       expect(page).to have_text("Welcome i made this")
     end
+
+    it "cannot save a blank username" do
+      expect(page).to have_text("Welcome #{user.username}")
+
+      click_button "Account"
+      fill_in "username", with: ""
+
+      click_button "Update Profile"
+
+      expect(page).to have_text("Username can't be blank")
+    end
   end
 end
