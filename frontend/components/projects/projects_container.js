@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { createProject,
   updateProject,
-  fetchProject,
   fetchProjects,
   destroyProject,
   receiveErrors,
@@ -21,7 +20,6 @@ const mapDispatchToProps = dispatch => ({
   createProject: (project) => dispatch(createProject(project)),
   createTask: (task) => dispatch(createTask(task)),
   destroyProject: (id) => dispatch(destroyProject(id)),
-  fetchProject: (id) => dispatch(fetchProject(id)),
   fetchProjects: (teamID) => dispatch(fetchProjects(teamID)),
   updateProject: (project) => dispatch(updateProject(project))
 });

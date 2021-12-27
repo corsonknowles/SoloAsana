@@ -32,15 +32,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$|\.jsx$/,
-        use: {
-          loader: 'istanbul-instrumenter-loader',
-          options: { esModules: true }
-        },
-        enforce: 'post',
-        exclude: /node_modules|\.spec\.js$/,
-      },
-      {
         test: /.jsx?$/,
         exclude: /(node_modules)/,
         use: {
@@ -58,3 +49,21 @@ module.exports = {
   devtool: 'source-map',
   // watch: true,
 };
+
+// TO USE: generate JS coverage with:
+// export COVERAGE="true" && npm install
+// export COVERAGE="true" && bundle exec rspec
+
+if (process.env.COVERAGE === "true") {
+  module.exports.module.rules.push(
+    {
+      test: /\.js$|\.jsx$/,
+      use: {
+        loader: 'istanbul-instrumenter-loader',
+        options: { esModules: true }
+      },
+      enforce: 'post',
+      exclude: /node_modules|\.spec\.js$/,
+    }
+  );
+}

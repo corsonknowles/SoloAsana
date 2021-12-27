@@ -40,12 +40,6 @@ export const destroyProject = id => dispatch => {
     .then( () => dispatch(clearTasks()));
 };
 
-export const fetchProject = id => dispatch => (
-  PROJECTS.fetchProject(id)
-    .then(project => dispatch(receiveProject(project))
-  )
-);
-
 export const fetchProjects = () => dispatch => (
   PROJECTS.fetchProjects()
     .then(projects => dispatch(receiveProjects(projects))

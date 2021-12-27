@@ -14,14 +14,6 @@ export const deleteProject = id => {
   });
 };
 
-// singular
-export const fetchProject = projectID => (
-  $.ajax({
-    method: 'GET',
-    url: `api/projects/${projectID}`
-  })
-);
-
 // plural
 export const fetchProjects = () => (
   $.ajax({
