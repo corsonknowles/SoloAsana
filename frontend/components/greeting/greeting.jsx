@@ -150,7 +150,7 @@ class Greeting extends React.Component {
                   placeholder="Watch me update in real time"
                 />
 
-                <label htmlFor="role" className="profile-label">ROLE </label>
+                <label htmlFor="role" className="profile-label">ROLE</label>
                 <input type="text" name="role"
                   value={this.state.role}
                   onChange={(event) => this.handleChange(event)}
@@ -166,8 +166,8 @@ class Greeting extends React.Component {
                   placeholder=""
                 />
 
-                <label htmlFor="about" className="profile-label">ABOUT ME  </label>
-                <input type="text" className="about" name="about"
+                <label htmlFor="about" className="profile-label">ABOUT ME</label>
+                <input type="text" className="about" name="about me"
                   value={this.state.about}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
