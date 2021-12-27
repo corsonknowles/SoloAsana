@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
-# if running tests and we want the code coverage, include `simplecov` and prepare the directories
 # See: https://www.fastruby.io/blog/rails/javascript/code-coverage/js-code-coverage-in-rails.html
-require "simplecov" if ENV["RAILS_ENV"] == "test" && ENV["COVERAGE"]
+if ENV["RAILS_ENV"] == "test"
+  require "simplecov"
+  FileUtils.mkdir_p(".nyc_output") # make sure the directory exists
+end
 
 # this function should be executed when we want to store the current `window.__coverage__` info in a file
 def dump_js_coverage
