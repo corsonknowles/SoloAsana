@@ -2,9 +2,12 @@
 
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    resources :users, only: %i[create destroy update show]
+    resources :users, only: %i[create destroy update show] do
+      resources :teams, only: %i[show index]
+    end
     resources :tasks, only: %i[create destroy update]
     resources :projects, only: %i[create destroy update show index]
+    resources :teams, except: %i[show index]
 
     resource :session, only: %i[create destroy]
   end

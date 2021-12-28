@@ -68,6 +68,16 @@ RSpec.describe Api::ProjectsController, type: :request do
         expect(response.content_type).to include("application/json")
         expect(response).to have_http_status(:ok)
       end
+
+      it "can delete" do
+        project
+        expect do
+          delete "/api/projects/#{project.id}", headers: headers
+
+          expect(response.content_type).to include("application/json")
+          expect(response).to have_http_status(:ok)
+        end.to change { Project.count }.by(-1)
+      end
     end
   end
 end
