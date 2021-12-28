@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   createProject: (project) => dispatch(createProject(project)),
   createTask: (task) => dispatch(createTask(task)),
   destroyProject: (id) => dispatch(destroyProject(id)),
-  fetchProjects: (teamID) => dispatch(fetchProjects(teamID)),
+  fetchProjects: () => dispatch(fetchProjects()),
   updateProject: (project) => dispatch(updateProject(project))
 });
 
