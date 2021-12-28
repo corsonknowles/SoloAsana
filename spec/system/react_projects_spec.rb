@@ -88,7 +88,7 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
       end
 
-      it "focusses on the last remaining project after deleting the rest" do
+      it "focuses on the last remaining project after deleting the rest" do
         expect(page).to have_field("project0")
         expect(page).to have_field("project1")
         expect(page).not_to have_field("project2")
