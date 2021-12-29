@@ -19,11 +19,11 @@ class Api::TeamsController < ApplicationController
   end
 
   def index
-    render json: Team.all.where(user_id: current_user.id), include: :projects
+    render json: current_user.teams.includes(:projects), include: :projects
   end
 
   def show
-    render json: Team.find(params[:id]), include: :projects
+    render json: current_user.teams.find(params[:id]), include: :projects
   end
 
   def update

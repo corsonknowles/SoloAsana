@@ -23,6 +23,32 @@ RSpec.describe Api::TeamsController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
+    context "with a team in the database" do
+      let!(:team) { create(:team, user: user) }
+
+      it "renders the team show page as JSON" do
+        get "/api/teams/#{team.id}", headers: headers
+
+        expect(response.body).to match(team.name)
+        expect(response.content_type).to include("application/json")
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "with multiple teams" do
+      let!(:teams) { create_list(:team, 3, user: user) }
+
+      it "renders the teams index as JSON" do
+        get "/api/teams", headers: headers
+
+        expect(response.body).to match(teams.first.name)
+        expect(response.body).to match(teams.second.name)
+        expect(response.body).to match(teams.third.name)
+        expect(response.content_type).to include("application/json")
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
     context "with well formed params" do
       it "creates a team and renders it as JSON" do
         post "/api/teams", params: { team: team_params }, headers: headers
