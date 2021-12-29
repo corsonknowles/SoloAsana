@@ -8,7 +8,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   clearErrors: () => dispatch(clearErrors()),
-  logout: () => dispatch(requestLogout()),
   updateUser: (user) => dispatch(updateUser(user))
 });
 

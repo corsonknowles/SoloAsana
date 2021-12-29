@@ -39,6 +39,17 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_field("project0")
     end
 
+    it "can update a project" do
+      expect do
+        seeded_project = find_by_id("project0")
+        seeded_project.native.send_keys("This")
+        page.execute_script %{ $('#project0').trigger('keyup') }
+        # spend time until the database action completes
+        visit current_path
+        expect(page).to have_field("project0", with: "#{project.name}This")
+      end.to change { Project.last.reload.name }.from(project.name).to("#{project.name}This")
+    end
+
     it "can create a 2nd project" do
       expect(page).to have_field("project0")
       expect(page).not_to have_field("project1")
