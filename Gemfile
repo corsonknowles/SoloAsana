@@ -29,6 +29,7 @@ group :development, :test do
   gem "rubocop"
   gem "rubocop-performance"
   gem "rubocop-rails"
+  gem "rubocop-rspec"
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false

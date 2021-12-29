@@ -15,7 +15,7 @@ class Api::SessionsController < ApplicationController
     else
       render(
         json: ["Invalid email/password combination"],
-        status: 401
+        status: :unauthorized
       )
     end
   end
@@ -28,7 +28,7 @@ class Api::SessionsController < ApplicationController
     else
       render(
         json: ["Nobody signed in"],
-        status: 404
+        status: :not_found
       )
     end
   end

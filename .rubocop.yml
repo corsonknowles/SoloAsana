@@ -1,3 +1,11 @@
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
 Lint/UselessAssignment:
   Exclude:
     - 'db/seeds.rb'

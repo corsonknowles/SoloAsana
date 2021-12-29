@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
     let(:example_password) { "example_password" }
 
     it "alters the password digest" do
-      expect { subject }.to(change { user.password_digest })
+      expect { subject }.to(change(user, :password_digest))
     end
   end
 
@@ -90,7 +90,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     it "changes the session token" do
-      expect { reset }.to(change { user.session_token })
+      expect { reset }.to(change(user, :session_token))
     end
 
     it { is_expected.to eq user.session_token }
@@ -102,7 +102,7 @@ RSpec.describe User, type: :model do
       it "ensures token uniqueness" do
         allow(user).to receive(:new_session_token).and_return(taken_token, "new_token")
 
-        expect { reset }.to(change { user.session_token })
+        expect { reset }.to(change(user, :session_token))
         expect(user.session_token).not_to eq(taken_token)
       end
     end

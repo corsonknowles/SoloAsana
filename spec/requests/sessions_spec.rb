@@ -50,6 +50,7 @@ RSpec.describe Api::SessionsController, type: :request do
     before do
       allow_any_instance_of(described_class).to receive(:require_logged_in!)
     end
+
     it "renders errors" do
       delete "/api/session/", headers: headers
 

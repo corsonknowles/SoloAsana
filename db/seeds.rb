@@ -33,7 +33,7 @@ task3 = Task.create!(title: "LYFT to the MoMA", body: "", done: false, user_id: 
 task4 = Task.create!(title: "Kitesurf in the bay. Fall over. Get back up again. Fall over.", body: "", done: false,
                      user_id: default_user.id, project_id: project_one.id, team_id: team_one.id, section: false)
 compare_icecream = "Debate whether Humphry Slocombe or BiRite Creamery is superior."\
-  "With the engineer who made the N02 ice cream at Smitten."
+                   "With the engineer who made the N02 ice cream at Smitten."
 task5 = Task.create!(title: compare_icecream, body: "", done: false, user_id: default_user.id,
                      project_id: project_one.id, team_id: team_one.id, section: false)
 task6 = Task.create!(title: "Acquire some hipster chique threads that are not too hipster and not too chique",
@@ -44,7 +44,7 @@ project_two = Project.create!(name: "Programmer Humor", team_id: team_one.id, us
 task21 = Task.create!(title: "Browse XKCD.com", body: "", done: false, user_id: default_user.id,
                       project_id: project_two.id, team_id: team_one.id, section: false)
 regex_wisdom = "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' "\
-  "Now they have two problems! - Jamie Zawinski"
+               "Now they have two problems! - Jamie Zawinski"
 task22 = Task.create!(title: regex_wisdom, body: "", done: false, user_id: default_user.id, project_id: project_two.id,
                       team_id: team_one.id, section: false)
 cache_names = "‘There are only two hard things in Computer Science: cache invalidation and naming things.’

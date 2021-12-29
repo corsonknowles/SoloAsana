@@ -8,7 +8,7 @@ class Api::ProjectsController < ApplicationController
     if @project.save
       render json: @project
     else
-      render json: @project.errors.full_messages, status: 422
+      render json: @project.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class Api::ProjectsController < ApplicationController
     if @project.update(update_params)
       render json: @project
     else
-      render json: @project.errors.full_messages, status: 422
+      render json: @project.errors.full_messages, status: :unprocessable_entity
     end
   end
 

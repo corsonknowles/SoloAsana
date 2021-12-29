@@ -8,7 +8,7 @@ class Api::TeamsController < ApplicationController
     if @team.save
       render json: @team, include: :projects
     else
-      render json: @team.errors.full_messages, status: 422
+      render json: @team.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +31,7 @@ class Api::TeamsController < ApplicationController
     if @team.update(team_params)
       render json: @team, include: :projects
     else
-      render json: @team.errors.full_messages, status: 422
+      render json: @team.errors.full_messages, status: :unprocessable_entity
     end
   end
 
