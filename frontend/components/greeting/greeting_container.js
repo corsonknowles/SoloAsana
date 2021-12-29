@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { receiveErrors, clearErrors, updateUser, requestLogout } from '../../actions/session_actions';
+import { clearErrors, requestLogout, updateUser } from '../../actions/session_actions';
 import Greeting from './greeting';
 
 const mapStateToProps = state => ({
@@ -8,7 +8,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  receiveErrors: () => dispatch(receiveErrors()),
   clearErrors: () => dispatch(clearErrors()),
   logout: () => dispatch(requestLogout()),
   updateUser: (user) => dispatch(updateUser(user))

@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
-import { createProject,
-  updateProject,
-  fetchProjects,
+import {
+  createProject,
   destroyProject,
-  receiveErrors,
-  clearErrors
-  } from '../../actions/projects_actions';
+  fetchProjects,
+  updateProject
+} from '../../actions/projects_actions';
 import Projects from './projects';
 import { withRouter } from 'react-router';
 import { createTask } from '../../actions/tasks_actions';
@@ -17,8 +16,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createProject: (project) => dispatch(createProject(project)),
   createTask: (task) => dispatch(createTask(task)),
+  createProject: (project) => dispatch(createProject(project)),
   destroyProject: (id) => dispatch(destroyProject(id)),
   fetchProjects: () => dispatch(fetchProjects()),
   updateProject: (project) => dispatch(updateProject(project))

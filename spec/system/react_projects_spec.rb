@@ -65,12 +65,14 @@ RSpec.describe "React Project Changes", type: :system do
       let!(:second_project) { create(:project, user: user, team: team) }
 
       it "can delete a 2nd project" do
+        expect(page).to have_field("project0")
         expect(page).to have_field("project1")
 
         not_the_only_project = find_by_id("project1")
         (not_the_only_project.value.length + 1).times { not_the_only_project.send_keys [:backspace] }
 
-        expect(page).not_to have_selector("project1")
+        expect(page).to have_field("project0")
+        expect(page).not_to have_field("project1")
       end
 
       it "can navigate between projects" do

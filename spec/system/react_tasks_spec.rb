@@ -72,11 +72,12 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(page).to have_field("task1")
 
         fill_in "task0", with: "This is my first task"
+        fill_in "task1", with: "This is my second task"
+
         seeded_task = find_by_id("task0")
         seeded_task.native.send_keys(:down)
         expect(page.evaluate_script("document.activeElement.id")).to eq "task1"
 
-        fill_in "task1", with: "This is my second task"
         next_task = find_by_id("task1")
         next_task.native.send_keys(:up)
         expect(page.evaluate_script("document.activeElement.id")).to eq "task0"

@@ -28,15 +28,16 @@ class Tasks extends React.Component {
             user_id: this.currentUser.id,
             done: false,
             section: false
-        }
-        this.props.createTask(mustHaveTask).then (
-          (createdTask) => {
-            // set the new task to state
-            const newState = merge({}, this.state);
-            newState.tasks[createdTask.id] = createdTask;
-            this.setState(newState);
           }
-        )}
+          this.props.createTask(mustHaveTask).then(
+            (createdTask) => {
+              // set the new task to state
+              const newState = merge({}, this.state);
+              newState.tasks[createdTask.id] = createdTask;
+              this.setState(newState);
+            }
+          )
+        }
       });
     }
   }
