@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
+gem "ar_after_transaction"
 gem "autoprefixer-rails"
 gem "bcrypt" # Use ActiveModel has_secure_password
 gem "figaro"

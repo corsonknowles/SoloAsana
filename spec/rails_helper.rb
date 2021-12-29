@@ -39,6 +39,10 @@ RSpec.shared_context "dump JS coverage" do
 end
 
 RSpec.configure do |config|
+  config.before(:suite) do
+    ActiveRecord::Base.normally_open_transactions = 1
+  end
+
   # See: https://github.com/rspec/rspec-rails/issues/2526
   config.include_context "dump JS coverage", type: :system
 
