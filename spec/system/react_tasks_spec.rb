@@ -32,7 +32,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       expect(page).to have_field("task0", with: "This is my new task")
     end
 
-    it 'can update a task' do
+    it "can update a task" do
       find_by_id("project0").click # TODO: add a feature to make this unneccessary
       expect(page).to have_field("task0")
 
@@ -43,8 +43,8 @@ RSpec.describe "React Tasks Changes", type: :system do
         # spend time until the database action completes
         visit current_path
         find_by_id("project0").click
-        expect(page).to have_field("task0", with: task.title + "This")
-      end.to change { Task.last.reload.title }.from(task.title).to(task.title + "This")
+        expect(page).to have_field("task0", with: "#{task.title}This")
+      end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}This")
     end
 
     it "can delete a 2nd task" do

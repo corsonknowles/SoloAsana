@@ -20,14 +20,14 @@ RSpec.describe "React Register", type: :system do
       end.to change { User.count }.by(1)
     end
 
-    context 'with an insufficient password' do
+    context "with an insufficient password" do
       let(:password) { "1" }
 
       it "renders errors" do
         expect do
           click_button "Register"
           expect(page).to have_text("too short")
-        end.not_to change { User.count }
+        end.to change { User.count }.by(0)
       end
     end
   end
