@@ -2,7 +2,6 @@
 
 source "https://rubygems.org"
 
-gem "ar_after_transaction"
 gem "autoprefixer-rails"
 gem "bcrypt" # Use ActiveModel has_secure_password
 gem "figaro"
@@ -18,6 +17,7 @@ gem "sass-rails" # Use SCSS for stylesheets
 # gem 'redis', '~> 3.0'
 
 group :development, :test do
+  gem "ar_after_transaction"
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i[mri mingw x64_mingw]
   gem "capybara" # for System Tests
