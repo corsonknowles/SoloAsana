@@ -46,12 +46,6 @@ export const fetchProjects = () => dispatch => (
   )
 );
 
-export const fetchProjectsByTeam = teamID => dispatch => (
-  PROJECTS.fetchProjects(teamID)
-    .then(projects => dispatch(receiveProjects(projects))
-  )
-);
-
 export const updateProject = project => dispatch => {
   return PROJECTS.updateProject(project).then(
     currentProject => dispatch(receiveProject(currentProject))
