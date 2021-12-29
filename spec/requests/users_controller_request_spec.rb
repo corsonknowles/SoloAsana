@@ -26,6 +26,18 @@ RSpec.describe Api::UsersController, type: :request do
     end
   end
 
+  context 'with a user in the database' do
+    let!(:user) { create(:user) }
+
+    it 'renders errors when not logged in' do
+      get "/api/users/#{user.id}", headers: headers
+
+      expect(response.body).to match("invalid credentials")
+      expect(response.content_type).to include("application/json")
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+
   context "with stubbed login" do
     let(:user) { create(:user) }
 
