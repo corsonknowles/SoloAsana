@@ -47,7 +47,11 @@ class Projects extends React.Component {
   }
 
   // componentDidMount () {
-  //   this.currentUser.latest_project =
+    // const firstItem = document.getElementById("project0");
+    // firstItem.focus();
+    // firstItem.click();
+
+    // this.currentUser.latest_project =
   // }
 
   // componentWillMount () {
