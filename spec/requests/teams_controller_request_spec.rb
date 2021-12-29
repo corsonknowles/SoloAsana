@@ -23,7 +23,7 @@ RSpec.describe Api::TeamsController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
-    context 'with a team in the database' do
+    context "with a team in the database" do
       let!(:team) { create(:team, user: user) }
 
       it "renders the team show page as JSON" do

@@ -26,10 +26,10 @@ RSpec.describe Api::UsersController, type: :request do
     end
   end
 
-  context 'with a user in the database' do
+  context "with a user in the database" do
     let!(:user) { create(:user) }
 
-    it 'renders errors when not logged in' do
+    it "renders errors when not logged in" do
       get "/api/users/#{user.id}", headers: headers
 
       expect(response.body).to match("invalid credentials")
