@@ -26,10 +26,10 @@ group :development, :test do
   gem "faker"
   gem "rspec"
   gem "rspec-rails"
-  gem "rubocop"
-  gem "rubocop-performance"
-  gem "rubocop-rails"
-  gem "rubocop-rspec"
+  gem "rubocop", require: false
+  gem "rubocop-performance", require: false
+  gem "rubocop-rails", require: false
+  gem "rubocop-rspec", require: false
   gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
