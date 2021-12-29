@@ -19,6 +19,28 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Max: 25
 
+Rails/FilePath:
+  Enabled: false
+
+# Convention over configuration
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 10
+
+RSpec/ExampleLength:
+  Max: 25
+
+RSpec/RSpec/LetSetup:
+  Enabled: false
+
+RSpec/RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/RSpec/NestedGroups:
+  Max: 5
+
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   Exclude:

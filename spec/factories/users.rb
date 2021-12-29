@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_users_on_email  (email)
+#  index_users_on_email  (email) UNIQUE
 #
 FactoryBot.define do
   factory :user do
