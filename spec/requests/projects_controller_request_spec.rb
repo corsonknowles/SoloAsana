@@ -21,6 +21,32 @@ RSpec.describe Api::ProjectsController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
+    context 'with a task in the database' do
+      let!(:project) { create(:project, user: user) }
+
+      it "renders the project show page as JSON" do
+        get "/api/projects/#{project.id}", headers: headers
+
+        expect(response.body).to match(project.name)
+        expect(response.content_type).to include("application/json")
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "with multiple projects" do
+      let!(:projects) { create_list(:project, 3, user: user) }
+
+      it "renders the projects index as JSON" do
+        get "/api/projects", headers: headers
+
+        expect(response.body).to match(projects.first.name)
+        expect(response.body).to match(projects.second.name)
+        expect(response.body).to match(projects.third.name)
+        expect(response.content_type).to include("application/json")
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
     context "with a draft project" do
       it "creates a project and renders it as JSON" do
         post "/api/projects", params: { project: project_params }, headers: headers
