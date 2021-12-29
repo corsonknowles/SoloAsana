@@ -21,7 +21,7 @@ RSpec.describe Api::ProjectsController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
-    context 'with a task in the database' do
+    context 'with a project in the database' do
       let!(:project) { create(:project, user: user) }
 
       it "renders the project show page as JSON" do
