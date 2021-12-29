@@ -1,3 +1,5 @@
+inherit_from: .rubocop_todo.yml
+
 require:
   - rubocop-performance
   - rubocop-rails
@@ -26,19 +28,25 @@ Rails/FilePath:
 Rails/LexicallyScopedActionFilter:
   Enabled: false
 
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+
+RSpec/FilePath:
+  SpecSuffixOnly: true
+
 RSpec/MultipleExpectations:
   Max: 10
 
 RSpec/ExampleLength:
   Max: 25
 
-RSpec/RSpec/LetSetup:
+RSpec/LetSetup:
   Enabled: false
 
-RSpec/RSpec/MultipleMemoizedHelpers:
+RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
-RSpec/RSpec/NestedGroups:
+RSpec/NestedGroups:
   Max: 5
 
 Style/ClassAndModuleChildren:
