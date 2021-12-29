@@ -16,8 +16,8 @@
 #
 class Team < ApplicationRecord
   belongs_to :user
-  has_many :projects
-  has_many :tasks
+  has_many :projects, dependent: :nullify
+  has_many :tasks, dependent: :nullify
 
   validates :name, length: { maximum: 255 }
 end

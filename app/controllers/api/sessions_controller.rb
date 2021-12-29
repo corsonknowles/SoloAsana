@@ -4,7 +4,7 @@ class Api::SessionsController < ApplicationController
   before_action :require_logged_in!, only: [:destroy]
 
   def create
-    @user = User.find_by_credentials(
+    @user = User.find_with_credentials(
       params[:user][:email],
       params[:user][:password]
     )
@@ -15,7 +15,7 @@ class Api::SessionsController < ApplicationController
     else
       render(
         json: ["Invalid email/password combination"],
-        status: 401
+        status: :unauthorized
       )
     end
   end
@@ -28,7 +28,7 @@ class Api::SessionsController < ApplicationController
     else
       render(
         json: ["Nobody signed in"],
-        status: 404
+        status: :not_found
       )
     end
   end

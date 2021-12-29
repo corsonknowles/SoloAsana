@@ -34,7 +34,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-RSpec.shared_context "dump JS coverage" do
+RSpec.shared_context "with JS coverage" do
   after { dump_js_coverage }
 end
 
@@ -44,7 +44,7 @@ RSpec.configure do |config|
   end
 
   # See: https://github.com/rspec/rspec-rails/issues/2526
-  config.include_context "dump JS coverage", type: :system
+  config.include_context "with JS coverage", type: :system
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"

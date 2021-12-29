@@ -8,7 +8,7 @@ class Api::TasksController < ApplicationController
     if @task.save
       render json: @task
     else
-      render json: @task.errors.full_messages, status: 422
+      render json: @task.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -23,7 +23,7 @@ class Api::TasksController < ApplicationController
     if @task.update(task_params)
       render json: @task
     else
-      render json: @task.errors.full_messages, status: 422
+      render json: @task.errors.full_messages, status: :unprocessable_entity
     end
   end
 

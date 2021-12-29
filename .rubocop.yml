@@ -1,3 +1,13 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
 Lint/UselessAssignment:
   Exclude:
     - 'db/seeds.rb'
@@ -10,6 +20,34 @@ Metrics/BlockLength:
 
 Metrics/MethodLength:
   Max: 25
+
+Rails/FilePath:
+  Enabled: false
+
+# Convention over configuration
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+Rails/RedundantPresenceValidationOnBelongsTo:
+  Enabled: false
+
+RSpec/FilePath:
+  SpecSuffixOnly: true
+
+RSpec/MultipleExpectations:
+  Max: 10
+
+RSpec/ExampleLength:
+  Max: 25
+
+RSpec/LetSetup:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
 
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact

@@ -77,7 +77,7 @@ RSpec.describe Api::TasksController, type: :request do
 
           expect(response.content_type).to include("application/json")
           expect(response).to have_http_status(:ok)
-        end.to change { Task.count }.by(-1)
+        end.to change(Task, :count).by(-1)
       end
     end
   end

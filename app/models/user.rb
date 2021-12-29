@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_users_on_email  (email)
+#  index_users_on_email  (email) UNIQUE
 #
 class User < ApplicationRecord
   attr_reader :password
@@ -34,16 +34,16 @@ class User < ApplicationRecord
   after_initialize :ensure_session_token
   before_validation :truncate_username
 
-  has_many :tasks
-  has_many :projects
-  has_many :teams
+  has_many :tasks, dependent: :restrict_with_exception
+  has_many :projects, dependent: :restrict_with_exception
+  has_many :teams, dependent: :restrict_with_exception
 
   def password=(password)
     self.password_digest = BCrypt::Password.create(password)
     @password = password
   end
 
-  def self.find_by_credentials(email, password)
+  def self.find_with_credentials(email, password)
     user = User.find_by(email: email)
 
     user if user&.password_is?(password)

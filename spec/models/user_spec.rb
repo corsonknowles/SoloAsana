@@ -19,7 +19,7 @@
 #
 # Indexes
 #
-#  index_users_on_email  (email)
+#  index_users_on_email  (email) UNIQUE
 #
 
 RSpec.describe User, type: :model do
@@ -42,8 +42,8 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe ".find_by_credentials" do
-    subject { described_class.find_by_credentials(email, example_password) }
+  describe ".find_with_credentials" do
+    subject { described_class.find_with_credentials(email, example_password) }
 
     let(:user) { create :user }
     let(:example_password) { "example_password" }
@@ -59,13 +59,13 @@ RSpec.describe User, type: :model do
   end
 
   describe "#password=" do
-    subject { user.password = example_password }
+    subject(:password_change) { user.password = example_password }
 
     let(:user) { build :user }
     let(:example_password) { "example_password" }
 
     it "alters the password digest" do
-      expect { subject }.to(change { user.password_digest })
+      expect { password_change }.to(change(user, :password_digest))
     end
   end
 
@@ -90,7 +90,7 @@ RSpec.describe User, type: :model do
     let(:user) { create(:user) }
 
     it "changes the session token" do
-      expect { reset }.to(change { user.session_token })
+      expect { reset }.to(change(user, :session_token))
     end
 
     it { is_expected.to eq user.session_token }
@@ -102,7 +102,7 @@ RSpec.describe User, type: :model do
       it "ensures token uniqueness" do
         allow(user).to receive(:new_session_token).and_return(taken_token, "new_token")
 
-        expect { reset }.to(change { user.session_token })
+        expect { reset }.to(change(user, :session_token))
         expect(user.session_token).not_to eq(taken_token)
       end
     end
