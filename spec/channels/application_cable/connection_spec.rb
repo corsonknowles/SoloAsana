@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 RSpec.describe ApplicationCable::Connection, type: :channel do
   it "stubs a user agent" do

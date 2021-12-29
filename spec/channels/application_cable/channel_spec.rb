@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 
 RSpec.describe ApplicationCable::Channel, type: :channel do
   it "subscribes without streams" do
