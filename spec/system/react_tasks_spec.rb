@@ -38,13 +38,12 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       expect do
         seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys("This")
+        seeded_task.native.send_keys("F")
         page.execute_script %{ $("#task0").trigger('keyup') }
-        # spend time until the database action completes
-        visit current_path
-        find_by_id("project0").click
-        expect(page).to have_field("task0", with: "#{task.title}This")
-      end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}This")
+        ActiveRecord::Base.after_transaction do
+          expect(page).to have_field("task0", with: "#{task.title}F")
+        end
+      end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}F")
     end
 
     it "can delete a 2nd task" do

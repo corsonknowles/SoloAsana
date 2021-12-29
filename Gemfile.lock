@@ -65,6 +65,8 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
+    ar_after_transaction (0.7.0)
+      activerecord (>= 4.2.0, < 6.2)
     ast (2.4.2)
     autoprefixer-rails (10.3.3.0)
       execjs (~> 2)
@@ -288,6 +290,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  ar_after_transaction
   autoprefixer-rails
   bcrypt
   better_errors
@@ -320,9 +323,6 @@ DEPENDENCIES
   spring-watcher-listen
   standard
   web-console (>= 3.3.0)
-
-RUBY VERSION
-   ruby 2.7.4p191
 
 BUNDLED WITH
    2.2.32

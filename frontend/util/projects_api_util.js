@@ -22,13 +22,6 @@ export const fetchProjects = () => (
   })
 );
 
-export const fetchProjectsByTeam = teamID => (
-  $.ajax({
-    method: 'GET',
-    url: `api/teams/${teamID}/projects`
-  })
-);
-
 // update: makes an AJAX request that updates an existing project.
 export const updateProject = project => (
   $.ajax({
