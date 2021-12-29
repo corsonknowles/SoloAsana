@@ -32,6 +32,21 @@ RSpec.describe "React Tasks Changes", type: :system do
       expect(page).to have_field("task0", with: "This is my new task")
     end
 
+    it "can update a task" do
+      find_by_id("project0").click # TODO: add a feature to make this unneccessary
+      expect(page).to have_field("task0")
+
+      expect do
+        seeded_task = find_by_id("task0")
+        seeded_task.native.send_keys("This")
+        page.execute_script %{ $("#task0").trigger('keyup') }
+        # spend time until the database action completes
+        visit current_path
+        find_by_id("project0").click
+        expect(page).to have_field("task0", with: "#{task.title}This")
+      end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}This")
+    end
+
     it "can delete a 2nd task" do
       find_by_id("project0").click # TODO: add a feature to make this unneccessary
       expect(page).not_to have_field("task1")
