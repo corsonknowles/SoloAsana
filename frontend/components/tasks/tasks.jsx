@@ -10,6 +10,7 @@ class Tasks extends React.Component {
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleInput = this.handleInput.bind(this);
     this.handleInitialization = this.handleInitialization.bind(this);
   }
 
@@ -78,7 +79,7 @@ class Tasks extends React.Component {
           user_id: this.currentUser.id,
           done: false,
           section: false
-        }
+        };
 
         // push the new task to the database
         this.props.createTask(newTask)
@@ -128,12 +129,20 @@ class Tasks extends React.Component {
           nextItem.focus();
         }
       } else {
-        const value = event.target.value;
-        const task = this.props.tasks[taskID];
-        task.title = value;
 
-        this.props.updateTask(task)
       }
+    }
+  }
+
+  handleInput (taskID, i) {
+    return (event) => {
+      const key = event.key;
+      const keyCode = event.keyCode;
+      const value = event.target.value;
+      const task = this.props.tasks[taskID];
+      task.title = value;
+
+      this.props.updateTask(task)
     }
   }
 
@@ -152,6 +161,7 @@ class Tasks extends React.Component {
               placeholder="Enter your new task here"
               onKeyUp={this.handleKeyUp(taskNumber, i)}
               onKeyDown={this.handleKeyDown(taskNumber, i)}
+              onInput={this.handleInput(taskNumber, i)}
             />
           ))}
           <div className="spacer"></div>
