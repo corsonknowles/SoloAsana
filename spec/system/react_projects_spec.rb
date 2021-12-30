@@ -103,7 +103,7 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
       end
 
-      context 'with empty project names' do
+      context "with empty project names" do
         let!(:project) { create(:project, user: user, team: team, name: "") }
         let!(:second_project) { create(:project, user: user, team: team, name: "") }
 

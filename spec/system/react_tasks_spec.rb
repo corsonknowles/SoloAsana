@@ -14,7 +14,7 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
   end
 
-  context 'when signed in' do
+  context "when signed in" do
     before do
       visit "/"
 
@@ -25,7 +25,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       click_button "Sign In"
     end
 
-    it 'initializes a task when a taskless project is clicked' do
+    it "initializes a task when a taskless project is clicked" do
       expect do
         expect(page).not_to have_field("task0")
         find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
@@ -33,10 +33,10 @@ RSpec.describe "React Tasks Changes", type: :system do
       end.to change(Task, :count).by(1)
     end
 
-    context 'with a seeded task' do
+    context "with a seeded task" do
       let!(:task) { create(:task, user: user, team: team, project: project) }
 
-      it 'loads the task when the project is clicked' do
+      it "loads the task when the project is clicked" do
         expect do
           expect(page).not_to have_field("task0")
           find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
@@ -55,7 +55,8 @@ RSpec.describe "React Tasks Changes", type: :system do
       fill_in "PASSWORD", with: "rainbow_table"
 
       click_button "Sign In"
-      expect(page).to have_content "Welcome Robert the Chief"
+      # Capybara's approach to waiting for expectations ensures the page loads here
+      expect(page).to have_content "Welcome Robert the Chief" # rubocop:disable RSpec/ExpectInHook
       visit "/#/projects/#{project.id}"
     end
 
