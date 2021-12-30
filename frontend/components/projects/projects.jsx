@@ -84,7 +84,7 @@ class Projects extends React.Component {
           event.preventDefault();
           this.props.destroyProject(projectID);
 
-          const remainingItem = document.getElementById(`project${String(parseInt(i) - 1)}`)
+          const remainingItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
           if (remainingItem && Object.keys(this.props.projects).length > 2) {
             remainingItem.focus();
             remainingItem.click();
