@@ -4,15 +4,13 @@ import { Link, NavLink } from 'react-router-dom';
 import merge from 'lodash/merge';
 
 class Tasks extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-      tasks: this.props.tasks
-    }
+    this.state = { tasks: this.props.tasks }
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleInitialization = this.handleInitialization.bind(this);
   }
 
   componentWillMount () {
@@ -21,22 +19,7 @@ class Tasks extends React.Component {
       projectID = parseInt(this.props.match.params.id);
       this.props.fetchTasksByProject(projectID).then( () => {
         if (Object.keys(this.props.tasks).length === 0) {
-          const mustHaveTask = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
-          }
-          this.props.createTask(mustHaveTask).then(
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = createdTask;
-              this.setState(newState);
-            }
-          )
+          this.handleInitialization(projectID);
         }
       });
     }
@@ -54,26 +37,30 @@ class Tasks extends React.Component {
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
       this.props.fetchTasksByProject(projectID).then((tasks) => {
         if (Object.keys(tasks).length === 0) {
-          const mustHaveTask2 = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
-          }
-
-          this.props.createTask(mustHaveTask2).then (
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = mustHaveTask2;
-              this.setState(newState);
-            }
-          )
+          this.handleInitialization(projectID);
         }
       });
     }
+  }
+
+  handleInitialization (projectID) {
+    const mustHaveTask = {
+      title: "",
+      team_id: 1,
+      project_id: projectID,
+      user_id: this.currentUser.id,
+      done: false,
+      section: false
+    }
+
+    this.props.createTask(mustHaveTask).then (
+      (createdTask) => {
+        // set the new task to state
+        const newState = merge({}, this.state);
+        newState.tasks[createdTask.id] = mustHaveTask;
+        this.setState(newState);
+      }
+    )
   }
 
   handleKeyDown (taskID, i) {

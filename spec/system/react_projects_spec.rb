@@ -25,6 +25,8 @@ RSpec.describe "React Project Changes", type: :system do
     let(:team) { create(:team) }
     let!(:project) { create(:project, user: user, team: team) }
 
+    # it makes a project when there is no project
+
     it "can enter a project title" do
       fill_in "project0", with: "This is my new project"
       expect(page).to have_field("project0", with: "This is my new project")
@@ -101,18 +103,33 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
       end
 
-      it "focuses on the last remaining project after deleting the rest" do
-        expect(page).to have_field("project0")
-        expect(page).to have_field("project1")
-        expect(page).not_to have_field("project2")
+      context 'with empty project names' do
+        let!(:project) { create(:project, user: user, team: team, name: "") }
+        let!(:second_project) { create(:project, user: user, team: team, name: "") }
 
-        fill_in "project0", with: "0"
-        fill_in "project1", with: ""
-        latest_project = find_by_id("project1")
-        latest_project.native.send_keys(:delete)
+        it "focuses on the last remaining project after deleting the end of the list" do
+          expect(page).to have_field("project0")
+          expect(page).to have_field("project1")
+          expect(page).not_to have_field("project2")
 
-        expect(page).not_to have_field("project1")
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+          latest_project = find_by_id("project1")
+          latest_project.native.send_keys(:delete)
+
+          expect(page).not_to have_field("project1")
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        end
+
+        it "focuses on the last remaining project after deleting the beginning of the list" do
+          expect(page).to have_field("project0")
+          expect(page).to have_field("project1")
+          expect(page).not_to have_field("project2")
+
+          first_project = find_by_id("project0")
+          first_project.native.send_keys(:delete)
+
+          expect(page).not_to have_field("project1")
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        end
       end
     end
   end

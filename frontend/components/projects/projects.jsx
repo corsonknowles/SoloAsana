@@ -28,7 +28,7 @@ class Projects extends React.Component {
 
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
-    } else if (Object.keys(nextProps.projects).length === 0) {
+    } else if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length === 0) {
       this.props.createProject(newProject2)
     };
 
@@ -45,14 +45,6 @@ class Projects extends React.Component {
     // }
 
   }
-
-  // componentDidMount () {
-    // const firstItem = document.getElementById("project0");
-    // firstItem.focus();
-    // firstItem.click();
-
-    // this.currentUser.latest_project =
-  // }
 
   // componentWillMount () {
   //   // let firstProject = this.props.projects[0].id;
@@ -106,18 +98,21 @@ class Projects extends React.Component {
           event.preventDefault();
           this.props.destroyProject(projectID);
 
-          const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
-          if (previousItem) {
-            previousItem.focus();
-            previousItem.click();
-
+          const remainingItem = document.getElementById(`project${String(parseInt(i) - 1)}`)
+          if (remainingItem && Object.keys(this.props.projects).length > 2) {
+            remainingItem.focus();
+            remainingItem.click();
           } else {
-            // this will focus and display tasks for the last remaining project if all previous projects are deleted
-            const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
-            if (nextItem) {
-              nextItem.focus();
-              nextItem.click();
+            // this will focus and display tasks for the last remaining project
+            // for when the top of the project list is deleted and the only project left is the next one
+            let lastProject = document.getElementById("project1");
+
+            if (lastProject.name === target.name) {
+              // for when the end of the project list is deleted and the only project left is the previous one
+              lastProject = document.getElementById("project0");
             }
+            lastProject.focus();
+            lastProject.click();
           }
         }
       }
