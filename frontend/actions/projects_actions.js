@@ -30,7 +30,10 @@ export const receiveProjects = projects => ({
 // asynchronous actions
 export const createProject = project => dispatch => (
   PROJECTS.createProject(project)
-    .then(savedProject => { dispatch(receiveProject(savedProject)) }
+    .then(savedProject => {
+      dispatch(receiveProject(savedProject))
+      return savedProject;
+    }
   )
 );
 
