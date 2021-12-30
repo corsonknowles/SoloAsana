@@ -27,7 +27,7 @@ class Projects extends React.Component {
         name: "",
         team_id: 1,
         user_id: this.currentUser.id
-      }
+      };
       this.props.createProject(newProject2).then (
         (createdProject) => {
           // set the new project to state
