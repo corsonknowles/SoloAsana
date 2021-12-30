@@ -92,6 +92,7 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       it "can update a task" do
         expect(page).to have_field("task0")
+        expect(page).to have_field("task0", with: task.title)
 
         expect do
           seeded_task = find_by_id("task0")

@@ -20,46 +20,32 @@ class Projects extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    const newProject2 = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
-
     if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
     } else if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length === 0) {
-      this.props.createProject(newProject2)
+      const newProject2 = {
+        name: "",
+        team_id: 1,
+        user_id: this.currentUser.id
+      }
+      this.props.createProject(newProject2).then (
+        (createdProject) => {
+          // set the new project to state
+          const newState = merge({}, this.state);
+          newState.projects[createdProject.id] = newProject2;
+          this.setState(newState);
+        }
+      ).then (
+        () => {
+          const newItem = document.getElementById("project0");
+          if (newItem) {
+            newItem.focus();
+            newItem.click();
+          }
+        }
+      )
     };
-
-    // TODO solve this with routing or create a way for it to work in DidMount
-    // let firstProject = this.props.projects[0].id;
-    // console.log(this.props.match.params.id);
-    // console.log((this.props.match.params.id));
-    // if (this.props.match.params.id) {
-    //   let firstProject = 108;
-    //   let projectURL = `/projects/${firstProject}`;
-    //   return (
-    //     <Redirect to={projectURL} />
-    //   );
-    // }
-
   }
-
-  // componentWillMount () {
-  //   // let firstProject = this.props.projects[0].id;
-  //   if (!!this.props.match.params.id) {
-  //
-  //     let firstProject = 111;
-  //     let projectURL = `/projects/${firstProject}`;
-  //     return (
-  //       <Redirect to={projectURL} />
-  //     );
-  //   }
-  //   console.log("did mount");
-  //   console.log(this.props.match.params.id);
-  //   console.log(!this.props.match.params.id);
-  // }
 
   handleKeyDown (projectID, i) {
     return (event) => {
