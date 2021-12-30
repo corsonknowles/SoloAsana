@@ -9,6 +9,4 @@ SimpleCov.at_exit do
   system("npm run coverage")
 end
 
-SimpleCov.start "rails" do
-  add_filter "app/channels/application_cable"
-end
+SimpleCov.start "rails"
