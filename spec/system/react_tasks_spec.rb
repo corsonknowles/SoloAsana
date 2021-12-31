@@ -125,6 +125,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
       it "can navigate between tasks" do
+        find_by_id("project0").click
         expect(page).to have_field("task0")
         expect(page).to have_field("task1")
 
@@ -141,6 +142,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can delete the 2nd seeded task" do
+        find_by_id("project0").click
         expect(page).to have_field("task1")
         fill_in "task1", with: "R"
         short_task = find_by_id("task1")
