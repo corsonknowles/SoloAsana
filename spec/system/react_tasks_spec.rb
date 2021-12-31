@@ -121,7 +121,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       end.to change(Task, :count).by(1)
     end
 
-    context "with justthe initial task" do
+    context "with just the initial task" do
       it "cannot delete the only task" do
         expect(page).to have_field("task0")
         expect(page).not_to have_field("task1")
