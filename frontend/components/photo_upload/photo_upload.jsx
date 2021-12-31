@@ -33,13 +33,13 @@ const customStyles = {
 
 class PhotoUpload extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       modalIsOpen: false,
       photo: this.props.currentUser.photo,
       uploadedFileCloudinaryUrl: '',
       pending: false
-    }
+    };
 
     this.currentUser = this.props.currentUser;
     this.handleSubmit = this.handleSubmit.bind(this);
