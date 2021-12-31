@@ -52,7 +52,7 @@ class Tasks extends React.Component {
       user_id: this.currentUser.id,
       done: false,
       section: false
-    }
+    };
 
     this.props.createTask(mustHaveTask).then (
       (createdTask) => {

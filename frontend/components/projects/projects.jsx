@@ -13,14 +13,15 @@ class Projects extends React.Component {
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   componentWillMount () {
-    this.props.fetchProjects()
+    this.props.fetchProjects();
   }
 
   componentWillReceiveProps (nextProps) {
-    if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
+    if (Object.keys(nextProps.projects).length > 0) {
       this.setState( { projects: nextProps.projects } )
     } else if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length === 0) {
       const newProject2 = {
@@ -69,10 +70,7 @@ class Projects extends React.Component {
           nextItem.click();
         }
       } else {
-        const target = event.target;
-        const value = target.value;
-        const empty = (value.length === 0);
-
+        const empty = (event.target.value.length === 0);
         const deleteKeys = (
           key === 'Delete' ||
           key === 'Backspace' ||
@@ -84,21 +82,17 @@ class Projects extends React.Component {
           event.preventDefault();
           this.props.destroyProject(projectID);
 
-          const remainingItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
-          if (remainingItem && Object.keys(this.props.projects).length > 2) {
-            remainingItem.focus();
-            remainingItem.click();
+          const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+          if (previousItem) {
+            previousItem.focus();
+            previousItem.click();
           } else {
-            // this will focus and display tasks for the last remaining project
-            // for when the top of the project list is deleted and the only project left is the next one
-            let lastProject = document.getElementById("project1");
-
-            if (lastProject.name === target.name) {
-              // for when the end of the project list is deleted and the only project left is the previous one
-              lastProject = document.getElementById("project0");
+            // this will focus on the last remaining project if all preceding ones are deleted
+            const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+            if (nextItem) {
+              nextItem.focus();
+              nextItem.click();
             }
-            lastProject.focus();
-            lastProject.click();
           }
         }
       }
@@ -125,12 +119,17 @@ class Projects extends React.Component {
           nextItem.click();
         }
       } else {
-        const value = event.target.value;
-        const project = this.props.projects[projectID];
-        project.name = value;
-
-        this.props.updateProject(project);
       }
+    }
+  }
+
+  handleInput (projectID, i) {
+    return (event) => {
+      const value = event.target.value;
+      const project = this.props.projects[projectID];
+      project.name = value;
+
+      this.props.updateProject(project);
     }
   }
 
@@ -149,6 +148,7 @@ class Projects extends React.Component {
               placeholder="_________________________"
               onKeyUp={this.handleKeyUp(projectID, i)}
               onKeyDown={this.handleKeyDown(projectID, i)}
+              onInput={this.handleInput(projectID, i)}
             />
           </NavLink>
           )
