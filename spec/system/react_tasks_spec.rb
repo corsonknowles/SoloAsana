@@ -139,6 +139,15 @@ RSpec.describe "React Tasks Changes", type: :system do
         next_task.native.send_keys(:up)
         expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
       end
+
+      it "can delete the 2nd seeded task" do
+        expect(page).to have_field("task1")
+        fill_in "task1", with: "R"
+        short_task = find_by_id("task1")
+        (short_task.value.length + 1).times { short_task.send_keys [:backspace] }
+
+        expect(page).not_to have_field("task1")
+      end
     end
   end
 end
