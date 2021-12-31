@@ -56,7 +56,9 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       click_button "Sign In"
       # Capybara's approach to waiting for expectations ensures the page loads here
-      expect(page).to have_content "Welcome Robert the Chief" # rubocop:disable RSpec/ExpectInHook
+      Timeout.timeout(Capybara.default_max_wait_time) do
+        sleep(0.1) until page.has_content?("Welcome Robert")
+      end
       visit "/#/projects/#{project.id}"
     end
 
@@ -133,7 +135,8 @@ RSpec.describe "React Tasks Changes", type: :system do
       let!(:task) { create(:task, user: user, team: team, project: project) }
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
-      it 'can fill in tasks' do
+      it "can fill in tasks" do
+        find_by_id("project0").click
         fill_in "task0", with: "This is my first task"
         fill_in "task1", with: "This is my second task"
         expect(page).to have_field("task0", with: "This is my first task")
