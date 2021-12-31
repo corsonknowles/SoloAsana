@@ -18,11 +18,12 @@ class Tasks extends React.Component {
     let projectID;
     if (this.props.match.params.id) {
       projectID = parseInt(this.props.match.params.id);
-      this.props.fetchTasksByProject(projectID).then( () => {
-        if (Object.keys(this.props.tasks).length === 0) {
-          this.handleInitialization(projectID);
-        }
-      });
+      this.props.fetchTasksByProject(projectID)
+        .then( (fetchedTasks) => {
+          if (fetchedTasks.length === 0) {
+            this.handleInitialization(projectID);
+          }
+        });
     }
   }
 
@@ -31,13 +32,10 @@ class Tasks extends React.Component {
     if (nextProps.match.params.id) {
       projectID = nextProps.match.params.id;
     }
-    if (projectID && Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
-      this.setState( { tasks: nextProps.tasks } )
-    }
 
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
       this.props.fetchTasksByProject(projectID).then((tasks) => {
-        if (Object.keys(tasks).length === 0) {
+        if (tasks.length === 0) {
           this.handleInitialization(projectID);
         }
       });
@@ -54,14 +52,7 @@ class Tasks extends React.Component {
       section: false
     };
 
-    this.props.createTask(mustHaveTask).then (
-      (createdTask) => {
-        // set the new task to state
-        const newState = merge({}, this.state);
-        newState.tasks[createdTask.id] = mustHaveTask;
-        this.setState(newState);
-      }
-    )
+    this.props.createTask(mustHaveTask);
   }
 
   handleKeyDown (taskID, i) {
@@ -136,8 +127,6 @@ class Tasks extends React.Component {
 
   handleInput (taskID, i) {
     return (event) => {
-      const key = event.key;
-      const keyCode = event.keyCode;
       const value = event.target.value;
       const task = this.props.tasks[taskID];
       task.title = value;
