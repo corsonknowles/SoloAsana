@@ -5,15 +5,14 @@ import merge from 'lodash/merge';
 
 class Projects extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      projects: this.props.projects
-    }
-
+    super(props);
+    this.state = { projects: this.props.projects };
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.respondToEnterWithCreate = this.respondToEnterWithCreate.bind(this);
+    this.respondToDeleteWhenEmpty = this.respondToDeleteWhenEmpty.bind(this);
   }
 
   componentWillMount () {
@@ -39,27 +38,49 @@ class Projects extends React.Component {
     };
   }
 
+  respondToEnterWithCreate (event, i) {
+    event.preventDefault();
+
+    const newProject = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    }
+    // set a new project in the database
+    this.props.createProject(newProject);
+
+    const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+    if (nextItem) {
+      nextItem.focus();
+      nextItem.click();
+    }
+  };
+
+  respondToDeleteWhenEmpty (event, projectID, i) {
+    event.preventDefault();
+    this.props.destroyProject(projectID);
+
+    const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+    if (previousItem) {
+      previousItem.focus();
+      previousItem.click();
+    } else {
+      // focus for the user's cursor and click to load tasks
+      const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+      if (nextItem) {
+        nextItem.focus();
+        nextItem.click();
+      }
+    }
+  };
+
   handleKeyDown (projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
 
       if (key === 'Enter' || keyCode === 13) {
-        event.preventDefault();
-
-        const newProject = {
-          name: "",
-          team_id: 1,
-          user_id: this.currentUser.id
-        }
-        // set a new project in the database
-        this.props.createProject(newProject);
-
-        const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
-        if (nextItem) {
-          nextItem.focus();
-          nextItem.click();
-        }
+        this.respondToEnterWithCreate(event, i);
       } else {
         const empty = (event.target.value.length === 0);
         const deleteKeys = (
@@ -70,21 +91,7 @@ class Projects extends React.Component {
         );
         const mustBeOneProject = (Object.keys(this.props.projects).length > 1);
         if (empty && mustBeOneProject && deleteKeys) {
-          event.preventDefault();
-          this.props.destroyProject(projectID);
-
-          const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
-          if (previousItem) {
-            previousItem.focus();
-            previousItem.click();
-          } else {
-            // this will focus on the last remaining project if all preceding ones are deleted
-            const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
-            if (nextItem) {
-              nextItem.focus();
-              nextItem.click();
-            }
-          }
+          this.respondToDeleteWhenEmpty(event, projectID, i);
         }
       }
     }

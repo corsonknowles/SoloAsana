@@ -5,8 +5,8 @@ import merge from 'lodash/merge';
 
 class Tasks extends React.Component {
   constructor(props) {
-    super(props)
-    this.state = { tasks: this.props.tasks }
+    super(props);
+    this.state = { tasks: this.props.tasks };
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);

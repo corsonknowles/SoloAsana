@@ -31,8 +31,7 @@ const customStyles = {
 
 class Greeting extends React.Component {
   constructor(props) {
-    super(props)
-
+    super(props);
     const currentUser = props.currentUser;
     const username = currentUser.username || "";
     const role = currentUser.role || "";
@@ -66,7 +65,7 @@ class Greeting extends React.Component {
   }
 
   componentWillUnmount() {
-    this.props.clearErrors()
+    this.props.clearErrors();
   };
 
   handleChange(event) {
@@ -86,7 +85,7 @@ class Greeting extends React.Component {
     user.about = this.state.about;
 
     this.props.updateUser(user);
-    this.closeModal()
+    this.closeModal();
   }
 
   openModal() {
