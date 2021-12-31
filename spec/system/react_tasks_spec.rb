@@ -49,9 +49,12 @@ RSpec.describe "React Tasks Changes", type: :system do
       let!(:task) { create(:task, user: user, team: team, project: project) }
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
-      it "can fill in tasks" do
+      it 'clicking project focuses it' do
         find_by_id("project0").click
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+      end
+
+      it "can fill in tasks" do
         fill_in "task0", with: "This is my first task"
         fill_in "task1", with: "This is my second task"
         expect(page).to have_field("task0", with: "This is my first task")
@@ -93,7 +96,7 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
   end
 
-  context "when signed in and visiting the project path" do
+  context "when signed in" do
     before do
       visit "/"
 
@@ -106,7 +109,6 @@ RSpec.describe "React Tasks Changes", type: :system do
       Timeout.timeout(Capybara.default_max_wait_time) do
         sleep(0.1) until page.has_content?("Welcome #{user.username}")
       end
-      visit "/#/projects/#{project.id}"
     end
 
     it "can enter a new task" do
@@ -141,7 +143,6 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can update a task" do
-        find_by_id("project0").click
         expect(page).to have_field("task0")
         expect(page).to have_field("task0", with: task.title)
 

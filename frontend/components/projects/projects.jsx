@@ -16,7 +16,15 @@ class Projects extends React.Component {
   }
 
   componentWillMount () {
-    this.props.fetchProjects();
+    this.props.fetchProjects().then (
+      () => {
+        const newItem = document.getElementById("project0");
+        if (newItem) {
+          newItem.focus();
+          newItem.click();
+        }
+      }
+    )
   }
 
   componentWillReceiveProps (nextProps) {
