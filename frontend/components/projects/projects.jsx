@@ -27,24 +27,24 @@ class Projects extends React.Component {
     )
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (Object.keys(nextProps.projects).length === 0) {
-      const newProject2 = {
-        name: "",
-        team_id: 1,
-        user_id: this.currentUser.id
-      };
-      this.props.createProject(newProject2).then (
-        () => {
-          const newItem = document.getElementById("project0");
-          if (newItem) {
-            newItem.focus();
-            newItem.click();
-          }
-        }
-      )
-    };
-  }
+  // componentWillReceiveProps (nextProps) {
+  //   if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length === 0) {
+  //     const newProject2 = {
+  //       name: "",
+  //       team_id: 1,
+  //       user_id: this.currentUser.id
+  //     };
+  //     this.props.createProject(newProject2).then (
+  //       () => {
+  //         const newItem = document.getElementById("project0");
+  //         if (newItem) {
+  //           newItem.focus();
+  //           newItem.click();
+  //         }
+  //       }
+  //     )
+  //   };
+  // }
 
   respondToEnterWithCreate (event, i) {
     event.preventDefault();

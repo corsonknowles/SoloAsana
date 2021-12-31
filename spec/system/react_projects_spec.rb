@@ -23,7 +23,7 @@ RSpec.describe "React Project Changes", type: :system do
     end
 
     let(:team) { create(:team) }
-    let!(:project) { create(:project, user: user, team: team) }
+    let!(:project) { user.projects.last }
 
     # it makes a project when there is no project
 
@@ -63,7 +63,7 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_field("project1")
     end
 
-    context "with 2 seeded projects" do
+    context "with an additional seeded project" do
       let!(:second_project) { create(:project, user: user, team: team) }
 
       it "can delete a 2nd project" do
@@ -104,7 +104,6 @@ RSpec.describe "React Project Changes", type: :system do
       end
 
       context "with empty project names" do
-        let!(:project) { create(:project, user: user, team: team, name: "") }
         let!(:second_project) { create(:project, user: user, team: team, name: "") }
 
         it "focuses on the last remaining project after deleting the end of the list" do

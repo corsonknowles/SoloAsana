@@ -2,9 +2,10 @@
 
 RSpec.describe "React Tasks Changes", type: :system do
   let(:user) { create(:user) }
-
   let(:team) { create(:team) }
-  let!(:project) { create(:project, user: user, team: team) }
+  let(:project) { user.projects.last }
+  let(:task) { user.tasks.first }
+
 
   context "when unauthorized" do
     it "proceeds to the logged out view" do
@@ -25,43 +26,43 @@ RSpec.describe "React Tasks Changes", type: :system do
       click_button "Sign In"
     end
 
-    it "initializes a task when a taskless project is clicked" do
+    it "begins with a task already int" do
       expect do
         expect(page).not_to have_field("task0")
         find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
         expect(page).to have_field("task0")
-      end.to change(Task, :count).by(1)
+      end.not_to change(Task, :count)
     end
 
-    context "with a seeded task" do
-      let!(:task) { create(:task, user: user, team: team, project: project) }
+    context "with an additional seeded task" do
+      let!(:task2) { create(:task, user: user, team: team, project: project) }
 
       it "loads the task when the project is clicked" do
+        expect(user.tasks.count).to eq 2
         expect do
-          expect(page).not_to have_field("task0")
+          expect(page).not_to have_field("task1")
           find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
-          expect(page).to have_field("task0")
+          expect(page).to have_field("task1")
         end.not_to change(Task, :count)
       end
     end
 
-    context "with 2 seeded tasks" do
-      let!(:task) { create(:task, user: user, team: team, project: project) }
+    context "with an additional seeded task" do
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
-      it "clicking project focuses it" do
+      it "focuses on a project by clicking" do
         find_by_id("project0").click
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
 
-      it "can fill in tasks" do
+      it "fills in tasks" do
         fill_in "task0", with: "This is my first task"
         fill_in "task1", with: "This is my second task"
         expect(page).to have_field("task0", with: "This is my first task")
         expect(page).to have_field("task1", with: "This is my second task")
       end
 
-      it "can navigate between tasks" do
+      it "navigates between tasks" do
         expect(page).to have_field("task0")
         expect(page).to have_field("task1")
 
@@ -76,7 +77,7 @@ RSpec.describe "React Tasks Changes", type: :system do
         end.not_to change(Task, :count)
       end
 
-      it "can delete the 2nd seeded task" do
+      it "deletes the 2nd seeded task" do
         fill_in "task1", with: "R"
         short_task = find_by_id("task1")
 
@@ -103,9 +104,10 @@ RSpec.describe "React Tasks Changes", type: :system do
       Timeout.timeout(Capybara.default_max_wait_time) do
         sleep(0.1) until page.has_content?("Welcome #{user.username}")
       end
+      visit "/#/projects/#{project.id}"
     end
 
-    it "can enter a new task" do
+    it "enters a new task" do
       fill_in "task0", with: "F"
       page.execute_script %{ $("#task0").trigger('keyup') }
       seeded_task = find_by_id("task0")
@@ -119,9 +121,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       end.to change(Task, :count).by(1)
     end
 
-    context "with a seeded task" do
-      let!(:task) { create(:task, user: user, team: team, project: project) }
-
+    context "with justthe initial task" do
       it "cannot delete the only task" do
         expect(page).to have_field("task0")
         expect(page).not_to have_field("task1")
@@ -136,8 +136,9 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(page).to have_field("task0")
       end
 
-      it "can update a task" do
-        find_by_id("project0").click
+      it "updates a task" do
+        expect(Task.last.title).to eq(task.title)
+        expect(page).to have_field("task0")
         seeded_task = find_by_id("task0")
         seeded_task.native.send_keys("F")
         expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
@@ -150,7 +151,7 @@ RSpec.describe "React Tasks Changes", type: :system do
         end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}F")
       end
 
-      it "can make and delete a 2nd task" do
+      it "makes and deletes a 2nd task" do
         fill_in "task0", with: "This is my new task"
         seeded_task = find_by_id("task0")
         expect(page).not_to have_field("task1")

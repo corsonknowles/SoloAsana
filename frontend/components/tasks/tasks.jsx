@@ -11,7 +11,7 @@ class Tasks extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.handleInitialization = this.handleInitialization.bind(this);
+    // this.handleInitialization = this.handleInitialization.bind(this);
   }
 
   componentWillMount () {
@@ -19,11 +19,11 @@ class Tasks extends React.Component {
     if (this.props.match.params.id) {
       projectID = parseInt(this.props.match.params.id);
       this.props.fetchTasksByProject(projectID)
-        .then( (fetchedTasks) => {
-          if (fetchedTasks.length === 0) {
-            this.handleInitialization(projectID);
-          }
-        });
+        // .then( (fetchedTasks) => {
+        //   if (fetchedTasks.length === 0) {
+        //     this.handleInitialization(projectID);
+        //   }
+        // });
     }
   }
 
@@ -34,26 +34,27 @@ class Tasks extends React.Component {
     }
 
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.fetchTasksByProject(projectID).then((tasks) => {
-        if (tasks.length === 0) {
-          this.handleInitialization(projectID);
-        }
-      });
+      this.props.fetchTasksByProject(projectID)
+      // .then((tasks) => {
+      //   if (tasks.length === 0) {
+      //     this.handleInitialization(projectID);
+      //   }
+      // });
     }
   }
 
-  handleInitialization (projectID) {
-    const mustHaveTask = {
-      title: "",
-      team_id: 1,
-      project_id: projectID,
-      user_id: this.currentUser.id,
-      done: false,
-      section: false
-    };
-
-    this.props.createTask(mustHaveTask);
-  }
+  // handleInitialization (projectID) {
+  //   const mustHaveTask = {
+  //     title: "",
+  //     team_id: 1,
+  //     project_id: projectID,
+  //     user_id: this.currentUser.id,
+  //     done: false,
+  //     section: false
+  //   };
+  //
+  //   this.props.createTask(mustHaveTask);
+  // }
 
   handleKeyDown (taskID, i) {
     return (event) => {

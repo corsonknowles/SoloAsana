@@ -33,6 +33,7 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token
   before_validation :truncate_username
+  after_create :initialize_project
 
   has_many :tasks, dependent: :restrict_with_exception
   has_many :projects, dependent: :restrict_with_exception
@@ -60,6 +61,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def initialize_project
+    projects.create!
+  end
 
   def truncate_username
     return unless username
