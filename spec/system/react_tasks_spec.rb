@@ -57,7 +57,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       click_button "Sign In"
       # Capybara's approach to waiting for expectations ensures the page loads here
       Timeout.timeout(Capybara.default_max_wait_time) do
-        sleep(0.1) until page.has_content?("Welcome Robert")
+        sleep(0.1) until page.has_content?("Welcome #{user.username}")
       end
       visit "/#/projects/#{project.id}"
     end
@@ -149,13 +149,15 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(page).to have_field("task1")
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
 
-        seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys(:down)
-        expect(page.evaluate_script("document.activeElement.id")).to eq "task1"
+        expect do
+          seeded_task = find_by_id("task0")
+          seeded_task.native.send_keys(:down)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "task1"
 
-        next_task = find_by_id("task1")
-        next_task.native.send_keys(:up)
-        expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
+          next_task = find_by_id("task1")
+          next_task.native.send_keys(:up)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
+        end.not_to change(Task, :count)
       end
 
       it "can delete the 2nd seeded task" do
@@ -163,9 +165,13 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(page).to have_field("task1")
         fill_in "task1", with: "R"
         short_task = find_by_id("task1")
-        (short_task.value.length + 1).times { short_task.send_keys [:backspace] }
 
-        expect(page).not_to have_field("task1")
+        expect do
+          ActiveRecord::Base.after_transaction do
+            (short_task.value.length + 1).times { short_task.send_keys [:backspace] }
+            expect(page).not_to have_field("task1")
+          end
+        end.to change(Task, :count).by(-1)
       end
     end
   end
