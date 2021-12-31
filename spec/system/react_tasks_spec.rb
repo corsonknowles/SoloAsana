@@ -61,24 +61,21 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
 
     it "can enter a new task" do
-      expect do
-        fill_in "task0", with: "F"
-        page.execute_script %{ $("#task0").trigger('keyup') }
-        seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys(:return)
-      end.to change(Task, :count).by(1)
+      fill_in "task0", with: "F"
+      page.execute_script %{ $("#task0").trigger('keyup') }
+      seeded_task = find_by_id("task0")
 
-      expect(page).to have_field("task0", with: "F")
-      expect(page).to have_field("task1", with: "")
+      expect do
+        seeded_task.native.send_keys(:return)
+        ActiveRecord::Base.after_transaction do
+          expect(page).to have_field("task0", with: "F")
+          expect(page).to have_field("task1", with: "")
+        end
+      end.to change(Task, :count).by(1)
     end
 
     context "with a seeded task" do
       let!(:task) { create(:task, user: user, team: team, project: project) }
-
-      it "can fill in a task" do
-        fill_in "task0", with: "This is my new task"
-        expect(page).to have_field("task0", with: "This is my new task")
-      end
 
       it "cannot delete the only task" do
         expect(page).to have_field("task0")
@@ -86,7 +83,11 @@ RSpec.describe "React Tasks Changes", type: :system do
 
         the_only_task = find_by_id("task0")
 
-        (the_only_task.value.length + 1).times { the_only_task.send_keys [:backspace] }
+        expect do
+          ActiveRecord::Base.after_transaction do
+            (the_only_task.value.length + 1).times { the_only_task.send_keys [:backspace] }
+          end
+        end.not_to change(Task, :count)
         expect(page).to have_field("task0")
       end
 
@@ -108,16 +109,23 @@ RSpec.describe "React Tasks Changes", type: :system do
       it "can delete a 2nd task" do
         expect(page).not_to have_field("task1")
 
-        fill_in "task0", with: "This is my new task"
-        seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys(:return)
-        expect(page).to have_field("task1")
+        expect do
+          ActiveRecord::Base.after_transaction do
+            fill_in "task0", with: "This is my new task"
+            seeded_task = find_by_id("task0")
+            seeded_task.native.send_keys(:return)
+            expect(page).to have_field("task1")
+          end
+        end.to change(Task, :count).by(1)
 
-        fill_in "task1", with: "test"
-        newly_entered_task = find_by_id("task1")
-        (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
-
-        expect(page).not_to have_field("task1")
+        expect do
+          ActiveRecord::Base.after_transaction do
+            fill_in "task1", with: "test"
+            newly_entered_task = find_by_id("task1")
+            (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
+            expect(page).not_to have_field("task1")
+          end
+        end.to change(Task, :count).by(-1)
       end
     end
 
@@ -125,13 +133,18 @@ RSpec.describe "React Tasks Changes", type: :system do
       let!(:task) { create(:task, user: user, team: team, project: project) }
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
+      it 'can fill in tasks' do
+        fill_in "task0", with: "This is my first task"
+        fill_in "task1", with: "This is my second task"
+        expect(page).to have_field("task0", with: "This is my first task")
+        expect(page).to have_field("task1", with: "This is my second task")
+      end
+
       it "can navigate between tasks" do
         find_by_id("project0").click
         expect(page).to have_field("task0")
         expect(page).to have_field("task1")
-
-        fill_in "task0", with: "This is my first task"
-        fill_in "task1", with: "This is my second task"
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
 
         seeded_task = find_by_id("task0")
         seeded_task.native.send_keys(:down)
