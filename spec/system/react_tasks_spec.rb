@@ -108,13 +108,13 @@ RSpec.describe "React Tasks Changes", type: :system do
         end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}F")
       end
 
-      it "can delete a 2nd task" do
+      it "can make and delete a 2nd task" do
+        fill_in "task0", with: "This is my new task"
+        seeded_task = find_by_id("task0")
         expect(page).not_to have_field("task1")
 
         expect do
           ActiveRecord::Base.after_transaction do
-            fill_in "task0", with: "This is my new task"
-            seeded_task = find_by_id("task0")
             seeded_task.native.send_keys(:return)
             expect(page).to have_field("task1")
           end
@@ -145,9 +145,9 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       it "can navigate between tasks" do
         find_by_id("project0").click
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
         expect(page).to have_field("task0")
         expect(page).to have_field("task1")
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
 
         expect do
           seeded_task = find_by_id("task0")
@@ -162,7 +162,9 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       it "can delete the 2nd seeded task" do
         find_by_id("project0").click
-        expect(page).to have_field("task1")
+        Timeout.timeout(Capybara.default_max_wait_time) do
+          sleep(0.1) until page.has_field?("task1")
+        end
         fill_in "task1", with: "R"
         short_task = find_by_id("task1")
 
