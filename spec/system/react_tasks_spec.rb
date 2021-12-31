@@ -91,6 +91,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can update a task" do
+        find_by_id("project0").click
         expect(page).to have_field("task0")
         expect(page).to have_field("task0", with: task.title)
 
