@@ -137,6 +137,7 @@ RSpec.describe "React Tasks Changes", type: :system do
 
       it "can fill in tasks" do
         find_by_id("project0").click
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
         fill_in "task0", with: "This is my first task"
         fill_in "task1", with: "This is my second task"
         expect(page).to have_field("task0", with: "This is my first task")
