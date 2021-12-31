@@ -13,61 +13,31 @@ class Projects extends React.Component {
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleInput = this.handleInput.bind(this);
   }
 
   componentWillMount () {
-    this.props.fetchProjects()
+    this.props.fetchProjects();
   }
 
   componentWillReceiveProps (nextProps) {
-    const newProject2 = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
-
-    if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length > 0) {
-      this.setState( { projects: nextProps.projects } )
-    } else if (Object.keys(nextProps.projects).length === 0) {
-      this.props.createProject(newProject2)
+    if (Object.keys(nextProps.projects).length === 0) {
+      const newProject2 = {
+        name: "",
+        team_id: 1,
+        user_id: this.currentUser.id
+      };
+      this.props.createProject(newProject2).then (
+        () => {
+          const newItem = document.getElementById("project0");
+          if (newItem) {
+            newItem.focus();
+            newItem.click();
+          }
+        }
+      )
     };
-
-    // TODO solve this with routing or create a way for it to work in DidMount
-    // let firstProject = this.props.projects[0].id;
-    // console.log(this.props.match.params.id);
-    // console.log((this.props.match.params.id));
-    // if (this.props.match.params.id) {
-    //   let firstProject = 108;
-    //   let projectURL = `/projects/${firstProject}`;
-    //   return (
-    //     <Redirect to={projectURL} />
-    //   );
-    // }
-
   }
-
-  // componentDidMount () {
-    // const firstItem = document.getElementById("project0");
-    // firstItem.focus();
-    // firstItem.click();
-
-    // this.currentUser.latest_project =
-  // }
-
-  // componentWillMount () {
-  //   // let firstProject = this.props.projects[0].id;
-  //   if (!!this.props.match.params.id) {
-  //
-  //     let firstProject = 111;
-  //     let projectURL = `/projects/${firstProject}`;
-  //     return (
-  //       <Redirect to={projectURL} />
-  //     );
-  //   }
-  //   console.log("did mount");
-  //   console.log(this.props.match.params.id);
-  //   console.log(!this.props.match.params.id);
-  // }
 
   handleKeyDown (projectID, i) {
     return (event) => {
@@ -91,10 +61,7 @@ class Projects extends React.Component {
           nextItem.click();
         }
       } else {
-        const target = event.target;
-        const value = target.value;
-        const empty = (value.length === 0);
-
+        const empty = (event.target.value.length === 0);
         const deleteKeys = (
           key === 'Delete' ||
           key === 'Backspace' ||
@@ -110,9 +77,8 @@ class Projects extends React.Component {
           if (previousItem) {
             previousItem.focus();
             previousItem.click();
-
           } else {
-            // this will focus and display tasks for the last remaining project if all previous projects are deleted
+            // this will focus on the last remaining project if all preceding ones are deleted
             const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
@@ -144,12 +110,17 @@ class Projects extends React.Component {
           nextItem.click();
         }
       } else {
-        const value = event.target.value;
-        const project = this.props.projects[projectID];
-        project.name = value;
-
-        this.props.updateProject(project);
       }
+    }
+  }
+
+  handleInput (projectID, i) {
+    return (event) => {
+      const value = event.target.value;
+      const project = this.props.projects[projectID];
+      project.name = value;
+
+      this.props.updateProject(project);
     }
   }
 
@@ -168,6 +139,7 @@ class Projects extends React.Component {
               placeholder="_________________________"
               onKeyUp={this.handleKeyUp(projectID, i)}
               onKeyDown={this.handleKeyDown(projectID, i)}
+              onInput={this.handleInput(projectID, i)}
             />
           </NavLink>
           )

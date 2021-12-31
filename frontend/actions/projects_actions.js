@@ -29,9 +29,10 @@ export const receiveProjects = projects => ({
 
 // asynchronous actions
 export const createProject = project => dispatch => (
-  PROJECTS.createProject(project)
-    .then(savedProject => { dispatch(receiveProject(savedProject)) }
-  )
+  PROJECTS.createProject(project).then(savedProject => {
+    dispatch(receiveProject(savedProject));
+    return savedProject;
+  })
 );
 
 export const destroyProject = id => dispatch => {
@@ -41,9 +42,10 @@ export const destroyProject = id => dispatch => {
 };
 
 export const fetchProjects = () => dispatch => (
-  PROJECTS.fetchProjects()
-    .then(projects => dispatch(receiveProjects(projects))
-  )
+  PROJECTS.fetchProjects().then(projects => {
+    dispatch(receiveProjects(projects));
+    return projects;
+  })
 );
 
 export const updateProject = project => dispatch => {

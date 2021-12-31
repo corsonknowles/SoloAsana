@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { clearErrors, updateUser, requestLogout } from '../../actions/session_actions';
+import { clearErrors, updateUser } from '../../actions/session_actions';
 import PhotoUpload from './photo_upload';
 
 const mapStateToProps = state => ({

@@ -56,7 +56,6 @@ export const fetchTasksByProject = projectID => dispatch => {
       dispatch(receiveTasksByProject(projectwithtasks))
       return projectwithtasks.tasks;
     }
-
   )
 };
 

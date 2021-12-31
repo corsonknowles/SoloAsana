@@ -4,41 +4,26 @@ import { Link, NavLink } from 'react-router-dom';
 import merge from 'lodash/merge';
 
 class Tasks extends React.Component {
-
   constructor(props) {
     super(props)
-    this.state = {
-      tasks: this.props.tasks
-    }
+    this.state = { tasks: this.props.tasks }
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
+    this.handleInput = this.handleInput.bind(this);
+    this.handleInitialization = this.handleInitialization.bind(this);
   }
 
   componentWillMount () {
     let projectID;
     if (this.props.match.params.id) {
       projectID = parseInt(this.props.match.params.id);
-      this.props.fetchTasksByProject(projectID).then( () => {
-        if (Object.keys(this.props.tasks).length === 0) {
-          const mustHaveTask = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
+      this.props.fetchTasksByProject(projectID)
+        .then( (fetchedTasks) => {
+          if (fetchedTasks.length === 0) {
+            this.handleInitialization(projectID);
           }
-          this.props.createTask(mustHaveTask).then(
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = createdTask;
-              this.setState(newState);
-            }
-          )
-        }
-      });
+        });
     }
   }
 
@@ -47,33 +32,27 @@ class Tasks extends React.Component {
     if (nextProps.match.params.id) {
       projectID = nextProps.match.params.id;
     }
-    if (projectID && Object.keys(this.props.tasks).length === 0 && Object.keys(nextProps.tasks).length > 0) {
-      this.setState( { tasks: nextProps.tasks } )
-    }
 
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
       this.props.fetchTasksByProject(projectID).then((tasks) => {
-        if (Object.keys(tasks).length === 0) {
-          const mustHaveTask2 = {
-            title: "",
-            team_id: 1,
-            project_id: projectID,
-            user_id: this.currentUser.id,
-            done: false,
-            section: false
-          }
-
-          this.props.createTask(mustHaveTask2).then (
-            (createdTask) => {
-              // set the new task to state
-              const newState = merge({}, this.state);
-              newState.tasks[createdTask.id] = mustHaveTask2;
-              this.setState(newState);
-            }
-          )
+        if (tasks.length === 0) {
+          this.handleInitialization(projectID);
         }
       });
     }
+  }
+
+  handleInitialization (projectID) {
+    const mustHaveTask = {
+      title: "",
+      team_id: 1,
+      project_id: projectID,
+      user_id: this.currentUser.id,
+      done: false,
+      section: false
+    };
+
+    this.props.createTask(mustHaveTask);
   }
 
   handleKeyDown (taskID, i) {
@@ -91,7 +70,7 @@ class Tasks extends React.Component {
           user_id: this.currentUser.id,
           done: false,
           section: false
-        }
+        };
 
         // push the new task to the database
         this.props.createTask(newTask)
@@ -141,12 +120,18 @@ class Tasks extends React.Component {
           nextItem.focus();
         }
       } else {
-        const value = event.target.value;
-        const task = this.props.tasks[taskID];
-        task.title = value;
 
-        this.props.updateTask(task)
       }
+    }
+  }
+
+  handleInput (taskID, i) {
+    return (event) => {
+      const value = event.target.value;
+      const task = this.props.tasks[taskID];
+      task.title = value;
+
+      this.props.updateTask(task)
     }
   }
 
@@ -165,6 +150,7 @@ class Tasks extends React.Component {
               placeholder="Enter your new task here"
               onKeyUp={this.handleKeyUp(taskNumber, i)}
               onKeyDown={this.handleKeyDown(taskNumber, i)}
+              onInput={this.handleInput(taskNumber, i)}
             />
           ))}
           <div className="spacer"></div>

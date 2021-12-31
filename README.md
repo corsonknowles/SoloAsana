@@ -73,7 +73,7 @@ This code allows you to move up and down a list of tasks. It is logic gated to p
 ...
 } else if (event.key === 'ArrowDown' || event.keyCode === 40) {
   event.preventDefault();
-  let itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
+  const itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
   if (itemBelow) {
     itemBelow.focus();
     itemBelow.select();
