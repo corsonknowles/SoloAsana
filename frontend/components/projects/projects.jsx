@@ -21,22 +21,13 @@ class Projects extends React.Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (Object.keys(nextProps.projects).length > 0) {
-      this.setState( { projects: nextProps.projects } )
-    } else if (Object.keys(this.props.projects).length === 0 && Object.keys(nextProps.projects).length === 0) {
+    if (Object.keys(nextProps.projects).length === 0) {
       const newProject2 = {
         name: "",
         team_id: 1,
         user_id: this.currentUser.id
       };
       this.props.createProject(newProject2).then (
-        (createdProject) => {
-          // set the new project to state
-          const newState = merge({}, this.state);
-          newState.projects[createdProject.id] = newProject2;
-          this.setState(newState);
-        }
-      ).then (
         () => {
           const newItem = document.getElementById("project0");
           if (newItem) {
