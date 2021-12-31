@@ -49,7 +49,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       let!(:task) { create(:task, user: user, team: team, project: project) }
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
-      it 'clicking project focuses it' do
+      it "clicking project focuses it" do
         find_by_id("project0").click
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
@@ -62,8 +62,6 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can navigate between tasks" do
-        find_by_id("project0").click
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
         expect(page).to have_field("task0")
         expect(page).to have_field("task1")
 
@@ -79,10 +77,6 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can delete the 2nd seeded task" do
-        find_by_id("project0").click
-        Timeout.timeout(Capybara.default_max_wait_time) do
-          sleep(0.1) until page.has_field?("task1")
-        end
         fill_in "task1", with: "R"
         short_task = find_by_id("task1")
 
@@ -96,7 +90,7 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
   end
 
-  context "when signed in" do
+  context "when signed in with a load await" do
     before do
       visit "/"
 
@@ -143,14 +137,14 @@ RSpec.describe "React Tasks Changes", type: :system do
       end
 
       it "can update a task" do
-        expect(page).to have_field("task0")
-        expect(page).to have_field("task0", with: task.title)
+        find_by_id("project0").click
+        seeded_task = find_by_id("task0")
+        seeded_task.native.send_keys("F")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
 
         expect do
-          seeded_task = find_by_id("task0")
-          seeded_task.native.send_keys("F")
-          page.execute_script %{ $("#task0").trigger('keyup') }
           ActiveRecord::Base.after_transaction do
+            page.execute_script %{ $("#task0").trigger('keyup') }
             expect(page).to have_field("task0", with: "#{task.title}F")
           end
         end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}F")
