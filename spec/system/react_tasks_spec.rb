@@ -6,7 +6,6 @@ RSpec.describe "React Tasks Changes", type: :system do
   let(:project) { user.projects.last }
   let(:task) { user.tasks.first }
 
-
   context "when unauthorized" do
     it "proceeds to the logged out view" do
       visit "/#/projects/#{project.id}"
@@ -35,7 +34,12 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
 
     context "with an additional seeded task" do
-      let!(:task2) { create(:task, user: user, team: team, project: project) }
+      let!(:second_task) { create(:task, user: user, team: team, project: project) }
+
+      it "focuses on a project by clicking" do
+        find_by_id("project0").click
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+      end
 
       it "loads the task when the project is clicked" do
         expect(user.tasks.count).to eq 2
@@ -44,15 +48,6 @@ RSpec.describe "React Tasks Changes", type: :system do
           find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
           expect(page).to have_field("task1")
         end.not_to change(Task, :count)
-      end
-    end
-
-    context "with an additional seeded task" do
-      let!(:second_task) { create(:task, user: user, team: team, project: project) }
-
-      it "focuses on a project by clicking" do
-        find_by_id("project0").click
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
 
       it "fills in tasks" do
@@ -140,11 +135,12 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(Task.last.title).to eq(task.title)
         expect(page).to have_field("task0")
         seeded_task = find_by_id("task0")
-        seeded_task.native.send_keys("F")
-        expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
 
         expect do
           ActiveRecord::Base.after_transaction do
+            seeded_task.native.send_keys("F")
+            expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
+
             page.execute_script %{ $("#task0").trigger('keyup') }
             expect(page).to have_field("task0", with: "#{task.title}F")
           end

@@ -98,7 +98,10 @@ class Projects extends React.Component {
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+        previousProjectNumber = String(parseInt(i) - 1;
+        if (previousProjectNumber < 0) return null;
+
+        const previousItem = document.getElementById(`project${previousProjectNumber}`);
         if (previousItem) {
           previousItem.focus();
           previousItem.click();
