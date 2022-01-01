@@ -43,10 +43,10 @@ RSpec.describe "React Project Changes", type: :system do
 
     it "can update a project" do
       expect do
-        seeded_project = find_by_id("project0")
-        seeded_project.native.send_keys("F")
-        page.execute_script %{ $('#project0').trigger('keyup') }
         ActiveRecord::Base.after_transaction do
+          seeded_project = find_by_id("project0")
+          seeded_project.native.send_keys("F")
+          page.execute_script %{ $('#project0').trigger('keyup') }
           expect(page).to have_field("project0", with: "#{project.name}F")
         end
       end.to change { Project.last.reload.name }.from(project.name).to("#{project.name}F")
@@ -77,7 +77,7 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page).not_to have_field("project1")
       end
 
-      it "can navigate between projects" do
+      it "can type and navigate between projects" do
         expect(page).to have_field("project1")
 
         fill_in "project0", with: "This is my first project"
@@ -89,6 +89,14 @@ RSpec.describe "React Project Changes", type: :system do
         next_project = find_by_id("project1")
         next_project.native.send_keys(:up)
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+      end
+
+      it "can step through the list" do
+        expect(page).to have_field("project0")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        find_by_id("project0").native.send_keys(:down)
+        expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
+        find_by_id("project1").native.send_keys(:down)
       end
 
       it "stops going up at the top of the list" do

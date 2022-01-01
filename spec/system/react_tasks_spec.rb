@@ -34,8 +34,9 @@ RSpec.describe "React Tasks Changes", type: :system do
     end
 
     it "steps through a stream of newly entered tasks" do
+      number_of_times = 3
       expect do
-        2.times do |n|
+        number_of_times.times do |n|
           ActiveRecord::Base.after_transaction do
             last_task = find_by_id("task#{n}")
             last_task.native.send_keys(:enter)
@@ -43,7 +44,7 @@ RSpec.describe "React Tasks Changes", type: :system do
             expect(page.evaluate_script("document.activeElement.id")).to eq "task#{n + 1}"
           end
         end
-      end.to change(Task, :count).by(2)
+      end.to change(Task, :count).by(number_of_times)
     end
 
     context "with an additional seeded task" do
@@ -52,6 +53,20 @@ RSpec.describe "React Tasks Changes", type: :system do
       it "focuses on a project by clicking" do
         find_by_id("project0").click
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+      end
+
+      it "steps through a stream of newly entered tasks" do
+        number_of_times = 3
+        expect do
+          number_of_times.times do |n|
+            ActiveRecord::Base.after_transaction do
+              last_task = find_by_id("task#{n}")
+              last_task.native.send_keys(:enter)
+              expect(page).to have_field("task#{n + 1}")
+              expect(page.evaluate_script("document.activeElement.id")).to eq "task#{n + 1}"
+            end
+          end
+        end.to change(Task, :count).by(number_of_times)
       end
 
       it "loads the task when the project is clicked" do

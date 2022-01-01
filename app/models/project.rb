@@ -19,7 +19,7 @@
 class Project < ApplicationRecord
   belongs_to :user
   belongs_to :team, optional: true
-  has_many :tasks
+  has_many :tasks, dependent: :delete_all # NOTE: this may be incompatible with teams
 
   validates :user_id, presence: true
   validates :name, length: { maximum: 255 }, allow_nil: true

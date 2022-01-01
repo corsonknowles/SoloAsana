@@ -14,20 +14,16 @@ class Tasks extends React.Component {
   }
 
   componentWillMount () {
-    let projectID;
-    if (this.props.match.params.id) {
-      projectID = parseInt(this.props.match.params.id);
+    const projectID = this.props.match.params.id;
+    if (projectID) {
       this.props.fetchTasksByProject(projectID)
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    let projectID;
-    if (nextProps.match.params.id) {
-      projectID = nextProps.match.params.id;
-    }
+    const projectID = nextProps.match.params.id;
 
-    if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
+    if (projectID && this.props.match.params.id !== projectID ) {
       this.props.fetchTasksByProject(projectID)
     }
   }
@@ -38,8 +34,6 @@ class Tasks extends React.Component {
       const keyCode = event.keyCode;
 
       if (key === 'Enter' || keyCode === 13) {
-        const projectID = parseInt(this.props.match.params.id);
-
         // Move down 1 in the list by focusing on the next item
         const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
         if (nextItem) {
@@ -49,7 +43,7 @@ class Tasks extends React.Component {
         const newTask = {
           title: "",
           team_id: 1,
-          project_id: projectID,
+          project_id: parseInt(this.props.match.params.id),
           user_id: this.currentUser.id,
           done: false,
           section: false
