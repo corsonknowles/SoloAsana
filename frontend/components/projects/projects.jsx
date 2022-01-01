@@ -31,18 +31,30 @@ class Projects extends React.Component {
   respondToEnterWithCreate (event, i) {
     event.preventDefault();
 
-    const newProject = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
-    // set a new project in the database
-    this.props.createProject(newProject);
-
     const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
     if (nextItem) {
       nextItem.focus();
       nextItem.click();
+    }
+
+    const newProject = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    };
+    
+    // set a new project in the database
+    // when the newest item is the last item, move after creating it
+    if (nextItem) {
+      this.props.createProject(newProject);
+    } else {
+      this.props.createProject(newProject).then( () => {
+        const newItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        if (newItem) {
+          newItem.focus();
+          newItem.click();
+        }
+      })
     }
   };
 

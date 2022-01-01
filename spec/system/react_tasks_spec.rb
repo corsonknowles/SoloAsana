@@ -33,6 +33,19 @@ RSpec.describe "React Tasks Changes", type: :system do
       end.not_to change(Task, :count)
     end
 
+    it 'steps through a stream of newly entered tasks' do
+      expect do
+        2.times do |n|
+          ActiveRecord::Base.after_transaction do
+            last_task = find_by_id("task#{n}")
+            last_task.native.send_keys(:enter)
+            expect(page).to have_field("task#{n+1}", with: "")
+            expect(page.evaluate_script("document.activeElement.id")).to eq "task#{n+1}"
+          end
+        end
+      end.to change(Task, :count).by(2)
+    end
+
     context "with an additional seeded task" do
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
@@ -132,7 +145,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       seeded_task = find_by_id("task0")
 
       expect do
-        seeded_task.native.send_keys(:return)
+        seeded_task.native.send_keys(:enter)
         ActiveRecord::Base.after_transaction do
           expect(page).to have_field("task0", with: "F")
           expect(page).to have_field("task1", with: "")
