@@ -31,4 +31,13 @@ class Task < ApplicationRecord
 
   validates :user_id, presence: true
   validates :project_id, presence: true
+
+  before_destroy :must_have_a_task
+
+  def must_have_a_task
+    return unless project.tasks.limit(2).count == 1
+
+    errors.add(:base, :undestroyable)
+    throw :abort
+  end
 end

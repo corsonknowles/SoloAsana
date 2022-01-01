@@ -69,15 +69,14 @@ I used React's synthetic event handlers to allow custom behavior for the enter a
 This code allows you to move up and down a list of tasks. It is logic gated to prevent generating any errors at the beginning or end of the list, when there would be no place to move the cursor to. This snippet overwrites the normal behavior of the up and down arrows. Instead of going to the beginning or end of a line of text, these keys will now take the user to the next item in the list. These effects make the To Do editor much more like a text editor in the browser.
 ```JavaScript
 // look up the potential next item in the list
-// then only if it exists, focus on and select that element.
-...
-} else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+// then only if it exists, focus on that element.
+if (event.key === 'ArrowDown' || event.keyCode === 40) {
   event.preventDefault();
   const itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
   if (itemBelow) {
     itemBelow.focus();
-    itemBelow.select();
   }
+}
 
 // add an iterator (i) to the map function to create unique ID's
 // since there are multiple lists on the page,
@@ -85,17 +84,20 @@ This code allows you to move up and down a list of tasks. It is logic gated to p
 // with the unique id's from other lists.
 // This requires the text parsing and text interpolation used above
 // to move between unique elements.
-render () {
-  <div className="tasks-list">
-    {Object.keys(this.props.tasks).map( (taskNumber, i) => (
-        <input
-        id={`task${i}`}
-        defaultValue={this.props.projects[projectID].name}
-
-        ...
-        />
-    )
-  )}  
+render() {
+  return (
+    <div className="tasks-area">
+      <div className="tasks-list">
+        { Object.keys(this.props.tasks).map((taskNumber, i) => (
+          <input
+            id={`task${i}`}
+            key={`task_key_${taskNumber}`}
+            defaultValue={this.props.tasks[taskNumber].title}
+          />
+        ))}
+      </div>
+    </div>
+  )
 }
 ```
 
@@ -134,5 +136,15 @@ Allow users to specify a due date for tasks and sort by time created and time du
 ### File Attachments
 
 File attachments can be allowed in a manner very similar to the interface for click-to-select file and drag-to-upload that users enjoy on the profile screen for image uploading. Allowing file attachment to tasks is a nice future direction that will lend additional versatility to the clean interface of the app.
+
+# Contributing
+
+Ruby coverage is tracked in CodeClimate. Rubocop and specs are run in Github Actions. To track JavaScript coverage locally, run tests with the coverage variable set, e.g.
+
+```bash
+export COVERAGE="true" && bundle exec rspec
+```
+Then check your local js-coverage folder for the full report.
+
 
 Here it is in production: [SoloAsana live](http://soloasana.com)

@@ -32,4 +32,21 @@ RSpec.describe Task, type: :model do
 
   it { is_expected.to validate_presence_of(:user_id) }
   it { is_expected.to validate_presence_of(:project_id) }
+
+  context "when a project has a task" do
+    let!(:project) { create(:project) }
+    let(:task) { project.tasks.first }
+
+    it "cannot delete the last task for a project" do
+      expect { task.destroy }.not_to change(described_class, :count)
+    end
+
+    context "when it is not the last task" do
+      let!(:second_task) { create(:task, project: project) }
+
+      it "can be destroyed" do
+        expect { task.destroy }.to change(described_class, :count).by(-1)
+      end
+    end
+  end
 end
