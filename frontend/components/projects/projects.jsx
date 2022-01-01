@@ -13,46 +13,48 @@ class Projects extends React.Component {
     this.handleInput = this.handleInput.bind(this);
     this.respondToEnterWithCreate = this.respondToEnterWithCreate.bind(this);
     this.respondToDeleteWhenEmpty = this.respondToDeleteWhenEmpty.bind(this);
+    this.decideIfDeletable = this.decideIfDeletable.bind(this);
   }
 
   componentWillMount () {
-    this.props.fetchProjects();
-  }
-
-  componentWillReceiveProps (nextProps) {
-    if (Object.keys(nextProps.projects).length === 0) {
-      const newProject2 = {
-        name: "",
-        team_id: 1,
-        user_id: this.currentUser.id
-      };
-      this.props.createProject(newProject2).then (
-        () => {
-          const newItem = document.getElementById("project0");
-          if (newItem) {
-            newItem.focus();
-            newItem.click();
-          }
+    this.props.fetchProjects().then (
+      () => {
+        const newItem = document.getElementById("project0");
+        if (newItem) {
+          newItem.focus();
+          newItem.click();
         }
-      )
-    };
+      }
+    )
   }
 
   respondToEnterWithCreate (event, i) {
     event.preventDefault();
 
-    const newProject = {
-      name: "",
-      team_id: 1,
-      user_id: this.currentUser.id
-    }
-    // set a new project in the database
-    this.props.createProject(newProject);
-
     const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
     if (nextItem) {
       nextItem.focus();
       nextItem.click();
+    }
+
+    const newProject = {
+      name: "",
+      team_id: 1,
+      user_id: this.currentUser.id
+    };
+    
+    // set a new project in the database
+    // when the newest item is the last item, move after creating it
+    if (nextItem) {
+      this.props.createProject(newProject);
+    } else {
+      this.props.createProject(newProject).then( () => {
+        const newItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
+        if (newItem) {
+          newItem.focus();
+          newItem.click();
+        }
+      })
     }
   };
 
@@ -74,6 +76,18 @@ class Projects extends React.Component {
     }
   };
 
+  decideIfDeletable (event, key, keyCode) {
+    // our input must be empty
+    if (event.target.value.length !== 0) return false
+    // it must be a delete key
+    if (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) {
+      if (Object.keys(this.props.projects).length > 1) {
+        return true
+      }
+    }
+    return false
+  }
+
   handleKeyDown (projectID, i) {
     return (event) => {
       const key = event.key;
@@ -82,15 +96,7 @@ class Projects extends React.Component {
       if (key === 'Enter' || keyCode === 13) {
         this.respondToEnterWithCreate(event, i);
       } else {
-        const empty = (event.target.value.length === 0);
-        const deleteKeys = (
-          key === 'Delete' ||
-          key === 'Backspace' ||
-          keyCode === 8 ||
-          keyCode === 46
-        );
-        const mustBeOneProject = (Object.keys(this.props.projects).length > 1);
-        if (empty && mustBeOneProject && deleteKeys) {
+        if (this.decideIfDeletable(event, key, keyCode)) {
           this.respondToDeleteWhenEmpty(event, projectID, i);
         }
       }
@@ -104,7 +110,10 @@ class Projects extends React.Component {
 
       if (key === 'ArrowUp' || keyCode === 38) {
         event.preventDefault();
-        const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+        const previousProjectNumber = (parseInt(i) - 1);
+        if (previousProjectNumber < 0) return null;
+
+        const previousItem = document.getElementById(`project${String(previousProjectNumber)}`);
         if (previousItem) {
           previousItem.focus();
           previousItem.click();
@@ -116,7 +125,6 @@ class Projects extends React.Component {
           nextItem.focus();
           nextItem.click();
         }
-      } else {
       }
     }
   }

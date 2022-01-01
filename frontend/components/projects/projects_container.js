@@ -7,7 +7,6 @@ import {
 } from '../../actions/projects_actions';
 import Projects from './projects';
 import { withRouter } from 'react-router';
-import { createTask } from '../../actions/tasks_actions';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
@@ -16,7 +15,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  createTask: (task) => dispatch(createTask(task)),
   createProject: (project) => dispatch(createProject(project)),
   destroyProject: (id) => dispatch(destroyProject(id)),
   fetchProjects: () => dispatch(fetchProjects()),
