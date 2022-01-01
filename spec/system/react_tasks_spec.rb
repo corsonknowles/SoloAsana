@@ -161,8 +161,7 @@ RSpec.describe "React Tasks Changes", type: :system do
 
         expect do
           ActiveRecord::Base.after_transaction do
-            fill_in "task1", with: "F"
-            debugger
+            fill_in "task1", with: ""
             newly_entered_task = find_by_id("task1")
             (newly_entered_task.value.length + 1).times { newly_entered_task.send_keys [:backspace] }
             expect(page).not_to have_field("task1")
