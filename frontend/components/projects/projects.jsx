@@ -42,7 +42,7 @@ class Projects extends React.Component {
       team_id: 1,
       user_id: this.currentUser.id
     };
-    
+
     // set a new project in the database
     // when the newest item is the last item, move after creating it
     if (nextItem) {
@@ -60,8 +60,6 @@ class Projects extends React.Component {
 
   respondToDeleteWhenEmpty (event, projectID, i) {
     event.preventDefault();
-    this.props.destroyProject(projectID);
-
     const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
     if (previousItem) {
       previousItem.focus();
@@ -74,6 +72,7 @@ class Projects extends React.Component {
         nextItem.click();
       }
     }
+    this.props.destroyProject(projectID);
   };
 
   decideIfDeletable (event, key, keyCode) {
