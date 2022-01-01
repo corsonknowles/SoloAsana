@@ -25,7 +25,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       click_button "Sign In"
     end
 
-    it "begins with a task already int" do
+    it "begins with a task already" do
       expect do
         expect(page).not_to have_field("task0")
         find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
@@ -82,6 +82,30 @@ RSpec.describe "React Tasks Changes", type: :system do
             expect(page).not_to have_field("task1")
           end
         end.to change(Task, :count).by(-1)
+      end
+
+      it "focuses on the last remaining task after deleting the end of the list" do
+        expect(page).to have_field("task0")
+        expect(page).to have_field("task1")
+        expect(page).not_to have_field("task2")
+
+        latest_task = find_by_id("task1")
+        (latest_task.value.length + 1).times { latest_task.send_keys [:delete] }
+
+        expect(page).not_to have_field("task1")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
+      end
+
+      it "focuses on the last remaining task after deleting the beginning of the list" do
+        expect(page).to have_field("task0")
+        expect(page).to have_field("task1")
+        expect(page).not_to have_field("task2")
+
+        first_task = find_by_id("task0")
+        (first_task.value.length + 1).times { first_task.send_keys [:backspace] }
+
+        expect(page).not_to have_field("task1")
+        expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
       end
     end
   end

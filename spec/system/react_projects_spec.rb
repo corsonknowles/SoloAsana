@@ -91,6 +91,17 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
 
+      it "stops going up at the top of the list" do
+        expect do
+          expect(page).to have_field("project1")
+
+          seeded_project = find_by_id("project0")
+          seeded_project.native.send_keys(:up)
+          seeded_project.native.send_keys(:up)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        end.not_to raise_error
+      end
+
       it "changes focus after hitting enter" do
         expect(page).to have_field("project0")
         expect(page).to have_field("project1")
