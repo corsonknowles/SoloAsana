@@ -90,7 +90,7 @@ RSpec.describe "React Tasks Changes", type: :system do
         expect(page).not_to have_field("task2")
 
         latest_task = find_by_id("task1")
-        (latest_task.value.length + 1).times { latest_task.send_keys [:delete] }
+        (latest_task.value.length + 1).times { latest_task.send_keys [:backspace] }
 
         expect(page).not_to have_field("task1")
         expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
