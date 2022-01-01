@@ -70,7 +70,7 @@ This code allows you to move up and down a list of tasks. It is logic gated to p
 ```JavaScript
 // look up the potential next item in the list
 // then only if it exists, focus on that element.
-} else if (event.key === 'ArrowDown' || event.keyCode === 40) {
+if (event.key === 'ArrowDown' || event.keyCode === 40) {
   event.preventDefault();
   const itemBelow = document.getElementById(`task${String(parseInt(i) + 1)}`);
   if (itemBelow) {
@@ -94,7 +94,7 @@ render() {
             key={`task_key_${taskNumber}`}
             defaultValue={this.props.tasks[taskNumber].title}
           />
-        )}
+        ))}
       </div>
     </div>
   )

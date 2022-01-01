@@ -63,6 +63,8 @@ class User < ApplicationRecord
   private
 
   def initialize_project
+    return if projects.any?
+
     projects.create!
   end
 
