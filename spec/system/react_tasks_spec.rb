@@ -33,14 +33,14 @@ RSpec.describe "React Tasks Changes", type: :system do
       end.not_to change(Task, :count)
     end
 
-    it 'steps through a stream of newly entered tasks' do
+    it "steps through a stream of newly entered tasks" do
       expect do
         2.times do |n|
           ActiveRecord::Base.after_transaction do
             last_task = find_by_id("task#{n}")
             last_task.native.send_keys(:enter)
-            expect(page).to have_field("task#{n+1}", with: "")
-            expect(page.evaluate_script("document.activeElement.id")).to eq "task#{n+1}"
+            expect(page).to have_field("task#{n + 1}", with: "")
+            expect(page.evaluate_script("document.activeElement.id")).to eq "task#{n + 1}"
           end
         end
       end.to change(Task, :count).by(2)
