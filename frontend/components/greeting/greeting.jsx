@@ -48,18 +48,13 @@ class Greeting extends React.Component {
       department,
       about,
       photo
-    }
-
-    this.logout = this.props.logout;
-    this.currentUser = this.props.currentUser;
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
-
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-
     this.clearErrors = this.props.clearErrors.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
   }
@@ -78,7 +73,7 @@ class Greeting extends React.Component {
   }
 
   handleSubmit(){
-    const user = this.currentUser;
+    const user = this.props.currentUser;
     user.username = this.state.username;
     user.role = this.state.role;
     user.department = this.state.department;
@@ -129,7 +124,7 @@ class Greeting extends React.Component {
             </div>
             <nav className="nav-right">
               <button className="gold" onClick={this.openModal}>Account</button>
-              <button className="header-button gold" onClick={this.logout} >Log Out</button>
+              <button className="header-button gold" onClick={this.props.logout} >Log Out</button>
             </nav>
           </header>
           <div className="right-side-of-page">
@@ -157,7 +152,7 @@ class Greeting extends React.Component {
                   value={this.state.role}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
-                  placeholder=""
+                  placeholder="Job Title"
                 />
 
                 <label htmlFor='department' className="profile-label">DEPARTMENT</label>
@@ -165,7 +160,7 @@ class Greeting extends React.Component {
                   value={this.state.department}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input"
-                  placeholder=""
+                  placeholder="Engineering"
                 />
 
                 <label htmlFor="about" className="profile-label">ABOUT ME</label>
