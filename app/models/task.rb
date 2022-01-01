@@ -37,7 +37,7 @@ class Task < ApplicationRecord
   def must_have_a_task
     return unless project.tasks.limit(2).count == 1
 
-    errors.add(:base, :undestroyable)      
+    errors.add(:base, :undestroyable)
     throw :abort
   end
 end
