@@ -26,6 +26,19 @@ RSpec.describe "React Profile Photo", type: :system do
       click_button "Update Profile"
     end
 
+    it "can open the dropzone file menu" do
+      expect(page).to have_text("Welcome #{user.username}")
+
+      click_button "Account"
+      find("figure.profile-photo").click
+      expect(page).to have_text("Drop an image")
+      expect(page).to have_text("Or, click to select a file to upload")
+
+      find_by_id("profile-dropzone").click
+      click_on(class: "profile-dropzone")
+      page.attach_file(File.path("public/favicon.ico"))
+    end
+
     it "can close the account modal" do
       expect(page).to have_text("Welcome #{user.username}")
       expect(page).not_to have_text("My Profile Settings")
