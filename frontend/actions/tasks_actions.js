@@ -33,21 +33,19 @@ export const clearErrors = () => ({
 
 // asynchronous actions
 export const createTask = task => dispatch => {
-  return (TASKS.createTask(task)
+  return TASKS.createTask(task)
     .then(newTask => {
       dispatch(receiveTask(newTask));
       return newTask;
-    }
-  )
-)};
+    });
+};
 
 export const updateTask = task => dispatch => {
   return TASKS.updateTask(task)
     .then(returnTask => {
       dispatch(receiveTask(returnTask));
       return returnTask;
-    }
-  );
+    });
 };
 
 export const fetchTasksByProject = projectID => dispatch => {
@@ -55,11 +53,10 @@ export const fetchTasksByProject = projectID => dispatch => {
     .then(projectwithtasks => {
       dispatch(receiveTasksByProject(projectwithtasks))
       return projectwithtasks.tasks;
-    }
-  )
+    });
 };
 
 export const destroyTask = id => dispatch => {
   return TASKS.deleteTask(id)
-    .then( () => dispatch(deleteTask(id)) );
+    .then(() => dispatch(deleteTask(id)));
 };

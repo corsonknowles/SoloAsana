@@ -23,4 +23,12 @@ class Project < ApplicationRecord
 
   validates :user_id, presence: true
   validates :name, length: { maximum: 255 }, allow_nil: true
+
+  after_create :initialize_task
+
+  private
+
+  def initialize_task
+    tasks.create!(user: user)
+  end
 end

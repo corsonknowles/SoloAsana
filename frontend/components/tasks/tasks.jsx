@@ -11,7 +11,6 @@ class Tasks extends React.Component {
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.handleInitialization = this.handleInitialization.bind(this);
   }
 
   componentWillMount () {
@@ -19,11 +18,6 @@ class Tasks extends React.Component {
     if (this.props.match.params.id) {
       projectID = parseInt(this.props.match.params.id);
       this.props.fetchTasksByProject(projectID)
-        .then( (fetchedTasks) => {
-          if (fetchedTasks.length === 0) {
-            this.handleInitialization(projectID);
-          }
-        });
     }
   }
 
@@ -34,25 +28,8 @@ class Tasks extends React.Component {
     }
 
     if (projectID && this.props.match.params.id !== nextProps.match.params.id ) {
-      this.props.fetchTasksByProject(projectID).then((tasks) => {
-        if (tasks.length === 0) {
-          this.handleInitialization(projectID);
-        }
-      });
+      this.props.fetchTasksByProject(projectID)
     }
-  }
-
-  handleInitialization (projectID) {
-    const mustHaveTask = {
-      title: "",
-      team_id: 1,
-      project_id: projectID,
-      user_id: this.currentUser.id,
-      done: false,
-      section: false
-    };
-
-    this.props.createTask(mustHaveTask);
   }
 
   handleKeyDown (taskID, i) {
@@ -62,6 +39,12 @@ class Tasks extends React.Component {
 
       if (key === 'Enter' || keyCode === 13) {
         const projectID = parseInt(this.props.match.params.id);
+
+        // Move down 1 in the list by focusing on the next item
+        const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+        if (nextItem) {
+          nextItem.focus();
+        }
 
         const newTask = {
           title: "",
@@ -73,13 +56,16 @@ class Tasks extends React.Component {
         };
 
         // push the new task to the database
-        this.props.createTask(newTask)
-
-        // Move down 1 in the list by focusing on the next item
-        const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
+        // when the newest item is the last item, move after creating it
         if (nextItem) {
-          nextItem.focus();
+          this.props.createTask(newTask);
+        } else {
+          this.props.createTask(newTask).then( () => {
+            const newItem = document.getElementById(`task${String(parseInt(i) + 1)}`)
+            newItem.focus();
+          });
         }
+
       } else {
         const empty = (event.target.value.length === 0);
         const mustBeOneTask = (Object.keys(this.props.tasks).length > 1);
