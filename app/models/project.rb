@@ -37,10 +37,9 @@ class Project < ApplicationRecord
 
   def must_have_a_project
     return unless user
+    return unless user.projects.limit(2).count == 1
 
-    if user.projects.limit(2).count == 1
-      errors.add(:base, :undestroyable)
-      throw :abort
-    end
+    errors.add(:base, :undestroyable)
+    throw :abort
   end
 end
