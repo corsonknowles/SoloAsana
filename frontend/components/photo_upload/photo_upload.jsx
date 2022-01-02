@@ -130,18 +130,20 @@ class PhotoUpload extends React.Component {
             style={customStyles}
             contentLabel="Profile Photo"
           >
-          <div className="file-upload">
-            <Dropzone className="dropzone"
-             id="profile-dropzone"
-             multiple={false}
-             accept="image/*"
-             onDrop={this.onImageDrop.bind(this)}>
-             <div className="instructions">Drop an image</div>
-             <div className="instructions">Or, click to select a file to upload</div>
-           </Dropzone>
-          </div>
-          <button className="inner-modal" onClick={this.closeModal}>X</button>
-        </Modal>
+            <div className="file-upload">
+              <Dropzone
+                className="dropzone"
+                id="profile-dropzone"
+                multiple={false}
+                accept="image/*"
+                onDrop={this.onImageDrop.bind(this)}
+              >
+                <div className="instructions">Drop an image</div>
+                <div className="instructions">Or, click to select a file to upload</div>
+              </Dropzone>
+            </div>
+            <button className="inner-modal" onClick={this.closeModal}>X</button>
+          </Modal>
         </div>
       </div>
     )
