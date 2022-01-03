@@ -32,7 +32,10 @@ export const createProject = project => dispatch => (
 
 export const destroyProject = id => dispatch => {
   return PROJECTS.deleteProject(id)
-    .then( () => dispatch(deleteProject(id)) )
+    .then(
+      () => dispatch(deleteProject(id)),
+      error => dispatch(receiveErrors(error.responseJSON))
+    )
 };
 
 export const fetchProjects = () => dispatch => (
