@@ -60,19 +60,20 @@ class Projects extends React.Component {
 
   respondToDeleteWhenEmpty (event, projectID, i) {
     event.preventDefault();
+    this.props.destroyProject(projectID);
+
     const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
     if (previousItem) {
       previousItem.focus();
       previousItem.click();
     } else {
-      // focus for the user's cursor and click to load tasks
+      // when all preceding items have been deleted
       const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
       if (nextItem) {
         nextItem.focus();
         nextItem.click();
       }
     }
-    this.props.destroyProject(projectID);
   };
 
   decideIfDeletable (event, key, keyCode) {
