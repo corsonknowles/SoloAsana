@@ -1,8 +1,9 @@
 import {
   RECEIVE_PROJECTS,
   RECEIVE_PROJECT,
-  DELETE_PROJECT
-
+  DELETE_PROJECT,
+  RECEIVE_ERRORS,
+  CLEAR_ERRORS
 } from '../actions/projects_actions';
 import { RECEIVE_LOGOUT_SUCCESS } from '../actions/session_actions'
 import merge from 'lodash/merge';
