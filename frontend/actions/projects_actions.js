@@ -31,8 +31,8 @@ export const createProject = project => dispatch => (
 );
 
 export const destroyProject = id => dispatch => {
-  return PROJECTS.deleteProject(id)
-    .then( () => dispatch(deleteProject(id)) )
+  return dispatch(deleteProject(id))
+    .then( () => PROJECTS.deleteProject(id))
 };
 
 export const fetchProjects = () => dispatch => (
