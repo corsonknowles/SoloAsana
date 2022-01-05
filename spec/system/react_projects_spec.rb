@@ -44,7 +44,7 @@ RSpec.describe "React Project Changes", type: :system do
     it "can update a project" do
       expect do
         ActiveRecord::Base.after_transaction do
-          expect(page).to have_field("project0", with: "#{project.name}")
+          expect(page).to have_field("project0", with: project.name.to_s)
           find_by_id("project0").native.send_keys("F")
           page.execute_script %{ $('#project0').trigger('keyup') }
           expect(page).to have_field("project0", with: "#{project.name}F")
