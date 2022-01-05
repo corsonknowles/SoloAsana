@@ -54,7 +54,7 @@ class PhotoUpload extends React.Component {
 
   handleSubmit(){
     return (event) => {
-      let user = this.currentUser;
+      const user = this.currentUser;
       user.photo = this.state.photo;
 
       this.props.updateUser(user);
@@ -63,7 +63,12 @@ class PhotoUpload extends React.Component {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState(
+      prevState => (
+        // OR: toggle modal with !prevState.modalIsOpen
+        { modalIsOpen: true }
+      )
+    );
   }
 
   afterOpenModal() {

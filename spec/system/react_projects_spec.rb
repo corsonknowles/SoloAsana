@@ -44,8 +44,8 @@ RSpec.describe "React Project Changes", type: :system do
     it "can update a project" do
       expect do
         ActiveRecord::Base.after_transaction do
-          seeded_project = find_by_id("project0")
-          seeded_project.native.send_keys("F")
+          expect(page).to have_field("project0", with: project.name.to_s)
+          find_by_id("project0").native.send_keys("F")
           page.execute_script %{ $('#project0').trigger('keyup') }
           expect(page).to have_field("project0", with: "#{project.name}F")
         end
@@ -91,12 +91,19 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
       end
 
-      it "can step through the list" do
+      it "navigates between projects" do
         expect(page).to have_field("project0")
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
-        find_by_id("project0").native.send_keys(:down)
-        expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
-        find_by_id("project1").native.send_keys(:down)
+        expect(page).to have_field("project1")
+
+        expect do
+          seeded_project = find_by_id("project0")
+          seeded_project.native.send_keys(:down)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
+
+          next_project = find_by_id("project1")
+          next_project.native.send_keys(:up)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        end.not_to change(Project, :count)
       end
 
       it "stops going up at the top of the list" do
@@ -107,6 +114,17 @@ RSpec.describe "React Project Changes", type: :system do
           seeded_project.native.send_keys(:up)
           seeded_project.native.send_keys(:up)
           expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
+        end.not_to raise_error
+      end
+
+      it "stops going down at the top of the list" do
+        expect do
+          expect(page).to have_field("project1")
+
+          seeded_project = find_by_id("project1")
+          seeded_project.native.send_keys(:down)
+          seeded_project.native.send_keys(:down)
+          expect(page.evaluate_script("document.activeElement.id")).to eq "project1"
         end.not_to raise_error
       end
 
