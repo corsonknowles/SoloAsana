@@ -1,3 +1,4 @@
 {
-  "report-dir": "js-coverage"
+  "report-dir": "js-coverage",
+  "reporter": "lcov"
 }
