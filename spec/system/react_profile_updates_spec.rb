@@ -14,6 +14,15 @@ RSpec.describe "React Profile Updates", type: :system do
       click_button "Sign In"
     end
 
+    it "can open and close the account modal" do
+      expect(page).to have_text("Welcome #{user.username}")
+      click_button "Account"
+      expect(page).to have_text("My Profile Settings")
+
+      click_on(class: "close-modal")
+      expect(page).not_to have_text("My Profile Settings")
+    end
+
     it "can edit the user profile" do
       expect(page).to have_text("Welcome #{user.username}")
 
