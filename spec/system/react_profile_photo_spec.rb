@@ -11,6 +11,7 @@ RSpec.describe "React Profile Photo", type: :system do
       fill_in "EMAIL ADDRESS", with: user.email
       fill_in "PASSWORD", with: user.password
 
+      # rubocop:disable RSpec/ExpectInHook
       # auth the user
       click_button "Sign In"
       expect(page).to have_text("Welcome #{user.username}")
@@ -25,6 +26,7 @@ RSpec.describe "React Profile Photo", type: :system do
       expect(page).to have_css(".inner-modal")
       expect(page).to have_text("Drop an image")
       expect(page).to have_text("Or, click to select a file to upload")
+      # rubocop:enable RSpec/ExpectInHook
     end
 
     it "can close the dropzone and the account modal" do
@@ -52,7 +54,7 @@ RSpec.describe "React Profile Photo", type: :system do
           click_button "Update Profile"
           expect(page).to have_text("Welcome #{user.username}")
         end
-      end.to change { user.reload.photo }
+      end.to(change { user.reload.photo })
     end
 
     it "can open the dropzone file menu" do
@@ -74,7 +76,7 @@ RSpec.describe "React Profile Photo", type: :system do
           click_button "Update Profile"
           expect(page).to have_text("Welcome #{user.username}")
         end
-      end.to change { user.reload.photo }
+      end.to(change { user.reload.photo })
     end
   end
 end
