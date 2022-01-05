@@ -62,12 +62,12 @@ class Projects extends React.Component {
     event.preventDefault();
     this.props.destroyProject(projectID);
 
-    let previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
+    const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
     if (previousItem) {
       previousItem.focus();
       previousItem.click();
     } else {
-      // this will focus on the last remaining task if all preceding ones are deleted
+      // when all preceding items have been deleted
       const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
       if (nextItem) {
         nextItem.focus();
