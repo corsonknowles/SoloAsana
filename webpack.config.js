@@ -67,3 +67,8 @@ if (process.env.COVERAGE === "true") {
     }
   );
 }
+
+// export WATCH="true" && npm install
+if (process.env.WATCH === "true") {
+  module.exports = { ...module.exports, watch: true };
+}
