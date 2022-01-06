@@ -59,8 +59,10 @@ RSpec.describe "React Profile Photo", type: :system do
     end
 
     it "can open the dropzone file menu" do
-      find_by_id("profile-dropzone").click
-      expect(page).to have_text("Drop an image")
+      expect do
+        find_by_id("profile-dropzone").click
+        expect(page).to have_text("Drop an image")
+      end.not_to raise_error
     end
 
     it "can reveal and set the hidden file input" do
