@@ -82,6 +82,3 @@ jobs:
         uses: paambaati/codeclimate-action@v3.0.0
         with:
           debug: true
-          coverageLocations: |
-            ${{github.workspace}}/js-coverage:lcov
-            ${{github.workspace}}/coverage:simplecov
