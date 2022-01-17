@@ -49,6 +49,7 @@ RSpec.describe "React Profile Photo", type: :system do
         expect(page).not_to have_css(".inner-modal")
         expect(page).not_to have_text("Or, click to select a file to upload")
 
+        expect(page).to have_text("Update profile photo")
         expect(page).to have_css("img.profile-photo[src*='cloudinary']")
         ActiveRecord::Base.after_transaction do
           click_button "Update Profile"
@@ -58,8 +59,10 @@ RSpec.describe "React Profile Photo", type: :system do
     end
 
     it "can open the dropzone file menu" do
-      find_by_id("profile-dropzone").click
-      expect(page).to have_text("Drop an image")
+      expect do
+        find_by_id("profile-dropzone").click
+        expect(page).to have_text("Drop an image")
+      end.not_to raise_error
     end
 
     it "can reveal and set the hidden file input" do
@@ -71,6 +74,7 @@ RSpec.describe "React Profile Photo", type: :system do
         expect(page).not_to have_css(".inner-modal")
         expect(page).not_to have_text("Or, click to select a file to upload")
 
+        expect(page).to have_text("Update profile photo")
         expect(page).to have_css("img.profile-photo[src*='cloudinary']")
         ActiveRecord::Base.after_transaction do
           click_button "Update Profile"

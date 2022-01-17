@@ -64,6 +64,7 @@ class Projects extends React.Component {
 
     const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
     if (previousItem) {
+      // focus for the user's cursor and click to load tasks
       previousItem.focus();
       previousItem.click();
     } else {
