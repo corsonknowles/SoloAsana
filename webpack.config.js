@@ -29,6 +29,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '*']
   },
+  coverageReporters: [['lcov', { projectRoot: '..' }]],
   module: {
     rules: [
       {
