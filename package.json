@@ -2,7 +2,7 @@
   "name": "SoloAsana",
   "private": true,
   "engines": {
-    "node": "16.13.0"
+    "node": "16.13"
   },
   "scripts": {
     "build": "npm install",
