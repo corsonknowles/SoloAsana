@@ -77,7 +77,7 @@ jobs:
           bundle exec rails db:setup
           bundle exec rspec
   coverage:
-    needs: [ test ]
+    needs: [ rspec ]
     name: Publish Coverage Report to CodeClimate
     env:
       CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
