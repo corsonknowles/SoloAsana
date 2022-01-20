@@ -76,11 +76,13 @@ jobs:
 
           bundle exec rails db:setup
           bundle exec rspec
-      - name: Publish Coverage Report to CodeClimate
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        uses: paambaati/codeclimate-action@v3.0.0
-        with:
-          debug: true
-          coverageLocations: |
-            ${{github.workspace}}/*.resultset.json:simplecov
+  coverage:
+    needs: [ test ]
+    name: Publish Coverage Report to CodeClimate
+    env:
+      CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+    uses: paambaati/codeclimate-action@v3.0.0
+    with:
+      debug: true
+      coverageLocations: |
+        ${{github.workspace}}/*.resultset.json:simplecov
