@@ -9,7 +9,7 @@
     "postinstall": "webpack",
     "start": "npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coverage": "nyc merge .nyc_output .nyc_output/out.json && nyc report --reporter=html"
+    "coverage": "nyc merge .nyc_output .nyc_output/out.json && nyc report --report-dir='js-coverage' --reporter='lcov'"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
