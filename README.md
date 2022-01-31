@@ -11,7 +11,7 @@
 [heroku]: http://soloasana.herokuapp.com
 
 SoloAsana is a lean, sleek task management app.
-It began as a rapid deployment personal project, built in less than two weeks, powered by a Rails 5.1 backend with API endpoints.
+It began as a rapid deployment personal project, built in less than two weeks, powered by a modern Rails backend with API endpoints.
 SoloAsana delivers a React.js frontend using the Redux framework.
 The database fueling all this is PostgreSQL.
 
@@ -39,7 +39,7 @@ The database fueling all this is PostgreSQL.
 
   SoloAsana provides an easy way to get started with a DEMO login feature. The demo login auto-completes the secure authentication form and logs the guest user directly into the site.
 
-  Once inside, the user has access to their profile in the top right corner and an editable list of projects along the right hand side.
+  Once inside, the user has access to their profile in the top right corner and an editable list of projects with their included tasks.
 
   The project list also serves as a navigation tool. Selecting any list will render the associated tasks and allow the user to add, edit, and delete tasks from the list.
 
@@ -101,7 +101,7 @@ render() {
 }
 ```
 
-Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old JavaScript object to render values to HTML fields in React. Because hash lookup is so fast, O(1), this can be on par or faster than either retrieving data in an array format from the database or transforming it before rendering. Since all tasks are fetched when you retrieve the project they belong to, and all tasks are retrieved when you retrieve all projects, this prevents expensive N+1 queries to the database.
+Movement between projects was handled similarly, using a different set of unique ID's. This also shows how easy it is to iterate through a plain old JavaScript object to render values to HTML fields in React. Since all tasks are fetched when you retrieve the project they belong to, and all tasks are retrieved when you retrieve all projects, this prevents expensive N+1 queries to the database.
 
 ### Showing off HTML5 for Better User Experience
 
