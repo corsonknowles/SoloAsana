@@ -30,10 +30,11 @@ group :development, :test do
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
-  gem "selenium-webdriver"
+  # gem "selenium-webdriver"
   gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "standard"
+  gem 'webdrivers'
   # gem 'therubyracer', platforms: :ruby # See https://github.com/rails/execjs#readme
 end
 
