@@ -47,3 +47,4 @@ app/assets/javascripts/bundle.js.LICENSE.txt
 
 # Choose your own adventure
 .ruby_version
+cc-test-reporter
