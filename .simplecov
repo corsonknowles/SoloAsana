@@ -5,8 +5,8 @@ SimpleCov.at_exit do
   # this is the default if no `at_exit` block is configured
   SimpleCov.result.format!
 
-  # process istanbul js report
-  system("npm run coverage")
+  # process javascript coverage report
+  system("npm run test:coverage")
 end
 
 SimpleCov.start "rails"

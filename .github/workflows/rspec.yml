@@ -76,6 +76,8 @@ jobs:
 
           bundle exec rails db:setup
           bundle exec rspec
+      - name: Run JavaScript Tests with Coverage
+        run: npm run test:coverage
       - name: Publish Coverage Report to CodeClimate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -84,3 +86,4 @@ jobs:
           debug: true
           coverageLocations: |
             ${{github.workspace}}/*.resultset.json:simplecov
+            ${{github.workspace}}/coverage/lcov.info:lcov
