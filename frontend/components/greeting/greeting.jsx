@@ -162,7 +162,7 @@ class Greeting extends React.Component {
                 />
 
                 <label htmlFor="about" className="profile-label">ABOUT ME</label>
-                <textarea name="about"
+                <input type="text" name="about"
                   value={this.state.about}
                   onChange={(event) => this.handleChange(event)}
                   className="profile-input about"
