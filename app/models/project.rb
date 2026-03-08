@@ -1,21 +1,21 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: projects
 #
-#  id         :bigint           not null, primary key
+#  id         :integer          not null, primary key
 #  name       :string
+#  team_id    :integer
+#  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  team_id    :bigint
-#  user_id    :bigint
 #
 # Indexes
 #
 #  index_projects_on_team_id  (team_id)
 #  index_projects_on_user_id  (user_id)
 #
+
 class Project < ApplicationRecord
   belongs_to :user
   belongs_to :team, optional: true
