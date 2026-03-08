@@ -4,7 +4,6 @@ import { RECEIVE_CURRENT_USER,
          CLEAR_ERRORS
        }
          from '../actions/session_actions';
-import merge from 'lodash/merge';
 
 const _nullUser = {
   currentUser: null,
@@ -12,7 +11,6 @@ const _nullUser = {
 };
 
 const SessionReducer = function(state = _nullUser, action){
-  let newState;
   switch(action.type){
     case RECEIVE_CURRENT_USER:
       return {
@@ -20,16 +18,11 @@ const SessionReducer = function(state = _nullUser, action){
         errors: []
       };
     case RECEIVE_LOGOUT_SUCCESS:
-      newState = merge({}, _nullUser);
-      return newState;
+      return { ..._nullUser };
     case RECEIVE_ERRORS:
-      const errors = { errors: action.errors };
-      newState = merge({}, state, errors);
-      return newState;
+      return { ...state, errors: action.errors };
     case CLEAR_ERRORS:
-      newState = merge({}, state);
-      newState.errors = [];
-      return newState;
+      return { ...state, errors: [] };
     default:
       return state;
   }
