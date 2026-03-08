@@ -1,34 +1,12 @@
 import React from 'react';
 import Modal from 'react-modal';
 import Dropzone from 'react-dropzone';
+import { modalContentStyles } from '../../util/modal_styles';
 
 const cloudName     = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.cloud_name)     || 'cloudfunded';
 const uploadPreset  = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.upload_preset)  || 'i8cgxpgn';
 const CLOUDINARY_UPLOAD_PRESET = uploadPreset;
 const CLOUDINARY_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    width                 : '50%',
-    maxWidth              : '575px',
-    minWidth              : '500px',
-    maxHeight             : '585px',
-    height                : '80%',
-    display               : 'flex',
-    justifyContent        : 'center',
-    alignItems            : 'center',
-    color                 : '#49505b',
-    fontWeight            :  'bold',
-    pointerEvents         : 'auto',
-    borderRadius          : '10px'
-  }
-};
 
 class PhotoUpload extends React.Component {
   constructor(props) {
@@ -41,7 +19,6 @@ class PhotoUpload extends React.Component {
     };
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.onImageDrop = this.onImageDrop.bind(this);
@@ -114,9 +91,8 @@ class PhotoUpload extends React.Component {
         <div>
           <Modal
             isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
-            style={customStyles}
+            style={modalContentStyles}
             contentLabel="Profile Photo"
           >
             <div className="file-upload">

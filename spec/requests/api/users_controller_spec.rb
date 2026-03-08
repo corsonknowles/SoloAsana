@@ -26,31 +26,11 @@ RSpec.describe Api::UsersController, type: :request do
     end
   end
 
-  context "with a user in the database" do
-    let!(:user) { create(:user) }
-
-    it "renders errors when not logged in" do
-      get "/api/users/#{user.id}", headers: headers
-
-      expect(response.body).to match("invalid credentials")
-      expect(response.content_type).to include("application/json")
-      expect(response).to have_http_status(:unauthorized)
-    end
-  end
-
   context "with stubbed login" do
     let(:user) { create(:user) }
 
     before do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
-    end
-
-    it "renders the show page as JSON" do
-      get "/api/users/#{user.id}", headers: headers
-
-      expect(response.body).to match(user.username)
-      expect(response.content_type).to include("application/json")
-      expect(response).to have_http_status(:ok)
     end
 
     it "errors on invalid update" do

@@ -24,7 +24,7 @@ class Api::ProjectsController < ApplicationController
 
   def update
     @project = current_user.projects.find(params[:id])
-    if @project.update(update_params)
+    if @project.update(project_params)
       render json: @project
     else
       render json: @project.errors.full_messages, status: :unprocessable_content
@@ -43,10 +43,6 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.expect(project: %i[name team_id user_id])
-  end
-
-  def update_params
     params.expect(project: %i[name team_id user_id])
   end
 end

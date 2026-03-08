@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class Api::UsersController < ApplicationController
-  before_action :require_logged_in!, only: %i[show update]
-
-  def show
-    @user = current_user
-  end
+  before_action :require_logged_in!, only: %i[update]
 
   def create
     @user = User.new(user_params)

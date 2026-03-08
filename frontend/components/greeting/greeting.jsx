@@ -3,29 +3,7 @@ import Modal from 'react-modal';
 import PhotoUpload from '../photo_upload/photo_upload';
 import TaskContainer from '../tasks/task_container';
 import ProjectsContainer from '../projects/projects_container';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    width                 : '50%',
-    maxWidth              : '575px',
-    minWidth              : '500px',
-    maxHeight             : '585px',
-    height                : '80%',
-    display               : 'flex',
-    justifyContent        : 'center',
-    alignItems            : 'center',
-    color                 : '#49505b',
-    fontWeight            : 'bold',
-    pointerEvents         : 'auto',
-    borderRadius          : '10px'
-  }
-};
+import { modalContentStyles } from '../../util/modal_styles';
 
 class Greeting extends React.Component {
   constructor(props) {
@@ -49,7 +27,6 @@ class Greeting extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.clearErrors = this.props.clearErrors.bind(this);
     this.renderErrors = this.renderErrors.bind(this);
@@ -83,10 +60,6 @@ class Greeting extends React.Component {
 
   openModal() {
     this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
   }
 
   closeModal() {
@@ -128,9 +101,8 @@ class Greeting extends React.Component {
           <div className="right-side-of-page">
             <Modal
               isOpen={this.state.modalIsOpen}
-              onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
-              style={customStyles}
+              style={modalContentStyles}
               contentLabel="User Profile"
             >
               <div className="form profile">
