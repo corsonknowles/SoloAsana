@@ -3,18 +3,18 @@
 #
 # Table name: tasks
 #
-#  id         :integer          not null, primary key
-#  title      :string
+#  id         :bigint           not null, primary key
 #  body       :text
-#  due        :integer
 #  done       :boolean
-#  user_id    :integer
-#  project_id :integer
-#  team_id    :integer
+#  due        :integer
 #  section    :boolean
-#  task_id    :integer
+#  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  project_id :bigint
+#  task_id    :bigint
+#  team_id    :bigint
+#  user_id    :bigint
 #
 # Indexes
 #

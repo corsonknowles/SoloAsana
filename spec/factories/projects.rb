@@ -3,12 +3,12 @@
 #
 # Table name: projects
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  name       :string
-#  team_id    :integer
-#  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  team_id    :bigint
+#  user_id    :bigint
 #
 # Indexes
 #

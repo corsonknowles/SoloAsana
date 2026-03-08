@@ -3,11 +3,11 @@
 #
 # Table name: teams
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  name       :string
-#  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :bigint
 #
 # Indexes
 #

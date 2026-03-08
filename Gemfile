@@ -30,7 +30,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "annotate"
+  gem "annotaterb"
   gem "better_errors" # Access an IRB console on exception pages or by using <%= console %>
   gem "binding_of_caller" # For full-featued Better Errors
   gem "listen"

@@ -293,4 +293,4 @@ Pinned at 2.6.5, three major versions behind 3.2.0.
 | P3 | `tasks.due` integer → date column | S | ⬜ todo |
 | P3 | Remove Action Cable boilerplate | XS | ✅ done |
 | P3 | Migrate `secrets.yml` → Rails credentials | S | ✅ done |
-| P3 | Update `annotate` gem | XS | ⬜ todo |
+| P3 | Update `annotate` gem | XS | ✅ done |

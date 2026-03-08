@@ -3,18 +3,18 @@
 #
 # Table name: users
 #
-#  id              :integer          not null, primary key
-#  username        :string
-#  email           :string           not null
-#  password_digest :string           not null
-#  session_token   :string
-#  role            :string
-#  department      :string
+#  id              :bigint           not null, primary key
 #  about           :string
+#  department      :string
+#  email           :string           not null
+#  latest_project  :integer
+#  password_digest :string           not null
 #  photo           :string
+#  role            :string
+#  session_token   :string
+#  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
-#  latest_project  :integer
 #
 # Indexes
 #
