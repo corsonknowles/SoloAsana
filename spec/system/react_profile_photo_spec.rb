@@ -73,25 +73,20 @@ RSpec.describe "React Profile Photo", type: :system do
     end
 
     it "handles upload error when Cloudinary request fails" do
-      # Superagent v6 only uses onreadystatechange (not onerror), and reads
-      # readyState/status directly off the XHR object (which are native
-      # read-only properties — we can't fake them).
-      #
-      # The reliable approach: redirect the Cloudinary URL to a local port
-      # that isn't listening.  Chrome immediately returns ECONNREFUSED, which
-      # sets readyState=4 / status=0 — exactly the path superagent uses to
-      # call crossDomainError() → callback(err) → setState({pending: false}).
+      # Redirect Cloudinary URLs to a local port that isn't listening.
+      # fetch() rejects with TypeError on ECONNREFUSED, triggering the
+      # catch block → setState({ pending: false }) and no photo update.
       page.execute_script(<<~JS)
         (function() {
           if (window.__cloudinaryErrorTest) return;
           window.__cloudinaryErrorTest = true;
 
-          var origOpen = XMLHttpRequest.prototype.open;
-          XMLHttpRequest.prototype.open = function(method, url) {
-            if (url && url.indexOf('cloudinary') !== -1) {
+          var origFetch = window.fetch;
+          window.fetch = function(url, opts) {
+            if (typeof url === 'string' && url.indexOf('cloudinary') !== -1) {
               url = 'http://127.0.0.1:49999/upload'; // nothing listens here
             }
-            return origOpen.call(this, method, url);
+            return origFetch.call(this, url, opts);
           };
         })();
       JS

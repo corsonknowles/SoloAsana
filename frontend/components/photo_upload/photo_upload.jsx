@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
 import Dropzone from 'react-dropzone';
-import request from 'superagent';
 
 const cloudName     = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.cloud_name)     || 'cloudfunded';
 const uploadPreset  = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.upload_preset)  || 'i8cgxpgn';
@@ -73,19 +72,15 @@ class PhotoUpload extends React.Component {
   }
 
   handleImageUpload(file) {
-    let upload = request.post(CLOUDINARY_UPLOAD_URL)
-                        .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-                        .field('file', file);
+    const formData = new FormData();
+    formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    formData.append('file', file);
 
-    upload.end((err, response) => {
-      if (err) {
-        console.error(err);
-        this.setState({ pending: false });
-        return;
-      }
-
-      if (response && response.body && response.body.secure_url) {
-        const newUrl = response.body.secure_url;
+    fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData })
+      .then(res => (res.ok ? res.json() : Promise.reject(res)))
+      .then(data => {
+        const newUrl = data && data.secure_url;
+        if (!newUrl) return;
         this.setState({
           uploadedFileCloudinaryUrl: newUrl,
           photo: newUrl,
@@ -94,8 +89,11 @@ class PhotoUpload extends React.Component {
         // Pass newUrl directly — reading this.state.photo here would return
         // the pre-upload value because React 18 batches setState asynchronously.
         this.props.updateUser({ ...this.props.currentUser, photo: newUrl });
-      }
-    });
+      })
+      .catch(err => {
+        console.error(err);
+        this.setState({ pending: false });
+      });
   }
 
   render() {
@@ -123,14 +121,17 @@ class PhotoUpload extends React.Component {
           >
             <div className="file-upload">
               <Dropzone
-                className="dropzone"
-                id="profile-dropzone"
+                onDrop={(acceptedFiles) => this.onImageDrop(acceptedFiles)}
+                accept={{ 'image/*': [] }}
                 multiple={false}
-                accept="image/*"
-                onDrop={this.onImageDrop.bind(this)}
               >
-                <div className="instructions">Drop an image</div>
-                <div className="instructions">Or, click to select a file to upload</div>
+                {({ getRootProps, getInputProps }) => (
+                  <div {...getRootProps({ className: 'dropzone', id: 'profile-dropzone' })}>
+                    <input {...getInputProps()} />
+                    <div className="instructions">Drop an image</div>
+                    <div className="instructions">Or, click to select a file to upload</div>
+                  </div>
+                )}
               </Dropzone>
             </div>
             <button className="inner-modal" onClick={this.closeModal}>X</button>
