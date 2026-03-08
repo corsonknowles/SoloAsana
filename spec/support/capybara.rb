@@ -10,7 +10,7 @@
 #     Points at the selenium/standalone-chrome service in docker-compose.
 #     Capybara binds on 0.0.0.0 so the Chrome container can reach it.
 
-SELENIUM_REMOTE_URL = ENV["SELENIUM_REMOTE_URL"]
+SELENIUM_REMOTE_URL = ENV.fetch("SELENIUM_REMOTE_URL", nil)
 
 # When running in Docker the Rails test server must be reachable from the
 # Chrome container.  Fix the port so we can reference it by name.

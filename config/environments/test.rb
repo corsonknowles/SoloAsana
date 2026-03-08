@@ -4,7 +4,7 @@
 # SimpleCov is loaded from spec_helper when COVERAGE is set (must load before app code)
 if ENV["RAILS_ENV"] == "test" && ENV["COVERAGE"]
   FileUtils.mkdir_p(".nyc_output")
-  Dir.glob(Rails.root.join(".nyc_output", "*")).each { |f| FileUtils.rm_f(f) }
+  Rails.root.glob(".nyc_output/*").each { |f| FileUtils.rm_f(f) }
 end
 
 # this function should be executed when we want to store the current `window.__coverage__` info in a file
@@ -15,7 +15,7 @@ def dump_js_coverage
   return if page_coverage.blank?
 
   # we will store one `js-....json` file for each system test, and we save all of them in the .nyc_output dir
-  File.open(Rails.root.join(".nyc_output", "js-#{Random.rand(10_000_000_000_000)}.json"), "w") do |report|
+  Rails.root.join(".nyc_output", "js-#{Random.rand(10_000_000_000_000)}.json").open("w") do |report|
     report.puts page_coverage
   end
 end

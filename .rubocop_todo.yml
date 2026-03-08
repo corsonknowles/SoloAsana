@@ -9,8 +9,15 @@
 # Offense count: 6
 RSpec/AnyInstance:
   Exclude:
-    - 'spec/requests/projects_controller_request_spec.rb'
-    - 'spec/requests/sessions_controller_request_spec.rb'
-    - 'spec/requests/tasks_controller_request_spec.rb'
-    - 'spec/requests/teams_controller_request_spec.rb'
-    - 'spec/requests/users_controller_request_spec.rb'
+    - 'spec/requests/api/projects_controller_spec.rb'
+    - 'spec/requests/api/sessions_controller_spec.rb'
+    - 'spec/requests/api/tasks_controller_spec.rb'
+    - 'spec/requests/api/teams_controller_spec.rb'
+    - 'spec/requests/api/users_controller_spec.rb'
+
+# These booleans are in an old migration that has already been applied to all
+# environments.  Adding defaults would require a new migration; suppressed here
+# rather than generating churn in the schema history.
+Rails/ThreeStateBooleanColumn:
+  Exclude:
+    - 'db/migrate/20170718161915_create_tasks.rb'

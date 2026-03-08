@@ -30,9 +30,7 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(
-      :id, :title, :body, :due, :done, :section, :project_id, :project,
-      :team, :user, :team_id, :user_id, :task_id, :created_at, :updated_at
-    )
+    params.expect(task: %i[id title body due done section project_id project
+                           team user team_id user_id task_id created_at updated_at])
   end
 end

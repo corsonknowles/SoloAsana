@@ -43,10 +43,10 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :created_at, :updated_at)
+    params.expect(project: %i[name team user team_id user_id created_at updated_at])
   end
 
   def update_params
-    params.require(:project).permit(:name, :team, :user, :team_id, :user_id, :created_at, :updated_at)
+    params.expect(project: %i[name team user team_id user_id created_at updated_at])
   end
 end

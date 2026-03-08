@@ -136,7 +136,7 @@ RSpec.describe User, type: :model do
       user = create(:user)
       token = user.session_token
       # after_initialize fires again when loading from the DB; token must be preserved
-      expect(User.find(user.id).session_token).to eq(token)
+      expect(described_class.find(user.id).session_token).to eq(token)
     end
   end
 

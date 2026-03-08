@@ -38,6 +38,6 @@ class Api::TeamsController < ApplicationController
   private
 
   def team_params
-    params.require(:team).permit(:name, :user, :user_id)
+    params.expect(team: %i[name user user_id])
   end
 end

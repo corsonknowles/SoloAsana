@@ -29,13 +29,10 @@ class Task < ApplicationRecord
   belongs_to :project
   belongs_to :team, optional: true
 
-  validates :user_id, presence: true
-  validates :project_id, presence: true
-
   before_destroy :must_have_a_task
 
   def must_have_a_task
-    return unless project.tasks.limit(2).count == 1
+    return unless project.tasks.one?
 
     errors.add(:base, :undestroyable)
     throw :abort

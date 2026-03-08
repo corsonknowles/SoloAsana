@@ -58,5 +58,14 @@ RSpec.describe "React Sign In", type: :system do
       expect(page).not_to have_text("Welcome Robert")
       expect(page).to have_content("Move work forward")
     end
+
+    it "initialises the Redux store from window.currentUser when revisiting while already logged in" do
+      # After the AJAX login above the browser holds the session cookie.
+      # A hard navigation back to '/' makes Rails inject window.currentUser
+      # into the page HTML, covering the `if (window.currentUser)` branch
+      # in frontend/index.jsx that is otherwise unreachable via AJAX-only login.
+      visit "/"
+      expect(page).to have_text("Welcome #{user.username}")
+    end
   end
 end
