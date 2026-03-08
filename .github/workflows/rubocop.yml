@@ -1,28 +1,21 @@
 name: Rubocop
+
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-  # Also trigger on page_build, as well as release created events
-  page_build:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
+
 jobs:
   rubocop:
-    strategy:
-      matrix:
-        ruby: [2.7.4]  # note, must use '3.0' with quotes due to known bug
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: ${{ matrix.ruby }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: gem install rubocop rubocop-performance rubocop-rails rubocop-rspec && rubocop
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+      - name: Run Rubocop
+        run: bundle exec rubocop
