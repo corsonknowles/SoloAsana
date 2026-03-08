@@ -48,3 +48,7 @@ app/assets/javascripts/bundle.js.LICENSE.txt
 
 # Choose your own adventure
 .ruby_version
+
+# Ignore key files for decrypting credentials and more.
+/config/*.key
+
