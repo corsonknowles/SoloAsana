@@ -45,5 +45,13 @@ RSpec.describe Task, type: :model do
         expect { task.destroy }.to change(described_class, :count).by(-1)
       end
     end
+
+    context "when it is a subtask" do
+      let!(:subtask) { create(:task, project: project, task_id: task.id) }
+
+      it "can be destroyed without triggering the last-task guard" do
+        expect { subtask.destroy }.to change(described_class, :count).by(-1)
+      end
+    end
   end
 end
