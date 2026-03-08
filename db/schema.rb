@@ -10,33 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_034013) do
-
+ActiveRecord::Schema[8.1].define(version: 2026_03_08_120852) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension "pg_catalog.plpgsql"
 
   create_table "projects", force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
     t.string "name"
     t.bigint "team_id"
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["team_id"], name: "index_projects_on_team_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "title"
     t.text "body"
-    t.integer "due"
+    t.datetime "created_at", precision: nil, null: false
     t.boolean "done"
-    t.bigint "user_id"
+    t.integer "due"
     t.bigint "project_id"
-    t.bigint "team_id"
     t.boolean "section"
     t.bigint "task_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.bigint "team_id"
+    t.string "title"
+    t.datetime "updated_at", precision: nil, null: false
+    t.bigint "user_id"
     t.index ["project_id"], name: "index_tasks_on_project_id"
     t.index ["task_id"], name: "index_tasks_on_task_id"
     t.index ["team_id"], name: "index_tasks_on_team_id"
@@ -44,26 +43,26 @@ ActiveRecord::Schema.define(version: 2021_12_29_034013) do
   end
 
   create_table "teams", force: :cascade do |t|
+    t.datetime "created_at", precision: nil, null: false
     t.string "name"
+    t.datetime "updated_at", precision: nil, null: false
     t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_teams_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.string "session_token"
-    t.string "role"
-    t.string "department"
     t.string "about"
-    t.string "photo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.string "department"
+    t.string "email", null: false
     t.integer "latest_project"
+    t.string "password_digest", null: false
+    t.string "photo"
+    t.string "role"
+    t.string "session_token"
+    t.datetime "updated_at", precision: nil, null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["session_token"], name: "index_users_on_session_token", unique: true
   end
-
 end
