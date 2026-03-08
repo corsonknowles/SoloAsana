@@ -9,7 +9,7 @@
     "postinstall": "webpack",
     "start": "npx webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coverage": "test $(ls .nyc_output 2>/dev/null | wc -l) -gt 0 && nyc merge .nyc_output .nyc_output/out.json && nyc report --report-dir='js-coverage' --reporter='lcov' || echo 'No JS coverage data (run system specs with COVERAGE=true)'"
+    "coverage": "test $(ls .nyc_output 2>/dev/null | wc -l) -gt 0 && nyc merge .nyc_output .nyc_output/out.json && nyc report --report-dir='js-coverage' --reporter='lcov' && nyc check-coverage --lines 100 --functions 100 || echo 'No JS coverage data (run system specs with COVERAGE=true)'"
   },
   "dependencies": {
     "@babel/core": "^7.16.0",
