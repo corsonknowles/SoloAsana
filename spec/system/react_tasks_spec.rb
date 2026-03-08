@@ -156,7 +156,7 @@ RSpec.describe "React Tasks Changes", type: :system do
 
     it "enters a new task" do
       fill_in "task0", with: "F"
-      page.execute_script %{ $("#task0").trigger('keyup') }
+      page.execute_script "document.getElementById('task0').dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }))"
       seeded_task = find_by_id("task0")
 
       expect do
@@ -193,7 +193,7 @@ RSpec.describe "React Tasks Changes", type: :system do
             seeded_task.native.send_keys("F")
             expect(page.evaluate_script("document.activeElement.id")).to eq "task0"
 
-            page.execute_script %{ $("#task0").trigger('keyup') }
+            page.execute_script "document.getElementById('task0').dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }))"
             expect(page).to have_field("task0", with: "#{task.title}F")
           end
         end.to change { Task.last.reload.title }.from(task.title).to("#{task.title}F")

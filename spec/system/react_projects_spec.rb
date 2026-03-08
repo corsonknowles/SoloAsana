@@ -86,7 +86,7 @@ RSpec.describe "React Project Changes", type: :system do
         ActiveRecord::Base.after_transaction do
           expect(page).to have_field("project0", with: project.name.to_s)
           find_by_id("project0").native.send_keys("F")
-          page.execute_script %{ $('#project0').trigger('keyup') }
+          page.execute_script "document.getElementById('project0').dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }))"
           expect(page).to have_field("project0", with: "#{project.name}F")
         end
       end.to change { Project.last.reload.name }.from(project.name).to("#{project.name}F")
