@@ -123,10 +123,7 @@ class Projects extends React.Component {
 
   handleInput(projectID, i) {
     return (event) => {
-      const value = event.target.value;
-      const project = this.props.projects[projectID];
-      project.name = value;
-
+      const project = { ...this.props.projects[projectID], name: event.target.value };
       this.props.updateProject(project);
     };
   }

@@ -1,14 +1,7 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore } from '@reduxjs/toolkit';
 import rootReducer from '../reducers/root_reducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
 
-const configureStore = (preloadedState = {}) => (
-  createStore(
-    rootReducer,
-    preloadedState,
-    composeWithDevTools(applyMiddleware(thunk))
-  )
-);
-
-export default configureStore;
+// RTK's configureStore automatically enables Redux DevTools and includes
+// redux-thunk middleware, replacing the explicit composeWithDevTools setup.
+export default (preloadedState = {}) =>
+  configureStore({ reducer: rootReducer, preloadedState });

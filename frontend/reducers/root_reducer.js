@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import TaskReducer from './task_reducer';
 import SessionReducer from './session_reducer';
 import ProjectReducer from './project_reducer';

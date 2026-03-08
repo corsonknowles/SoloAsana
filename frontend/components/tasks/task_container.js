@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter } from '../../util/route_util';
 import {
   fetchTasksByProject,
   createTask,

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import configureStore from './store/store.js'
 import Root from './components/root'
 
@@ -14,5 +14,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const root = document.getElementById('root');
-  ReactDOM.render(<Root store={ store } />, root);
+  createRoot(root).render(<Root store={store} />);
 });

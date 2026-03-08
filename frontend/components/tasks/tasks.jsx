@@ -97,10 +97,7 @@ class Tasks extends React.Component {
 
   handleInput(taskID, i) {
     return (event) => {
-      const value = event.target.value;
-      const task = this.props.tasks[taskID];
-      task.title = value;
-
+      const task = { ...this.props.tasks[taskID], title: event.target.value };
       this.props.updateTask(task);
     };
   }

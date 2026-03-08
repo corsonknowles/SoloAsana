@@ -1,32 +1,31 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Route, Redirect, withRouter } from 'react-router-dom';
+import { Navigate, useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-const mapStateToProps = state => {
-  return {loggedIn: Boolean(state.session.currentUser)};
+// Auth guard: redirect logged-in users away from the login page.
+export const AuthRoute = ({ children }) => {
+  const loggedIn = useSelector(state => Boolean(state.session.currentUser));
+  return loggedIn ? <Navigate to="/" replace /> : children;
 };
 
-//functional component
-// the props below are passed in from Route
-const Auth = ({component: Component, path, loggedIn}) => (
-  <Route path={path} render={(props) => (
-      !loggedIn ? (
-        <Component {...props} />
-        ):(
-          <Redirect to="/"/>
-        )
-      )} />
-  );
+// Protected guard: redirect anonymous users to login.
+export const ProtectedRoute = ({ children }) => {
+  const loggedIn = useSelector(state => Boolean(state.session.currentUser));
+  return loggedIn ? children : <Navigate to="/login" replace />;
+};
 
-const Protected = ({component: Component, path, loggedIn}) => (
-  <Route path={path} render={(props) => (
-      loggedIn ? (
-        <Component {...props} />
-        ):(
-          <Redirect to="/login"/>
-        )
-      )} />
-  );
-
-export const AuthRoute = withRouter(connect(mapStateToProps, null)(Auth));
-export const ProtectedRoute = withRouter(connect(mapStateToProps, null)(Protected));
+// HOC for class components that need router props.
+// withRouter was removed in React Router v6; this replacement injects
+// { match: { params }, navigate, location } to preserve the existing
+// this.props.match.params.id usage in class components without converting them.
+export const withRouter = (Component) => {
+  const WrappedComponent = (props) => {
+    const params = useParams();
+    const navigate = useNavigate();
+    const location = useLocation();
+    return <Component {...props} match={{ params }} navigate={navigate} location={location} />;
+  };
+  WrappedComponent.displayName =
+    `withRouter(${Component.displayName || Component.name || 'Component'})`;
+  return WrappedComponent;
+};

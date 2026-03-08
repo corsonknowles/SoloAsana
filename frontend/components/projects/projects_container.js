@@ -6,7 +6,7 @@ import {
   updateProject
 } from '../../actions/projects_actions';
 import Projects from './projects';
-import { withRouter } from 'react-router';
+import { withRouter } from '../../util/route_util';
 
 const mapStateToProps = state => ({
   currentUser: state.session.currentUser,
