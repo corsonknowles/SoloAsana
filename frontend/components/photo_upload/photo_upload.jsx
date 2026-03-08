@@ -1,12 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import { Link, NavLink } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
-const CLOUDINARY_UPLOAD_PRESET = 'i8cgxpgn';
-const CLOUDINARY_UPLOAD_URL = 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
+const CLOUDINARY_UPLOAD_PRESET = window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.upload_preset || 'i8cgxpgn';
+const CLOUDINARY_UPLOAD_URL = window.CLOUDINARY_OPTIONS
+  ? `https://api.cloudinary.com/v1_1/${window.CLOUDINARY_OPTIONS.cloud_name}/upload`
+  : 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
 
 const customStyles = {
   content : {
@@ -41,7 +41,6 @@ class PhotoUpload extends React.Component {
       pending: false
     };
 
-    this.currentUser = this.props.currentUser;
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.openModal = this.openModal.bind(this);
@@ -52,23 +51,18 @@ class PhotoUpload extends React.Component {
     this.handleImageUpload = this.handleImageUpload.bind(this);
   }
 
-  handleSubmit(){
-    return (event) => {
-      const user = this.currentUser;
-      user.photo = this.state.photo;
-
-      this.props.updateUser(user);
-      this.closeModal()
+  handleSubmit() {
+    const user = {
+      ...this.props.currentUser,
+      photo: this.state.photo,
     };
+
+    this.props.updateUser(user);
+    this.closeModal();
   }
 
   openModal() {
-    this.setState(
-      prevState => (
-        // OR: toggle modal with !prevState.modalIsOpen
-        { modalIsOpen: true }
-      )
-    );
+    this.setState({ modalIsOpen: true });
   }
 
   afterOpenModal() {
@@ -109,7 +103,7 @@ class PhotoUpload extends React.Component {
           pending: false
         });
 
-        this.handleSubmit()();
+        this.handleSubmit();
       }
     });
   }
@@ -153,7 +147,7 @@ class PhotoUpload extends React.Component {
           </Modal>
         </div>
       </div>
-    )
+    );
   }
 }
 

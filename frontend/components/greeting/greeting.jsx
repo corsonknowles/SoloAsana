@@ -1,7 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
-import { Link, NavLink } from 'react-router-dom';
 import PhotoUploadContainer from '../photo_upload/photo_upload_container';
 import TaskContainer from '../tasks/task_container';
 import ProjectsContainer from '../projects/projects_container';
@@ -41,8 +39,6 @@ class Greeting extends React.Component {
 
     this.state = {
       modalIsOpen: false,
-      photoModalIsOpen: false,
-      uploadedFileCloudinaryUrl: '',
       username,
       role,
       department,
@@ -61,7 +57,7 @@ class Greeting extends React.Component {
 
   componentWillUnmount() {
     this.props.clearErrors();
-  };
+  }
 
   handleChange(event) {
     const target = event.target;
@@ -72,12 +68,14 @@ class Greeting extends React.Component {
     });
   }
 
-  handleSubmit(){
-    const user = this.props.currentUser;
-    user.username = this.state.username;
-    user.role = this.state.role;
-    user.department = this.state.department;
-    user.about = this.state.about;
+  handleSubmit() {
+    const user = {
+      ...this.props.currentUser,
+      username: this.state.username,
+      role: this.state.role,
+      department: this.state.department,
+      about: this.state.about,
+    };
 
     this.props.updateUser(user);
     this.closeModal();
@@ -95,7 +93,7 @@ class Greeting extends React.Component {
     this.setState({modalIsOpen: false});
   }
 
-  renderErrors(){
+  renderErrors() {
     return(
       <div>
         <ul className="errors">
@@ -164,10 +162,10 @@ class Greeting extends React.Component {
                 />
 
                 <label htmlFor="about" className="profile-label">ABOUT ME</label>
-                <input type="text" className="about" name="about"
+                <input type="text" name="about"
                   value={this.state.about}
                   onChange={(event) => this.handleChange(event)}
-                  className="profile-input"
+                  className="profile-input about"
                   placeholder="At work I run dev ops. At home, I rescue kittens."
                 />
 
@@ -183,7 +181,8 @@ class Greeting extends React.Component {
           </div>
         </div>
       </div>
-    )}
+    );
   }
+}
 
-  export default Greeting;
+export default Greeting;

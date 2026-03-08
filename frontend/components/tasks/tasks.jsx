@@ -1,40 +1,35 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link, NavLink } from 'react-router-dom';
-import merge from 'lodash/merge';
 
 class Tasks extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: this.props.tasks };
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
     this.handleInput = this.handleInput.bind(this);
   }
 
-  componentWillMount () {
+  componentDidMount() {
     const projectID = this.props.match.params.id;
     if (projectID) {
-      this.props.fetchTasksByProject(projectID)
+      this.props.fetchTasksByProject(projectID);
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    const projectID = nextProps.match.params.id;
+  componentDidUpdate(prevProps) {
+    const projectID = this.props.match.params.id;
 
-    if (projectID && this.props.match.params.id !== projectID ) {
-      this.props.fetchTasksByProject(projectID)
+    if (projectID && prevProps.match.params.id !== projectID) {
+      this.props.fetchTasksByProject(projectID);
     }
   }
 
-  handleKeyDown (taskID, i) {
+  handleKeyDown(taskID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
 
       if (key === 'Enter' || keyCode === 13) {
-        // Move down 1 in the list by focusing on the next item
         const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
         if (nextItem) {
           nextItem.focus();
@@ -49,13 +44,11 @@ class Tasks extends React.Component {
           section: false
         };
 
-        // push the new task to the database
-        // when the newest item is the last item, move after creating it
         if (nextItem) {
           this.props.createTask(newTask);
         } else {
-          this.props.createTask(newTask).then( () => {
-            const newItem = document.getElementById(`task${String(parseInt(i) + 1)}`)
+          this.props.createTask(newTask).then(() => {
+            const newItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
             newItem.focus();
           });
         }
@@ -71,7 +64,6 @@ class Tasks extends React.Component {
           if (previousItem) {
             previousItem.focus();
           } else {
-            // this will focus on the last remaining task if all preceding ones are deleted
             const nextItem = document.getElementById(`task${String(parseInt(i) + 1)}`);
             if (nextItem) {
               nextItem.focus();
@@ -79,10 +71,10 @@ class Tasks extends React.Component {
           }
         }
       }
-    }
+    };
   }
 
-  handleKeyUp (taskID, i) {
+  handleKeyUp(taskID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -99,20 +91,18 @@ class Tasks extends React.Component {
         if (nextItem) {
           nextItem.focus();
         }
-      } else {
-
       }
-    }
+    };
   }
 
-  handleInput (taskID, i) {
+  handleInput(taskID, i) {
     return (event) => {
       const value = event.target.value;
       const task = this.props.tasks[taskID];
       task.title = value;
 
-      this.props.updateTask(task)
-    }
+      this.props.updateTask(task);
+    };
   }
 
   render() {
@@ -139,7 +129,7 @@ class Tasks extends React.Component {
           <div className="task-help-text">Saving Changes is Automatic</div>
         </div>
       </div>
-    )
+    );
   }
 }
 

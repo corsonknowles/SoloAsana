@@ -1,22 +1,5 @@
 const path = require('path');
 
-let webpack = require("webpack");
-
-let plugins = []; // if using any plugins for both dev and production
-let devPlugins = []; // if using any plugins for development
-
-let prodPlugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': JSON.stringify('production')
-    }
-  }),
-];
-
-plugins = plugins.concat(
-  process.env.NODE_ENV === 'production' ? prodPlugins : devPlugins
-)
-
 module.exports = {
   mode: 'production',
   context: __dirname,
@@ -25,7 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
     filename: 'bundle.js'
   },
-  plugins: plugins,
   resolve: {
     extensions: ['.js', '.jsx', '*']
   },
@@ -47,7 +29,6 @@ module.exports = {
     ]
   },
   devtool: 'source-map',
-  // watch: true,
 };
 
 // TO USE: generate JS coverage with:

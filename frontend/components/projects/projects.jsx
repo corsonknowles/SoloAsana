@@ -1,12 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Link, NavLink, withRouter, Redirect } from 'react-router-dom';
-import merge from 'lodash/merge';
+import { NavLink } from 'react-router-dom';
 
 class Projects extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { projects: this.props.projects };
     this.currentUser = this.props.currentUser;
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.handleKeyUp = this.handleKeyUp.bind(this);
@@ -16,8 +13,8 @@ class Projects extends React.Component {
     this.decideIfDeletable = this.decideIfDeletable.bind(this);
   }
 
-  componentWillMount () {
-    this.props.fetchProjects().then (
+  componentDidMount() {
+    this.props.fetchProjects().then(
       () => {
         const newItem = document.getElementById("project0");
         if (newItem) {
@@ -25,10 +22,10 @@ class Projects extends React.Component {
           newItem.click();
         }
       }
-    )
+    );
   }
 
-  respondToEnterWithCreate (event, i) {
+  respondToEnterWithCreate(event, i) {
     event.preventDefault();
 
     const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
@@ -43,53 +40,47 @@ class Projects extends React.Component {
       user_id: this.currentUser.id
     };
 
-    // set a new project in the database
-    // when the newest item is the last item, move after creating it
     if (nextItem) {
       this.props.createProject(newProject);
     } else {
-      this.props.createProject(newProject).then( () => {
+      this.props.createProject(newProject).then(() => {
         const newItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
         if (newItem) {
           newItem.focus();
           newItem.click();
         }
-      })
+      });
     }
-  };
+  }
 
-  respondToDeleteWhenEmpty (event, projectID, i) {
+  respondToDeleteWhenEmpty(event, projectID, i) {
     event.preventDefault();
     this.props.destroyProject(projectID);
 
     const previousItem = document.getElementById(`project${String(parseInt(i) - 1)}`);
     if (previousItem) {
-      // focus for the user's cursor and click to load tasks
       previousItem.focus();
       previousItem.click();
     } else {
-      // when all preceding items have been deleted
       const nextItem = document.getElementById(`project${String(parseInt(i) + 1)}`);
       if (nextItem) {
         nextItem.focus();
         nextItem.click();
       }
     }
-  };
-
-  decideIfDeletable (event, key, keyCode) {
-    // our input must be empty
-    if (event.target.value.length !== 0) return false
-    // it must be a delete key
-    if (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) {
-      if (Object.keys(this.props.projects).length > 1) {
-        return true
-      }
-    }
-    return false
   }
 
-  handleKeyDown (projectID, i) {
+  decideIfDeletable(event, key, keyCode) {
+    if (event.target.value.length !== 0) return false;
+    if (key === 'Delete' || key === 'Backspace' || keyCode === 8 || keyCode === 46) {
+      if (Object.keys(this.props.projects).length > 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  handleKeyDown(projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -101,10 +92,10 @@ class Projects extends React.Component {
           this.respondToDeleteWhenEmpty(event, projectID, i);
         }
       }
-    }
+    };
   }
 
-  handleKeyUp (projectID, i) {
+  handleKeyUp(projectID, i) {
     return (event) => {
       const key = event.key;
       const keyCode = event.keyCode;
@@ -127,23 +118,23 @@ class Projects extends React.Component {
           nextItem.click();
         }
       }
-    }
+    };
   }
 
-  handleInput (projectID, i) {
+  handleInput(projectID, i) {
     return (event) => {
       const value = event.target.value;
       const project = this.props.projects[projectID];
       project.name = value;
 
       this.props.updateProject(project);
-    }
+    };
   }
 
   render() {
     return (
       <div className="sidebar-container">
-        {Object.keys(this.props.projects).map( (projectID, i) => (
+        {Object.keys(this.props.projects).map((projectID, i) => (
           <NavLink tabIndex="-1" className={`sidebar-nav-link sidebar-item-row`} to={`/projects/${projectID}`} key={`Link${projectID}`}>
             <input
               type="text"
@@ -158,8 +149,7 @@ class Projects extends React.Component {
               onInput={this.handleInput(projectID, i)}
             />
           </NavLink>
-          )
-        )}
+        ))}
         <div className="spacer"></div>
         <div className="project-help-text">
           &#9166; Enter Adds a New Project
@@ -171,8 +161,8 @@ class Projects extends React.Component {
           Saving Changes is Automatic
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default withRouter(Projects);
+export default Projects;
