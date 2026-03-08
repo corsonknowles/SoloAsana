@@ -1,7 +1,7 @@
 # SoloAsana — Technical Investment Plan
 
 Last updated: 2026-03-07  
-Stack: Ruby 4.0.1 · Rails 8.1.2 · React 18.3.1 · React Router 6 · Redux Toolkit 2 · Webpack 5 · PostgreSQL
+Stack: Ruby 4.0.1 · Rails 8.1.2 · React 19 · React Router 7 · Redux Toolkit 2 · Webpack 5 · PostgreSQL
 
 ---
 
@@ -48,6 +48,12 @@ Stack: Ruby 4.0.1 · Rails 8.1.2 · React 18.3.1 · React Router 6 · Redux Tool
 | `sessions_controller#destroy` dead branch | Removed unreachable else; spec updated |
 | Feature: `users.latest_project` | Projects save/restore last-viewed project on login |
 | Feature: `tasks.task_id` subtask nesting | Model associations, reducer, nested UI; "+" button, Enter/Backspace |
+| Delete 5 dead code files | photo_upload_container, projects/tasks jbuilder templates + view specs |
+| Replace `superagent` with native `fetch` | FormData + fetch in photo_upload; cloudinary stub intercepts fetch |
+| Upgrade `react-dropzone` v3 → v15 | Render-prop API; accept: { 'image/*': [] } |
+| React 18 → 19 | Version bump; client-side only |
+| React Router v6 → v7 | Future flags already set; minimal breaking changes |
+| `babel-loader` v8 → v10, `webpack-cli` v4 → v6 | Build verified |
 
 ---
 
@@ -58,81 +64,6 @@ Stack: Ruby 4.0.1 · Rails 8.1.2 · React 18.3.1 · React Router 6 · Redux Tool
 ---
 
 ## P2 · Medium Priority
-
-### Delete three dead code files
-
-| File | Reason |
-|---|---|
-| `frontend/components/photo_upload/photo_upload_container.js` | `greeting.jsx` now imports `PhotoUpload` directly; container is unreferenced anywhere |
-| `app/views/api/projects/_project.json.jbuilder` | `ProjectsController` uses `render json:` (bypasses Jbuilder); template is never rendered |
-| `app/views/api/projects/show.json.jbuilder` | Same; delegates to the dead partial above |
-| `app/views/api/tasks/_task.json.jbuilder` | `TasksController` uses `render json:`; template is never rendered |
-| `app/views/api/tasks/show.json.jbuilder` | Same |
-
-(The users Jbuilder templates ARE live: `UsersController` uses `render :show` which
-renders `show.json.jbuilder`.)
-
-**Effort:** XS
-
----
-
-### Replace `superagent` with native `fetch` in `photo_upload.jsx`
-
-`superagent` is the last remaining third-party HTTP library. Every other API call in
-the app uses the native `fetch`-based `request()` helper in `api_util.js`. The
-Cloudinary upload in `photo_upload.jsx` still uses `superagent` because it makes a
-multipart `POST` — but `FormData` + native `fetch` handles this equally well:
-
-```js
-const formData = new FormData();
-formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-formData.append('file', file);
-
-fetch(CLOUDINARY_UPLOAD_URL, { method: 'POST', body: formData })
-  .then(res => res.ok ? res.json() : Promise.reject(res))
-  .then(data => { /* handle data.secure_url */ })
-  .catch(err => { /* handle error */ });
-```
-
-This removes `superagent` from `package.json` entirely.
-
-**Note:** `superagent` is currently at v6.1.0 in this project; v10.3.0 is the latest
-stable. Staying on v6 also means the `react-dropzone` `onImageDrop` / `files[0]`
-callback API is tightly coupled to the old dropzone version (see below).
-
-**Effort:** S
-
----
-
-### Upgrade `react-dropzone` v3 → v15
-
-`react-dropzone@3.13.3` is twelve major versions behind. The v3 callback API
-(`className`, `onDrop(files)`) was replaced with a hook and render-prop API in v5+:
-
-```jsx
-// v3 (current)
-<Dropzone onDrop={this.onImageDrop} accept="image/*" multiple={false}>
-  <div>Drop an image</div>
-</Dropzone>
-
-// v11+ with hooks (replacement after converting PhotoUpload to a function component)
-const { getRootProps, getInputProps } = useDropzone({
-  onDrop: acceptedFiles => handleImageUpload(acceptedFiles[0]),
-  accept: { 'image/*': [] },
-  multiple: false
-});
-<div {...getRootProps()}>
-  <input {...getInputProps()} />
-  <div>Drop an image</div>
-</div>
-```
-
-Natural to do **alongside** the class-component → hooks migration (see below) and
-the `superagent` → `fetch` migration, since all three are in `photo_upload.jsx`.
-
-**Effort:** S (in isolation), XS (if done as part of hooks migration)
-
----
 
 ### Class components → Functional components with hooks
 
@@ -155,57 +86,6 @@ RTK's `useSelector` and `useDispatch` are already available; `useNavigate`,
 (simplest first; each is self-contained).
 
 **Effort:** L
-
----
-
-### React Router v6 → v7
-
-`react-router@6.30.3` and `react-router-dom@6.30.3`. React Router v7 (7.13.1) is
-now stable. The future flags already in `root.jsx` were specifically introduced to
-smooth the v7 transition:
-
-```jsx
-<BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-```
-
-With those flags active the breaking changes are minimal. The main surface area is
-that v7 ships a new `RouterProvider` + `createBrowserRouter` API as the preferred
-entry point (the `<BrowserRouter>` component still works but is considered legacy in
-v7).
-
-Natural to do **after** the hooks migration so the new `createBrowserRouter` data
-router pattern can be adopted with function components.
-
-**Effort:** S
-
----
-
-### React 18 → 19
-
-React 19.2.4 is current. The upgrade from 18 is mostly a version bump for a
-client-side-only app (no server components involved). Notable change: `ref` is now a
-prop instead of forwarded via `React.forwardRef` — irrelevant here since no
-component uses `forwardRef`. The new `use()` hook is available for promise
-unwrapping.
-
-Natural to do **alongside** the v7 React Router upgrade.
-
-**Effort:** XS
-
----
-
-### Update `babel-loader` and `webpack-cli`
-
-| Package | Current | Latest |
-|---|---|---|
-| `babel-loader` | `8.2.3` | `10.1.0` |
-| `webpack-cli` | `4.9.1` | `6.0.1` |
-
-Both are dev dependencies. `babel-loader` v9+ dropped support for Babel 7 peer
-dependency quirks. `webpack-cli` v6 includes improved error messages and `serve`
-command improvements.
-
-**Effort:** XS (test that the build still works after bumping)
 
 ---
 
@@ -337,13 +217,13 @@ guard the file itself with `if Rails.env.test?` so it is never loaded outside te
 | P1 | Feature: `tasks.task_id` — subtask nesting | M | ✅ done |
 | P1 | PostgreSQL 12 → 16 in CI | XS | ✅ done |
 | P1 | `sessions_controller#destroy` unreachable else branch | XS | ✅ done |
-| P2 | Delete 5 dead code files (orphaned container + dead jbuilder templates) | XS | ⬜ todo |
-| P2 | `superagent` → native `fetch` for Cloudinary upload | S | ⬜ todo |
-| P2 | `react-dropzone` v3 → v15 | S | ⬜ todo |
+| P2 | Delete 5 dead code files (orphaned container + dead jbuilder templates) | XS | ✅ done |
+| P2 | `superagent` → native `fetch` for Cloudinary upload | S | ✅ done |
+| P2 | `react-dropzone` v3 → v15 | S | ✅ done |
 | P2 | Class components → functional components + hooks | L | ⬜ todo |
-| P2 | React Router v6 → v7 | S | ⬜ todo |
-| P2 | React 18 → 19 | XS | ⬜ todo |
-| P2 | `babel-loader` v8 → v10; `webpack-cli` v4 → v6 | XS | ⬜ todo |
+| P2 | React Router v6 → v7 | S | ✅ done |
+| P2 | React 18 → 19 | XS | ✅ done |
+| P2 | `babel-loader` v8 → v10; `webpack-cli` v4 → v6 | XS | ✅ done |
 | P3 | Remove `spring` gem | XS | ⬜ todo |
 | P3 | `npm run test` → `bundle exec rspec` | XS | ⬜ todo |
 | P3 | `tasks.due` integer → `date` column | S | ⬜ todo |
