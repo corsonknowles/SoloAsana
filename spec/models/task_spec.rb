@@ -7,7 +7,7 @@
 #  id         :bigint           not null, primary key
 #  body       :text
 #  done       :boolean          default(FALSE), not null
-#  due        :integer
+#  due        :date
 #  section    :boolean          default(FALSE), not null
 #  title      :string
 #  created_at :datetime         not null

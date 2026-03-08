@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_08_131225) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_08_140001) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,7 +28,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_131225) do
     t.text "body"
     t.datetime "created_at", precision: nil, null: false
     t.boolean "done", default: false, null: false
-    t.integer "due"
+    t.date "due"
     t.bigint "project_id"
     t.boolean "section", default: false, null: false
     t.bigint "task_id"
@@ -59,7 +59,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_08_131225) do
     t.string "password_digest", null: false
     t.string "photo"
     t.string "role"
-    t.string "session_token"
+    t.string "session_token", null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true

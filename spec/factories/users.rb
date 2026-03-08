@@ -12,7 +12,7 @@
 #  password_digest :string           not null
 #  photo           :string
 #  role            :string
-#  session_token   :string
+#  session_token   :string           not null
 #  username        :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
