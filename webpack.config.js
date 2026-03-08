@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   context: __dirname,
   entry: './frontend/index.jsx',
   output: {
@@ -28,7 +28,7 @@ module.exports = {
       }
     ]
   },
-  devtool: 'source-map',
+  devtool: process.env.NODE_ENV === 'production' ? 'source-map' : 'eval-source-map',
 };
 
 // TO USE: generate JS coverage with:
