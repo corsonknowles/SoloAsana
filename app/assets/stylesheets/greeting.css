@@ -16,6 +16,8 @@ input, textarea {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   color: #151b26;
+  font-family: inherit;
+  font-size: inherit;
   padding-left: 10px;
   border: 1px solid #d5dce0
 }
@@ -41,10 +43,8 @@ section {
 
 .about {
   height: 120px;
-  margin: 10px;
   width: 440px;
-  border-radius: 3px;
-  font-size: 14px;
+  resize: vertical;
 }
 
 .blue {
