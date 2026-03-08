@@ -330,10 +330,6 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
-    spring (4.4.2)
-    spring-watcher-listen (2.1.0)
-      listen (>= 2.7, < 4.0)
-      spring (>= 4)
     sprockets (4.2.2)
       concurrent-ruby (~> 1.0)
       logger
@@ -400,8 +396,6 @@ DEPENDENCIES
   selenium-webdriver
   shoulda-matchers
   simplecov
-  spring
-  spring-watcher-listen
   web-console (>= 3.3.0)
 
 BUNDLED WITH

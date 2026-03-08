@@ -36,7 +36,5 @@ group :development do
   gem "listen"
   gem "pry-rails"
   gem "rails_real_favicon"
-  gem "spring" # https://github.com/rails/spring
-  gem "spring-watcher-listen"
   gem "web-console", ">= 3.3.0"
 end
