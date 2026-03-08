@@ -1,6 +1,6 @@
 import React from 'react';
 import Modal from 'react-modal';
-import PhotoUploadContainer from '../photo_upload/photo_upload_container';
+import PhotoUpload from '../photo_upload/photo_upload';
 import TaskContainer from '../tasks/task_container';
 import ProjectsContainer from '../projects/projects_container';
 
@@ -135,7 +135,7 @@ class Greeting extends React.Component {
             >
               <div className="form profile">
                 <h2 className="profile-title">My Profile Settings</h2>
-                <PhotoUploadContainer/>
+                <PhotoUpload currentUser={this.props.currentUser} updateUser={this.props.updateUser} />
 
                 <label htmlFor="username" className="profile-label">USERNAME</label>
                 <input type="text" name="username"
