@@ -108,7 +108,7 @@ RSpec.describe "React Profile Photo", type: :system do
 
     it "can reveal and set the hidden file input" do
       expect do
-        page.execute_script(%{ $('input[type="file"]').show() })
+        page.execute_script("document.querySelector('input[type=\"file\"]').style.display = 'block'")
         file_path = "app/assets/images/favicon/apple-touch-icon.png"
         find(:file_field).set File.path(file_path)
 
