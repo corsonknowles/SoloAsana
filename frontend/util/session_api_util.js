@@ -1,34 +1,6 @@
-// login: makes an AJAX request that creates a new session
-export const login = user => (
-  $.ajax({
-    method: 'POST',
-    url: '/api/session',
-    data: { user }
-  })
-);
+import { request } from './api_util';
 
-// logout: makes an AJAX request that deletes the current session
-export const logout = () => (
-  $.ajax({
-    method: 'DELETE',
-    url: '/api/session'
-  })
-);
-
-// signup: makes an AJAX request that creates a new user
-export const signup = user => (
-  $.ajax({
-    method: 'POST',
-    url: '/api/users',
-    data: { user }
-  })
-);
-
-// update: makes an AJAX request that updates an existing user
-export const update = user => (
-  $.ajax({
-    method: 'PATCH',
-    url: `/api/users/${user.id}`,
-    data: { user }
-  })
-);
+export const login  = user => request('POST',   '/api/session',       { user });
+export const logout = ()   => request('DELETE',  '/api/session');
+export const signup = user => request('POST',   '/api/users',         { user });
+export const update = user => request('PATCH',  `/api/users/${user.id}`, { user });

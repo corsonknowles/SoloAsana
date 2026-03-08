@@ -5,7 +5,6 @@ source "https://rubygems.org"
 gem "autoprefixer-rails"
 gem "bcrypt" # Use ActiveModel has_secure_password
 gem "jbuilder" # https://github.com/rails/jbuilder
-gem "jquery-rails"
 gem "pg", "~> 1.5" # Ruby 3.3+ / 4.x compatibility
 gem "puma" # Use Puma as the app server
 gem "rails", "~> 8.0"

@@ -39,7 +39,7 @@ export const destroyProject = id => dispatch => {
   return PROJECTS.deleteProject(id)
     .then(
       () => dispatch(deleteProject(id)),
-      error => dispatch(receiveErrors(error.responseJSON))
+      error => dispatch(receiveErrors(error))
     )
 };
 

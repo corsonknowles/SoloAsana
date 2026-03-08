@@ -15,7 +15,7 @@ export const UPDATE_CURRENT_USER = "UPDATE_CURRENT_USER";
 export const requestLogin = user => dispatch => {
   return APIUtil.login(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
-    error => dispatch(receiveErrors(error.responseJSON))
+    error => dispatch(receiveErrors(error))
   );
 };
 
@@ -28,14 +28,14 @@ export const requestLogout = () => dispatch => {
 export const requestSignup = user => dispatch => {
   return APIUtil.signup(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
-    error => dispatch(receiveErrors(error.responseJSON))
+    error => dispatch(receiveErrors(error))
   );
 };
 
 export const updateUser = user => dispatch => {
   return APIUtil.update(user).then(
     currentUser => dispatch(receiveCurrentUser(currentUser)),
-    error => dispatch(receiveErrors(error.responseJSON))
+    error => dispatch(receiveErrors(error))
   );
 };
 

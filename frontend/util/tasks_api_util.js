@@ -1,33 +1,6 @@
-// createTask: makes an AJAX request that creates a new task
-export const createTask = task => {
-  return $.ajax({
-    method: 'POST',
-    url: `api/tasks`,
-    data: { task }
-  });
-};
+import { request } from './api_util';
 
-// plural
-export const fetchTasksByProject = projectID => {
-  return $.ajax({
-    method: 'GET',
-    url: `api/projects/${projectID}`
-  });
-};
-
-// updateTask: makes an AJAX request that updates a task (takes Task not task.id as argument)
-export const updateTask = task => {
-  return $.ajax({
-    method: 'PATCH',
-    url: `api/tasks/${task.id}`,
-    data: { task }
-  });
-};
-
-// deleteTask: makes an AJAX request that deletes a task by ID
-export const deleteTask = id => {
-  return $.ajax({
-    method: 'DELETE',
-    url: `api/tasks/${id}`
-  });
-};
+export const fetchTasksByProject = projectID => request('GET',    `/api/projects/${projectID}`);
+export const createTask          = task      => request('POST',   '/api/tasks',          { task });
+export const updateTask          = task      => request('PATCH',  `/api/tasks/${task.id}`, { task });
+export const deleteTask          = id        => request('DELETE', `/api/tasks/${id}`);

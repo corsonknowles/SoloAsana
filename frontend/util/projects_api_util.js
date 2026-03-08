@@ -1,32 +1,6 @@
-export const createProject = project => {
-  return $.ajax({
-    method: 'POST',
-    url: `api/projects`,
-    data: { project }
-  });
-};
+import { request } from './api_util';
 
-// deleteProject: makes an AJAX request that deletes a project by ID
-export const deleteProject = id => {
-  return $.ajax({
-    method: 'DELETE',
-    url: `api/projects/${id}`
-  });
-};
-
-// plural
-export const fetchProjects = () => (
-  $.ajax({
-    method: 'GET',
-    url: `api/projects`
-  })
-);
-
-// update: makes an AJAX request that updates an existing project.
-export const updateProject = project => (
-  $.ajax({
-    method: 'PATCH',
-    url: `/api/projects/${project.id}`,
-    data: { project }
-  })
-);
+export const fetchProjects  = ()        => request('GET',    '/api/projects');
+export const createProject  = project  => request('POST',   '/api/projects',         { project });
+export const updateProject  = project  => request('PATCH',  `/api/projects/${project.id}`, { project });
+export const deleteProject  = id       => request('DELETE', `/api/projects/${id}`);
