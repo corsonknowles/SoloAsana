@@ -18,7 +18,11 @@ const TaskReducer = function(state = {}, action){
       return { ...state, [action.task.id]: action.task };
     case DELETE_TASK: {
       const { [action.id]: _removed, ...rest } = state;
-      return rest;
+      // Also purge subtasks whose parent was just deleted
+      const deletedID = parseInt(action.id);
+      return Object.fromEntries(
+        Object.entries(rest).filter(([, task]) => task.task_id !== deletedID)
+      );
     }
     case RECEIVE_LOGOUT_SUCCESS:
       return {};

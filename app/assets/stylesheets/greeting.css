@@ -316,10 +316,53 @@ section {
   height: 20px;
 }
 
+.task-with-subtasks {
+  width: 100%;
+}
+
+.task-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.task-row .tasks-item-row {
+  flex: 1;
+}
+
+.add-subtask-btn {
+  background: none;
+  border: none;
+  color: rgb(130, 140, 153);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0;
+  padding: 0 6px;
+  transition: opacity 0.1s;
+}
+
+.task-row:hover .add-subtask-btn,
+.add-subtask-btn:focus {
+  opacity: 1;
+}
+
+.subtask-row {
+  padding-left: 28px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .tasks-item-row {
   width: 95%;
   display: flex;
   align-self: center;
+}
+
+.tasks-item-row.subtask {
+  font-size: 12px;
+  color: rgb(70, 80, 95);
+  width: 100%;
 }
 
 .tasks-item-row::after {

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tasks
@@ -28,11 +29,17 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :project
   belongs_to :team, optional: true
+  belongs_to :parent_task, class_name: "Task", foreign_key: :task_id,
+                           optional: true, inverse_of: :subtasks
+  has_many :subtasks, class_name: "Task", dependent: :destroy,
+                      inverse_of: :parent_task
 
   before_destroy :must_have_a_task
 
   def must_have_a_task
-    return unless project.tasks.one?
+    return if task_id.present? # subtasks can always be deleted
+
+    return unless project.tasks.where(task_id: nil).one?
 
     errors.add(:base, :undestroyable)
     throw :abort
