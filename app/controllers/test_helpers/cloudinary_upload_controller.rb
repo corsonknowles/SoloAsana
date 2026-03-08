@@ -3,17 +3,15 @@
 # Only reachable in the test environment (route is guarded by Rails.env.test?).
 # Returns a minimal Cloudinary-shaped JSON response so system specs that
 # exercise photo upload work without a real Cloudinary account or network.
-module TestHelpers
-  class CloudinaryUploadController < ApplicationController
-    skip_before_action :verify_authenticity_token
+class TestHelpers::CloudinaryUploadController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
-    def create
-      render json: {
-        secure_url: "https://res.cloudinary.com/test/image/upload/v1/spec/test.jpg",
-        public_id:  "spec/test",
-        format:     "jpg",
-        version:    1
-      }
-    end
+  def create
+    render json: {
+      secure_url: "https://res.cloudinary.com/test/image/upload/v1/spec/test.jpg",
+      public_id: "spec/test",
+      format: "jpg",
+      version: 1
+    }
   end
 end
