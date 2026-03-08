@@ -14,15 +14,30 @@ class Projects extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchProjects().then(
-      () => {
-        const newItem = document.getElementById("project0");
-        if (newItem) {
-          newItem.focus();
-          newItem.click();
+    this.props.fetchProjects().then(projects => {
+      const latestID = this.props.currentUser.latest_project;
+      if (latestID && projects[latestID]) {
+        const projectIDs = Object.keys(projects);
+        const index = projectIDs.indexOf(String(latestID));
+        if (index !== -1) {
+          const item = document.getElementById(`project${index}`);
+          if (item) { item.focus(); item.click(); return; }
         }
       }
-    );
+      const project0 = document.getElementById("project0");
+      if (project0) { project0.focus(); project0.click(); }
+    });
+  }
+
+  componentDidUpdate(prevProps) {
+    const currentProjectID = this.props.match.params.id;
+    const prevProjectID = prevProps.match.params.id;
+    if (currentProjectID && currentProjectID !== prevProjectID) {
+      this.props.updateUser({
+        ...this.props.currentUser,
+        latest_project: parseInt(currentProjectID)
+      });
+    }
   }
 
   respondToEnterWithCreate(event, i) {

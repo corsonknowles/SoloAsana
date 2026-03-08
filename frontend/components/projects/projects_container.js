@@ -5,6 +5,7 @@ import {
   fetchProjects,
   updateProject
 } from '../../actions/projects_actions';
+import { updateUser } from '../../actions/session_actions';
 import Projects from './projects';
 import { withRouter } from '../../util/route_util';
 
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => ({
   createProject: (project) => dispatch(createProject(project)),
   destroyProject: (id) => dispatch(destroyProject(id)),
   fetchProjects: () => dispatch(fetchProjects()),
-  updateProject: (project) => dispatch(updateProject(project))
+  updateProject: (project) => dispatch(updateProject(project)),
+  updateUser: (user) => dispatch(updateUser(user))
 });
 
 export default withRouter(connect(
