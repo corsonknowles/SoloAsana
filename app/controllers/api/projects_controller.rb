@@ -43,10 +43,10 @@ class Api::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.expect(project: %i[name team user team_id user_id created_at updated_at])
+    params.expect(project: %i[name team_id user_id])
   end
 
   def update_params
-    params.expect(project: %i[name team user team_id user_id created_at updated_at])
+    params.expect(project: %i[name team_id user_id])
   end
 end

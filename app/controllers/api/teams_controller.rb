@@ -38,6 +38,6 @@ class Api::TeamsController < ApplicationController
   private
 
   def team_params
-    params.expect(team: %i[name user user_id])
+    params.expect(team: %i[name user_id])
   end
 end
