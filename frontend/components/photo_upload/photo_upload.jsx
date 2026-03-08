@@ -41,24 +41,12 @@ class PhotoUpload extends React.Component {
       pending: false
     };
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-
     this.openModal = this.openModal.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.onImageDrop = this.onImageDrop.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-  }
-
-  handleSubmit() {
-    const user = {
-      ...this.props.currentUser,
-      photo: this.state.photo,
-    };
-
-    this.props.updateUser(user);
-    this.closeModal();
   }
 
   openModal() {
@@ -97,13 +85,15 @@ class PhotoUpload extends React.Component {
       }
 
       if (response && response.body && response.body.secure_url) {
+        const newUrl = response.body.secure_url;
         this.setState({
-          uploadedFileCloudinaryUrl: response.body.secure_url,
-          photo: response.body.secure_url,
+          uploadedFileCloudinaryUrl: newUrl,
+          photo: newUrl,
           pending: false
         });
-
-        this.handleSubmit();
+        // Pass newUrl directly — reading this.state.photo here would return
+        // the pre-upload value because React 18 batches setState asynchronously.
+        this.props.updateUser({ ...this.props.currentUser, photo: newUrl });
       }
     });
   }
