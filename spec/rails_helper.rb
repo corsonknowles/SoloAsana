@@ -38,6 +38,11 @@ RSpec.shared_context "with JS coverage" do
   after { dump_js_coverage }
 end
 
+# Auto-include the Cloudinary XHR stub for any example tagged :cloudinary_stub.
+RSpec.configure do |config|
+  config.include_context "with cloudinary stub", :cloudinary_stub
+end
+
 RSpec.configure do |config|
   config.before(:suite) do
     ActiveRecord::Base.normally_open_transactions = 1

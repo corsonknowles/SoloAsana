@@ -5,7 +5,9 @@ RSpec.describe "React Project Changes", type: :system do
   # when the browser pathname was already `/projects/:id` (BrowserRouter).
   # The fix was to prefix all API utility URLs with a leading `/`.
   context "when switching between projects via the sidebar" do
-    let(:user) { create(:user) }
+    # :without_initial_project prevents User#initialize_project from adding a
+    # phantom project0 that would shift first_project to project1 in the sidebar.
+    let(:user) { create(:user, :without_initial_project) }
     # Data must be declared before `before` so it exists when the React app
     # first fetches projects after login.
     let!(:team)           { create(:team) }
@@ -105,6 +107,15 @@ RSpec.describe "React Project Changes", type: :system do
 
     context "with an additional seeded project" do
       let!(:second_project) { create(:project, user: user, team: team) }
+
+      # let! runs *after* the outer before-login, so the React app fetched
+      # projects before second_project existed.  Wait for the login XHR to
+      # finish (session cookie must be written before we navigate), then
+      # re-visit "/" so React fetches the now-complete project list.
+      before do
+        expect(page).to have_text("Welcome")
+        visit "/"
+      end
 
       it "can delete a 2nd project" do
         expect(page).to have_field("project0")

@@ -10,6 +10,14 @@ Rails.application.routes.draw do
     resource :session, only: %i[create destroy]
   end
 
+  # Fake Cloudinary upload endpoint — test environment only.
+  # System specs redirect XHR calls for api.cloudinary.com here so photo
+  # upload tests work without hitting the real Cloudinary API.
+  if Rails.env.test?
+    post "/cloudinary_upload_stub",
+         to: "test_helpers/cloudinary_upload#create"
+  end
+
   root to: "static_pages#root"
 
   # Catch-all: serve the React app for any non-API path so that

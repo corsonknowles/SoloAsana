@@ -37,9 +37,7 @@ RSpec.describe "React Profile Photo", type: :system do
       expect(page).not_to have_css("h2.profile-title")
     end
 
-    # WARNING: this integration test speaks to Cloudinary
-    # Use Webmock and stub this if you do not want this integration test
-    it "can upload files" do
+    it "can upload files", :cloudinary_stub do
       expect do
         expect(page).not_to have_css("img.profile-photo[src*='cloudinary']")
 
@@ -106,7 +104,7 @@ RSpec.describe "React Profile Photo", type: :system do
       expect(page).not_to have_css("img.profile-photo[src*='cloudinary']")
     end
 
-    it "can reveal and set the hidden file input" do
+    it "can reveal and set the hidden file input", :cloudinary_stub do
       expect do
         page.execute_script("document.querySelector('input[type=\"file\"]').style.display = 'block'")
         file_path = "app/assets/images/favicon/apple-touch-icon.png"

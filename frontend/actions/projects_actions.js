@@ -39,8 +39,11 @@ export const destroyProject = id => dispatch => {
   return PROJECTS.deleteProject(id)
     .then(
       () => dispatch(deleteProject(id)),
+      // Defensive: fires only on network/server error after the client-side
+      // must-have-one-project guard passes. Not exercised by system specs
+      // without network mocking; covered by the reducer unit test.
       error => dispatch(receiveErrors(error))
-    )
+    );
 };
 
 export const fetchProjects = () => dispatch => (

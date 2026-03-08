@@ -32,5 +32,11 @@ FactoryBot.define do
     after(:build) do |user, evaluator|
       user.password = evaluator.password
     end
+
+    # Use when a spec controls its own project set and does not want the
+    # auto-project that User#initialize_project creates after_create.
+    trait :without_initial_project do
+      after(:create) { |user| user.projects.delete_all }
+    end
   end
 end

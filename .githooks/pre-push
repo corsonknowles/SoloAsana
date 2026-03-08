@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Pre-push hook: run the full RSpec system suite before every push.
+# Install once with:  git config core.hooksPath .githooks
+#
+# Skip for a specific push with:  git push --no-verify
+
+set -euo pipefail
+
+echo "▶ Running RSpec system specs before push…"
+
+cd "$(git rev-parse --show-toplevel)"
+
+if ! bundle exec rspec spec/system --format progress; then
+  echo ""
+  echo "✗ RSpec failed — push aborted."
+  echo "  Fix the failures above, or bypass with: git push --no-verify"
+  exit 1
+fi
+
+echo "✓ All specs passed."

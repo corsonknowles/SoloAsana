@@ -23,6 +23,11 @@ RSpec.describe "React Sign In", type: :system do
       expect(page).not_to have_text("Welcome Robert")
       expect(page).to have_content("Move work forward")
     end
+
+    it "displays the server error message" do
+      # Waits for the login XHR to complete and the Redux error to be rendered.
+      expect(page).to have_text("Invalid email/password combination")
+    end
   end
 
   context "with a valid login" do
@@ -60,10 +65,12 @@ RSpec.describe "React Sign In", type: :system do
     end
 
     it "initialises the Redux store from window.currentUser when revisiting while already logged in" do
-      # After the AJAX login above the browser holds the session cookie.
-      # A hard navigation back to '/' makes Rails inject window.currentUser
-      # into the page HTML, covering the `if (window.currentUser)` branch
-      # in frontend/index.jsx that is otherwise unreachable via AJAX-only login.
+      # Wait for the AJAX login to fully complete (session cookie written)
+      # before issuing the hard navigation; otherwise visit('/') races the XHR.
+      expect(page).to have_text("Welcome #{user.username}")
+
+      # Hard navigation: Rails now sees the session cookie and injects
+      # window.currentUser, exercising the preloaded-state branch in index.jsx.
       visit "/"
       expect(page).to have_text("Welcome #{user.username}")
     end

@@ -50,6 +50,14 @@ RSpec.describe "React Tasks Changes", type: :system do
     context "with an additional seeded task" do
       let!(:second_task) { create(:task, user: user, team: team, project: project) }
 
+      # let! runs *after* the outer before-login, so the React app fetched tasks
+      # before second_task existed. Wait for login XHR, then re-visit so
+      # fetchProjects includes both tasks in its response.
+      before do
+        expect(page).to have_text("Welcome")
+        visit "/"
+      end
+
       it "focuses on a project by clicking" do
         find_by_id("project0").click
         expect(page.evaluate_script("document.activeElement.id")).to eq "project0"
@@ -72,8 +80,10 @@ RSpec.describe "React Tasks Changes", type: :system do
       it "loads the task when the project is clicked" do
         expect(user.tasks.count).to eq 2
         expect do
-          expect(page).not_to have_field("task1")
-          find_by_id("project0").click # TODO: this is kind of an anti-feature on first login
+          # After the before-block re-visit, both tasks are in Redux.
+          # Clicking project0 (or the componentDidMount auto-click) renders both.
+          find_by_id("project0").click
+          expect(page).to have_field("task0")
           expect(page).to have_field("task1")
         end.not_to change(Task, :count)
       end
