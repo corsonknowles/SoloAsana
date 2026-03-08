@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 # See: https://www.fastruby.io/blog/rails/javascript/code-coverage/js-code-coverage-in-rails.html
-if ENV["RAILS_ENV"] == "test"
-  require "simplecov"
-  FileUtils.mkdir_p(".nyc_output") # make sure the directory exists
+# SimpleCov is loaded from spec_helper when COVERAGE is set (must load before app code)
+if ENV["RAILS_ENV"] == "test" && ENV["COVERAGE"]
+  FileUtils.mkdir_p(".nyc_output")
+  Dir.glob(Rails.root.join(".nyc_output", "*")).each { |f| FileUtils.rm_f(f) }
 end
 
 # this function should be executed when we want to store the current `window.__coverage__` info in a file

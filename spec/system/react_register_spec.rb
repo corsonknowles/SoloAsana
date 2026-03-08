@@ -27,7 +27,7 @@ RSpec.describe "React Register", type: :system do
         expect do
           click_button "Register"
           expect(page).to have_text("too short")
-        end.to change(User, :count).by(0)
+        end.not_to change(User, :count)
       end
     end
   end

@@ -22,6 +22,11 @@ export const receiveProjects = projects => ({
   projects
 });
 
+export const receiveErrors = errors => ({
+  type: RECEIVE_ERRORS,
+  errors
+});
+
 // asynchronous actions
 export const createProject = project => dispatch => (
   PROJECTS.createProject(project).then(savedProject => {

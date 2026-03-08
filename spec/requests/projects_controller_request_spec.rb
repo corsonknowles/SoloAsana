@@ -64,8 +64,23 @@ RSpec.describe Api::ProjectsController, type: :request do
 
           expect(response.body).to match("Name is too long")
           expect(response.content_type).to include("application/json")
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
+      end
+    end
+
+    context "when destroying the last project" do
+      let(:project) { user.projects.first }
+
+      it "returns errors when destroy fails (last project)" do
+        expect(user.projects.count).to eq(1)
+
+        expect do
+          delete "/api/projects/#{project.id}", headers: headers
+
+          expect(response.content_type).to include("application/json")
+          expect(response).to have_http_status(:unprocessable_content)
+        end.not_to change(Project, :count)
       end
     end
 
@@ -76,7 +91,7 @@ RSpec.describe Api::ProjectsController, type: :request do
         put "/api/projects/#{project.id}", params: { project: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "accepts valid PATCH updates" do

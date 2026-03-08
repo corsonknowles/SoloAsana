@@ -33,12 +33,23 @@ RSpec.describe User, type: :model do
   it { is_expected.to have_many(:projects) }
   it { is_expected.to have_many(:teams) }
 
-  describe "active record hooks" do
-    let(:user) { create :user }
+  describe "username truncation" do
+    it "preserves usernames of 255 characters or less" do
+      user = create(:user, username: "a" * 255)
+      expect(user.username.length).to eq(255)
+    end
 
-    it "trunctates username before validations" do
+    it "truncates usernames longer than 255 characters on save" do
+      user = create(:user)
       user.username = "*" * 260
       expect { user.save! }.to change { user.username.length }.from(260).to(255)
+    end
+
+    it "truncates long usernames on create" do
+      user = build(:user, username: "x" * 300)
+      user.save!
+      expect(user.username.length).to eq(255)
+      expect(user.username).to end_with("...")
     end
   end
 
@@ -49,7 +60,7 @@ RSpec.describe User, type: :model do
     let(:example_password) { "example_password" }
     let(:email) { user.email }
 
-    it { is_expected.to be nil }
+    it { is_expected.to be_nil }
 
     context "when user has the example password" do
       let(:user) { create(:user, password: example_password) }

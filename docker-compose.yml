@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: soloasana
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: SoloAsana_test
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U soloasana"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    shm_size: "2gb"
+    ports:
+      - "4444:4444"
+      - "7900:7900" # noVNC — open http://localhost:7900 to watch tests live
+
+  test:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+      chrome:
+        condition: service_started
+    environment:
+      RAILS_ENV: test
+      PG_HOST: db
+      PG_USER: soloasana
+      PG_PASSWORD: password
+      PG_DATABASE: SoloAsana_test
+      PG_PORT: 5432
+      SELENIUM_REMOTE_URL: http://chrome:4444/wd/hub
+      # Cloudinary creds (optional — upload tests skip gracefully without them)
+      # CLOUD_NAME: your_cloud_name
+      # UPLOAD_PRESET: your_upload_preset
+      SECRET_KEY_BASE: docker_test_secret_key_base_aaaabbbbccccddddeeeeffffgggg
+    command: bundle exec rspec
+
+volumes:
+  postgres_data:

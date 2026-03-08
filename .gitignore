@@ -18,6 +18,7 @@
 
 # Ignore debugging history
 .byebug_history
+.debug_history
 
 # Ignore locally compiled JS etc
 /node_modules/

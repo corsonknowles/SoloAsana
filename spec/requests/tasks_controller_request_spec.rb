@@ -39,7 +39,7 @@ RSpec.describe Api::TasksController, type: :request do
 
           expect(response.body).to match("Project must exist")
           expect(response.content_type).to include("application/json")
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
     end
@@ -51,7 +51,7 @@ RSpec.describe Api::TasksController, type: :request do
         put "/api/tasks/#{task.id}", params: { task: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "accepts valid PATCH updates" do

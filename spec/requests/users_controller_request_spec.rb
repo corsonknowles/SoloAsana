@@ -22,7 +22,7 @@ RSpec.describe Api::UsersController, type: :request do
 
       expect(response.body).to match("Password is too short")
       expect(response.content_type).to include("application/json")
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
   end
 
@@ -51,7 +51,7 @@ RSpec.describe Api::UsersController, type: :request do
           headers: headers
 
       expect(response.content_type).to include("application/json")
-      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response).to have_http_status(:unprocessable_content)
     end
 
     it "accepts valid PATCH updates" do

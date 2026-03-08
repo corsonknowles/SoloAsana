@@ -3,21 +3,6 @@
 class Api::ProjectsController < ApplicationController
   before_action :require_logged_in!
 
-  def create
-    @project = current_user.projects.new(project_params)
-    if @project.save
-      render json: @project
-    else
-      render json: @project.errors.full_messages, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    @project = current_user.projects.find(params[:id])
-    @project.destroy
-    render json: @project
-  end
-
   def index
     @projects = current_user.projects.includes(:tasks)
     render json: @projects, include: :tasks
@@ -28,12 +13,30 @@ class Api::ProjectsController < ApplicationController
     render json: @project, include: :tasks
   end
 
+  def create
+    @project = current_user.projects.new(project_params)
+    if @project.save
+      render json: @project
+    else
+      render json: @project.errors.full_messages, status: :unprocessable_content
+    end
+  end
+
   def update
     @project = current_user.projects.find(params[:id])
     if @project.update(update_params)
       render json: @project
     else
-      render json: @project.errors.full_messages, status: :unprocessable_entity
+      render json: @project.errors.full_messages, status: :unprocessable_content
+    end
+  end
+
+  def destroy
+    @project = current_user.projects.find(params[:id])
+    if @project.destroy
+      render json: @project
+    else
+      render json: @project.errors.full_messages, status: :unprocessable_content
     end
   end
 

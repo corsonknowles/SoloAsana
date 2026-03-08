@@ -8,7 +8,16 @@ class Api::TasksController < ApplicationController
     if @task.save
       render json: @task
     else
-      render json: @task.errors.full_messages, status: :unprocessable_entity
+      render json: @task.errors.full_messages, status: :unprocessable_content
+    end
+  end
+
+  def update
+    @task = current_user.tasks.find(params[:id])
+    if @task.update(task_params)
+      render json: @task
+    else
+      render json: @task.errors.full_messages, status: :unprocessable_content
     end
   end
 
@@ -18,20 +27,11 @@ class Api::TasksController < ApplicationController
     render json: @task
   end
 
-  def update
-    @task = current_user.tasks.find(params[:id])
-    if @task.update(task_params)
-      render json: @task
-    else
-      render json: @task.errors.full_messages, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def task_params
     params.require(:task).permit(
-      :title, :body, :due, :done, :section, :project_id, :project,
+      :id, :title, :body, :due, :done, :section, :project_id, :project,
       :team, :user, :team_id, :user_id, :task_id, :created_at, :updated_at
     )
   end

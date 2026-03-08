@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { clearErrors, updateUser } from '../../actions/session_actions';
+import { updateUser } from '../../actions/session_actions';
 import PhotoUpload from './photo_upload';
 
 const mapStateToProps = state => ({
@@ -7,7 +7,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  clearErrors: () => dispatch(clearErrors()),
   updateUser: (user) => dispatch(updateUser(user))
 });
 

@@ -98,9 +98,11 @@ class PhotoUpload extends React.Component {
     upload.end((err, response) => {
       if (err) {
         console.error(err);
+        this.setState({ pending: false });
+        return;
       }
 
-      if (response.body.secure_url !== '') {
+      if (response && response.body && response.body.secure_url) {
         this.setState({
           uploadedFileCloudinaryUrl: response.body.secure_url,
           photo: response.body.secure_url,

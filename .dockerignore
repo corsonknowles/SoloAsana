@@ -1,0 +1,25 @@
+# Version control
+.git
+.gitignore
+
+# Dependencies (installed fresh in the image)
+node_modules/
+vendor/bundle/
+
+# Build artifacts / coverage
+coverage/
+js-coverage/
+.nyc_output/
+public/assets/packs/
+tmp/
+log/
+
+# Local secrets (never bake into image)
+.env
+config/master.key
+config/application.yml
+
+# macOS / IDE noise
+.DS_Store
+.cursor/
+*.swp

@@ -66,7 +66,7 @@ RSpec.describe Api::TeamsController, type: :request do
 
           expect(response.body).to match("Name is too long")
           expect(response.content_type).to include("application/json")
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(:unprocessable_content)
         end
       end
     end
@@ -78,7 +78,7 @@ RSpec.describe Api::TeamsController, type: :request do
         put "/api/teams/#{team.id}", params: { team: { user_id: nil } }, headers: headers
 
         expect(response.content_type).to include("application/json")
-        expect(response).to have_http_status(:unprocessable_entity)
+        expect(response).to have_http_status(:unprocessable_content)
       end
 
       it "accepts valid PATCH updates" do

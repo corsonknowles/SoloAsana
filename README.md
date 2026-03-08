@@ -139,12 +139,68 @@ File attachments can be allowed in a manner very similar to the interface for cl
 
 # Contributing
 
-Ruby coverage is tracked in CodeClimate. Rubocop and specs are run in Github Actions. To track JavaScript coverage locally, run tests with the coverage variable set, e.g.
+## Running the full test suite with Docker
+
+The easiest way to run all 133 specs (including system specs with headless Chrome) without installing Ruby, Postgres, or Chrome locally:
 
 ```bash
-export COVERAGE="true" && bundle exec rspec
+docker compose build          # first time, or after Gemfile/package.json changes
+docker compose run --rm test  # runs bundle exec rspec inside the container
 ```
-Then check your local js-coverage folder for the full report.
 
+Services that start automatically:
+| Service  | What it does |
+|----------|-------------|
+| `db`     | PostgreSQL 16 — test database |
+| `chrome` | `selenium/standalone-chrome` — headless browser for system specs |
+| `test`   | Rails app — builds assets, sets up DB, runs RSpec |
+
+**Watch tests run live** (useful for debugging system specs): open <http://localhost:7900> while tests are running — the `chrome` service exposes noVNC on port 7900.
+
+**Run a specific spec:**
+```bash
+docker compose run --rm test bundle exec rspec spec/system/react_profile_photo_spec.rb
+```
+
+**Open a shell in the container:**
+```bash
+docker compose run --rm test bash
+```
+
+**Clean up:**
+```bash
+docker compose down -v   # removes containers and the postgres volume
+```
+
+> **Note on Cloudinary upload tests** — two system specs hit the real Cloudinary API. Without credentials they will fail. Pass them via the `test` service environment in `docker-compose.yml` or via the command line:
+> ```bash
+> CLOUD_NAME=xxx UPLOAD_PRESET=yyy docker compose run --rm test bundle exec rspec
+> ```
+
+---
+
+## Running tests locally (without Docker)
+
+Ruby and JavaScript coverage are tracked in CodeClimate. Rubocop and specs are run in Github Actions. To measure both Ruby and JS coverage locally in one test run:
+
+```bash
+COVERAGE=true npm install   # build instrumented JS bundle (one-time after deps change)
+COVERAGE=true bundle exec rspec
+```
+
+Reports: `coverage/` (Ruby) and `js-coverage/` (JS)
+
+**System specs run in headless Chrome** by default (no visible browser window). On macOS you may see:
+
+- **"chromedriver can't be opened because Apple cannot check it for malicious software"** — one-time fix so the popup stops (tests can still run if you click "Open"):  
+  `xattr -d com.apple.quarantine $(which chromedriver 2>/dev/null)`  
+  If chromedriver isn’t on your PATH, find it (e.g. in `~/.cache/selenium`), then run `xattr -d com.apple.quarantine /path/to/chromedriver`.
+- **"chromedriver can't be opened"** (Gatekeeper blocking an old binary) — remove the driver so Selenium Manager fetches a fresh one:
+
+```bash
+brew uninstall chromedriver 2>/dev/null
+rm -f $(which chromedriver 2>/dev/null)
+bundle exec rspec spec/system
+```
 
 Here it is in production: [SoloAsana live](http://soloasana.com)

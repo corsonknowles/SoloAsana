@@ -10,9 +10,7 @@
 
 # User.create(username: "Awesome User", email: "awesome.user@example.com")
 
-unless Rails.env.development? || Rails.env.test?
-  abort("The Rails environment is not running in test or development mode!")
-end
+abort("The Rails environment is not running in test or development mode!") unless Rails.env.local?
 
 Team.destroy_all
 Project.destroy_all
@@ -32,7 +30,7 @@ task3 = Task.create!(title: "LYFT to the MoMA", body: "", done: false, user_id: 
                      project_id: project_one.id, team_id: team_one.id, section: false)
 task4 = Task.create!(title: "Kitesurf in the bay. Fall over. Get back up again. Fall over.", body: "", done: false,
                      user_id: default_user.id, project_id: project_one.id, team_id: team_one.id, section: false)
-compare_icecream = "Debate whether Humphry Slocombe or BiRite Creamery is superior."\
+compare_icecream = "Debate whether Humphry Slocombe or BiRite Creamery is superior." \
                    "With the engineer who made the N02 ice cream at Smitten."
 task5 = Task.create!(title: compare_icecream, body: "", done: false, user_id: default_user.id,
                      project_id: project_one.id, team_id: team_one.id, section: false)
@@ -43,7 +41,7 @@ task6 = Task.create!(title: "Acquire some hipster chique threads that are not to
 project_two = Project.create!(name: "Programmer Humor", team_id: team_one.id, user_id: default_user.id)
 task21 = Task.create!(title: "Browse XKCD.com", body: "", done: false, user_id: default_user.id,
                       project_id: project_two.id, team_id: team_one.id, section: false)
-regex_wisdom = "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' "\
+regex_wisdom = "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' " \
                "Now they have two problems! - Jamie Zawinski"
 task22 = Task.create!(title: regex_wisdom, body: "", done: false, user_id: default_user.id, project_id: project_two.id,
                       team_id: team_one.id, section: false)
