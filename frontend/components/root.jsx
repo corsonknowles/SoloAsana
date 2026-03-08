@@ -5,7 +5,7 @@ import App from './App';
 
 const Root = ({ store }) => (
   <Provider store={ store } >
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <App />
     </BrowserRouter>
   </Provider>
