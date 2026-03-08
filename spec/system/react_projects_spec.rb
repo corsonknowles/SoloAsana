@@ -5,7 +5,7 @@ RSpec.describe "React Project Changes", type: :system do
 
   context "when unauthorized" do
     it "renders 401 on the projects view" do
-      visit "/#/projects/1"
+      visit "/projects/1"
 
       expect(page).to have_text("Check Out the DEMO Account")
     end

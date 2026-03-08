@@ -8,7 +8,7 @@ RSpec.describe "React Tasks Changes", type: :system do
 
   context "when unauthorized" do
     it "proceeds to the logged out view" do
-      visit "/#/projects/#{project.id}"
+      visit "/projects/#{project.id}"
 
       expect(page).to have_text("Check Out the DEMO Account")
     end
@@ -151,7 +151,7 @@ RSpec.describe "React Tasks Changes", type: :system do
       Timeout.timeout(Capybara.default_max_wait_time) do
         sleep(0.1) until page.has_content?("Welcome #{user.username}")
       end
-      visit "/#/projects/#{project.id}"
+      visit "/projects/#{project.id}"
     end
 
     it "enters a new task" do

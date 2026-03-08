@@ -12,5 +12,7 @@ Rails.application.routes.draw do
 
   root to: "static_pages#root"
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # Catch-all: serve the React app for any non-API path so that
+  # BrowserRouter can handle client-side navigation on direct load.
+  get "*path", to: "static_pages#root", format: false
 end
