@@ -128,6 +128,39 @@ RSpec.describe "React Project Changes", type: :system do
         expect(page).not_to have_field("project1")
       end
 
+      it "keeps the project in the UI when the server rejects the delete" do
+        # Install a fetch mock that makes DELETE /api/projects/:id return a 422.
+        # This exercises the destroyProject error callback in projects_actions.js
+        # which is unreachable in normal use (the client-side guard stops the call
+        # when only one project exists, and a real delete always succeeds for 2+).
+        page.execute_script(<<~JS)
+          (function () {
+            var orig = window.fetch;
+            window.fetch = function (url, opts) {
+              if (opts && opts.method === 'DELETE' && String(url).indexOf('/api/projects/') !== -1) {
+                return Promise.resolve({
+                  ok: false, status: 422,
+                  json: function () { return Promise.resolve(['Cannot delete project']); }
+                });
+              }
+              return orig.call(this, url, opts);
+            };
+          })();
+        JS
+
+        expect(page).to have_field("project0")
+        expect(page).to have_field("project1")
+
+        expect do
+          second = find_by_id("project1")
+          # project name is nil → field is already empty → one Backspace triggers delete
+          (second.value.length + 1).times { second.send_keys [:backspace] }
+          # project1 must still be visible: the mock caused receiveErrors to fire
+          # instead of deleteProject, so Redux keeps the project in state
+          expect(page).to have_field("project1")
+        end.not_to change(Project, :count)
+      end
+
       it "can type and navigate between projects" do
         expect(page).to have_field("project1")
 
