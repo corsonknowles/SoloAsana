@@ -3,10 +3,10 @@ import Modal from 'react-modal';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 
-const CLOUDINARY_UPLOAD_PRESET = window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.upload_preset || 'i8cgxpgn';
-const CLOUDINARY_UPLOAD_URL = window.CLOUDINARY_OPTIONS
-  ? `https://api.cloudinary.com/v1_1/${window.CLOUDINARY_OPTIONS.cloud_name}/upload`
-  : 'https://api.cloudinary.com/v1_1/cloudfunded/upload';
+const cloudName     = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.cloud_name)     || 'cloudfunded';
+const uploadPreset  = (window.CLOUDINARY_OPTIONS && window.CLOUDINARY_OPTIONS.upload_preset)  || 'i8cgxpgn';
+const CLOUDINARY_UPLOAD_PRESET = uploadPreset;
+const CLOUDINARY_UPLOAD_URL    = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
 
 const customStyles = {
   content : {
