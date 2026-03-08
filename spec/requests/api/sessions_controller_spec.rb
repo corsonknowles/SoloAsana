@@ -46,20 +46,6 @@ RSpec.describe Api::SessionsController, type: :request do
     end
   end
 
-  context "with stubbed before_action and no current user" do
-    before do
-      allow_any_instance_of(described_class).to receive(:require_logged_in!)
-    end
-
-    it "renders errors" do
-      delete "/api/session/", headers: headers
-
-      expect(response.body).to match("Nobody signed in")
-      expect(response.content_type).to include("application/json")
-      expect(response).to have_http_status(:not_found)
-    end
-  end
-
   context "with a real login session" do
     let(:password) { "realpassword1" }
     let(:user) { create(:user, password: password) }
@@ -68,9 +54,6 @@ RSpec.describe Api::SessionsController, type: :request do
       post "/api/session", params: { user: { email: user.email, password: password } }, headers: headers
       expect(response).to have_http_status(:ok)
 
-      # destroy calls current_user twice in the same request:
-      # once in @user = current_user, then again inside logout.
-      # The second call returns the memoised @current_user value.
       delete "/api/session/", headers: headers
       expect(response).to have_http_status(:ok)
     end
