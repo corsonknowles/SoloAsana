@@ -21,7 +21,7 @@ class Api::TeamsController < ApplicationController
   end
 
   def update
-    @team = Team.find(params[:id])
+    @team = current_user.teams.find(params[:id])
     if @team.update(team_params)
       render json: @team, include: :projects
     else
