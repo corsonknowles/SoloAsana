@@ -59,4 +59,20 @@ RSpec.describe Api::SessionsController, type: :request do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  context "with a real login session" do
+    let(:password) { "realpassword1" }
+    let(:user) { create(:user, password: password) }
+
+    it "logs in then logs out without stubs (exercises current_user memoisation)" do
+      post "/api/session", params: { user: { email: user.email, password: password } }, headers: headers
+      expect(response).to have_http_status(:ok)
+
+      # destroy calls current_user twice in the same request:
+      # once in @user = current_user, then again inside logout.
+      # The second call returns the memoised @current_user value.
+      delete "/api/session/", headers: headers
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end

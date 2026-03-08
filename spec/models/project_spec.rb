@@ -54,4 +54,20 @@ RSpec.describe Project, type: :model do
       expect { project.delete }.to change(described_class, :count).by(-1)
     end
   end
+
+  context "when the project has no associated user" do
+    it "can be destroyed (must_have_a_project returns early)" do
+      user = create(:user)
+      project = create(:project, user: user)
+      project.user = nil
+      expect { project.destroy }.to change(described_class, :count).by(-1)
+    end
+  end
+
+  describe "#initialize_task (private)" do
+    it "does not create an extra task when the project already has one" do
+      project = create(:project)
+      expect { project.send(:initialize_task) }.not_to change(Task, :count)
+    end
+  end
 end

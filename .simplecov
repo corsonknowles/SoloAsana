@@ -8,4 +8,6 @@ SimpleCov.at_exit do
   system("npm run coverage") if ENV["COVERAGE"] && Dir.glob(File.join(Dir.pwd, ".nyc_output", "js-*.json")).any?
 end
 
-SimpleCov.start "rails"
+SimpleCov.start "rails" do
+  enable_coverage :branch
+end

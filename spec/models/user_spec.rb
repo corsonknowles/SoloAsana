@@ -51,6 +51,12 @@ RSpec.describe User, type: :model do
       expect(user.username.length).to eq(255)
       expect(user.username).to end_with("...")
     end
+
+    it "does not raise when username is nil" do
+      user = build(:user, username: nil)
+      expect { user.valid? }.not_to raise_error
+      expect(user.username).to be_nil
+    end
   end
 
   describe ".find_with_credentials" do
@@ -61,6 +67,12 @@ RSpec.describe User, type: :model do
     let(:email) { user.email }
 
     it { is_expected.to be_nil }
+
+    context "when the email does not exist" do
+      let(:email) { "nonexistent@example.com" }
+
+      it { is_expected.to be_nil }
+    end
 
     context "when user has the example password" do
       let(:user) { create(:user, password: example_password) }
@@ -116,6 +128,22 @@ RSpec.describe User, type: :model do
         expect { reset }.to(change(user, :session_token))
         expect(user.session_token).not_to eq(taken_token)
       end
+    end
+  end
+
+  describe "#ensure_session_token (private)" do
+    it "does not overwrite an existing session token" do
+      user = create(:user)
+      token = user.session_token
+      # after_initialize fires again when loading from the DB; token must be preserved
+      expect(User.find(user.id).session_token).to eq(token)
+    end
+  end
+
+  describe "#initialize_project (private)" do
+    it "does not create an extra project when the user already has one" do
+      user = create(:user)
+      expect { user.send(:initialize_project) }.not_to change(Project, :count)
     end
   end
 end

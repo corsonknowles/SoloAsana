@@ -19,4 +19,5 @@ RSpec.describe Team, type: :model do
   it { is_expected.to belong_to(:user) }
   it { is_expected.to have_many(:projects) }
   it { is_expected.to have_many(:tasks) }
+  it { is_expected.to validate_length_of(:name).is_at_most(255) }
 end

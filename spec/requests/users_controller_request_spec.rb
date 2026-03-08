@@ -45,6 +45,14 @@ RSpec.describe Api::UsersController, type: :request do
       allow_any_instance_of(described_class).to receive(:current_user).and_return(user)
     end
 
+    it "renders the show page as JSON" do
+      get "/api/users/#{user.id}", headers: headers
+
+      expect(response.body).to match(user.username)
+      expect(response.content_type).to include("application/json")
+      expect(response).to have_http_status(:ok)
+    end
+
     it "errors on invalid update" do
       put "/api/users/#{user.id}",
           params: { user: { username: "", email: "user@example.com", password: "good_example" } },
