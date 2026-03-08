@@ -12,10 +12,12 @@
 
 abort("The Rails environment is not running in test or development mode!") unless Rails.env.local?
 
-Team.destroy_all
-Project.destroy_all
-Task.destroy_all
-User.destroy_all
+# delete_all skips model callbacks (e.g. must_have_a_task) and is safe for a
+# dev/test reset.  Order respects FK constraints: children before parents.
+Task.delete_all
+Project.delete_all
+Team.delete_all
+User.delete_all
 
 default_user = User.create!(email: "awesome.user@example.com", username: "Robert", password: "secure",
                             photo: "https://res.cloudinary.com/cloudfunded/image/upload/v1501203375/hetwrlqq3rw3udsygkat.jpg")

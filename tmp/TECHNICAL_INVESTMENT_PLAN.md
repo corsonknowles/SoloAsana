@@ -277,7 +277,7 @@ Pinned at 2.6.5, three major versions behind 3.2.0.
 
 | Priority | Item | Effort | Status |
 |---|---|---|---|
-| P0 | `tasks.done`/`section` nullable booleans | S | ⬜ todo |
+| P0 | `tasks.done`/`section` nullable booleans | S | ✅ done |
 | P1 | Feature: last-viewed project (`users.latest_project`) | S | ⬜ todo |
 | P1 | Feature: subtask nesting (`tasks.task_id`) | M | ⬜ todo |
 | P1 | Fix `rspec.yml` CI workflow | S | ✅ done |

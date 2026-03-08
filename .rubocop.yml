@@ -49,6 +49,14 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'config/application.rb'
 
+# The original create_tasks migration predates the ThreeStateBooleanColumn cop
+# and cannot be changed without invalidating schema history.  The boolean
+# columns it created (done, section) were retrofitted with null: false and
+# default: false in FixTaskBooleanNullability (20260308131225).
+Rails/ThreeStateBooleanColumn:
+  Exclude:
+    - 'db/migrate/20170718161915_create_tasks.rb'
+
 Style/Documentation:
   Enabled: false
 

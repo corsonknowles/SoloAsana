@@ -5,9 +5,9 @@
 #
 #  id         :bigint           not null, primary key
 #  body       :text
-#  done       :boolean
+#  done       :boolean          default(FALSE), not null
 #  due        :integer
-#  section    :boolean
+#  section    :boolean          default(FALSE), not null
 #  title      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
