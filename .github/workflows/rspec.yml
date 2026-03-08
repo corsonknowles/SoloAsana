@@ -1,65 +1,51 @@
 name: RSpec
+
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the main branch
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-  # Also trigger on page_build, as well as release created events
-  page_build:
-  release:
-    types: # This configuration does not affect the page_build event above
-      - created
+
 jobs:
   rspec:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ '16' ]
-        ruby: ["4.0"]
     services:
       postgres:
         image: postgres:12
         ports: ["5432:5432"]
         env:
-          RAILS_ENV: test
           POSTGRES_PASSWORD: password
-          PG_HOST: /var/run/postgresql
-          PG_USER: SoloAsana
-          PG_PASSWORD: password
-          PG_PORT: 5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+      - name: Install system dependencies
+        run: sudo apt-get -yqq install libpq-dev
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+          ruby-version: .ruby-version
+          bundler-cache: true
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node }}
-          registry-url: 'https://registry.npmjs.org'
+          node-version: '22'
           cache: 'npm'
-      - run: npm install
+      - name: Install npm dependencies
         env:
           COVERAGE: "true"
-      - name: Install Chromedriver
-        uses: nanasess/setup-chromedriver@master
+        run: npm install --legacy-peer-deps
       - name: Install Code Climate test-reporter
         run: |
           curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
-      - name: Run RSpec with Chromedriver and System Specs
+      - name: Run RSpec
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
           COVERAGE: "true"
@@ -72,17 +58,13 @@ jobs:
           PG_PASSWORD: password
           PG_PORT: 5432
         run: |
-          export DISPLAY=:99
-          chromedriver --url-base=/wd/hub &
-          sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 &
-          sudo apt-get -yqq install libpq-dev
-
           bundle exec rails db:setup
           bundle exec rspec
+      # paambaati/codeclimate-action was archived July 2025; v9.0.0 is the final release.
       - name: Publish Coverage Report to CodeClimate
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        uses: paambaati/codeclimate-action@v3.0.0
+        uses: paambaati/codeclimate-action@v9.0.0
         with:
           debug: true
           coverageLocations: |
