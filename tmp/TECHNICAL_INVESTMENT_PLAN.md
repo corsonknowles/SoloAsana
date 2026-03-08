@@ -1,6 +1,6 @@
 # SoloAsana — Technical Investment Plan
 
-Last updated: 2026-03-07  
+Last updated: 2026-03-08  
 Stack: Ruby 4.0.1 · Rails 8.1.2 · React 19 · React Router 7 · Redux Toolkit 2 · Webpack 5 · PostgreSQL
 
 ---
@@ -40,13 +40,13 @@ Stack: Ruby 4.0.1 · Rails 8.1.2 · React 19 · React Router 7 · Redux Toolkit 
 | Fix all jQuery usages in system specs | Replaced `page.execute_script %{ $(...) }` with native `dispatchEvent` / `style.display` |
 | All 8 failing system specs | Race conditions, auto-project factory trait, re-visit synchronisation, Cloudinary stub |
 | `RSpec/AnyInstance` suppressions cleared | Request specs converted to targeted stubs |
-| Ruby 100% line + branch coverage | Full suite: 141 examples, 0 failures |
-| JavaScript 100% line + function coverage | `babel-plugin-istanbul` + nyc; fetch-mock spec closes final gap |
+| Ruby 100% line + branch coverage | Full suite; SimpleCov `minimum_coverage line: 100, branch: 100` |
+| JavaScript 100% line + function coverage | `babel-plugin-istanbul` + nyc; `nyc check-coverage --lines 100 --functions 100` |
 | Pre-push git hook | `.githooks/pre-push` runs system specs before every `git push` |
 | Rubocop: 23 offenses | All resolved (bulk migration, line length, ExpectInHook, Style/Layout) |
 | PostgreSQL 12 → 16 in CI | `rspec.yml` service image updated |
 | `sessions_controller#destroy` dead branch | Removed unreachable else; spec updated |
-| Feature: `users.latest_project` | Projects save/restore last-viewed project on login |
+| Feature: `users.latest_project` | Projects save/restore last-viewed project; `_user` partial includes it; system spec for reload |
 | Feature: `tasks.task_id` subtask nesting | Model associations, reducer, nested UI; "+" button, Enter/Backspace |
 | Delete 5 dead code files | photo_upload_container, projects/tasks jbuilder templates + view specs |
 | Replace `superagent` with native `fetch` | FormData + fetch in photo_upload; cloudinary stub intercepts fetch |
