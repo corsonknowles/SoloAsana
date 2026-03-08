@@ -8,9 +8,11 @@
 # constraint is applied, avoiding a separate update_all pass.
 class FixTaskBooleanNullability < ActiveRecord::Migration[8.0]
   def change
-    change_column_null    :tasks, :done,    false, false
-    change_column_null    :tasks, :section, false, false
-    change_column_default :tasks, :done,    from: nil, to: false
-    change_column_default :tasks, :section, from: nil, to: false
+    change_table :tasks, bulk: true do |t|
+      t.change_null    :done,    false, false
+      t.change_null    :section, false, false
+      t.change_default :done,    from: nil, to: false
+      t.change_default :section, from: nil, to: false
+    end
   end
 end

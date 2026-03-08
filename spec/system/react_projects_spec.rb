@@ -4,6 +4,8 @@ RSpec.describe "React Project Changes", type: :system do
   # Regression: relative API URLs (e.g. `api/projects/id`) resolved incorrectly
   # when the browser pathname was already `/projects/:id` (BrowserRouter).
   # The fix was to prefix all API utility URLs with a leading `/`.
+  let(:user) { create(:user) }
+
   context "when switching between projects via the sidebar" do
     # :without_initial_project prevents User#initialize_project from adding a
     # phantom project0 that would shift first_project to project1 in the sidebar.
@@ -42,8 +44,6 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_field("task0")
     end
   end
-
-  let(:user) { create(:user) }
 
   context "when unauthorized" do
     it "renders 401 on the projects view" do
@@ -88,7 +88,8 @@ RSpec.describe "React Project Changes", type: :system do
         ActiveRecord::Base.after_transaction do
           expect(page).to have_field("project0", with: project.name.to_s)
           find_by_id("project0").native.send_keys("F")
-          page.execute_script "document.getElementById('project0').dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }))"
+          keyup_js = "document.getElementById('project0').dispatchEvent(new KeyboardEvent('keyup', { bubbles: true }))"
+          page.execute_script keyup_js
           expect(page).to have_field("project0", with: "#{project.name}F")
         end
       end.to change { Project.last.reload.name }.from(project.name).to("#{project.name}F")
@@ -113,7 +114,7 @@ RSpec.describe "React Project Changes", type: :system do
       # finish (session cookie must be written before we navigate), then
       # re-visit "/" so React fetches the now-complete project list.
       before do
-        expect(page).to have_text("Welcome")
+        expect(page).to have_text("Welcome") # rubocop:disable RSpec/ExpectInHook
         visit "/"
       end
 
