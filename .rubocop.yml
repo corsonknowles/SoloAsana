@@ -47,8 +47,6 @@ RSpec/NestedGroups:
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
   Exclude:
-    - 'app/channels/application_cable/channel.rb'
-    - 'app/channels/application_cable/connection.rb'
     - 'config/application.rb'
 
 Style/Documentation:

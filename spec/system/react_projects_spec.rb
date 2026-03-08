@@ -1,6 +1,46 @@
 # frozen_string_literal: true
 
 RSpec.describe "React Project Changes", type: :system do
+  # Regression: relative API URLs (e.g. `api/projects/id`) resolved incorrectly
+  # when the browser pathname was already `/projects/:id` (BrowserRouter).
+  # The fix was to prefix all API utility URLs with a leading `/`.
+  context "when switching between projects via the sidebar" do
+    let(:user) { create(:user) }
+    # Data must be declared before `before` so it exists when the React app
+    # first fetches projects after login.
+    let!(:team)           { create(:team) }
+    let!(:first_project)  { create(:project, user: user, team: team) }
+    let!(:first_task)     { create(:task,    user: user, team: team, project: first_project) }
+    let!(:second_project) { create(:project, user: user, team: team) }
+    let!(:second_task)    { create(:task,    user: user, team: team, project: second_project) }
+
+    before do
+      visit "/"
+      click_button "Log In"
+      fill_in "EMAIL ADDRESS", with: user.email
+      fill_in "PASSWORD", with: "rainbow_table"
+      click_button "Sign In"
+    end
+
+    it "loads tasks for the first project when clicked" do
+      find_by_id("project0").click
+      expect(page).to have_current_path("/projects/#{first_project.id}")
+      expect(page).to have_field("task0")
+    end
+
+    it "loads tasks for a project clicked from another project's URL" do
+      find_by_id("project0").click
+      expect(page).to have_current_path("/projects/#{first_project.id}")
+      expect(page).to have_field("task0")
+
+      # While the browser pathname is already /projects/:id, clicking a different
+      # project must still fetch tasks via an absolute API path.
+      find_by_id("project1").click
+      expect(page).to have_current_path("/projects/#{second_project.id}")
+      expect(page).to have_field("task0")
+    end
+  end
+
   let(:user) { create(:user) }
 
   context "when unauthorized" do
