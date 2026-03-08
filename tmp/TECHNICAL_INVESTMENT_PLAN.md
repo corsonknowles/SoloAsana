@@ -1,6 +1,6 @@
 # SoloAsana — Technical Investment Plan
 
-Last updated: 2026-03-08  
+Last updated: 2026-03-07  
 Stack: Ruby 4.0.1 · Rails 8.1.2 · React 18.3.1 · React Router 6 · Redux Toolkit 2 · Webpack 5 · PostgreSQL
 
 ---
@@ -43,121 +43,17 @@ Stack: Ruby 4.0.1 · Rails 8.1.2 · React 18.3.1 · React Router 6 · Redux Tool
 | Ruby 100% line + branch coverage | Full suite: 141 examples, 0 failures |
 | JavaScript 100% line + function coverage | `babel-plugin-istanbul` + nyc; fetch-mock spec closes final gap |
 | Pre-push git hook | `.githooks/pre-push` runs system specs before every `git push` |
+| Rubocop: 23 offenses | All resolved (bulk migration, line length, ExpectInHook, Style/Layout) |
+| PostgreSQL 12 → 16 in CI | `rspec.yml` service image updated |
+| `sessions_controller#destroy` dead branch | Removed unreachable else; spec updated |
+| Feature: `users.latest_project` | Projects save/restore last-viewed project on login |
+| Feature: `tasks.task_id` subtask nesting | Model associations, reducer, nested UI; "+" button, Enter/Backspace |
 
 ---
 
 ## P1 · High Priority
 
-### Rubocop: 23 remaining offenses (17 auto-correctable)
-
-```
-app/controllers/test_helpers/cloudinary_upload_controller.rb
-  Style/ClassAndModuleChildren (nested → compact notation)
-  Layout/HashAlignment (hash keys out of alignment)
-
-app/models/{project,task,team,user}.rb
-spec/models/{project,task,team,user}_spec.rb
-spec/factories/{projects,teams,users}.rb
-  Layout/EmptyLineAfterMagicComment (auto-correctable)
-
-db/migrate/20260308131225_fix_task_boolean_nullability.rb
-  Rails/BulkChangeTable (wrap in change_table bulk: true)
-
-lib/tasks/annotate_rb.rake
-  Style/FrozenStringLiteralComment (auto-correctable)
-
-spec/system/react_projects_spec.rb
-  RSpec/LetBeforeExamples (let(:team) defined after examples in context)
-  Layout/LineLength (one line over 120 chars)
-  RSpec/ExpectInHook (expect in before — deliberate Capybara sync, see note)
-
-spec/system/react_tasks_spec.rb
-  RSpec/ExpectInHook (same pattern)
-  Layout/LineLength (two lines over 120 chars)
-```
-
-> **Note on `RSpec/ExpectInHook`:** The `expect(page).to have_text("Welcome")` calls
-> inside `before` blocks are intentional Capybara synchronisation points, not
-> test assertions. They wait for the login XHR to complete before the before-chain
-> continues. One idiomatic fix is to extract a `wait_for_login!` helper method that
-> wraps the Capybara wait; another is to add `# rubocop:disable RSpec/ExpectInHook`
-> with a comment explaining the intent.
-
-**Effort:** S (run `bundle exec rubocop -a` for the 17 auto-correctable offenses; 6
-require manual attention)
-
----
-
-### Feature: Navigate to last-viewed project on login (`users.latest_project`)
-
-The `users.latest_project` integer column exists in the schema and is included in
-both `user_params` and `update_params`. It is never written to and never read.
-
-**Current behaviour (anti-feature):** `Projects#componentDidMount` auto-clicks
-`project0` (the first project by numeric ID) on every page load. This is noted as an
-anti-feature in `react_tasks_spec.rb:31`.
-
-**Intended behaviour:** When a user navigates to a project, call
-`updateUser({ ...currentUser, latest_project: projectID })`. On login or hard
-reload, read `window.currentUser.latest_project` and navigate directly to that
-project instead of auto-clicking `project0`.
-
-**Effort:** S
-
----
-
-### Feature: Subtask nesting (`tasks.task_id`)
-
-`tasks.task_id` column and index exist. The `task_id` field is whitelisted in
-`task_params`. No model association, serialiser output, or frontend rendering has
-been built.
-
-**To implement:**
-1. `Task` model: `has_many :subtasks, class_name: "Task", foreign_key: :task_id`
-   and `belongs_to :parent_task, class_name: "Task", optional: true`
-2. Include subtasks in the `_task.json.jbuilder` partial (or in the `render json:`
-   call from the tasks controller)
-3. Build collapsible nesting in `tasks.jsx`
-
-**Effort:** M
-
----
-
-### PostgreSQL 12 in CI → 16
-
-The CI workflow uses `image: postgres:12`. PostgreSQL 12 reached end of life in
-November 2024. Rails 8 recommends PostgreSQL 14+.
-
-Change `rspec.yml`:
-```yaml
-image: postgres:16
-```
-
-**Effort:** XS
-
----
-
-### `sessions_controller#destroy` unreachable else branch
-
-The `destroy` action has `before_action :require_logged_in!` which redirects any
-unauthenticated request with a 401 before the action body runs. The inner `if @user`
-/ `else` block is therefore unreachable in the else branch.
-
-```ruby
-def destroy
-  @user = current_user
-  if @user       # always true here — require_logged_in! guarantees it
-    logout
-    render "api/users/show"
-  else            # dead code; nobody can reach this
-    render json: ["Nobody signed in"], status: :not_found
-  end
-end
-```
-
-**Fix:** Remove the `if`/`else` and always call `logout` + render.
-
-**Effort:** XS
+**P1 complete.** All items addressed. Remaining work is P2 and below.
 
 ---
 
@@ -436,11 +332,11 @@ guard the file itself with `if Rails.env.test?` so it is never loaded outside te
 
 | Priority | Item | Effort | Status |
 |---|---|---|---|
-| P1 | Clean 23 Rubocop offenses | S | ⬜ todo |
-| P1 | Feature: `users.latest_project` — navigate to last-viewed project | S | ⬜ todo |
-| P1 | Feature: `tasks.task_id` — subtask nesting | M | ⬜ todo |
-| P1 | PostgreSQL 12 → 16 in CI | XS | ⬜ todo |
-| P1 | `sessions_controller#destroy` unreachable else branch | XS | ⬜ todo |
+| P1 | Clean 23 Rubocop offenses | S | ✅ done |
+| P1 | Feature: `users.latest_project` — navigate to last-viewed project | S | ✅ done |
+| P1 | Feature: `tasks.task_id` — subtask nesting | M | ✅ done |
+| P1 | PostgreSQL 12 → 16 in CI | XS | ✅ done |
+| P1 | `sessions_controller#destroy` unreachable else branch | XS | ✅ done |
 | P2 | Delete 5 dead code files (orphaned container + dead jbuilder templates) | XS | ⬜ todo |
 | P2 | `superagent` → native `fetch` for Cloudinary upload | S | ⬜ todo |
 | P2 | `react-dropzone` v3 → v15 | S | ⬜ todo |
@@ -484,16 +380,3 @@ has no frontend consumer. The schema has `teams`, `projects.team_id`, and
 (the columns are `optional: true` in both models; `nil` is valid and honest).
 This unblocks clean data while the full feature is planned.
 
----
-
-### `users.latest_project` — navigate to last-viewed project on login
-
-Column exists. `user_params` and `update_params` already whitelist it.
-See P1 entry for implementation detail.
-
----
-
-### `tasks.task_id` — subtask nesting
-
-Column, index, and param whitelist exist. `belongs_to :parent_task` and
-`has_many :subtasks` associations are not yet declared. See P1 entry.
