@@ -91,20 +91,6 @@ RTK's `useSelector` and `useDispatch` are already available; `useNavigate`,
 
 ## P3 · Low Priority
 
-### Remove `spring` gem
-
-`spring` and `spring-watcher-listen` are listed in the `Gemfile`. Spring was the
-Rails app preloader from the Rails 4/5 era. It was removed from Rails 7 app
-templates and is no longer maintained for Rails 8. It adds `config/spring.rb` and
-hooks into `bin/rails` / `bin/rake` (via binstubs that may not even be present).
-
-**Fix:** Remove `gem "spring"` and `gem "spring-watcher-listen"` from `Gemfile`.
-Delete `config/spring.rb`.
-
-**Effort:** XS
-
----
-
 ### `npm run test` → invoke RSpec
 
 `package.json` has `"test": "echo \"Error: no test specified\" && exit 1"`. This
@@ -116,16 +102,6 @@ should either delegate or at minimum print the correct command.
 ```
 
 **Effort:** XS
-
----
-
-### `tasks.due` integer → `date` column
-
-`due` is stored as an `integer`. A `date` or `datetime` column would give it
-semantic meaning, enable database-level date arithmetic, and surface human-readable
-values in the API response without client-side conversion.
-
-**Effort:** S (migration + API + frontend display)
 
 ---
 
@@ -197,12 +173,14 @@ the route constraints and delete the action.
 
 ---
 
-### `app/controllers/test_helpers/` location
+### ~~`app/controllers/test_helpers/` location~~ ✅ done
 
-The `TestHelpers::CloudinaryUploadController` is in `app/controllers/` which means
+~~The `TestHelpers::CloudinaryUploadController` is in `app/controllers/` which means
 it is eager-loaded in all environments. The route guard (`if Rails.env.test?`) keeps
 it unreachable in production, but the class still loads. Move to `spec/support/` or
-guard the file itself with `if Rails.env.test?` so it is never loaded outside tests.
+guard the file itself with `if Rails.env.test?` so it is never loaded outside tests.~~
+
+Controller moved to `spec/support/test_helpers/cloudinary_upload_controller.rb` so it is only loaded when running specs.
 
 **Effort:** XS
 
