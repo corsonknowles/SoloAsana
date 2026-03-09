@@ -224,15 +224,15 @@ guard the file itself with `if Rails.env.test?` so it is never loaded outside te
 | P2 | React Router v6 → v7 | S | ✅ done |
 | P2 | React 18 → 19 | XS | ✅ done |
 | P2 | `babel-loader` v8 → v10; `webpack-cli` v4 → v6 | XS | ✅ done |
-| P3 | Remove `spring` gem | XS | ⬜ todo |
-| P3 | `npm run test` → `bundle exec rspec` | XS | ⬜ todo |
-| P3 | `tasks.due` integer → `date` column | S | ⬜ todo |
-| P3 | Extract duplicate `customStyles` to shared constant | XS | ⬜ todo |
-| P3 | Remove dead `afterOpenModal()` methods | XS | ⬜ todo |
-| P3 | `users.session_token` DB `NOT NULL` constraint | XS | ⬜ todo |
-| P3 | Merge duplicate `project_params` / `update_params` | XS | ⬜ todo |
-| P3 | Remove `UsersController#show` route (never called) | XS | ⬜ todo |
-| P3 | Move `test_helpers/` controller out of `app/controllers/` | XS | ⬜ todo |
+| P3 | Remove `spring` gem | XS | ✅ done |
+| P3 | `npm run test` → `bundle exec rspec` | XS | ✅ done |
+| P3 | `tasks.due` integer → `date` column | S | ✅ done |
+| P3 | Extract duplicate `customStyles` to shared constant | XS | ✅ done |
+| P3 | Remove dead `afterOpenModal()` methods | XS | ✅ done |
+| P3 | `users.session_token` DB `NOT NULL` constraint | XS | ✅ done |
+| P3 | Merge duplicate `project_params` / `update_params` | XS | ✅ done |
+| P3 | Remove `UsersController#show` route (never called) | XS | ✅ done |
+| P3 | Guard `test_helpers/` controller (ensure_test_env) | XS | ✅ done |
 
 ---
 

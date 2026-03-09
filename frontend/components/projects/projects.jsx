@@ -16,16 +16,18 @@ class Projects extends React.Component {
   componentDidMount() {
     this.props.fetchProjects().then(projects => {
       const latestID = this.props.currentUser.latest_project;
-      if (latestID && projects[latestID]) {
-        const projectIDs = Object.keys(projects);
-        const index = projectIDs.indexOf(String(latestID));
-        if (index !== -1) {
-          const item = document.getElementById(`project${index}`);
-          if (item) { item.focus(); item.click(); return; }
-        }
+      let index = 0;
+      if (latestID && Array.isArray(projects)) {
+        const found = projects.findIndex(
+          p => String(p.id) === String(latestID)
+        );
+        if (found !== -1) index = found;
       }
-      const project0 = document.getElementById("project0");
-      if (project0) { project0.focus(); project0.click(); }
+      const item = document.getElementById(`project${index}`);
+      if (item) {
+        item.focus();
+        item.click();
+      }
     });
   }
 

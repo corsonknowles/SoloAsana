@@ -43,6 +43,24 @@ RSpec.describe "React Project Changes", type: :system do
       expect(page).to have_current_path("/projects/#{second_project.id}")
       expect(page).to have_field("task0")
     end
+
+    it "restores the last-viewed project after page reload" do
+      find_by_id("project0").click
+      expect(page).to have_current_path("/projects/#{first_project.id}")
+      find_by_id("project1").click
+      expect(page).to have_current_path("/projects/#{second_project.id}")
+      expect(page).to have_field("task0")
+      # Allow updateUser PATCH to persist latest_project before reload
+      30.times do
+        break if user.reload.latest_project == second_project.id
+        sleep 0.1
+      end
+      expect(user.reload.latest_project).to eq(second_project.id)
+      visit page.current_path
+      # Wait for Projects to fetch, select a project, and load tasks
+      expect(page).to have_field("task0", wait: 5)
+      expect(page).to have_current_path("/projects/#{second_project.id}")
+    end
   end
 
   context "when unauthorized" do
