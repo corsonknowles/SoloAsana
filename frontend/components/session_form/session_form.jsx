@@ -41,7 +41,6 @@ class SessionForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
 
     this.openModal = this.openModal.bind(this);
-    this.afterOpenModal = this.afterOpenModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
 
     this.handleDemoLogin = this.handleDemoLogin.bind(this);
@@ -89,10 +88,6 @@ class SessionForm extends React.Component {
 
   openModal() {
     this.setState({modalIsOpen: true});
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
   }
 
   closeModal() {
@@ -164,7 +159,6 @@ class SessionForm extends React.Component {
             <button className="white demo" onClick={(event) => this.launchDemo(event)}>Check Out the DEMO Account</button>
             <Modal
               isOpen={this.state.modalIsOpen}
-              onAfterOpen={this.afterOpenModal}
               onRequestClose={this.closeModal}
               style={customStyles}
               contentLabel="Login Form"
