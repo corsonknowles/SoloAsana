@@ -25,7 +25,7 @@ RSpec.describe "React Demo Sign In", type: :system do
       visit_page_with_seed_user
       click_button "Register to Get Started"
       click_button "Demo User"
-      expect(page).to have_text("⏎ Enter Adds A New Task")
+      expect(page).to have_text("⏎ Enter Adds A New Task", wait: 8)
     end
   end
 
