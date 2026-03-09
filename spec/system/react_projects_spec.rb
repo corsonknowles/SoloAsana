@@ -56,7 +56,7 @@ RSpec.describe "React Project Changes", type: :system do
         sleep 0.1
       end
       expect(user.reload.latest_project).to eq(second_project.id)
-      visit page.current_path
+      visit "/" # Full reload from root so server renders fresh window.currentUser
       # Wait for Projects to fetch, select a project, and load tasks
       expect(page).to have_field("task0", wait: 5)
       expect(page).to have_current_path("/projects/#{second_project.id}")

@@ -14,28 +14,20 @@ class Projects extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchProjects().then(projects => {
+    this.props.fetchProjects().then(apiProjects => {
       const latestID = this.props.currentUser.latest_project;
-      const projectsById = projects.reduce((acc, p) => ({ ...acc, [p.id]: p }), {});
-      const projectIDs = Object.keys(projectsById);
+      const projectsById = apiProjects.reduce((acc, p) => ({ ...acc, [p.id]: p }), {});
+      const projectIds = apiProjects.map(p => String(p.id));
       let index = 0;
-      if (latestID && projectIDs.includes(String(latestID))) {
-        index = projectIDs.indexOf(String(latestID));
+      if (latestID && projectsById[latestID]) {
+        const idx = projectIds.indexOf(String(latestID));
+        if (idx !== -1) index = idx;
       }
-      const idx = index;
-      // Defer click until after React has rendered the sidebar; retry if DOM not ready
-      const tryClick = (retries = 20) => {
-        const item = document.getElementById(`project${idx}`);
-        if (item) {
-          item.focus();
-          item.click();
-          return;
-        }
-        if (retries > 0) {
-          requestAnimationFrame(() => setTimeout(() => tryClick(retries - 1), 50));
-        }
-      };
-      requestAnimationFrame(() => setTimeout(() => tryClick(), 0));
+      const item = document.getElementById(`project${index}`);
+      if (item) {
+        item.focus();
+        item.click();
+      }
     });
   }
 
