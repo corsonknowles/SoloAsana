@@ -8,6 +8,12 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  workflow_dispatch:
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
