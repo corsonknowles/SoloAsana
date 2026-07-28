@@ -8,6 +8,12 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  workflow_dispatch:
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -44,19 +50,17 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Setup Node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           registry-url: 'https://registry.npmjs.org'
           cache: 'npm'
-      - run: npm install
+      # istanbul-instrumenter-loader@3 declares a webpack <=4 peer dep, but the
+      # app is on webpack 5; it is only used under COVERAGE=true, so relax the
+      # strict npm 7+ peer check rather than force a downgrade.
+      - run: npm install --legacy-peer-deps
       - name: Install Chromedriver
         uses: nanasess/setup-chromedriver@master
-      - name: Install Code Climate test-reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          ./cc-test-reporter before-build
       - name: Run RSpec with Chromedriver and System Specs
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
@@ -76,7 +80,12 @@ jobs:
 
           bundle exec rails db:setup
           bundle exec rspec
+      - name: Run JavaScript Tests with Coverage
+        run: npm run test:coverage
+      # Best-effort: CodeClimate (codeclimate.com) is an archived service, so a
+      # failed coverage upload must not fail the build.
       - name: Publish Coverage Report to CodeClimate
+        continue-on-error: true
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         uses: paambaati/codeclimate-action@v3.0.0
@@ -84,3 +93,4 @@ jobs:
           debug: true
           coverageLocations: |
             ${{github.workspace}}/*.resultset.json:simplecov
+            ${{github.workspace}}/coverage/lcov.info:lcov

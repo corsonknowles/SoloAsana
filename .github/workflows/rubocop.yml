@@ -8,6 +8,12 @@ on:
   pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+  workflow_dispatch:
   # Also trigger on page_build, as well as release created events
   page_build:
   release:
@@ -25,4 +31,4 @@ jobs:
       with:
         ruby-version: ${{ matrix.ruby }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: gem install rubocop rubocop-performance rubocop-rails rubocop-rspec && rubocop
+    - run: bundle exec rubocop
