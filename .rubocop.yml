@@ -7,8 +7,6 @@ require:
 
 AllCops:
   NewCops: enable
-  Exclude:
-    - 'db/schema.rb'
 
 Lint/UselessAssignment:
   Exclude:
