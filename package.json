@@ -65,6 +65,8 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "roots": ["<rootDir>/frontend", "<rootDir>/util"],
+    "testPathIgnorePatterns": ["/node_modules/", "/vendor/"],
     "collectCoverage": true,
     "coverageDirectory": "coverage",
     "coverageReporters": ["lcov", "text"],
