@@ -6,9 +6,7 @@ SimpleCov.at_exit do
   SimpleCov.result.format!
 
   # process javascript coverage report (only if not in CI where it's run separately)
-  unless ENV['CI']
-    system("npm run test:coverage")
-  end
+  system("npm run test:coverage") unless ENV["CI"]
 end
 
 SimpleCov.start "rails"
